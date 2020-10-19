@@ -23,18 +23,18 @@ public class LargeTextView: UITextView, UITextViewDelegate {
 
     // MARK: - styling and layout
 
-    public func setupLayout(in stackView: UIStackView) {
-        translatesAutoresizingMaskIntoConstraints = false
-        stackView.addArrangedSubview(self)
-        let widthConst: CGFloat = stackView.layoutMargins.right*2.0
-        print(String(describing: widthConst))
-        widthAnchor.constraint(equalTo: stackView.widthAnchor, constant: -widthConst).isActive = true
-        heightAnchor.constraint(equalToConstant: 200.0).isActive = true
-        isScrollEnabled = false
-        layer.borderWidth = 2.5
-        layer.borderColor = UIColor.systemGray5.cgColor
-        layer.cornerRadius = 8
-    }
+//    public func setupLayout(in stackView: UIStackView) {
+//        translatesAutoresizingMaskIntoConstraints = false
+//        stackView.addArrangedSubview(self)
+//        let widthConst: CGFloat = stackView.layoutMargins.right*2.0
+//        print(String(describing: widthConst))
+//        widthAnchor.constraint(equalTo: stackView.widthAnchor, constant: -widthConst).isActive = true
+//        heightAnchor.constraint(equalToConstant: 200.0).isActive = true
+//        isScrollEnabled = false
+//        layer.borderWidth = 2.5
+//        layer.borderColor = UIColor.systemGray5.cgColor
+//        layer.cornerRadius = 8
+//    }
 
     // MARK: - initialisors
 

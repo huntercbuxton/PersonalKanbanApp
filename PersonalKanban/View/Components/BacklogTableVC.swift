@@ -57,6 +57,8 @@ class BacklogTableVC: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.sliderDelegate?.hideMenu()
         print("selected the cell at \(indexPath) for task titled: \(self.tasks[indexPath.row].title)")
+        let editScreen = AddEditTaskVC(persistenceManager: persistenceManager, useState: .edit, task: tasks[indexPath.row])
+        self.navigationController?.pushViewController(editScreen, animated: true)
     }
 
     // MARK: - initialization

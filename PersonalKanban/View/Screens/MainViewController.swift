@@ -87,7 +87,7 @@ class MainViewController: UIViewController, SlidingViewDelegate, MenuSelectionDe
     }
 
     @objc func composeBarButtonItemTapped() {
-        let composeVC = AddEditTaskVC(persistenceManager: self.persistenceManager)
+        let composeVC = AddEditTaskVC(persistenceManager: self.persistenceManager, useState: .create)
         hideMenu()
         present(UINavigationController(rootViewController: composeVC), animated: true, completion: {})
         print("called \(#function)")
