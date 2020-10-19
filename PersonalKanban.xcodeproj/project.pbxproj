@@ -7,15 +7,159 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		713F7A87253C569B00D23CC7 /* InputValidatorClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 713F7A86253C569B00D23CC7 /* InputValidatorClient.swift */; };
+		713F7A95253CD0AC00D23CC7 /* LargeTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 713F7A94253CD0AC00D23CC7 /* LargeTextView.swift */; };
 		715B72B2253BEDDE00219F07 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 715B72B1253BEDDE00219F07 /* AppDelegate.swift */; };
 		715B72B4253BEDDE00219F07 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 715B72B3253BEDDE00219F07 /* SceneDelegate.swift */; };
 		715B72B6253BEDDE00219F07 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 715B72B5253BEDDE00219F07 /* MainViewController.swift */; };
-		715B72B9253BEDDE00219F07 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 715B72B7253BEDDE00219F07 /* Main.storyboard */; };
 		715B72BB253BEDE800219F07 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 715B72BA253BEDE800219F07 /* Assets.xcassets */; };
 		715B72BE253BEDE800219F07 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 715B72BC253BEDE800219F07 /* LaunchScreen.storyboard */; };
 		715B72C9253BEDE800219F07 /* PersonalKanbanTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 715B72C8253BEDE800219F07 /* PersonalKanbanTests.swift */; };
 		715B72D4253BEDE800219F07 /* PersonalKanbanUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 715B72D3253BEDE800219F07 /* PersonalKanbanUITests.swift */; };
+		715B72EF253BF39000219F07 /* UIConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 715B72EE253BF39000219F07 /* UIConstants.swift */; };
+		715B72F7253C331C00219F07 /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 715B72F6253C331C00219F07 /* Enums.swift */; };
+		715B7301253C39BC00219F07 /* SliderOneVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 715B72FF253C39BC00219F07 /* SliderOneVC.swift */; };
+		715B7306253C3A3900219F07 /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 715B7305253C3A3900219F07 /* Protocols.swift */; };
+		715B730E253C4B1C00219F07 /* BacklogTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 715B730D253C4B1C00219F07 /* BacklogTableVC.swift */; };
+		715B7316253C520300219F07 /* ComposeTaskVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 715B7315253C520300219F07 /* ComposeTaskVC.swift */; };
+		715B731B253C524600219F07 /* PaddedTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 715B731A253C524600219F07 /* PaddedTextField.swift */; };
+		71BC1B3C253DC948005EC646 /* PersonalKanban.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 71BC1B3A253DC948005EC646 /* PersonalKanban.xcdatamodeld */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXBuildRule section */
+		713F7A9F253CF32E00D23CC7 /* PBXBuildRule */ = {
+			isa = PBXBuildRule;
+			compilerSpec = com.apple.compilers.proxy.script;
+			fileType = pattern.proxy;
+			inputFiles = (
+			);
+			isEditable = 1;
+			outputFiles = (
+			);
+			script = "# Type a script or drag a script file from your workspace to insert its path.\n";
+		};
+		713F7AA0253CF36800D23CC7 /* PBXBuildRule */ = {
+			isa = PBXBuildRule;
+			compilerSpec = com.apple.compilers.proxy.script;
+			fileType = pattern.proxy;
+			inputFiles = (
+			);
+			isEditable = 1;
+			outputFiles = (
+			);
+			script = "# Type a script or drag a script file from your workspace to insert its path.\n";
+		};
+		713F7AA1253CF36900D23CC7 /* PBXBuildRule */ = {
+			isa = PBXBuildRule;
+			compilerSpec = com.apple.compilers.proxy.script;
+			fileType = pattern.proxy;
+			inputFiles = (
+			);
+			isEditable = 1;
+			outputFiles = (
+			);
+			script = "# Type a script or drag a script file from your workspace to insert its path.\n";
+		};
+		713F7AA2253CF39A00D23CC7 /* PBXBuildRule */ = {
+			isa = PBXBuildRule;
+			compilerSpec = com.apple.compilers.proxy.script;
+			fileType = pattern.proxy;
+			inputFiles = (
+			);
+			isEditable = 1;
+			outputFiles = (
+			);
+			script = "# Type a script or drag a script file from your workspace to insert its path.\n";
+		};
+		713F7AA3253CF39B00D23CC7 /* PBXBuildRule */ = {
+			isa = PBXBuildRule;
+			compilerSpec = com.apple.compilers.proxy.script;
+			fileType = pattern.proxy;
+			inputFiles = (
+			);
+			isEditable = 1;
+			outputFiles = (
+			);
+			script = "# Type a script or drag a script file from your workspace to insert its path.\n";
+		};
+		713F7AA4253CF3FE00D23CC7 /* PBXBuildRule */ = {
+			isa = PBXBuildRule;
+			compilerSpec = com.apple.compilers.proxy.script;
+			fileType = pattern.proxy;
+			inputFiles = (
+			);
+			isEditable = 1;
+			outputFiles = (
+			);
+			script = "# Type a script or drag a script file from your workspace to insert its path.\n";
+		};
+		713F7AA5253CF3FF00D23CC7 /* PBXBuildRule */ = {
+			isa = PBXBuildRule;
+			compilerSpec = com.apple.compilers.proxy.script;
+			fileType = pattern.proxy;
+			inputFiles = (
+			);
+			isEditable = 1;
+			outputFiles = (
+			);
+			script = "# Type a script or drag a script file from your workspace to insert its path.\n";
+		};
+		713F7AA6253CF40000D23CC7 /* PBXBuildRule */ = {
+			isa = PBXBuildRule;
+			compilerSpec = com.apple.compilers.proxy.script;
+			fileType = pattern.proxy;
+			inputFiles = (
+			);
+			isEditable = 1;
+			outputFiles = (
+			);
+			script = "# Type a script or drag a script file from your workspace to insert its path.\n";
+		};
+		713F7AA7253CF40500D23CC7 /* PBXBuildRule */ = {
+			isa = PBXBuildRule;
+			compilerSpec = com.apple.compilers.proxy.script;
+			fileType = pattern.proxy;
+			inputFiles = (
+			);
+			isEditable = 1;
+			outputFiles = (
+			);
+			script = "# Type a script or drag a script file from your workspace to insert its path.\n";
+		};
+		713F7AB4253CF4D300D23CC7 /* PBXBuildRule */ = {
+			isa = PBXBuildRule;
+			compilerSpec = com.apple.compilers.proxy.script;
+			fileType = pattern.proxy;
+			inputFiles = (
+			);
+			isEditable = 1;
+			outputFiles = (
+			);
+			script = "# Type a script or drag a script file from your workspace to insert its path.\n";
+		};
+		713F7AB5253CF4D300D23CC7 /* PBXBuildRule */ = {
+			isa = PBXBuildRule;
+			compilerSpec = com.apple.compilers.proxy.script;
+			fileType = pattern.proxy;
+			inputFiles = (
+			);
+			isEditable = 1;
+			outputFiles = (
+			);
+			script = "# Type a script or drag a script file from your workspace to insert its path.\n";
+		};
+		713F7ABC253CF72C00D23CC7 /* PBXBuildRule */ = {
+			isa = PBXBuildRule;
+			compilerSpec = com.apple.compilers.proxy.script;
+			fileType = pattern.proxy;
+			inputFiles = (
+			);
+			isEditable = 1;
+			outputFiles = (
+			);
+			script = "# Type a script or drag a script file from your workspace to insert its path.\n";
+		};
+/* End PBXBuildRule section */
 
 /* Begin PBXContainerItemProxy section */
 		715B72C5253BEDE800219F07 /* PBXContainerItemProxy */ = {
@@ -35,11 +179,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		713F7A86253C569B00D23CC7 /* InputValidatorClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputValidatorClient.swift; sourceTree = "<group>"; };
+		713F7A94253CD0AC00D23CC7 /* LargeTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LargeTextView.swift; sourceTree = "<group>"; };
 		715B72AE253BEDDE00219F07 /* PersonalKanban.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PersonalKanban.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		715B72B1253BEDDE00219F07 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		715B72B3253BEDDE00219F07 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		715B72B5253BEDDE00219F07 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
-		715B72B8253BEDDE00219F07 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		715B72BA253BEDE800219F07 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		715B72BD253BEDE800219F07 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		715B72BF253BEDE800219F07 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -49,6 +194,14 @@
 		715B72CF253BEDE800219F07 /* PersonalKanbanUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PersonalKanbanUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		715B72D3253BEDE800219F07 /* PersonalKanbanUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalKanbanUITests.swift; sourceTree = "<group>"; };
 		715B72D5253BEDE800219F07 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		715B72EE253BF39000219F07 /* UIConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIConstants.swift; sourceTree = "<group>"; };
+		715B72F6253C331C00219F07 /* Enums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
+		715B72FF253C39BC00219F07 /* SliderOneVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SliderOneVC.swift; sourceTree = "<group>"; };
+		715B7305253C3A3900219F07 /* Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
+		715B730D253C4B1C00219F07 /* BacklogTableVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BacklogTableVC.swift; sourceTree = "<group>"; };
+		715B7315253C520300219F07 /* ComposeTaskVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComposeTaskVC.swift; sourceTree = "<group>"; };
+		715B731A253C524600219F07 /* PaddedTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaddedTextField.swift; sourceTree = "<group>"; };
+		71BC1B3B253DC948005EC646 /* PersonalKanban.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = PersonalKanban.xcdatamodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,6 +229,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		713F7A85253C567D00D23CC7 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				713F7A86253C569B00D23CC7 /* InputValidatorClient.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
 		715B72A5253BEDDD00219F07 = {
 			isa = PBXGroup;
 			children = (
@@ -99,10 +260,11 @@
 		715B72B0253BEDDE00219F07 /* PersonalKanban */ = {
 			isa = PBXGroup;
 			children = (
+				713F7A85253C567D00D23CC7 /* Controller */,
+				715B72EA253BF00700219F07 /* View */,
 				715B72B1253BEDDE00219F07 /* AppDelegate.swift */,
+				71BC1B3A253DC948005EC646 /* PersonalKanban.xcdatamodeld */,
 				715B72B3253BEDDE00219F07 /* SceneDelegate.swift */,
-				715B72B5253BEDDE00219F07 /* MainViewController.swift */,
-				715B72B7253BEDDE00219F07 /* Main.storyboard */,
 				715B72BA253BEDE800219F07 /* Assets.xcassets */,
 				715B72BC253BEDE800219F07 /* LaunchScreen.storyboard */,
 				715B72BF253BEDE800219F07 /* Info.plist */,
@@ -128,6 +290,22 @@
 			path = PersonalKanbanUITests;
 			sourceTree = "<group>";
 		};
+		715B72EA253BF00700219F07 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				715B731A253C524600219F07 /* PaddedTextField.swift */,
+				715B7315253C520300219F07 /* ComposeTaskVC.swift */,
+				715B730D253C4B1C00219F07 /* BacklogTableVC.swift */,
+				715B72FF253C39BC00219F07 /* SliderOneVC.swift */,
+				715B72B5253BEDDE00219F07 /* MainViewController.swift */,
+				715B72EE253BF39000219F07 /* UIConstants.swift */,
+				715B72F6253C331C00219F07 /* Enums.swift */,
+				715B7305253C3A3900219F07 /* Protocols.swift */,
+				713F7A94253CD0AC00D23CC7 /* LargeTextView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -138,8 +316,21 @@
 				715B72AA253BEDDE00219F07 /* Sources */,
 				715B72AB253BEDDE00219F07 /* Frameworks */,
 				715B72AC253BEDDE00219F07 /* Resources */,
+				713F7ABD253CF7CA00D23CC7 /* ShellScript */,
 			);
 			buildRules = (
+				713F7ABC253CF72C00D23CC7 /* PBXBuildRule */,
+				713F7AB5253CF4D300D23CC7 /* PBXBuildRule */,
+				713F7AB4253CF4D300D23CC7 /* PBXBuildRule */,
+				713F7AA7253CF40500D23CC7 /* PBXBuildRule */,
+				713F7AA6253CF40000D23CC7 /* PBXBuildRule */,
+				713F7AA5253CF3FF00D23CC7 /* PBXBuildRule */,
+				713F7AA4253CF3FE00D23CC7 /* PBXBuildRule */,
+				713F7AA3253CF39B00D23CC7 /* PBXBuildRule */,
+				713F7AA2253CF39A00D23CC7 /* PBXBuildRule */,
+				713F7AA1253CF36900D23CC7 /* PBXBuildRule */,
+				713F7AA0253CF36800D23CC7 /* PBXBuildRule */,
+				713F7A9F253CF32E00D23CC7 /* PBXBuildRule */,
 			);
 			dependencies = (
 			);
@@ -233,7 +424,6 @@
 			files = (
 				715B72BE253BEDE800219F07 /* LaunchScreen.storyboard in Resources */,
 				715B72BB253BEDE800219F07 /* Assets.xcassets in Resources */,
-				715B72B9253BEDDE00219F07 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -253,14 +443,44 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		713F7ABD253CF7CA00D23CC7 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nif which swiftlint >/dev/null; then\n    swiftlint\nelse\n    echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		715B72AA253BEDDE00219F07 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				715B72B6253BEDDE00219F07 /* MainViewController.swift in Sources */,
+				715B731B253C524600219F07 /* PaddedTextField.swift in Sources */,
+				713F7A87253C569B00D23CC7 /* InputValidatorClient.swift in Sources */,
 				715B72B2253BEDDE00219F07 /* AppDelegate.swift in Sources */,
+				715B72F7253C331C00219F07 /* Enums.swift in Sources */,
+				713F7A95253CD0AC00D23CC7 /* LargeTextView.swift in Sources */,
+				715B7301253C39BC00219F07 /* SliderOneVC.swift in Sources */,
+				71BC1B3C253DC948005EC646 /* PersonalKanban.xcdatamodeld in Sources */,
 				715B72B4253BEDDE00219F07 /* SceneDelegate.swift in Sources */,
+				715B72EF253BF39000219F07 /* UIConstants.swift in Sources */,
+				715B730E253C4B1C00219F07 /* BacklogTableVC.swift in Sources */,
+				715B7316253C520300219F07 /* ComposeTaskVC.swift in Sources */,
+				715B7306253C3A3900219F07 /* Protocols.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -296,14 +516,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		715B72B7253BEDDE00219F07 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				715B72B8253BEDDE00219F07 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		715B72BC253BEDE800219F07 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -593,6 +805,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		71BC1B3A253DC948005EC646 /* PersonalKanban.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				71BC1B3B253DC948005EC646 /* PersonalKanban.xcdatamodel */,
+			);
+			currentVersion = 71BC1B3B253DC948005EC646 /* PersonalKanban.xcdatamodel */;
+			path = PersonalKanban.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 715B72A6253BEDDD00219F07 /* Project object */;
 }
