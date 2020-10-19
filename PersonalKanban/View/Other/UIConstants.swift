@@ -9,5 +9,5 @@ import Foundation
 
 struct UIConstants {
     static let menuButtonImageMame = "sidebar.leading"
-    static let composeButtonImageName = "square.and.pencil"
+    static let addButtonImageName = "plus"
 }

@@ -9,15 +9,24 @@ import UIKit
 
 class BacklogTableVC: UITableViewController {
 
+    let persistenceManager: PersistenceManager
+
+    func getTasks() {
+        self.tasks = persistenceManager.getAllTasks()
+    }
+
     // MARK: - SlidingViewsMenu
 
-    weak var sliderDelegate: ViewSlidingDelegate!
+    weak var sliderDelegate: SlidingViewDelegate?
 
-    var sampleData = ["one", "two", "three", "four", "five"]
+    private var tasks: [Task] = []
+
     private let reuseID = "taskListCellReuseID"
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        getTasks()
+        self.tasks.forEach({print("task with title: ", $0.title)})
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -34,27 +43,30 @@ class BacklogTableVC: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return sampleData.count
+        return tasks.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: self.reuseID, for: indexPath)
-        cell.textLabel?.text = sampleData[indexPath.row]
+        cell.textLabel?.text = tasks[indexPath.row].title
         return cell
     }
 
-    // MARK: - initialisation
+    // MARK: UITableViewDelegate conformance
 
-    // This allows you to initialise your custom UIViewController without a nib or bundle.
-    convenience init() {
-        self.init(nibName: nil, bundle: nil)
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.sliderDelegate?.hideMenu()
+        print("selected the cell at \(indexPath) for task titled: \(self.tasks[indexPath.row].title)")
     }
 
-    // This extends the superclass.
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+    // MARK: - initialization
+
+    init(sliderDelegate: MainViewController?, persistenceManager: PersistenceManager) {
+        self.persistenceManager = persistenceManager
+        super.init(nibName: nil, bundle: nil)
     }
 
-    // This is also necessary when extending the superclass.
-    required init?(coder aDecoder: NSCoder) { fatalError("init(coder:) has not been implemented") }
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 }

@@ -20,7 +20,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // https://learnappmaking.com/scene-delegate-app-delegate-xcode-11-ios-13/
         if let windowScene = scene as? UIWindowScene {
             let window = UIWindow(windowScene: windowScene)
-            let rootVC = MainViewController(page: MenuOptions.backlog)
+            let rootVC = MainViewController(page: .backlog, persistenceManager: PersistenceManager.shared)
             let navigation = UINavigationController(rootViewController: rootVC)
             window.rootViewController = navigation
             self.window = window
@@ -54,6 +54,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Called as the scene transitions from the foreground to the background.
         // Use this method to save data, release shared resources, and store enough scene-specific state information
         // to restore the scene back to its current state.
+
+        // Not sure if this is the best place for this. This is where I had it in the original 2019 code, based on this
+        // https://cocoacasts.com/implement-the-nsfetchedresultscontrollerdelegate-protocol-with-swift-3
+        // Kilo Loco put it in the AppDelegate function applicationWillTerminate but that doesn't seem to be a part of the project's auto-generated code any more. research later
+        PersistenceManager.shared.save()
+
     }
 
 }

@@ -7,16 +7,55 @@
 
 import UIKit
 
-class MainViewController: UIViewController, ViewSlidingDelegate {
+class MainViewController: UIViewController, SlidingViewDelegate, MenuSelectionDelegate {
+
+    let persistenceManager: PersistenceManager
+
+    // MARK: MenuSelectionDelegate
+
+    typealias IdT = MainMenuOptions
+
+    func upateSelection(from oldSelection: MainMenuOptions?, to newSelection: MainMenuOptions) {
+        print("called updateSelection in MainViewController")
+        hideMenu()
+    }
+
+    // MARK: SlidingViewDelegate
+
+    func toggleMenuVisibility() {
+        UIView.animate(withDuration: self.animationDuration,
+                       delay: self.animationDelay,
+                       usingSpringWithDamping: self.animationSpringDamping,
+                       initialSpringVelocity: self.animationInitialSpringVelocity,
+                       options: self.animationOptions) {
+            self.contentViewTwo.frame.origin.x = self.menuIsVisible ? 0 :
+                self.contentViewTwo.frame.width - self.slideInMenuPadding
+        } completion: { (_) in
+            self.menuIsVisible.toggle()
+        }
+    }
+
+    func hideMenu() {
+        if menuIsVisible { toggleMenuVisibility() }
+    }
+
+    func showMenu() {
+        if !menuIsVisible { toggleMenuVisibility() }
+    }
+
+    // MARK: MenuSelectionDelegate conformance
 
     // MARK: - instance properties
 
-    var currentPage: MenuOptions!
-    var currentTitle: String {  currentPage.rawValue  }
+    var currentPage: MainMenuOptions!
+
+    // MARK: other instance properties
+
+    var currentTitle: String { currentPage.pageTitle }
     lazy var menuBarButtonItem: UIBarButtonItem = UIBarButtonItem(image: UIConstants.menuButtonImageMame,
                                                                   target: self,
                                                                   selector: #selector(menuBarButtonItemTapped))
-    lazy var composeBarButtonItem: UIBarButtonItem = UIBarButtonItem(image: UIConstants.composeButtonImageName,
+    lazy var addBarButton: UIBarButtonItem = UIBarButtonItem(image: UIConstants.addButtonImageName,
                                                                      target: self,
                                                                      selector: #selector(composeBarButtonItemTapped))
     var menuIsVisible: Bool = false
@@ -30,8 +69,8 @@ class MainViewController: UIViewController, ViewSlidingDelegate {
     var animationInitialSpringVelocity: CGFloat = 0.0
     var animationOptions: UIView.AnimationOptions = .curveEaseInOut
 
-    lazy var vcOne: SliderOneVC = SliderOneVC(delegate: self)
-    var vcTwo: BacklogTableVC = BacklogTableVC()
+    lazy var vcOne: SliderOneVC = SliderOneVC(sliderDelegate: self, selectionDelegate: self, savedSelection: MainMenuOptions.backlog)
+    lazy var vcTwo: BacklogTableVC = BacklogTableVC(sliderDelegate: self, persistenceManager: PersistenceManager.shared)
 
     // MARK: - instance methods
 
@@ -48,7 +87,8 @@ class MainViewController: UIViewController, ViewSlidingDelegate {
     }
 
     @objc func composeBarButtonItemTapped() {
-        let composeVC = ComposeTaskVC()
+        let composeVC = AddEditTaskVC(persistenceManager: self.persistenceManager)
+        hideMenu()
         present(UINavigationController(rootViewController: composeVC), animated: true, completion: {})
         print("called \(#function)")
     }
@@ -56,7 +96,7 @@ class MainViewController: UIViewController, ViewSlidingDelegate {
     private func setupElements() {
         title = self.currentTitle
         navigationItem.setLeftBarButton(menuBarButtonItem, animated: false)
-        navigationItem.setRightBarButton(composeBarButtonItem, animated: false)
+        navigationItem.setRightBarButton(addBarButton, animated: false)
         contentViewOne.pinMenuTo(view, with: slideInMenuPadding)
         contentViewOne.backgroundColor = .systemGray4
         contentViewTwo.edgeTo(view)
@@ -80,38 +120,17 @@ class MainViewController: UIViewController, ViewSlidingDelegate {
         vcTwo.view.bottomAnchor.constraint(equalTo: contentViewTwo.bottomAnchor).isActive = true
     }
 
-    func toggleMenuVisibility() {
-        UIView.animate(withDuration: self.animationDuration,
-                       delay: self.animationDelay,
-                       usingSpringWithDamping: self.animationSpringDamping,
-                       initialSpringVelocity: self.animationInitialSpringVelocity,
-                       options: self.animationOptions) {
-            self.contentViewTwo.frame.origin.x = self.menuIsVisible ? 0 :
-                self.contentViewTwo.frame.width - self.slideInMenuPadding
-        } completion: { (_) in
-            self.menuIsVisible.toggle()
-        }
-    }
-
-    func hideMenu() {
-        if menuIsVisible { toggleMenuVisibility() }
-    }
-
-    func showMenu() {
-        if !menuIsVisible { toggleMenuVisibility() }
-    }
-
     // MARK: - initialization
 
-    init(page selection: MenuOptions) {
+    init(page selection: MainMenuOptions, persistenceManager: PersistenceManager) {
         self.currentPage = selection
+        self.persistenceManager = persistenceManager
         super.init(nibName: nil, bundle: nil)
     }
 
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-        super.init(nibName: nil, bundle: nil)
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("\(#function) has not been implemented")
     }
-    required init?(coder aDecoder: NSCoder) { fatalError("\(#function) has not been implemented") }
 }
 
 // MARK: - other type extensions

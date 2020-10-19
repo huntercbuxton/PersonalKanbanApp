@@ -7,7 +7,9 @@
 
 import UIKit
 
-class ComposeTaskVC: UIViewController {
+class AddEditTaskVC: UIViewController, InputsInterfaceDelegate {
+
+    let persistenceManager: PersistenceManager
 
     var inputValidationManager: InputValidationManager!
 
@@ -33,14 +35,23 @@ class ComposeTaskVC: UIViewController {
     lazy var titleTexttField: PaddedTextField = PaddedTextField()
 
     lazy var notesTextView: LargeTextView = LargeTextView(text: "Test Text Here")
+
+    private func createTask(title: String, notes: String) {
+        let task = Task(context: persistenceManager.context)
+        task.title = title
+        task.notes = notes
+        persistenceManager.save()
+    }
+
     @objc func savedBarButtonTapped() {
+        createTask(title: "a random title", notes: "some notes also")
         self.dismiss(animated: true, completion: {})
-            print("savedButtonTapped was executed")
+        print("\(#function) was executed")
     }
 
     @objc func cancelBarButtonTapped() {
         self.dismiss(animated: true, completion: {})
-        print("cancelBarButtonTapped was completed")
+        print("\(#function) was completed")
     }
 
     override func viewDidLoad() {
@@ -56,7 +67,17 @@ class ComposeTaskVC: UIViewController {
         stackView.heightAnchor.constraint(equalToConstant: vHeight).isActive = true
     }
 
-    // MARK: - initialisation
+    // MARK: InputsInterfaceDelegate conformance
+
+    func enableUse(for: String) {
+        self.saveBarButton.isEnabled = true
+    }
+
+    func disableUse(for: String) {
+        self.saveBarButton.isEnabled = false
+    }
+
+    // MARK: initial setup
 
     private func setupUIElements() {
         self.title = "Create Task"
@@ -71,34 +92,20 @@ class ComposeTaskVC: UIViewController {
         self.titleTexttField.setupLayout(in: stackView)
         notesTextView.setupLayout(in: stackView)
         self.inputValidationManager = InputValidationManager()
-        self.inputValidationManager!.delegate = self
+        self.inputValidationManager.delegate = self
         self.titleTexttField.inputValidationDelegate = self.inputValidationManager
         self.notesTextView.inputValidationDelegate = self.inputValidationManager
     }
-    // This allows you to initialise your custom UIViewController without a nib or bundle.
-    convenience init() {
-    self.init(nibName: nil, bundle: nil)
+
+    // MARK: initialization
+
+    init(persistenceManager: PersistenceManager) {
+        self.persistenceManager = persistenceManager
+        super.init(nibName: nil, bundle: nil)
     }
 
-    // This extends the superclass.
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-    }
-
-    // This is also necessary when extending the superclass.
-    required init?(coder aDecoder: NSCoder) { fatalError("init(coder:) has not been implemented") }
-}
-
-// MARK: - InputsInterfaceDelegate
-
-extension ComposeTaskVC: InputsInterfaceDelegate {
-//    func showAlert() -> String { }
-    func enableUse(for: String) {
-        self.saveBarButton.isEnabled = true
-    }
-
-    func disableUse(for: String) {
-        self.saveBarButton.isEnabled = false
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 }
 
