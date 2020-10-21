@@ -27,7 +27,7 @@ class InputTracker {
                 return
             }
             self.input = newValue!
-            if isEmpty(newValue!) {
+            if !isEmpty(newValue!) {
                 approved = false
                 return
             }

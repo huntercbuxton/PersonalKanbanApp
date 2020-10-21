@@ -34,3 +34,32 @@ protocol MenuController {
     func reset()
     func refresh()
 }
+
+
+
+protocol SlidingContentsViewContoller: CoreDataDisplayDelegate {
+    func refreshDisplay()
+    var sliderDelegate: SlidingViewDelegate? { get set }
+}
+
+extension SlidingContentsViewContoller {
+    func refreshDisplay() { }
+}
+
+protocol CoreDataDisplayDelegate {
+    func updateCoreData()
+}
+
+extension CoreDataDisplayDelegate {
+    func updateCoreData() { print("warning: this is the default implementation in the protocol extension of CoreDataDisplayDelegate. this functio \(#function) has no body") }
+}
+
+protocol ManagedObjectChangeRemovable {
+    var hasEdited: Bool { get set }
+//    func hasChanged() -> Bool
+    func discardCoreDataChanges()
+//    func equalValuesFor(property: PropertyEnum) -> Bool
+//    func originalValueFor<T>(key: String) -> T
+}
+
+

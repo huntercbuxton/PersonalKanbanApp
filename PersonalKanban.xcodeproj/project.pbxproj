@@ -26,10 +26,24 @@
 		715B730E253C4B1C00219F07 /* BacklogTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 715B730D253C4B1C00219F07 /* BacklogTableVC.swift */; };
 		715B7316253C520300219F07 /* AddEditTaskVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 715B7315253C520300219F07 /* AddEditTaskVC.swift */; };
 		715B731B253C524600219F07 /* PaddedTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 715B731A253C524600219F07 /* PaddedTextField.swift */; };
+		717DCB1C253EB75E00E2156F /* EpicsTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 717DCB1B253EB75E00E2156F /* EpicsTableVC.swift */; };
+		717DCB24253ED0BE00E2156F /* AddEditEpicVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 717DCB23253ED0BE00E2156F /* AddEditEpicVC.swift */; };
+		717DCB29253EDAC300E2156F /* ChooseEpicsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 717DCB28253EDAC300E2156F /* ChooseEpicsScreen.swift */; };
+		717DCB2E253EF59300E2156F /* EpicTasksTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 717DCB2D253EF59300E2156F /* EpicTasksTableVC.swift */; };
+		717DCB33253F0A7200E2156F /* ViewOnlyEpicDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 717DCB32253F0A7200E2156F /* ViewOnlyEpicDetailVC.swift */; };
+		717DCB3B253F25E600E2156F /* EditEpicDetailsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 717DCB3A253F25E600E2156F /* EditEpicDetailsVC.swift */; };
+		717DCB40253F2BE000E2156F /* EpicDetailsEditorMenuVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 717DCB3F253F2BE000E2156F /* EpicDetailsEditorMenuVC.swift */; };
+		717DCB4D253F3DBA00E2156F /* Epic+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 717DCB47253F3DBA00E2156F /* Epic+CoreDataClass.swift */; };
+		717DCB4E253F3DBA00E2156F /* Epic+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 717DCB48253F3DBA00E2156F /* Epic+CoreDataProperties.swift */; };
+		717DCB4F253F3DBA00E2156F /* Note+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 717DCB49253F3DBA00E2156F /* Note+CoreDataClass.swift */; };
+		717DCB50253F3DBA00E2156F /* Note+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 717DCB4A253F3DBA00E2156F /* Note+CoreDataProperties.swift */; };
+		717DCB51253F3DBA00E2156F /* Task+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 717DCB4B253F3DBA00E2156F /* Task+CoreDataClass.swift */; };
+		717DCB52253F3DBA00E2156F /* Task+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 717DCB4C253F3DBA00E2156F /* Task+CoreDataProperties.swift */; };
+		717DCB5D253F3FF900E2156F /* DateConversion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 717DCB5C253F3FF900E2156F /* DateConversion.swift */; };
+		717DCB62253F4AAE00E2156F /* LogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 717DCB61253F4AAE00E2156F /* LogView.swift */; };
+		717DCB6F253F5C9300E2156F /* SelectWorkflowStatusMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 717DCB6E253F5C9300E2156F /* SelectWorkflowStatusMenu.swift */; };
 		71BC1B3C253DC948005EC646 /* PersonalKanban.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 71BC1B3A253DC948005EC646 /* PersonalKanban.xcdatamodeld */; };
 		71BC1B44253DCC6C005EC646 /* PersistenceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71BC1B43253DCC6C005EC646 /* PersistenceManager.swift */; };
-		71BC1B55253DD305005EC646 /* Task+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71BC1B53253DD305005EC646 /* Task+CoreDataClass.swift */; };
-		71BC1B56253DD305005EC646 /* Task+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71BC1B54253DD305005EC646 /* Task+CoreDataProperties.swift */; };
 		71BC1B5D253DD3A3005EC646 /* InputsEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71BC1B5C253DD3A3005EC646 /* InputsEnum.swift */; };
 		71BC1B62253DD3D4005EC646 /* InputsProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71BC1B61253DD3D4005EC646 /* InputsProtocols.swift */; };
 /* End PBXBuildFile section */
@@ -212,10 +226,24 @@
 		715B730D253C4B1C00219F07 /* BacklogTableVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BacklogTableVC.swift; sourceTree = "<group>"; };
 		715B7315253C520300219F07 /* AddEditTaskVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddEditTaskVC.swift; sourceTree = "<group>"; };
 		715B731A253C524600219F07 /* PaddedTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaddedTextField.swift; sourceTree = "<group>"; };
+		717DCB1B253EB75E00E2156F /* EpicsTableVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpicsTableVC.swift; sourceTree = "<group>"; };
+		717DCB23253ED0BE00E2156F /* AddEditEpicVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEditEpicVC.swift; sourceTree = "<group>"; };
+		717DCB28253EDAC300E2156F /* ChooseEpicsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseEpicsScreen.swift; sourceTree = "<group>"; };
+		717DCB2D253EF59300E2156F /* EpicTasksTableVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpicTasksTableVC.swift; sourceTree = "<group>"; };
+		717DCB32253F0A7200E2156F /* ViewOnlyEpicDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewOnlyEpicDetailVC.swift; sourceTree = "<group>"; };
+		717DCB3A253F25E600E2156F /* EditEpicDetailsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditEpicDetailsVC.swift; sourceTree = "<group>"; };
+		717DCB3F253F2BE000E2156F /* EpicDetailsEditorMenuVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpicDetailsEditorMenuVC.swift; sourceTree = "<group>"; };
+		717DCB47253F3DBA00E2156F /* Epic+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Epic+CoreDataClass.swift"; sourceTree = "<group>"; };
+		717DCB48253F3DBA00E2156F /* Epic+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Epic+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		717DCB49253F3DBA00E2156F /* Note+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Note+CoreDataClass.swift"; sourceTree = "<group>"; };
+		717DCB4A253F3DBA00E2156F /* Note+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Note+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		717DCB4B253F3DBA00E2156F /* Task+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Task+CoreDataClass.swift"; sourceTree = "<group>"; };
+		717DCB4C253F3DBA00E2156F /* Task+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Task+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		717DCB5C253F3FF900E2156F /* DateConversion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateConversion.swift; sourceTree = "<group>"; };
+		717DCB61253F4AAE00E2156F /* LogView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogView.swift; sourceTree = "<group>"; };
+		717DCB6E253F5C9300E2156F /* SelectWorkflowStatusMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectWorkflowStatusMenu.swift; sourceTree = "<group>"; };
 		71BC1B3B253DC948005EC646 /* PersonalKanban.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = PersonalKanban.xcdatamodel; sourceTree = "<group>"; };
 		71BC1B43253DCC6C005EC646 /* PersistenceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceManager.swift; sourceTree = "<group>"; };
-		71BC1B53253DD305005EC646 /* Task+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Task+CoreDataClass.swift"; sourceTree = "<group>"; };
-		71BC1B54253DD305005EC646 /* Task+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Task+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		71BC1B5C253DD3A3005EC646 /* InputsEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputsEnum.swift; sourceTree = "<group>"; };
 		71BC1B61253DD3D4005EC646 /* InputsProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputsProtocols.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -250,6 +278,7 @@
 			children = (
 				71BC1B5B253DD35A005EC646 /* UserInputHandling */,
 				71BC1B5A253DD347005EC646 /* DAO */,
+				717DCB5C253F3FF900E2156F /* DateConversion.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -323,6 +352,7 @@
 			children = (
 				71BC1B69253DD509005EC646 /* CoreData */,
 				7146AC3D253E1E7500DA7D03 /* MainMenuData.swift */,
+				7146AC51253E2DA100DA7D03 /* MainMenuOptions.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -350,6 +380,12 @@
 			children = (
 				715B72B5253BEDDE00219F07 /* MainViewController.swift */,
 				715B7315253C520300219F07 /* AddEditTaskVC.swift */,
+				717DCB23253ED0BE00E2156F /* AddEditEpicVC.swift */,
+				717DCB28253EDAC300E2156F /* ChooseEpicsScreen.swift */,
+				717DCB2D253EF59300E2156F /* EpicTasksTableVC.swift */,
+				717DCB32253F0A7200E2156F /* ViewOnlyEpicDetailVC.swift */,
+				717DCB3A253F25E600E2156F /* EditEpicDetailsVC.swift */,
+				717DCB6E253F5C9300E2156F /* SelectWorkflowStatusMenu.swift */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -362,6 +398,9 @@
 				715B730D253C4B1C00219F07 /* BacklogTableVC.swift */,
 				715B72FF253C39BC00219F07 /* SliderOneVC.swift */,
 				71209AEB253E3CDD0082DA0A /* TaskEditingTable.swift */,
+				717DCB1B253EB75E00E2156F /* EpicsTableVC.swift */,
+				717DCB3F253F2BE000E2156F /* EpicDetailsEditorMenuVC.swift */,
+				717DCB61253F4AAE00E2156F /* LogView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -379,9 +418,12 @@
 		71BC1B69253DD509005EC646 /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
-				71BC1B53253DD305005EC646 /* Task+CoreDataClass.swift */,
-				71BC1B54253DD305005EC646 /* Task+CoreDataProperties.swift */,
-				7146AC51253E2DA100DA7D03 /* MainMenuOptions.swift */,
+				717DCB48253F3DBA00E2156F /* Epic+CoreDataProperties.swift */,
+				717DCB47253F3DBA00E2156F /* Epic+CoreDataClass.swift */,
+				717DCB49253F3DBA00E2156F /* Note+CoreDataClass.swift */,
+				717DCB4A253F3DBA00E2156F /* Note+CoreDataProperties.swift */,
+				717DCB4B253F3DBA00E2156F /* Task+CoreDataClass.swift */,
+				717DCB4C253F3DBA00E2156F /* Task+CoreDataProperties.swift */,
 			);
 			name = CoreData;
 			sourceTree = "<group>";
@@ -550,25 +592,39 @@
 			files = (
 				715B72B6253BEDDE00219F07 /* MainViewController.swift in Sources */,
 				7146AC3E253E1E7500DA7D03 /* MainMenuData.swift in Sources */,
+				717DCB1C253EB75E00E2156F /* EpicsTableVC.swift in Sources */,
 				7146AC52253E2DA100DA7D03 /* MainMenuOptions.swift in Sources */,
+				717DCB40253F2BE000E2156F /* EpicDetailsEditorMenuVC.swift in Sources */,
 				71209AEC253E3CDD0082DA0A /* TaskEditingTable.swift in Sources */,
-				71BC1B55253DD305005EC646 /* Task+CoreDataClass.swift in Sources */,
+				717DCB52253F3DBA00E2156F /* Task+CoreDataProperties.swift in Sources */,
 				715B731B253C524600219F07 /* PaddedTextField.swift in Sources */,
 				71BC1B62253DD3D4005EC646 /* InputsProtocols.swift in Sources */,
+				717DCB4E253F3DBA00E2156F /* Epic+CoreDataProperties.swift in Sources */,
+				717DCB6F253F5C9300E2156F /* SelectWorkflowStatusMenu.swift in Sources */,
+				717DCB2E253EF59300E2156F /* EpicTasksTableVC.swift in Sources */,
 				713F7A87253C569B00D23CC7 /* InputValidationManager.swift in Sources */,
 				715B72B2253BEDDE00219F07 /* AppDelegate.swift in Sources */,
 				71BC1B5D253DD3A3005EC646 /* InputsEnum.swift in Sources */,
-				71BC1B56253DD305005EC646 /* Task+CoreDataProperties.swift in Sources */,
 				713F7A95253CD0AC00D23CC7 /* LargeTextView.swift in Sources */,
+				717DCB29253EDAC300E2156F /* ChooseEpicsScreen.swift in Sources */,
 				715B7301253C39BC00219F07 /* SliderOneVC.swift in Sources */,
+				717DCB3B253F25E600E2156F /* EditEpicDetailsVC.swift in Sources */,
 				71BC1B44253DCC6C005EC646 /* PersistenceManager.swift in Sources */,
+				717DCB33253F0A7200E2156F /* ViewOnlyEpicDetailVC.swift in Sources */,
 				71BC1B3C253DC948005EC646 /* PersonalKanban.xcdatamodeld in Sources */,
 				715B72B4253BEDDE00219F07 /* SceneDelegate.swift in Sources */,
+				717DCB4F253F3DBA00E2156F /* Note+CoreDataClass.swift in Sources */,
+				717DCB5D253F3FF900E2156F /* DateConversion.swift in Sources */,
+				717DCB51253F3DBA00E2156F /* Task+CoreDataClass.swift in Sources */,
 				715B72EF253BF39000219F07 /* UIConstants.swift in Sources */,
 				7146AC39253E19B000DA7D03 /* MainMenuProtocols.swift in Sources */,
 				715B730E253C4B1C00219F07 /* BacklogTableVC.swift in Sources */,
 				715B7316253C520300219F07 /* AddEditTaskVC.swift in Sources */,
+				717DCB62253F4AAE00E2156F /* LogView.swift in Sources */,
 				715B7306253C3A3900219F07 /* SlidingViewsVCProtocols.swift in Sources */,
+				717DCB4D253F3DBA00E2156F /* Epic+CoreDataClass.swift in Sources */,
+				717DCB24253ED0BE00E2156F /* AddEditEpicVC.swift in Sources */,
+				717DCB50253F3DBA00E2156F /* Note+CoreDataProperties.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

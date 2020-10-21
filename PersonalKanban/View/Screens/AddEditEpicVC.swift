@@ -1,100 +1,28 @@
 //
-//  ComposeTaskVC.swift
+//  AddEditEpicVC.swift
 //  PersonalKanban
 //
-//  Created by Hunter Buxton on 10/14/20.
+//  Created by Hunter Buxton on 10/20/20.
 //
 
 import UIKit
 
-enum EditScreenUseState {
-    case create
-    case edit
-}
-
-protocol EditTaskTableDelegate {
-    func deleteTask()
-    func goToEpicSelectionScreen()
-    func goToWorkflowSelectorScreen()
-}
-
-protocol WorkflowStatusSelectionDelegate {
-    func selectStatus(newStatus: WorkflowPosition)
-}
-
-class AddEditTaskVC: UIViewController, InputsInterfaceDelegate, EditTaskTableDelegate, EpicsSelectorDelegate, WorkflowStatusSelectionDelegate {
-
-
-    // MARK: EditTaskTableDelegate conformance
-
-    func goToEpicSelectionScreen() {
-        let epicsScreen = ChooseEpicsScreen(persistenceManager: persistenceManager, selectionDelegate: self)
-        self.navigationController?.pushViewController(epicsScreen, animated: true)
-    }
-
-    // MARK: EpicsSelectorDelegate conformance
-
-    func select(epic: Epic) {
-        self.selectedEpic = epic
-        self.table.selectedEpic = selectedEpic
-    }
-
-    // MARK: WorkflowStatusSelectionDelegate conformance
-
-    func selectStatus(newStatus: WorkflowPosition) {
-        self.selectedStatus = newStatus
-        self.table.selectedStatus = selectedStatus
-    }
-
-    func goToWorkflowSelectorScreen() {
-        let positionScreen = SelectWorkflowStatusMenu(workflowStatusSelectionDelegate: self)
-        self.navigationController?.pushViewController(positionScreen, animated: true)
-
-    }
-
-    func deleteTask() {
-        let alert = UIAlertController(title: "Alert", message: "Are you sure you want to delete this task?", preferredStyle: UIAlertController.Style.alert)
-        alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel, handler: { _ in print("called handler for Cancel action") }))
-        alert.addAction(UIAlertAction(title: "Delete", style: UIAlertAction.Style.destructive, handler: {_ in
-            guard let task = self.taskMO else { fatalError("taskMO was nil when executing \(#function)") }
-            self.persistenceManager.delete(task: task)
-            self.goBack()
-        }))
-        self.present(alert, animated: true, completion: nil)
-    }
-
-    var selectedStatus: WorkflowPosition? {
-        didSet {
-            //print("didSet called on selectedEpic; the newValue is \(selectedEpic?.title)")
-        }
-        willSet {
-            if newValue != selectedStatus {
-                self.saveBarButton.isEnabled = true
-            }
-        }
-    }
-    var selectedEpic: Epic? {
-        didSet {
-            //print("didSet called on selectedEpic; the newValue is \(selectedEpic?.title)")
-        }
-        willSet {
-            if newValue != selectedEpic {
-                self.saveBarButton.isEnabled = true
-            }
-        }
-    }
-
-    var updateDelegate: CoreDataDisplayDelegate!
-    var inputValidationManager: InputValidationManager!
+class AddEditEpicVC: UIViewController, InputsInterfaceDelegate {
 
     let persistenceManager: PersistenceManager
 
-    private let useState: EditScreenUseState
-    private var titleText: String { useState == .create ? "Create Task" : "Edit Task" }
+    let useState: EditScreenUseState
+
+    var epic: Epic?
+
+    var updateDelegate: CoreDataDisplayDelegate!
+
+    var inputValidationManager: InputValidationManager!
+
+    private var titleText: String { useState == .create ? "Create Epic" : "Edit Epic" }
+
     private var titlePlaceholderText: String = "add a title"
-    private var taskMO: Task?
-    var originalPosition: WorkflowPosition = WorkflowPosition.defaultStatus
-    var finalPosition: WorkflowPosition = WorkflowPosition.defaultStatus
+
     private let sectionSpacing: CGFloat = 20.0
 
     // MARK: UI Elements
@@ -114,20 +42,15 @@ class AddEditTaskVC: UIViewController, InputsInterfaceDelegate, EditTaskTableDel
 
     lazy var notesTextView: LargeTextView = LargeTextView(text: "")
 
-    lazy var table: TaskEditingTable = TaskEditingTable(useState: self.useState, editingDelegate: self, selectedEpic: self.selectedEpic, workflowStatus: self.selectedStatus)
-
-    lazy var taskLog: LogView =  LogView(dateCreated: taskMO?.dateCreated, dateUpdated: taskMO?.dateUpdated)
-
-    // MARK: instance methods
+    lazy var table = UITableViewController() //TaskEditingTable = TaskEditingTable(useState: self.useState, editingDelegate: self)
 
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .systemGroupedBackground
-
         setupUIElements()
-//        table.workFlowDisplayUpdate(self.finalPosition)
         setupDataStuff()
     }
+
 
     // MARK: InputsInterfaceDelegate conformance
 
@@ -139,36 +62,24 @@ class AddEditTaskVC: UIViewController, InputsInterfaceDelegate, EditTaskTableDel
         self.saveBarButton.isEnabled = false
     }
 
-    private func createTask(title: String, notes: String, epic: Epic?, status: WorkflowPosition?) {
-        let task = Task(context: persistenceManager.context)
-        task.title = title
-        task.quickNote = notes
-        task.epic = epic
-        var date = Date()
-        task.dateCreated = DateConversion.format(date)
-        task.dateUpdated = DateConversion.format(date)
-        task.workflowStatus =  Int64(status?.rawValue ?? WorkflowPosition.backlog.rawValue)
+    private func createEpic(title: String, notes: String) {
+        let epic = Epic(context: persistenceManager.context)
+        epic.title = title
+        epic.quickNote = notes
         persistenceManager.save()
     }
 
     private func saveChanges() {
-        guard let task = taskMO else { fatalError("taskMO was nil when executing \(#function)") }
-        let tempStatus = Int64(self.finalPosition.rawValue)
-        print("called \(#function); about to save the workflow update of \(tempStatus)")
-        task.title = titleTextField.text
-        task.quickNote = notesTextView.text
-        task.epic = selectedEpic
-        var date = Date()
-        task.dateUpdated = DateConversion.format(date)
-        task.workflowStatus = tempStatus
+        guard let epic = epic else { fatalError("epic was nil when executing \(#function)") }
+        epic.title = titleTextField.text!
+        epic.quickNote = notesTextView.text
         persistenceManager.save()
         self.updateDelegate.updateCoreData()
     }
 
     @objc func savedBarButtonTapped() {
-//        print("useState=\(useState)")
         if useState == .create {
-            createTask(title: self.titleTextField.text!, notes: self.notesTextView.text, epic: self.selectedEpic, status: self.selectedStatus)
+            createEpic(title: self.titleTextField.text!, notes: self.notesTextView.text)
         } else {
             saveChanges()
         }
@@ -176,19 +87,19 @@ class AddEditTaskVC: UIViewController, InputsInterfaceDelegate, EditTaskTableDel
         print("\(#function) was executed")
     }
 
-    @objc func cancelBarButtonTapped() {
-        self.goBack()
-        print("\(#function) was completed")
-    }
-
     private func goBack() {
-
         if self.useState == .create {
             self.dismiss(animated: true, completion: {})
         } else {
             self.navigationController?.popViewController(animated: true)
         }
         self.updateDelegate.updateCoreData()
+    }
+
+
+    @objc func cancelBarButtonTapped() {
+        self.goBack()
+        print("\(#function) was completed")
     }
 
     // MARK: initial setup
@@ -247,20 +158,11 @@ class AddEditTaskVC: UIViewController, InputsInterfaceDelegate, EditTaskTableDel
         contentView.addSubview(table.view)
         self.table.view.topAnchor.constraint(equalTo: notesTextView.bottomAnchor, constant: sectionSpacing).isActive = true
         self.table.view.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: 0.0).isActive = true
-//        self.table.view.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: 0.0).isActive = true
+        self.table.view.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: 0.0).isActive = true
         self.table.view.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 0.0).isActive = true
         table.view.sizeThatFits(CGSize(width: contentView.bounds.width, height: CGFloat.greatestFiniteMagnitude))
         let newSize = table.view.sizeThatFits(CGSize(width: contentView.bounds.width, height: CGFloat.greatestFiniteMagnitude))
         table.view.heightAnchor.constraint(equalToConstant: newSize.height).isActive = true
-
-        self.addChild(taskLog)
-        taskLog.view.translatesAutoresizingMaskIntoConstraints = false
-        contentView.addSubview((taskLog.view)!)
-        taskLog.view.topAnchor.constraint(equalTo: table.view.bottomAnchor, constant: 0.0).isActive = true
-        taskLog.view.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: 0.0).isActive = true
-        taskLog.view.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -50.0).isActive = true
-        taskLog.view.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 0.0).isActive = true
-
     }
 
     private func setupDataStuff() {
@@ -272,25 +174,31 @@ class AddEditTaskVC: UIViewController, InputsInterfaceDelegate, EditTaskTableDel
     }
 
     private func prefillInputFields() {
-        guard let task = taskMO else { fatalError("taskMO was nil when executing \(#function)") }
-        self.titleTextField.text = task.title
-        self.notesTextView.text = task.quickNote
-        if let current = task.epic {
-            self.selectedEpic = current
-            table.selectedEpic = selectedEpic
-        }
-        if let pos = WorkflowPosition(rawValue: Int(task.workflowStatus)) {
-            self.selectedStatus = pos
-            table.selectedStatus = selectedStatus
-        }
+        guard let epic = epic else { fatalError("taskMO was nil when executing \(#function)") }
+        self.titleTextField.text = epic.title
+        self.notesTextView.text = epic.quickNote
+    }
+
+    // MARK: EditTaskTableDelegate conformance
+
+    func deleteTask() {
+        let alert = UIAlertController(title: "Alert", message: "Are you sure you want to delete this task?", preferredStyle: UIAlertController.Style.alert)
+        alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel, handler: { _ in print("called handler for Cancel action") }))
+        alert.addAction(UIAlertAction(title: "Delete", style: UIAlertAction.Style.destructive, handler: {_ in
+            guard let epic = self.epic else { fatalError("taskMO was nil when executing \(#function)") }
+            self.persistenceManager.delete(epic: epic)
+            self.goBack()
+        }))
+        self.present(alert, animated: true, completion: nil)
     }
 
     // MARK: initialization
 
-    init(persistenceManager: PersistenceManager, useState: EditScreenUseState, task: Task? = nil, updateDelegate: CoreDataDisplayDelegate) {
+
+    init(persistenceManager: PersistenceManager, useState: EditScreenUseState, epic: Epic? = nil, updateDelegate: CoreDataDisplayDelegate) {
         self.persistenceManager = persistenceManager
         self.useState = useState
-        self.taskMO = task
+        self.epic = epic
         self.updateDelegate = updateDelegate
         super.init(nibName: nil, bundle: nil)
     }

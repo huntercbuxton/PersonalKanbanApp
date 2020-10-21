@@ -7,26 +7,74 @@
 
 import UIKit
 
-class BacklogTableVC: UITableViewController {
+
+
+class BacklogTableVC: UITableViewController, SlidingContentsViewContoller {
+
+    weak var sliderDelegate: SlidingViewDelegate?
+
+    func refreshDisplay() {
+        print("called \(#function) implementation in BacklogTableVC")
+    }
+
+    func updateCoreData() {
+        print("called \(#function) implementation in BacklogTableVC")
+        self.updatedData = persistenceManager.getAllTasks()
+    }
+
+    // MARK: Data management
 
     let persistenceManager: PersistenceManager
 
-    func getTasks() {
-        self.tasks = persistenceManager.getAllTasks()
+    func loadData() {
+        print("called loadData!!!!")
+        self.updatedData = persistenceManager.getAllTasks()
     }
 
     // MARK: - SlidingViewsMenu
 
-    weak var sliderDelegate: SlidingViewDelegate?
 
-    private var tasks: [Task] = []
+    lazy var displayData: [Task] = [] {
+        didSet {
+            print("in the displayedData property observer in \(#file), \(#line)")
+            self.tableView.reloadData()
+        }
+    }
+
+    private var fetchedData: [Task] = [] {
+        didSet {
+            print("in the fetchedData property observer in \(#file), \(#line)")
+            self.displayData = sortData()
+        }
+    }
+
+    private var updatedData: [Task] {
+        get {
+            print("in the displayedData GET property observer in \(#file), \(#line)")
+            return persistenceManager.getAllTasks()
+        } set {
+            print("in the displayedData SET property observer in \(#file), \(#line)")
+            updateData(in: newValue)
+            persistenceManager.save()
+            self.fetchedData = persistenceManager.getAllTasks()
+            self.tableView.reloadData()
+        }
+    }
+
+    func sortData() -> [Task] {
+        return self.fetchedData
+    }
+
+    func updateData(in tasks: [Task]) {
+
+    }
 
     private let reuseID = "taskListCellReuseID"
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        getTasks()
-        self.tasks.forEach({print("task with title: ", $0.title)})
+        loadData()
+        self.displayData.forEach({print("task with title: ", $0.title)})
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -36,6 +84,7 @@ class BacklogTableVC: UITableViewController {
         self.tableView.tableFooterView = UITableViewHeaderFooterView()
     }
 
+
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -43,12 +92,12 @@ class BacklogTableVC: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return tasks.count
+        return displayData.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: self.reuseID, for: indexPath)
-        cell.textLabel?.text = tasks[indexPath.row].title
+        cell.textLabel?.text = displayData[indexPath.row].title
         return cell
     }
 
@@ -56,8 +105,8 @@ class BacklogTableVC: UITableViewController {
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.sliderDelegate?.hideMenu()
-        print("selected the cell at \(indexPath) for task titled: \(self.tasks[indexPath.row].title)")
-        let editScreen = AddEditTaskVC(persistenceManager: persistenceManager, useState: .edit, task: tasks[indexPath.row])
+        print("selected the cell at \(indexPath) for task titled: \(self.displayData[indexPath.row].title)")
+        let editScreen = AddEditTaskVC(persistenceManager: persistenceManager, useState: .edit, task: displayData[indexPath.row], updateDelegate: self)
         self.navigationController?.pushViewController(editScreen, animated: true)
     }
 

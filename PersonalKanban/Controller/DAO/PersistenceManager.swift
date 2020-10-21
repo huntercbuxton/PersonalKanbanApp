@@ -20,7 +20,33 @@ final class PersistenceManager {
     lazy var context: NSManagedObjectContext = persistentContainer.viewContext
 
     func getAllTasks() -> [Task] {
-        return self.fetch(Task.self)
+        let tasks = self.fetch(Task.self)
+        print("these are the current tasks:")
+        tasks.forEach({print("task title: \($0.title) with status: \($0.workflowStatus) ")})
+        return tasks
+    }
+
+    func getAllEpics() -> [Epic] {
+        let epics = self.fetch(Epic.self)
+        print("these are the current epics:")
+        epics.forEach({print($0.title,"tasks.count:",$0.tasks?.count)})
+        return epics
+    }
+
+    func delete(task: Task) {
+        context.delete(task)
+        save()
+    }
+
+    func delete(epic: Epic) {
+        context.delete(epic)
+        save()
+    }
+
+    func deleteAllTasks() {
+        print("now calling \(#function)")
+        let tasks = getAllTasks()
+        tasks.forEach({self.delete(task: $0)})
     }
 
     // MARK: private methods/properties

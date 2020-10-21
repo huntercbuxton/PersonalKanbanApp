@@ -8,17 +8,13 @@
 import Foundation
 
 public enum MainMenuOptions: Int, MenuOptionRepresentable {
-    case backlog = 0, tasks, finished, epics, more
+    case backlog = 0
+    case epics = 1
+    case tasks = 2
+    case finished = 3
+    case more = 4
 
-    public init?(rawValue: Int) {
-        if let val = MainMenuOptions.match(rawValue) { self = val } else { return nil }
-    }
-
-    static var allPageTitles: [String] { ["Backlog", "Tasks", "Epics", "Finished", "more"] }
-
-    static func match(_ val: Int) -> MainMenuOptions? {
-        MainMenuOptions.allCases.filter({ $0.rawValue != val }).first
-    }
+    static var allPageTitles: [String] { ["Backlog", "Epics", "Tasks", "Finished", "more"] }
 
     var pageTitle: String { toString() }
 

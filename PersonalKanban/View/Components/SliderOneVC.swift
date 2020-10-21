@@ -17,13 +17,13 @@ class SliderOneVC: UITableViewController, MenuController {
 
     typealias MenuT = MainMenuData<MainMenuOptions>
 
-    var menu: MainMenuData = MainMenuData(options: MainMenuOptions.allCases, defaultSelection: MainMenuOptions.tasks, currentSelection: MainMenuOptions.tasks)
+    var menu: MainMenuData = MainMenuData(options: MainMenuOptions.allCases, defaultSelection: MainMenuOptions.backlog, currentSelection: MainMenuOptions.backlog)
 
     weak var selectionDelegate: MainViewController?
 
     func select(option: MainMenuOptions) {
+//        print("MainMenu class is calling \(#function) with arg option: \(option)")
         self.selectionDelegate?.upateSelection(from: menu.currentSelection, to: option)
-        self.menu.currentSelection = self.menu.defaultSelection
         menu.currentSelection = option
         sliderDelegate?.hideMenu()
     }
@@ -79,6 +79,7 @@ class SliderOneVC: UITableViewController, MenuController {
     // MARK: UITableViewDelegate
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        print("main menu class selected the option at \(String(describing: indexPath))")
         guard let option = MainMenuOptions.init(rawValue: indexPath.row) else {
             fatalError("the index path selected was \(indexPath.description) which cannot be converted to a menu option")
         }
