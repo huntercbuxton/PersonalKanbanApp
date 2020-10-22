@@ -23,7 +23,7 @@
 		715B72EF253BF39000219F07 /* UIConsts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 715B72EE253BF39000219F07 /* UIConsts.swift */; };
 		715B7301253C39BC00219F07 /* SliderOneVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 715B72FF253C39BC00219F07 /* SliderOneVC.swift */; };
 		715B7306253C3A3900219F07 /* SlidingViewsVCProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 715B7305253C3A3900219F07 /* SlidingViewsVCProtocols.swift */; };
-		715B730E253C4B1C00219F07 /* BacklogTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 715B730D253C4B1C00219F07 /* BacklogTableVC.swift */; };
+		715B730E253C4B1C00219F07 /* TasksTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 715B730D253C4B1C00219F07 /* TasksTable.swift */; };
 		715B7316253C520300219F07 /* AddEditTaskVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 715B7315253C520300219F07 /* AddEditTaskVC.swift */; };
 		715B731B253C524600219F07 /* PaddedTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 715B731A253C524600219F07 /* PaddedTextField.swift */; };
 		717DCB1C253EB75E00E2156F /* EpicsTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 717DCB1B253EB75E00E2156F /* EpicsTableVC.swift */; };
@@ -50,6 +50,7 @@
 		71BC1B44253DCC6C005EC646 /* PersistenceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71BC1B43253DCC6C005EC646 /* PersistenceManager.swift */; };
 		71BC1B5D253DD3A3005EC646 /* InputsEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71BC1B5C253DD3A3005EC646 /* InputsEnum.swift */; };
 		71BC1B62253DD3D4005EC646 /* InputsProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71BC1B61253DD3D4005EC646 /* InputsProtocols.swift */; };
+		71D378392541B53D00F66FCC /* EnumWorkflowPositions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71D378382541B53D00F66FCC /* EnumWorkflowPositions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXBuildRule section */
@@ -227,7 +228,7 @@
 		715B72EE253BF39000219F07 /* UIConsts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIConsts.swift; sourceTree = "<group>"; };
 		715B72FF253C39BC00219F07 /* SliderOneVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SliderOneVC.swift; sourceTree = "<group>"; };
 		715B7305253C3A3900219F07 /* SlidingViewsVCProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlidingViewsVCProtocols.swift; sourceTree = "<group>"; };
-		715B730D253C4B1C00219F07 /* BacklogTableVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BacklogTableVC.swift; sourceTree = "<group>"; };
+		715B730D253C4B1C00219F07 /* TasksTable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TasksTable.swift; sourceTree = "<group>"; };
 		715B7315253C520300219F07 /* AddEditTaskVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddEditTaskVC.swift; sourceTree = "<group>"; };
 		715B731A253C524600219F07 /* PaddedTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaddedTextField.swift; sourceTree = "<group>"; };
 		717DCB1B253EB75E00E2156F /* EpicsTableVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpicsTableVC.swift; sourceTree = "<group>"; };
@@ -254,6 +255,7 @@
 		71BC1B43253DCC6C005EC646 /* PersistenceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceManager.swift; sourceTree = "<group>"; };
 		71BC1B5C253DD3A3005EC646 /* InputsEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputsEnum.swift; sourceTree = "<group>"; };
 		71BC1B61253DD3D4005EC646 /* InputsProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputsProtocols.swift; sourceTree = "<group>"; };
+		71D378382541B53D00F66FCC /* EnumWorkflowPositions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnumWorkflowPositions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -287,6 +289,7 @@
 				71BC1B5B253DD35A005EC646 /* UserInputHandling */,
 				71BC1B5A253DD347005EC646 /* DAO */,
 				717DCB5C253F3FF900E2156F /* DateConversion.swift */,
+				71D378382541B53D00F66FCC /* EnumWorkflowPositions.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -404,7 +407,7 @@
 			children = (
 				715B731A253C524600219F07 /* PaddedTextField.swift */,
 				713F7A94253CD0AC00D23CC7 /* LargeTextView.swift */,
-				715B730D253C4B1C00219F07 /* BacklogTableVC.swift */,
+				715B730D253C4B1C00219F07 /* TasksTable.swift */,
 				715B72FF253C39BC00219F07 /* SliderOneVC.swift */,
 				71209AEB253E3CDD0082DA0A /* TaskEditingTable.swift */,
 				717DCB1B253EB75E00E2156F /* EpicsTableVC.swift */,
@@ -632,9 +635,10 @@
 				717DCB4F253F3DBA00E2156F /* Note+CoreDataClass.swift in Sources */,
 				717DCB5D253F3FF900E2156F /* DateConversion.swift in Sources */,
 				717DCB51253F3DBA00E2156F /* Task+CoreDataClass.swift in Sources */,
+				71D378392541B53D00F66FCC /* EnumWorkflowPositions.swift in Sources */,
 				715B72EF253BF39000219F07 /* UIConsts.swift in Sources */,
 				7146AC39253E19B000DA7D03 /* MainMenuProtocols.swift in Sources */,
-				715B730E253C4B1C00219F07 /* BacklogTableVC.swift in Sources */,
+				715B730E253C4B1C00219F07 /* TasksTable.swift in Sources */,
 				715B7316253C520300219F07 /* AddEditTaskVC.swift in Sources */,
 				717DCB62253F4AAE00E2156F /* LogView.swift in Sources */,
 				715B7306253C3A3900219F07 /* SlidingViewsVCProtocols.swift in Sources */,

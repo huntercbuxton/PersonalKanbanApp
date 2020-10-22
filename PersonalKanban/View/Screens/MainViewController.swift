@@ -18,15 +18,25 @@ class MainViewController: UIViewController, SlidingViewDelegate, MenuSelectionDe
         self.currentPage = newSelection
         removeSlidingVCContents()
         switch newSelection {
-
-        case .inProgress, .toDo, .backlog, .archived, .finished, .more:
-            vcTwo = BacklogTableVC(sliderDelegate: self, persistenceManager: persistenceManager)
+        case .inProgress:
+            vcTwo = TasksTable(sliderDelegate: self, persistenceManager: persistenceManager, sortValue: .inProgress)
+            setupContentChildVC(child: vcTwo as! UIViewController, superView: contentViewTwo)
+        case .toDo:
+            vcTwo = TasksTable(sliderDelegate: self, persistenceManager: persistenceManager, sortValue: .toDo)
+            setupContentChildVC(child: vcTwo as! UIViewController, superView: contentViewTwo)
+        case .backlog:
+            vcTwo = TasksTable(sliderDelegate: self, persistenceManager: persistenceManager, sortValue: .backlog)
+            setupContentChildVC(child: vcTwo as! UIViewController, superView: contentViewTwo)
+        case .finished:
+            vcTwo = TasksTable(sliderDelegate: self, persistenceManager: persistenceManager, sortValue: .finished)
             setupContentChildVC(child: vcTwo as! UIViewController, superView: contentViewTwo)
         case .epics:
             vcTwo = EpicsTableVC(sliderDelegate: self, persistenceManager: persistenceManager)
             setupContentChildVC(child: vcTwo as! UIViewController, superView: contentViewTwo)
-//        default:
-//            fatalError("not yet implemented")
+        case .archived:
+            print("not yet implemented")
+        case .more:
+            print("not yet implemented")
         }
     }
 
@@ -60,7 +70,7 @@ class MainViewController: UIViewController, SlidingViewDelegate, MenuSelectionDe
     private lazy var contentViewOne: UIView = UIView()
     private lazy var contentViewTwo: UIView = UIView()
     private lazy var vcOne: SliderOneVC = SliderOneVC(sliderDelegate: self, selectionDelegate: self, savedSelection: MainMenuOptions.backlog)
-    private lazy var vcTwo: SlidingContentsViewContoller = BacklogTableVC(sliderDelegate: self, persistenceManager: PersistenceManager.shared)
+    private lazy var vcTwo: SlidingContentsViewContoller = TasksTable(sliderDelegate: self, persistenceManager: PersistenceManager.shared)
 
     // MARK: - properties specifying UI style/layout
 

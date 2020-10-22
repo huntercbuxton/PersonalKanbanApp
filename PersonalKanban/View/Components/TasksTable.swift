@@ -7,10 +7,10 @@
 
 import UIKit
 
-class BacklogTableVC: UITableViewController, SlidingContentsViewContoller {
+class TasksTable: UITableViewController, SlidingContentsViewContoller {
 
     // MARK: - properties
-
+    private var sortValue: WorkflowPosition
     private let cellReuseID = "BacklogTableVC.cellReuseID"
     weak var sliderDelegate: SlidingViewDelegate?
     private let persistenceManager: PersistenceManager
@@ -19,40 +19,36 @@ class BacklogTableVC: UITableViewController, SlidingContentsViewContoller {
             self.tableView.reloadData()
         }
     }
-    private var fetchedData: [Task] = [] {
-        didSet {
-            self.displayData = sortData()
-        }
-    }
+//    private var fetchedData: [Task] = [] {
+//        didSet {
+//            self.displayData = sortData()
+//        }
+//    }
     private var updatedData: [Task] {
         get {
-            return persistenceManager.getAllTasks()
+            return persistenceManager.sort()
         } set {
             persistenceManager.save()
-            self.fetchedData = persistenceManager.getAllTasks()
-            self.tableView.reloadData()
+            self.displayData = persistenceManager.sort(match: sortValue)
+//            self.tableView.reloadData()
         }
     }
 
     // MARK: - methods
 
-    func refreshDisplay() {
-        print("called \(#function) implementation in BacklogTableVC")
-    }
-
     func updateCoreData() {
         print("called \(#function) implementation in BacklogTableVC")
-        self.updatedData = persistenceManager.getAllTasks()
+        self.updatedData = persistenceManager.sort(match: sortValue)
     }
 
     func loadData() {
         print("called loadData!!!!")
-        self.updatedData = persistenceManager.getAllTasks()
+        self.updatedData = persistenceManager.sort(match: sortValue)
     }
-
-    func sortData() -> [Task] {
-        return self.fetchedData
-    }
+//
+//    func sortData() -> [Task] {
+//        return self.displayData
+//    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -89,8 +85,9 @@ class BacklogTableVC: UITableViewController, SlidingContentsViewContoller {
 
     // MARK: - initialization
 
-    init(sliderDelegate: MainViewController?, persistenceManager: PersistenceManager) {
+    init(sliderDelegate: MainViewController?, persistenceManager: PersistenceManager, sortValue: WorkflowPosition = .inProgress) {
         self.persistenceManager = persistenceManager
+        self.sortValue = sortValue
         super.init(nibName: nil, bundle: nil)
     }
 

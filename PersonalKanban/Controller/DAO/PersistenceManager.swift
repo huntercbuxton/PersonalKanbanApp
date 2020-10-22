@@ -19,6 +19,38 @@ final class PersistenceManager {
 
     lazy var context: NSManagedObjectContext = persistentContainer.viewContext
 
+    func sort() -> [Task] {
+        let entityName = String(describing: Task.self)
+        let request = NSFetchRequest<Task>(entityName: entityName)
+        let predicateKey = "workflowStatus"
+        let descriptorKey = "dateUpdated"
+        let sortDescriptor = NSSortDescriptor(key: descriptorKey, ascending: true)
+        request.sortDescriptors = [sortDescriptor]
+        request.predicate = NSPredicate(format: "\(predicateKey) == 0")
+        do {
+            let objects = try context.fetch(request) as [Task]
+            return objects ?? [Task]()
+        } catch {
+            fatalError("failed to perform the fetch request in the method \(#function)")
+        }
+    }
+
+    func sort(match workflowPosition: WorkflowPosition) -> [Task] {
+        let entityName = String(describing: Task.self)
+        let request = NSFetchRequest<Task>(entityName: entityName)
+        let predicateKey = "workflowStatus"
+        let descriptorKey = "dateUpdated"
+        let sortDescriptor = NSSortDescriptor(key: descriptorKey, ascending: true)
+        request.sortDescriptors = [sortDescriptor]
+        request.predicate = NSPredicate(format: "\(predicateKey) == \(workflowPosition.rawValue)")
+        do {
+            let objects = try context.fetch(request) as [Task]
+            return objects ?? [Task]()
+        } catch {
+            fatalError("failed to perform the fetch request in the method \(#function)")
+        }
+    }
+
     func getAllTasks() -> [Task] {
         let tasks = self.fetch(Task.self)
         print("these are the current tasks:")
