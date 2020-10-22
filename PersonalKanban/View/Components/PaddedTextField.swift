@@ -58,7 +58,7 @@ open class PaddedTextField: UITextField, InputValidatable, UITextFieldDelegate {
 //    }
 
     @objc open func respondToChange() {
-        self.inputValidationDelegate!.inputUpdate(self.text, from: inputField)
+//        self.inputValidationDelegate!.inputUpdate(self.text, from: inputField)
     }
 
     func firstSetup() {

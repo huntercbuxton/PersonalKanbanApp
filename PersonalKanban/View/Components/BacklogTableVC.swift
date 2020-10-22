@@ -7,11 +7,34 @@
 
 import UIKit
 
-
-
 class BacklogTableVC: UITableViewController, SlidingContentsViewContoller {
 
+    // MARK: - properties
+
+    private let cellReuseID = "BacklogTableVC.cellReuseID"
     weak var sliderDelegate: SlidingViewDelegate?
+    private let persistenceManager: PersistenceManager
+    private lazy var displayData: [Task] = [] {
+        didSet {
+            self.tableView.reloadData()
+        }
+    }
+    private var fetchedData: [Task] = [] {
+        didSet {
+            self.displayData = sortData()
+        }
+    }
+    private var updatedData: [Task] {
+        get {
+            return persistenceManager.getAllTasks()
+        } set {
+            persistenceManager.save()
+            self.fetchedData = persistenceManager.getAllTasks()
+            self.tableView.reloadData()
+        }
+    }
+
+    // MARK: - methods
 
     func refreshDisplay() {
         print("called \(#function) implementation in BacklogTableVC")
@@ -22,68 +45,22 @@ class BacklogTableVC: UITableViewController, SlidingContentsViewContoller {
         self.updatedData = persistenceManager.getAllTasks()
     }
 
-    // MARK: Data management
-
-    let persistenceManager: PersistenceManager
-
     func loadData() {
         print("called loadData!!!!")
         self.updatedData = persistenceManager.getAllTasks()
-    }
-
-    // MARK: - SlidingViewsMenu
-
-
-    lazy var displayData: [Task] = [] {
-        didSet {
-            print("in the displayedData property observer in \(#file), \(#line)")
-            self.tableView.reloadData()
-        }
-    }
-
-    private var fetchedData: [Task] = [] {
-        didSet {
-            print("in the fetchedData property observer in \(#file), \(#line)")
-            self.displayData = sortData()
-        }
-    }
-
-    private var updatedData: [Task] {
-        get {
-            print("in the displayedData GET property observer in \(#file), \(#line)")
-            return persistenceManager.getAllTasks()
-        } set {
-            print("in the displayedData SET property observer in \(#file), \(#line)")
-            updateData(in: newValue)
-            persistenceManager.save()
-            self.fetchedData = persistenceManager.getAllTasks()
-            self.tableView.reloadData()
-        }
     }
 
     func sortData() -> [Task] {
         return self.fetchedData
     }
 
-    func updateData(in tasks: [Task]) {
-
-    }
-
-    private let reuseID = "taskListCellReuseID"
-
     override func viewDidLoad() {
         super.viewDidLoad()
         loadData()
-        self.displayData.forEach({print("task with title: ", $0.title)})
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         self.view.translatesAutoresizingMaskIntoConstraints = false
-        self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: self.reuseID)
+        self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: self.cellReuseID)
         self.tableView.tableFooterView = UITableViewHeaderFooterView()
     }
-
 
     // MARK: - Table view data source
 
@@ -96,16 +73,16 @@ class BacklogTableVC: UITableViewController, SlidingContentsViewContoller {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: self.reuseID, for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: self.cellReuseID, for: indexPath)
         cell.textLabel?.text = displayData[indexPath.row].title
         return cell
     }
 
-    // MARK: UITableViewDelegate conformance
+    // MARK: - UITableViewDelegate protocol conformance
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.sliderDelegate?.hideMenu()
-        print("selected the cell at \(indexPath) for task titled: \(self.displayData[indexPath.row].title)")
+//        print("selected the cell at \(indexPath) for task titled: \(self.displayData[indexPath.row].title)")
         let editScreen = AddEditTaskVC(persistenceManager: persistenceManager, useState: .edit, task: displayData[indexPath.row], updateDelegate: self)
         self.navigationController?.pushViewController(editScreen, animated: true)
     }

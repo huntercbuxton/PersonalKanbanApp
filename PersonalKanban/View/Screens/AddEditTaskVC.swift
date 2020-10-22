@@ -12,45 +12,26 @@ enum EditScreenUseState {
     case edit
 }
 
-protocol EditTaskTableDelegate {
-    func deleteTask()
-    func goToEpicSelectionScreen()
-    func goToWorkflowSelectorScreen()
-}
+class AddEditTaskVC: UIViewController, InputsInterfaceDelegate, EditTaskTableDelegate, TaskEditorOptionsTable2Delegate, EpicsSelectorDelegate, WorkflowStatusSelectionDelegate {
 
-protocol WorkflowStatusSelectionDelegate {
-    func selectStatus(newStatus: WorkflowPosition)
-}
-
-class AddEditTaskVC: UIViewController, InputsInterfaceDelegate, EditTaskTableDelegate, EpicsSelectorDelegate, WorkflowStatusSelectionDelegate {
-
-
-    // MARK: EditTaskTableDelegate conformance
+    // MARK: - EditTaskTableDelegate conformance
 
     func goToEpicSelectionScreen() {
         let epicsScreen = ChooseEpicsScreen(persistenceManager: persistenceManager, selectionDelegate: self)
         self.navigationController?.pushViewController(epicsScreen, animated: true)
     }
 
-    // MARK: EpicsSelectorDelegate conformance
-
-    func select(epic: Epic) {
-        self.selectedEpic = epic
-        self.table.selectedEpic = selectedEpic
-    }
-
-    // MARK: WorkflowStatusSelectionDelegate conformance
-
-    func selectStatus(newStatus: WorkflowPosition) {
-        self.selectedStatus = newStatus
-        self.table.selectedStatus = selectedStatus
+    func goToStoryPointsSelectionScreen() {
+        let storyPointsVC = StoryPointsSelectionScreen(delegate: self, currentSelection: storyPoints)
+        self.navigationController?.pushViewController(storyPointsVC, animated: true)
     }
 
     func goToWorkflowSelectorScreen() {
-        let positionScreen = SelectWorkflowStatusMenu(workflowStatusSelectionDelegate: self)
+        let positionScreen = SelectWorkflowStatusMenu(workflowStatusSelectionDelegate: self, currentStatus: workflowStatus)
         self.navigationController?.pushViewController(positionScreen, animated: true)
-
     }
+
+    // MARK: - TaskEditorOptionsTable2Delegate conformance
 
     func deleteTask() {
         let alert = UIAlertController(title: "Alert", message: "Are you sure you want to delete this task?", preferredStyle: UIAlertController.Style.alert)
@@ -58,149 +39,121 @@ class AddEditTaskVC: UIViewController, InputsInterfaceDelegate, EditTaskTableDel
         alert.addAction(UIAlertAction(title: "Delete", style: UIAlertAction.Style.destructive, handler: {_ in
             guard let task = self.taskMO else { fatalError("taskMO was nil when executing \(#function)") }
             self.persistenceManager.delete(task: task)
-            self.goBack()
+            self.navigateToPreviousScreen()
         }))
         self.present(alert, animated: true, completion: nil)
     }
 
-    var selectedStatus: WorkflowPosition? {
-        didSet {
-            //print("didSet called on selectedEpic; the newValue is \(selectedEpic?.title)")
-        }
-        willSet {
-            if newValue != selectedStatus {
-                self.saveBarButton.isEnabled = true
-            }
-        }
+    // MARK: - EpicsSelectorDelegate protocol conformance
+
+    func selectEpic(_ selection: Epic) {
+        self.selectedEpic = selection
+        self.table.selectedEpic = selection
     }
+
+//    // MARK: - StoryPointsSelectionDelegate protocol conformance
+
+    func selectStoryPoints(_ selectedValue: StoryPoints) {
+        self.storyPoints = selectedValue
+    }
+
+//    // MARK: - WorkflowStatusSelectionDelegate conformance
+
+    func selectStatus(newStatus: WorkflowPosition) {
+        self.workflowStatus = newStatus
+    }
+
+    // MARK: - InputsInterfaceDelegate conformance
+
+    func enableSave() {
+        self.saveBtn.isEnabled = true
+    }
+
+    func disableSave() {
+        self.saveBtn.isEnabled = false
+    }
+
+    // MARK: - properties storing working updates to the task data which has not been saved.
+
     var selectedEpic: Epic? {
-        didSet {
-            //print("didSet called on selectedEpic; the newValue is \(selectedEpic?.title)")
-        }
         willSet {
             if newValue != selectedEpic {
-                self.saveBarButton.isEnabled = true
+                self.saveBtn.isEnabled = true
             }
         }
     }
+    private lazy var storyPoints = taskMO?.storyPointsEnum ?? .unassigned {
+        didSet {
+            self.table.storyPoints = storyPoints
+        }
+    }
+    private lazy var workflowStatus: WorkflowPosition = self.taskMO?.workflowStatusEnum ?? .backlog {
+        didSet {
+            print("called didset with value \(workflowStatus) on AddEditTaskVC's workflowStatus")
+            self.table.workflowPosition = workflowStatus
+        }
+    }
 
-    var updateDelegate: CoreDataDisplayDelegate!
-    var inputValidationManager: InputValidationManager!
+    // MARK: - properties storing UI Components
 
-    let persistenceManager: PersistenceManager
+    private lazy var scrollView = UIScrollView()
+    private lazy var contentView = UIView()
+    private lazy var saveBtn = UIBarButtonItem(barButtonSystemItem: .save,
+                                                              target: self,
+                                                              action: #selector(saveBtnTapped))
+    private lazy var cancelBtn = UIBarButtonItem(barButtonSystemItem: .cancel,
+                                                                target: self,
+                                                                action: #selector(cancelBtnTapped))
+    private lazy var titleTextField: PaddedTextField = PaddedTextField()
+    private lazy var notesTextView: LargeTextView = LargeTextView(text: "")
+    private lazy var table: TaskEditingTable = TaskEditingTable(useState: self.useState, editingDelegate: self, selectedEpic: self.selectedEpic, workflowStatus: self.workflowStatus, storyPoints: storyPoints)
+    private lazy var table2 = TaskEditorOptionsTable2(delegate: self)
+    private var taskLog: LogView?// = LogView(dateCreated: taskMO?.dateCreated, dateUpdated: taskMO?.dateUpdated)
+
+    // MARK: - properties specifying UI style/layout
+
+    private var titleText: String { useState == .create ? "Create Task" : "Edit Task" }
+    private lazy var margins: UIEdgeInsets = contentView.layoutMargins
+
+    // MARK: - other properties
 
     private let useState: EditScreenUseState
-    private var titleText: String { useState == .create ? "Create Task" : "Edit Task" }
-    private var titlePlaceholderText: String = "add a title"
+    private weak var updateDelegate: CoreDataDisplayDelegate!
+//    private var inputValidationManager: InputValidationManager!
+    private let persistenceManager: PersistenceManager
     private var taskMO: Task?
-    var originalPosition: WorkflowPosition = WorkflowPosition.defaultStatus
-    var finalPosition: WorkflowPosition = WorkflowPosition.defaultStatus
-    private let sectionSpacing: CGFloat = 20.0
 
-    // MARK: UI Elements
-
-    lazy var saveBarButton: UIBarButtonItem = UIBarButtonItem(barButtonSystemItem: .save,
-                                                              target: self,
-                                                              action: #selector(savedBarButtonTapped))
-
-    lazy var cancelBarButton: UIBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel,
-                                                                target: self,
-                                                                action: #selector(cancelBarButtonTapped))
-
-    var scrollView: UIScrollView = UIScrollView()
-    var contentView = UIView()
-
-    lazy var titleTextField: PaddedTextField = PaddedTextField()
-
-    lazy var notesTextView: LargeTextView = LargeTextView(text: "")
-
-    lazy var table: TaskEditingTable = TaskEditingTable(useState: self.useState, editingDelegate: self, selectedEpic: self.selectedEpic, workflowStatus: self.selectedStatus)
-
-    lazy var taskLog: LogView =  LogView(dateCreated: taskMO?.dateCreated, dateUpdated: taskMO?.dateUpdated)
-
-    // MARK: instance methods
+    // MARK: - initial setup of UI components
 
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .systemGroupedBackground
+        setupNavBar()
+        setupScrollViewAndContentView()
+        setupInputFields()
+        setupTable(table)
+        table.view.topAnchor.constraint(equalTo: notesTextView.bottomAnchor, constant: UIConsts.verticalSpacing).isActive = true
 
-        setupUIElements()
-//        table.workFlowDisplayUpdate(self.finalPosition)
+        if useState == .edit {
+            setupTable(table2)
+            table2.view.topAnchor.constraint(equalTo: table.view.bottomAnchor, constant: UIConsts.verticalSpacing).isActive = true
+            setupLog()
+        } else {
+            table.view.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -contentView.layoutMargins.bottom).isActive = true
+        }
         setupDataStuff()
     }
 
-    // MARK: InputsInterfaceDelegate conformance
-
-    func enableUse(for: String) {
-        self.saveBarButton.isEnabled = true
-    }
-
-    func disableUse(for: String) {
-        self.saveBarButton.isEnabled = false
-    }
-
-    private func createTask(title: String, notes: String, epic: Epic?, status: WorkflowPosition?) {
-        let task = Task(context: persistenceManager.context)
-        task.title = title
-        task.quickNote = notes
-        task.epic = epic
-        var date = Date()
-        task.dateCreated = DateConversion.format(date)
-        task.dateUpdated = DateConversion.format(date)
-        task.workflowStatus =  Int64(status?.rawValue ?? WorkflowPosition.backlog.rawValue)
-        persistenceManager.save()
-    }
-
-    private func saveChanges() {
-        guard let task = taskMO else { fatalError("taskMO was nil when executing \(#function)") }
-        let tempStatus = Int64(self.finalPosition.rawValue)
-        print("called \(#function); about to save the workflow update of \(tempStatus)")
-        task.title = titleTextField.text
-        task.quickNote = notesTextView.text
-        task.epic = selectedEpic
-        var date = Date()
-        task.dateUpdated = DateConversion.format(date)
-        task.workflowStatus = tempStatus
-        persistenceManager.save()
-        self.updateDelegate.updateCoreData()
-    }
-
-    @objc func savedBarButtonTapped() {
-//        print("useState=\(useState)")
-        if useState == .create {
-            createTask(title: self.titleTextField.text!, notes: self.notesTextView.text, epic: self.selectedEpic, status: self.selectedStatus)
-        } else {
-            saveChanges()
-        }
-        self.goBack()
-        print("\(#function) was executed")
-    }
-
-    @objc func cancelBarButtonTapped() {
-        self.goBack()
-        print("\(#function) was completed")
-    }
-
-    private func goBack() {
-
-        if self.useState == .create {
-            self.dismiss(animated: true, completion: {})
-        } else {
-            self.navigationController?.popViewController(animated: true)
-        }
-        self.updateDelegate.updateCoreData()
-    }
-
-    // MARK: initial setup
-
-    private func setupUIElements() {
+    private func setupNavBar() {
         self.title = self.titleText
-        self.navigationItem.setRightBarButton(saveBarButton, animated: false)
-        saveBarButton.isEnabled = false
-        self.navigationItem.setLeftBarButton(cancelBarButton, animated: false)
+        self.navigationItem.setRightBarButton(saveBtn, animated: false)
+//        saveBtn.isEnabled = false
+        self.navigationItem.setLeftBarButton(cancelBtn, animated: false)
+    }
 
+    private func setupScrollViewAndContentView() {
         scrollView.translatesAutoresizingMaskIntoConstraints = false
-        self.view.addSubview(scrollView)
+        view.addSubview(scrollView)
         NSLayoutConstraint.activate([
             scrollView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
             scrollView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
@@ -208,66 +161,61 @@ class AddEditTaskVC: UIViewController, InputsInterfaceDelegate, EditTaskTableDel
             scrollView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor)
         ])
 
-        self.contentView.translatesAutoresizingMaskIntoConstraints = false
-        self.scrollView.addSubview(self.contentView)
-        NSLayoutConstraint.activate([
-            contentView.leadingAnchor.constraint(equalTo: self.scrollView.leadingAnchor),
-            contentView.trailingAnchor.constraint(equalTo: self.scrollView.trailingAnchor),
-            contentView.topAnchor.constraint(equalTo: self.scrollView.topAnchor),
-            contentView.bottomAnchor.constraint(equalTo: self.scrollView.bottomAnchor),
-            contentView.widthAnchor.constraint(equalTo: self.scrollView.widthAnchor)
-        ])
+        contentView.translatesAutoresizingMaskIntoConstraints = false
+        scrollView.addSubview(contentView)
+        contentView.constrainEdgeAnchors(to: scrollView, insets: margins)
+        contentView.widthAnchor.constraint(equalTo: self.scrollView.widthAnchor, constant: -(margins.left + margins.right)).isActive = true
+    }
 
-        let widthConst: CGFloat = contentView.layoutMargins.right
-
+    private func setupInputFields() {
         titleTextField.translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview(titleTextField)
-        titleTextField.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: widthConst).isActive = true
-        titleTextField.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -widthConst).isActive = true
-        titleTextField.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 0.0).isActive = true
-        titleTextField.layer.borderWidth = 2.5
-        titleTextField.layer.borderColor = UIColor.systemGray5.cgColor
-        titleTextField.layer.cornerRadius = 8
-        titleTextField.placeholder = titlePlaceholderText
+        titleTextField.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
+        titleTextField.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
+        titleTextField.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 0).isActive = true
+        titleTextField.layer.borderWidth = UIConsts.textInputBorderWidth
+        titleTextField.layer.borderColor = UIConsts.textInputBorderColor
+        titleTextField.layer.cornerRadius = UIConsts.textInputCornerRadius
+        titleTextField.placeholder = UIConsts.titleFieldPlaceholderText
 
         notesTextView.translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview(notesTextView)
-        print(String(describing: widthConst))
-        notesTextView.topAnchor.constraint(equalTo: titleTextField.bottomAnchor, constant: sectionSpacing).isActive = true
-        notesTextView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: widthConst).isActive = true
-        notesTextView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -widthConst).isActive = true
-        notesTextView.heightAnchor.constraint(equalToConstant: 200.0).isActive = true
-        notesTextView.isScrollEnabled = false
-        notesTextView.layer.borderWidth = 2.5
-        notesTextView.layer.borderColor = UIColor.systemGray5.cgColor
-        notesTextView.layer.cornerRadius = 8
+        notesTextView.topAnchor.constraint(equalTo: titleTextField.bottomAnchor, constant: UIConsts.verticalSpacing).isActive = true
+        notesTextView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 0).isActive = true
+        notesTextView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: 0).isActive = true
+        notesTextView.heightAnchor.constraint(equalToConstant: UIConsts.largeTextFieldHeight).isActive = true
+        notesTextView.layer.borderWidth = UIConsts.textInputBorderWidth
+        notesTextView.layer.borderColor = UIConsts.textInputBorderColor
+        notesTextView.layer.cornerRadius = UIConsts.textInputCornerRadius
+    }
 
-        self.addChild(table)
-        self.table.view.translatesAutoresizingMaskIntoConstraints = false
-        contentView.addSubview(table.view)
-        self.table.view.topAnchor.constraint(equalTo: notesTextView.bottomAnchor, constant: sectionSpacing).isActive = true
-        self.table.view.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: 0.0).isActive = true
-//        self.table.view.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: 0.0).isActive = true
-        self.table.view.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 0.0).isActive = true
-        table.view.sizeThatFits(CGSize(width: contentView.bounds.width, height: CGFloat.greatestFiniteMagnitude))
-        let newSize = table.view.sizeThatFits(CGSize(width: contentView.bounds.width, height: CGFloat.greatestFiniteMagnitude))
-        table.view.heightAnchor.constraint(equalToConstant: newSize.height).isActive = true
+    private func setupTable(_ tableVC: UITableViewController) {
+        self.addChild(tableVC)
+        tableVC.view.translatesAutoresizingMaskIntoConstraints = false
+        contentView.addSubview(tableVC.view)
+        tableVC.view.constrainHEdgesAnchors(contentView)
+        let newSize = tableVC.view.sizeThatFits(CGSize(width: contentView.bounds.width, height: CGFloat.greatestFiniteMagnitude))
+        tableVC.view.heightAnchor.constraint(equalToConstant: newSize.height).isActive = true
+    }
 
-        self.addChild(taskLog)
-        taskLog.view.translatesAutoresizingMaskIntoConstraints = false
-        contentView.addSubview((taskLog.view)!)
-        taskLog.view.topAnchor.constraint(equalTo: table.view.bottomAnchor, constant: 0.0).isActive = true
-        taskLog.view.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: 0.0).isActive = true
-        taskLog.view.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -50.0).isActive = true
-        taskLog.view.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 0.0).isActive = true
-
+    private func setupLog() {
+        guard let task = self.taskMO else { fatalError("taskMO was nil in edit mode (called in \(#function)") }
+        guard let d1 = task.dateCreated, let d2 = task.dateUpdated else { fatalError("in \(#function) the dates retrieved from taskMO were nil") }
+        self.taskLog = LogView(dateCreated: d1, dateUpdated: d2)
+        self.addChild(taskLog!)
+        taskLog?.view.translatesAutoresizingMaskIntoConstraints = false
+        contentView.addSubview((taskLog!.view)!)
+        taskLog?.view.heightAnchor.constraint(equalToConstant: 300).isActive = true
+        taskLog?.view.topAnchor.constraint(equalTo: table2.view.bottomAnchor, constant: UIConsts.verticalSpacing).isActive = true
+        taskLog?.view.constrainHEdgesAnchors(contentView)
+        taskLog?.view.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -50).isActive = true
     }
 
     private func setupDataStuff() {
-        self.inputValidationManager = InputValidationManager()
-        self.inputValidationManager.delegate = self
-        self.titleTextField.inputValidationDelegate = self.inputValidationManager
-        self.notesTextView.inputValidationDelegate = self.inputValidationManager
+//        self.inputValidationManager = InputValidationManager()
+//        self.inputValidationManager.delegate = self
+//        self.titleTextField.inputValidationDelegate = self.inputValidationManager
+//        self.notesTextView.inputValidationDelegate = self.inputValidationManager
         if self.useState == .edit { prefillInputFields() }
     }
 
@@ -277,20 +225,73 @@ class AddEditTaskVC: UIViewController, InputsInterfaceDelegate, EditTaskTableDel
         self.notesTextView.text = task.quickNote
         if let current = task.epic {
             self.selectedEpic = current
-            table.selectedEpic = selectedEpic
-        }
-        if let pos = WorkflowPosition(rawValue: Int(task.workflowStatus)) {
-            self.selectedStatus = pos
-            table.selectedStatus = selectedStatus
+//            table.selectedEpic = selectedEpic
         }
     }
 
-    // MARK: initialization
+    // MARK: - other methods
+
+    @objc func saveBtnTapped() {
+        if useState == .create {
+            createTask(title: self.titleTextField.text!, notes: self.notesTextView.text, epic: self.selectedEpic, status: self.workflowStatus)
+        } else {
+            saveChanges()
+        }
+        navigateToPreviousScreen()
+    }
+
+    @objc func cancelBtnTapped() {
+        navigateToPreviousScreen()
+    }
+
+    private func navigateToPreviousScreen() {
+        if useState == .create {
+            self.dismiss(animated: true, completion: {})
+        } else {
+            self.navigationController?.popViewController(animated: true)
+        }
+        updateDelegate.updateCoreData()
+    }
+
+    private func createTask(title: String, notes: String, epic: Epic?, status: WorkflowPosition?) {
+        let task = Task(context: persistenceManager.context)
+        task.title = title
+        task.quickNote = notes
+        task.epic = epic
+        task.storyPointsEnum = storyPoints
+        task.workflowStatusEnum = workflowStatus
+        let date = Date()
+        task.dateCreated = DateConversion.format(date)
+        task.dateUpdated = DateConversion.format(date)
+        persistenceManager.save()
+    }
+
+    private func saveChanges() {
+        guard let task = taskMO else { fatalError("taskMO was nil when executing \(#function)") }
+        task.title = titleTextField.text
+        task.quickNote = notesTextView.text
+        task.epic = selectedEpic
+        task.storyPointsEnum = storyPoints
+        task.workflowStatusEnum = workflowStatus
+        var date = Date()
+        task.dateUpdated = DateConversion.format(date)
+        persistenceManager.save()
+        self.updateDelegate.updateCoreData()
+    }
+
+//     MARK: - initialization
 
     init(persistenceManager: PersistenceManager, useState: EditScreenUseState, task: Task? = nil, updateDelegate: CoreDataDisplayDelegate) {
         self.persistenceManager = persistenceManager
         self.useState = useState
         self.taskMO = task
+        self.updateDelegate = updateDelegate
+        super.init(nibName: nil, bundle: nil)
+    }
+
+    init(persistenceManager: PersistenceManager, useState: EditScreenUseState, updateDelegate: CoreDataDisplayDelegate) {
+        self.persistenceManager = persistenceManager
+        self.useState = useState
         self.updateDelegate = updateDelegate
         super.init(nibName: nil, bundle: nil)
     }

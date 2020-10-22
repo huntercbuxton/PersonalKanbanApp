@@ -9,48 +9,44 @@ import UIKit
 
 class LogView: UIViewController {
 
-    private var dateCreated: Date?
-    private var dateUpdated: Date?
+    lazy var sectionLabel: UILabel = UILabel()
+    lazy var dateCreatedLabel: UILabel = UILabel()
+    lazy var dateUpdatedLabel: UILabel = UILabel()
 
-    lazy var createdLabel: UILabel = UILabel()
-    lazy var updatedLabel: UILabel = UILabel()
+    private var dateCreated: Date
+    private var dateUpdated: Date
+    private let horizontalMargin: CGFloat = 10
+    private let verticalMargin: CGFloat = 10
+    private let verticalItemSpacing: CGFloat = 15
 
-    var createdLabelText: String {
-        get {
-            if let date = self.dateCreated {
-                return "date created: \(DateConversion.toString(date: date)) "
-            } else {
-                return "Date created is nil"
-            }
-        }
-    }
-    var updatedLabelText: String {
-        get {
-            if let date = self.dateUpdated {
-                return "date updated: \(DateConversion.toString(date: date)) "
-            } else {
-                return "Date updated is nil"
-            }
-        }
-    }
+    private let sectionLabelText = "notes"
+    private var createdLabelText: String { "task created on \(DateConversion.toString(date: dateCreated)) " }
+    private var updatedLabelText: String { "task updated on \(DateConversion.toString(date: dateUpdated)) " }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         setupDisplay()
+        view.backgroundColor = .systemBackground
     }
 
     private func setupDisplay() {
-        createdLabel.setup(in: view)
-        createdLabel.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
-        createdLabel.text = createdLabelText
+        sectionLabel.text = sectionLabelText
+        sectionLabel.font = UIFont.preferredFont(forTextStyle: .title2)
+        sectionLabel.setup(in: view, margin: horizontalMargin)
+        sectionLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: verticalMargin).isActive = true
 
-        updatedLabel.setup(in: view)
-        updatedLabel.topAnchor.constraint(equalTo: createdLabel.bottomAnchor).isActive = true
-        updatedLabel.topAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
-        updatedLabel.text = updatedLabelText
+
+        dateCreatedLabel.setup(in: view, margin: horizontalMargin)
+        dateCreatedLabel.topAnchor.constraint(greaterThanOrEqualTo: sectionLabel.bottomAnchor, constant: verticalItemSpacing).isActive = true
+        dateCreatedLabel.text = createdLabelText
+
+        dateUpdatedLabel.setup(in: view, margin: horizontalMargin)
+        dateUpdatedLabel.topAnchor.constraint(equalTo: dateCreatedLabel.bottomAnchor, constant: verticalItemSpacing).isActive = true
+        dateUpdatedLabel.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -verticalMargin).isActive = true
+        dateUpdatedLabel.text = updatedLabelText
     }
 
-    init(dateCreated: Date?, dateUpdated: Date?) {
+    init(dateCreated: Date, dateUpdated: Date) {
         self.dateCreated = dateCreated
         self.dateUpdated = dateUpdated
         super.init(nibName: nil, bundle: nil)
@@ -61,11 +57,11 @@ class LogView: UIViewController {
 }
 
 private extension UILabel {
-    func setup(in view: UIView) {
+    func setup(in view: UIView, margin: CGFloat) {
          translatesAutoresizingMaskIntoConstraints = false
          view.addSubview(self)
-         self.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-         self.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-         self.heightAnchor.constraint(equalToConstant: 60).isActive = true
+        self.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: margin).isActive = true
+        self.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -margin).isActive = true
+        self.heightAnchor.constraint(equalToConstant: 60).isActive = true
     }
 }

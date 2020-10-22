@@ -22,14 +22,14 @@ final class PersistenceManager {
     func getAllTasks() -> [Task] {
         let tasks = self.fetch(Task.self)
         print("these are the current tasks:")
-        tasks.forEach({print("task title: \($0.title) with status: \($0.workflowStatus) ")})
+//        tasks.forEach({print("task title: \($0.title) with status: \($0.workflowStatus) ")})
         return tasks
     }
 
     func getAllEpics() -> [Epic] {
         let epics = self.fetch(Epic.self)
         print("these are the current epics:")
-        epics.forEach({print($0.title,"tasks.count:",$0.tasks?.count)})
+//        epics.forEach({print($0.title, "tasks.count:", $0.tasks?.count)})
         return epics
     }
 

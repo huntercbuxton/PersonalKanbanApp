@@ -7,12 +7,10 @@
 
 import UIKit
 
-
-
 class EpicDetailsEditorMenuVC: UITableViewController {
 
     private let cellReuseID = "EpicDetailsEditorMenuVC.cellReuseID"
-    var selectionDelegate: EpicDetailsMenuDelegate!
+    weak var selectionDelegate: EpicDetailsMenuDelegate!
 
     let options = [ ["add existing tasks",
                      "add new task",

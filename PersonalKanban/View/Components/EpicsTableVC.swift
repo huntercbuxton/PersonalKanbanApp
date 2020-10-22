@@ -9,9 +9,9 @@ import UIKit
 
 class EpicsTableVC: UITableViewController, SlidingContentsViewContoller {
 
-    // MARK: SlidingContentsViewContoller
+    // MARK: - SlidingContentsViewContoller
 
-    var sliderDelegate: SlidingViewDelegate?
+    weak var sliderDelegate: SlidingViewDelegate?
 
     func refreshDisplay() {
         print("called \(#function) in EpicsTableVC")
@@ -33,7 +33,6 @@ class EpicsTableVC: UITableViewController, SlidingContentsViewContoller {
     }
 
     lazy var epics: [Epic] = []
-
 
     private let cellReuseID = "EpicsTableVC.CellReuseID"
 
@@ -62,12 +61,11 @@ class EpicsTableVC: UITableViewController, SlidingContentsViewContoller {
         return cell
     }
 
-
     // MARK: UITableViewDelegate conformance
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.sliderDelegate?.hideMenu()
-        print("selected the cell at \(indexPath) for task titled: \(self.epics[indexPath.row].title)")
+//        print("selected the cell at \(indexPath) for task titled: \(self.epics[indexPath.row].title)")
       //  let detailView = AddEditEpicVC(persistenceManager: persistenceManager, useState: .edit, epic: epics[indexPath.row], updateDelegate: self)
         let detailView = EpicTasksTableVC(persistenceManager: persistenceManager, epic: epics[indexPath.row])
         self.navigationController?.pushViewController(detailView, animated: true)

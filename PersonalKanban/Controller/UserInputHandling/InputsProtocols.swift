@@ -18,11 +18,11 @@ protocol InputValidationDelegate: AnyObject {
 }
 
 public protocol InputsInterfaceDelegate: AnyObject {
-    func enableUse(for: String)
-    func disableUse(for: String)
+    func enableSave()
+    func disableSave()
 }
 
 extension InputsInterfaceDelegate {
-    func enableUse(for: String) {}
-    func disableUse(for: String) {}
+    func enableSave() {}
+    func disableSave() {}
 }

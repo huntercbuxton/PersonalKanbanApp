@@ -9,7 +9,6 @@
 import Foundation
 import CoreData
 
-
 extension Epic {
 
     @nonobjc public class func fetchRequest() -> NSFetchRequest<Epic> {
@@ -78,6 +77,6 @@ extension Epic {
 
 }
 
-extension Epic : Identifiable {
+extension Epic: Identifiable {
 
 }

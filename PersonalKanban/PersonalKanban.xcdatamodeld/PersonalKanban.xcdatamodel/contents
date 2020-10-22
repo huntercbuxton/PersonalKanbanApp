@@ -14,7 +14,7 @@
         <attribute name="highlight" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="textContent" optional="YES" attributeType="String"/>
         <relationship name="epicNotes" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Epic" inverseName="epicNotes" inverseEntity="Epic"/>
-        <relationship name="taskNotes" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Task"/>
+        <relationship name="taskNotes" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Task" inverseName="taskNotes" inverseEntity="Task"/>
     </entity>
     <entity name="Task" representedClassName="Task" syncable="YES">
         <attribute name="dateCreated" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
@@ -27,11 +27,11 @@
         <attribute name="title" attributeType="String"/>
         <attribute name="workflowStatus" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <relationship name="epic" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Epic" inverseName="tasks" inverseEntity="Epic"/>
-        <relationship name="taskNotes" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="Task" inverseName="taskNotes" inverseEntity="Task"/>
+        <relationship name="taskNotes" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="Note" inverseName="taskNotes" inverseEntity="Note"/>
     </entity>
     <elements>
-        <element name="Task" positionX="-63" positionY="-18" width="128" height="28"/>
         <element name="Epic" positionX="-63" positionY="18" width="128" height="148"/>
-        <element name="Note" positionX="-54" positionY="9" width="128" height="28"/>
+        <element name="Note" positionX="-54" positionY="9" width="128" height="118"/>
+        <element name="Task" positionX="-63" positionY="-18" width="128" height="208"/>
     </elements>
 </model>

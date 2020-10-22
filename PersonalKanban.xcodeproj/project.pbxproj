@@ -20,7 +20,7 @@
 		715B72BE253BEDE800219F07 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 715B72BC253BEDE800219F07 /* LaunchScreen.storyboard */; };
 		715B72C9253BEDE800219F07 /* PersonalKanbanTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 715B72C8253BEDE800219F07 /* PersonalKanbanTests.swift */; };
 		715B72D4253BEDE800219F07 /* PersonalKanbanUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 715B72D3253BEDE800219F07 /* PersonalKanbanUITests.swift */; };
-		715B72EF253BF39000219F07 /* UIConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 715B72EE253BF39000219F07 /* UIConstants.swift */; };
+		715B72EF253BF39000219F07 /* UIConsts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 715B72EE253BF39000219F07 /* UIConsts.swift */; };
 		715B7301253C39BC00219F07 /* SliderOneVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 715B72FF253C39BC00219F07 /* SliderOneVC.swift */; };
 		715B7306253C3A3900219F07 /* SlidingViewsVCProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 715B7305253C3A3900219F07 /* SlidingViewsVCProtocols.swift */; };
 		715B730E253C4B1C00219F07 /* BacklogTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 715B730D253C4B1C00219F07 /* BacklogTableVC.swift */; };
@@ -42,6 +42,10 @@
 		717DCB5D253F3FF900E2156F /* DateConversion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 717DCB5C253F3FF900E2156F /* DateConversion.swift */; };
 		717DCB62253F4AAE00E2156F /* LogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 717DCB61253F4AAE00E2156F /* LogView.swift */; };
 		717DCB6F253F5C9300E2156F /* SelectWorkflowStatusMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 717DCB6E253F5C9300E2156F /* SelectWorkflowStatusMenu.swift */; };
+		71B72FDB2541305900D26CDC /* UIViewLayoutsExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71B72FDA2541305900D26CDC /* UIViewLayoutsExtension.swift */; };
+		71B72FE62541501F00D26CDC /* StoryPointsSelectionScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71B72FE52541501F00D26CDC /* StoryPointsSelectionScreen.swift */; };
+		71B72FEB25416BCD00D26CDC /* MiscellaneousUIKitExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71B72FEA25416BCD00D26CDC /* MiscellaneousUIKitExtensions.swift */; };
+		71B72FF025416DA300D26CDC /* TaskEditorOptionsTable2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71B72FEF25416DA300D26CDC /* TaskEditorOptionsTable2.swift */; };
 		71BC1B3C253DC948005EC646 /* PersonalKanban.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 71BC1B3A253DC948005EC646 /* PersonalKanban.xcdatamodeld */; };
 		71BC1B44253DCC6C005EC646 /* PersistenceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71BC1B43253DCC6C005EC646 /* PersistenceManager.swift */; };
 		71BC1B5D253DD3A3005EC646 /* InputsEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71BC1B5C253DD3A3005EC646 /* InputsEnum.swift */; };
@@ -220,7 +224,7 @@
 		715B72CF253BEDE800219F07 /* PersonalKanbanUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PersonalKanbanUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		715B72D3253BEDE800219F07 /* PersonalKanbanUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalKanbanUITests.swift; sourceTree = "<group>"; };
 		715B72D5253BEDE800219F07 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		715B72EE253BF39000219F07 /* UIConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIConstants.swift; sourceTree = "<group>"; };
+		715B72EE253BF39000219F07 /* UIConsts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIConsts.swift; sourceTree = "<group>"; };
 		715B72FF253C39BC00219F07 /* SliderOneVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SliderOneVC.swift; sourceTree = "<group>"; };
 		715B7305253C3A3900219F07 /* SlidingViewsVCProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlidingViewsVCProtocols.swift; sourceTree = "<group>"; };
 		715B730D253C4B1C00219F07 /* BacklogTableVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BacklogTableVC.swift; sourceTree = "<group>"; };
@@ -242,6 +246,10 @@
 		717DCB5C253F3FF900E2156F /* DateConversion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateConversion.swift; sourceTree = "<group>"; };
 		717DCB61253F4AAE00E2156F /* LogView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogView.swift; sourceTree = "<group>"; };
 		717DCB6E253F5C9300E2156F /* SelectWorkflowStatusMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectWorkflowStatusMenu.swift; sourceTree = "<group>"; };
+		71B72FDA2541305900D26CDC /* UIViewLayoutsExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewLayoutsExtension.swift; sourceTree = "<group>"; };
+		71B72FE52541501F00D26CDC /* StoryPointsSelectionScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryPointsSelectionScreen.swift; sourceTree = "<group>"; };
+		71B72FEA25416BCD00D26CDC /* MiscellaneousUIKitExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiscellaneousUIKitExtensions.swift; sourceTree = "<group>"; };
+		71B72FEF25416DA300D26CDC /* TaskEditorOptionsTable2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskEditorOptionsTable2.swift; sourceTree = "<group>"; };
 		71BC1B3B253DC948005EC646 /* PersonalKanban.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = PersonalKanban.xcdatamodel; sourceTree = "<group>"; };
 		71BC1B43253DCC6C005EC646 /* PersistenceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceManager.swift; sourceTree = "<group>"; };
 		71BC1B5C253DD3A3005EC646 /* InputsEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputsEnum.swift; sourceTree = "<group>"; };
@@ -386,6 +394,7 @@
 				717DCB32253F0A7200E2156F /* ViewOnlyEpicDetailVC.swift */,
 				717DCB3A253F25E600E2156F /* EditEpicDetailsVC.swift */,
 				717DCB6E253F5C9300E2156F /* SelectWorkflowStatusMenu.swift */,
+				71B72FE52541501F00D26CDC /* StoryPointsSelectionScreen.swift */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -401,6 +410,7 @@
 				717DCB1B253EB75E00E2156F /* EpicsTableVC.swift */,
 				717DCB3F253F2BE000E2156F /* EpicDetailsEditorMenuVC.swift */,
 				717DCB61253F4AAE00E2156F /* LogView.swift */,
+				71B72FEF25416DA300D26CDC /* TaskEditorOptionsTable2.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -408,9 +418,11 @@
 		71BC1B68253DD48A005EC646 /* Other */ = {
 			isa = PBXGroup;
 			children = (
-				715B72EE253BF39000219F07 /* UIConstants.swift */,
+				715B72EE253BF39000219F07 /* UIConsts.swift */,
 				715B7305253C3A3900219F07 /* SlidingViewsVCProtocols.swift */,
 				7146AC38253E19B000DA7D03 /* MainMenuProtocols.swift */,
+				71B72FDA2541305900D26CDC /* UIViewLayoutsExtension.swift */,
+				71B72FEA25416BCD00D26CDC /* MiscellaneousUIKitExtensions.swift */,
 			);
 			path = Other;
 			sourceTree = "<group>";
@@ -590,10 +602,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				71B72FF025416DA300D26CDC /* TaskEditorOptionsTable2.swift in Sources */,
 				715B72B6253BEDDE00219F07 /* MainViewController.swift in Sources */,
 				7146AC3E253E1E7500DA7D03 /* MainMenuData.swift in Sources */,
 				717DCB1C253EB75E00E2156F /* EpicsTableVC.swift in Sources */,
 				7146AC52253E2DA100DA7D03 /* MainMenuOptions.swift in Sources */,
+				71B72FDB2541305900D26CDC /* UIViewLayoutsExtension.swift in Sources */,
 				717DCB40253F2BE000E2156F /* EpicDetailsEditorMenuVC.swift in Sources */,
 				71209AEC253E3CDD0082DA0A /* TaskEditingTable.swift in Sources */,
 				717DCB52253F3DBA00E2156F /* Task+CoreDataProperties.swift in Sources */,
@@ -604,19 +618,21 @@
 				717DCB2E253EF59300E2156F /* EpicTasksTableVC.swift in Sources */,
 				713F7A87253C569B00D23CC7 /* InputValidationManager.swift in Sources */,
 				715B72B2253BEDDE00219F07 /* AppDelegate.swift in Sources */,
+				71B72FE62541501F00D26CDC /* StoryPointsSelectionScreen.swift in Sources */,
 				71BC1B5D253DD3A3005EC646 /* InputsEnum.swift in Sources */,
 				713F7A95253CD0AC00D23CC7 /* LargeTextView.swift in Sources */,
 				717DCB29253EDAC300E2156F /* ChooseEpicsScreen.swift in Sources */,
 				715B7301253C39BC00219F07 /* SliderOneVC.swift in Sources */,
 				717DCB3B253F25E600E2156F /* EditEpicDetailsVC.swift in Sources */,
 				71BC1B44253DCC6C005EC646 /* PersistenceManager.swift in Sources */,
+				71B72FEB25416BCD00D26CDC /* MiscellaneousUIKitExtensions.swift in Sources */,
 				717DCB33253F0A7200E2156F /* ViewOnlyEpicDetailVC.swift in Sources */,
 				71BC1B3C253DC948005EC646 /* PersonalKanban.xcdatamodeld in Sources */,
 				715B72B4253BEDDE00219F07 /* SceneDelegate.swift in Sources */,
 				717DCB4F253F3DBA00E2156F /* Note+CoreDataClass.swift in Sources */,
 				717DCB5D253F3FF900E2156F /* DateConversion.swift in Sources */,
 				717DCB51253F3DBA00E2156F /* Task+CoreDataClass.swift in Sources */,
-				715B72EF253BF39000219F07 /* UIConstants.swift in Sources */,
+				715B72EF253BF39000219F07 /* UIConsts.swift in Sources */,
 				7146AC39253E19B000DA7D03 /* MainMenuProtocols.swift in Sources */,
 				715B730E253C4B1C00219F07 /* BacklogTableVC.swift in Sources */,
 				715B7316253C520300219F07 /* AddEditTaskVC.swift in Sources */,

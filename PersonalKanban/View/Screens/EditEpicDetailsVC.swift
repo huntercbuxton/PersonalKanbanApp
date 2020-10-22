@@ -13,7 +13,7 @@ enum EditCompletionStatus {
     case deleted
 }
 
-protocol EpicDetailsMenuDelegate {
+protocol EpicDetailsMenuDelegate: AnyObject {
     func deleteEpic()
     func deleteTasks()
     func unassignTasks()
@@ -31,13 +31,12 @@ class EditEpicDetailsVC: UIViewController, EpicDetailsMenuDelegate {
     func deleteTasks() {}
     func unassignTasks() {}
 
-
     private var editStatus: EditCompletionStatus = .noChange
     private var titleText = "Edit Details"
     private var titlePlaceholderText: String = "add a title"
     private let sectionSpacing: CGFloat = 20.0
 
-    var displayDelegate: CoreDataDisplayDelegate!
+    weak var displayDelegate: CoreDataDisplayDelegate!
 
     let persistenceManager: PersistenceManager!
     let epic: Epic!
@@ -50,7 +49,6 @@ class EditEpicDetailsVC: UIViewController, EpicDetailsMenuDelegate {
     lazy var notesTextView: LargeTextView = LargeTextView(text: self.epic.quickNote ?? "")
     lazy var table: EpicDetailsEditorMenuVC = EpicDetailsEditorMenuVC(selectionDelegate: self)
 
-
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .systemGroupedBackground
@@ -58,7 +56,6 @@ class EditEpicDetailsVC: UIViewController, EpicDetailsMenuDelegate {
         self.navigationItem.setLeftBarButton(cancelBtn, animated: false)
         self.navigationItem.setRightBarButton(saveBtn, animated: true)
         self.saveBtn.isEnabled = false
-
     }
 
     private func setupUIElements() {
@@ -128,13 +125,8 @@ class EditEpicDetailsVC: UIViewController, EpicDetailsMenuDelegate {
     }
 
     @objc func cancelBtnTapped() {
-        discardChanges()
         self.editStatus = .noChange
         goBack()
-    }
-
-    func discardChanges() {
-
     }
 
     private func goBack() {

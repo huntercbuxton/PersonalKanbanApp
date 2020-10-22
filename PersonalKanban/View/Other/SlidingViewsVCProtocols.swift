@@ -14,5 +14,3 @@ protocol SlidingViewDelegate: AnyObject {
     func hideMenu()
     func showMenu()
 }
-
-

@@ -15,7 +15,7 @@ class EpicTasksTableVC: UITableViewController, CoreDataDisplayDelegate {
 
     let persistenceManager: PersistenceManager
     let epic: Epic!
-    var tasks: [[Task]] = [[],[],[],[]]
+    var tasks: [[Task]] = [[], [], [], []]
 
     private var viewState: EditableState = .off {
         didSet {

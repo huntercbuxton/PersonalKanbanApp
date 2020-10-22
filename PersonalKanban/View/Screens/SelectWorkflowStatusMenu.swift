@@ -8,28 +8,31 @@
 import UIKit
 
 enum WorkflowPosition: Int, CaseIterable {
-    case toDo = 0, backlog, finished, archive
+    case inProgress = 0, toDo, backlog, finished
 
     var displayName: String {
-        var strings = [ "to-do","backlog","finished","archive"]
+        let strings = ["in progress","to do","backlog","finished"]
         return strings[self.rawValue]
     }
 
     static var defaultStatus: WorkflowPosition { return .backlog }
 }
 
-
+protocol WorkflowStatusSelectionDelegate: AnyObject {
+    func selectStatus(newStatus: WorkflowPosition)
+}
 
 class SelectWorkflowStatusMenu: UITableViewController {
 
-//    var currentSelection: WorkflowPosition
     private let cellReuseID = "SelectWorkflowStatusMenu.cellReuseID"
-    var workflowStatusSelectionDelegate: WorkflowStatusSelectionDelegate
-    var options: [WorkflowPosition] = WorkflowPosition.allCases as [WorkflowPosition]
+    private weak var workflowStatusSelectionDelegate: WorkflowStatusSelectionDelegate?
+    private var options: [WorkflowPosition] = WorkflowPosition.allCases as [WorkflowPosition]
+    private var currentStatus: WorkflowPosition
+
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellReuseID)
-        self.tableView.tableFooterView = UIView(background: .systemGroupedBackground)
+        tableView.tableFooterView = UIView(background: .systemGroupedBackground)
     }
 
     // MARK: - Table view data source
@@ -45,15 +48,19 @@ class SelectWorkflowStatusMenu: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: .default, reuseIdentifier: cellReuseID)
         cell.textLabel?.text = options[indexPath.row].displayName
+        if options[indexPath.row] == currentStatus {
+            cell.isSelected = true
+        }
         return cell
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        workflowStatusSelectionDelegate.selectStatus(newStatus: options[indexPath.row])
+        workflowStatusSelectionDelegate?.selectStatus(newStatus: options[indexPath.row])
         self.navigationController?.popViewController(animated: true)
     }
 
-    init(workflowStatusSelectionDelegate: WorkflowStatusSelectionDelegate) {
+    init(workflowStatusSelectionDelegate: WorkflowStatusSelectionDelegate, currentStatus: WorkflowPosition) {
+        self.currentStatus = currentStatus
         self.workflowStatusSelectionDelegate = workflowStatusSelectionDelegate
         super.init(nibName: nil, bundle: nil)
     }

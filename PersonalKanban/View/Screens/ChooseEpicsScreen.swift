@@ -7,23 +7,20 @@
 
 import UIKit
 
-
-protocol EpicsSelectorDelegate {
-    func select(epic: Epic)
+protocol EpicsSelectorDelegate: AnyObject {
+    func selectEpic(_ selectedEpic: Epic)
 }
 
 class ChooseEpicsScreen: UITableViewController {
 
-    let persistenceManager: PersistenceManager
+    private let persistenceManager: PersistenceManager
     private let cellReuseID = "ChooseEpicsScreen.cellReuseID"
-    var selectionDelegate: EpicsSelectorDelegate?
+    weak var selectionDelegate: EpicsSelectorDelegate?
+    lazy var epics: [Epic] = []
 
     func loadData() {
-        print("called loadData!!!!")
         self.epics = persistenceManager.getAllEpics()
     }
-
-    lazy var epics: [Epic] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,8 +46,7 @@ class ChooseEpicsScreen: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("selected the cell at \(indexPath) for task titled: \(self.epics[indexPath.row].title)")
-        selectionDelegate?.select(epic: self.epics[indexPath.row])
+        selectionDelegate?.selectEpic(self.epics[indexPath.row])
         self.navigationController?.popViewController(animated: true)
     }
 

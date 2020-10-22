@@ -13,12 +13,12 @@ import CoreData
 public class Epic: NSManagedObject {
 
     var tasksList: [Task] {
-          get { return self.tasks?.array as! [Task] }
+        get { return self.tasks?.array as? [Task] ?? [] }
           set { tasks = NSOrderedSet(array: newValue) }
       }
 
     var notesList: [Note] {
-        get { return self.epicNotes?.array as! [Note] }
+        get { return self.epicNotes?.array as? [Note] ?? [] }
         set { epicNotes = NSOrderedSet(array: newValue) }
     }
 }

@@ -7,7 +7,7 @@
 
 import Foundation
 
-// the root parent view will alsp conform to this to know when the content should be changed
+// the root parent view will also conform to this to know when the content should be changed
 protocol MenuSelectionDelegate: AnyObject {
     associatedtype IdT: Hashable
     func upateSelection(from oldSelection: IdT?, to newSelection: IdT)
@@ -35,8 +35,6 @@ protocol MenuController {
     func refresh()
 }
 
-
-
 protocol SlidingContentsViewContoller: CoreDataDisplayDelegate {
     func refreshDisplay()
     var sliderDelegate: SlidingViewDelegate? { get set }
@@ -46,7 +44,7 @@ extension SlidingContentsViewContoller {
     func refreshDisplay() { }
 }
 
-protocol CoreDataDisplayDelegate {
+protocol CoreDataDisplayDelegate: AnyObject {
     func updateCoreData()
 }
 
@@ -61,5 +59,3 @@ protocol ManagedObjectChangeRemovable {
 //    func equalValuesFor(property: PropertyEnum) -> Bool
 //    func originalValueFor<T>(key: String) -> T
 }
-
-

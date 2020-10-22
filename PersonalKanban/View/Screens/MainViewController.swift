@@ -8,53 +8,29 @@
 import UIKit
 
 class MainViewController: UIViewController, SlidingViewDelegate, MenuSelectionDelegate {
-
-    let persistenceManager: PersistenceManager
-
-    // MARK: MenuSelectionDelegate
+    // MARK: - MenuSelectionDelegate protocol conformance
 
     typealias IdT = MainMenuOptions
 
     func upateSelection(from oldSelection: MainMenuOptions?, to newSelection: MainMenuOptions) {
-//        print("called \(#function) in MainViewController. args are oldSelection: \(oldSelection) and newSelectioN: \(newSelection)")
         hideMenu()
-        guard oldSelection != newSelection else {
-//            print("selection repeated.")
-            return
-        }
-        switch newSelection {
-        case .backlog:
-//            print("will now setup the BackLOG table")
-            removeSlidingVCContents()
-            self.vcTwo = BacklogTableVC(sliderDelegate: self, persistenceManager: persistenceManager)
-            self.title = MainMenuOptions.backlog.pageTitle
-            setupContentChildVC()
-        case .epics:
-//            print("will now setup the EPICS table")
-            removeSlidingVCContents()
-            self.vcTwo = EpicsTableVC(sliderDelegate: self, persistenceManager: persistenceManager)
-            self.title = MainMenuOptions.epics.pageTitle
-            setupContentChildVC()
-        default:
-            self.title = MainMenuOptions.more.pageTitle
-//            print("that menu item has not been assigned a response yet")
-        }
+        guard oldSelection != newSelection else { return }
         self.currentPage = newSelection
+        removeSlidingVCContents()
+        switch newSelection {
+
+        case .inProgress, .toDo, .backlog, .archived, .finished, .more:
+            vcTwo = BacklogTableVC(sliderDelegate: self, persistenceManager: persistenceManager)
+            setupContentChildVC(child: vcTwo as! UIViewController, superView: contentViewTwo)
+        case .epics:
+            vcTwo = EpicsTableVC(sliderDelegate: self, persistenceManager: persistenceManager)
+            setupContentChildVC(child: vcTwo as! UIViewController, superView: contentViewTwo)
+//        default:
+//            fatalError("not yet implemented")
+        }
     }
 
-    func removeSlidingVCContents() {
-//        print("called \(#function)")
-        let vc = vcTwo as! UIViewController
-        vc.willMove(toParent: nil)
-        vc.view.removeFromSuperview()
-        vc.removeFromParent()
-    }
-
-    func setupSlidingVCContents(_ newVC: UIViewController) {
-
-    }
-
-    // MARK: SlidingViewDelegate
+    // MARK: - SlidingViewDelegate protocol conformance
 
     func toggleMenuVisibility() {
         UIView.animate(withDuration: self.animationDuration,
@@ -77,101 +53,101 @@ class MainViewController: UIViewController, SlidingViewDelegate, MenuSelectionDe
         if !menuIsVisible { toggleMenuVisibility() }
     }
 
-    // MARK: MenuSelectionDelegate conformance
+    // MARK: - properties referencing UI components
 
-    // MARK: - instance properties
+    private lazy var menuBBI: UIBarButtonItem = UIBarButtonItem(image: UIImage(systemName: UIConsts.menuButtonImageMame), style: .plain, target: self, action: #selector(menuBBITapped))
+    private lazy var addBBI: UIBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addBBITapped))
+    private lazy var contentViewOne: UIView = UIView()
+    private lazy var contentViewTwo: UIView = UIView()
+    private lazy var vcOne: SliderOneVC = SliderOneVC(sliderDelegate: self, selectionDelegate: self, savedSelection: MainMenuOptions.backlog)
+    private lazy var vcTwo: SlidingContentsViewContoller = BacklogTableVC(sliderDelegate: self, persistenceManager: PersistenceManager.shared)
 
-    var currentPage: MainMenuOptions!
+    // MARK: - properties specifying UI style/layout
 
-    // MARK: other instance properties
+    private var menuPercentageWidthOfParentView: CGFloat = 0.4
+    private lazy var slideInMenuPadding: CGFloat = self.view.frame.width * (1 - menuPercentageWidthOfParentView)
+    private var animationDuration: TimeInterval = 0.5
+    private var animationDelay: TimeInterval = 0.0
+    private var animationSpringDamping: CGFloat = 0.8
+    private var animationInitialSpringVelocity: CGFloat = 0.0
+    private var animationOptions: UIView.AnimationOptions = .curveEaseInOut
+    private var currentPage: MainMenuOptions! {
+        didSet {
+            self.title = currentPage.pageTitle
+        }
+    }
 
-    var currentTitle: String { currentPage.pageTitle }
-    lazy var menuBarButtonItem: UIBarButtonItem = UIBarButtonItem(image: UIConstants.menuButtonImageMame,
-                                                                  target: self,
-                                                                  selector: #selector(menuBarButtonItemTapped))
-    lazy var addBarButton: UIBarButtonItem = UIBarButtonItem(image: UIConstants.addButtonImageName,
-                                                                     target: self,
-                                                                     selector: #selector(composeBarButtonItemTapped))
-    var menuIsVisible: Bool = false
-    var menuPercentageWidthOfParentView: CGFloat = 0.3
-    lazy var slideInMenuPadding: CGFloat = self.view.frame.width * menuPercentageWidthOfParentView
-    lazy var contentViewOne: UIView = UIView()
-    lazy var contentViewTwo: UIView = UIView()
-    var animationDuration: TimeInterval = 0.5
-    var animationDelay: TimeInterval = 0.0
-    var animationSpringDamping: CGFloat = 0.8
-    var animationInitialSpringVelocity: CGFloat = 0.0
-    var animationOptions: UIView.AnimationOptions = .curveEaseInOut
+    // MARK: - other properties
 
-    lazy var vcOne: SliderOneVC = SliderOneVC(sliderDelegate: self, selectionDelegate: self, savedSelection: MainMenuOptions.backlog)
-    lazy var vcTwo: SlidingContentsViewContoller = BacklogTableVC(sliderDelegate: self, persistenceManager: PersistenceManager.shared)
+    private let persistenceManager: PersistenceManager
+    private var menuIsVisible: Bool = false
 
-    // MARK: - instance methods
+    // MARK: - methods for initial UI setup
 
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
-//        self.coreDataDisplayDelegate = self.vcTwo
-        self.setupElements()
-        setupFirstChildVC()
-        setupContentChildVC()
+        setupSubviews()
+        setupContentChildVC(child: vcOne, superView: contentViewOne)
+        setupContentChildVC(child: vcTwo as! UIViewController, superView: contentViewTwo)
     }
 
-    @objc func menuBarButtonItemTapped() {
+    private func setupSubviews() {
+        title = self.currentPage.pageTitle
+        navigationItem.setLeftBarButton(menuBBI, animated: false)
+        navigationItem.setRightBarButton(addBBI, animated: false)
+
+        view.addSubview(contentViewOne)
+        contentViewOne.translatesAutoresizingMaskIntoConstraints = false
+        contentViewOne.constrainVEdgeAnchors(view, constant: 0)
+        contentViewOne.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        contentViewOne.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -slideInMenuPadding).isActive = true
+
+        view.addSubview(contentViewTwo)
+        contentViewTwo.constrainEdgeAnchors(to: view)
+        contentViewTwo.layer.shadowColor = UIColor.systemGray.cgColor
+        contentViewTwo.layer.shadowOffset = CGSize(width: 0, height: 1.0)
+        contentViewTwo.layer.shadowOpacity = 0.6
+        contentViewTwo.layer.shadowRadius = 4.0
+    }
+
+    // MARK: - other methods
+
+    private func removeSlidingVCContents() {
+        let vc = vcTwo as! UIViewController
+        vc.willMove(toParent: nil)
+        vc.view.removeFromSuperview()
+        vc.removeFromParent()
+    }
+
+    private func setupContentChildVC(child: UIViewController, superView: UIView) {
+        child.view.translatesAutoresizingMaskIntoConstraints = false
+        superView.addSubview(child.view)
+        self.addChild(child)
+        child.view.constrainEdgeAnchors(to: contentViewTwo)
+    }
+
+    @objc func menuBBITapped() {
         self.toggleMenuVisibility()
-//        print("called \(#function)")
     }
 
-    @objc func composeBarButtonItemTapped() {
+    @objc func addBBITapped() {
         switch currentPage {
-        case .backlog:
-            let composeVC = AddEditTaskVC(persistenceManager: self.persistenceManager, useState: .create, updateDelegate: self.vcTwo)
+        case .toDo, .inProgress, .backlog:
+            let composeVC  = AddEditTaskVC(persistenceManager: persistenceManager, useState: .create, updateDelegate: self.vcTwo)
             present(UINavigationController(rootViewController: composeVC), animated: true, completion: { })
         case .epics:
             let composeVC = AddEditEpicVC(persistenceManager: persistenceManager, useState: .create, updateDelegate: self.vcTwo)
             present(UINavigationController(rootViewController: composeVC), animated: true, completion: { })
+        case .archived, .more, .finished:
+            print("called \(#function); should probably remove the add button when on these pages.")
         default:
             fatalError("wrong case caught in \(#function)")
-//            print("you selected the compose button on a currentPage of \(currentPage) according to the main parent vc. \(#function) should not have been called.")
         }
-
         hideMenu()
-
-        print("called \(#function)")
     }
 
-    private func setupElements() {
-        title = self.currentTitle
-        navigationItem.setLeftBarButton(menuBarButtonItem, animated: false)
-        navigationItem.setRightBarButton(addBarButton, animated: false)
-        contentViewOne.pinMenuTo(view, with: slideInMenuPadding)
-        contentViewOne.backgroundColor = .systemGray4
-        contentViewTwo.edgeTo(view)
-        contentViewTwo.backgroundColor = .systemBackground
-    }
-
-    private func setupFirstChildVC() {
-        vcOne.view.translatesAutoresizingMaskIntoConstraints = false
-        self.contentViewOne.addSubview(vcOne.view)
-        self.addChild(vcOne)
-        vcOne.view.topAnchor.constraint(equalTo: contentViewOne.topAnchor).isActive = true
-        vcOne.view.leadingAnchor.constraint(equalTo: contentViewOne.leadingAnchor).isActive = true
-        vcOne.view.trailingAnchor.constraint(equalTo: contentViewOne.trailingAnchor).isActive = true
-        vcOne.view.bottomAnchor.constraint(equalTo: contentViewOne.bottomAnchor).isActive = true
-    }
-
-    private func setupContentChildVC() {
-        let castVC = self.vcTwo as! UIViewController
-        castVC.view.translatesAutoresizingMaskIntoConstraints = false
-        self.contentViewTwo.addSubview(castVC.view)
-        self.addChild(castVC)
-        castVC.view.topAnchor.constraint(equalTo: contentViewTwo.topAnchor).isActive = true
-        castVC.view.leadingAnchor.constraint(equalTo: contentViewTwo.leadingAnchor).isActive = true
-        castVC.view.trailingAnchor.constraint(equalTo: contentViewTwo.trailingAnchor).isActive = true
-        castVC.view.bottomAnchor.constraint(equalTo: contentViewTwo.bottomAnchor).isActive = true
-    }
-
-    // MARK: - initialization
+    // MARK: - initializers
 
     init(page selection: MainMenuOptions, persistenceManager: PersistenceManager) {
         self.currentPage = selection
@@ -181,43 +157,5 @@ class MainViewController: UIViewController, SlidingViewDelegate, MenuSelectionDe
 
     required init?(coder aDecoder: NSCoder) {
         fatalError("\(#function) has not been implemented")
-    }
-}
-
-// MARK: - other type extensions
-
-extension UIBarButtonItem {
-    convenience init(image systemName: String, target: AnyObject?, selector: Selector?) {
-        self.init()
-        let image: UIImage = UIImage(systemName: systemName)!.withRenderingMode(.alwaysOriginal)
-        self.image = image
-        self.style = .done
-        self.setupButtonAction(target: target, selector: selector)
-    }
-
-    func setupButtonAction(target: AnyObject?, selector: Selector?) {
-        self.target = target
-        self.action = selector
-    }
-}
-
-public extension UIView {
-
-    func edgeTo(_ view: UIView) {
-        view.addSubview(self)
-        translatesAutoresizingMaskIntoConstraints = false
-        topAnchor.constraint(equalTo: view.topAnchor).isActive = true
-        leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-        trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-        bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
-    }
-
-    func pinMenuTo(_ view: UIView, with constant: CGFloat) {
-        view.addSubview(self)
-        translatesAutoresizingMaskIntoConstraints = false
-        topAnchor.constraint(equalTo: view.topAnchor).isActive = true
-        leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-        trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -constant).isActive = true
-        bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
     }
 }

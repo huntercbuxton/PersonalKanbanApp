@@ -8,13 +8,15 @@
 import Foundation
 
 public enum MainMenuOptions: Int, MenuOptionRepresentable {
-    case backlog = 0
-    case epics = 1
-    case tasks = 2
-    case finished = 3
-    case more = 4
+    case inProgress = 0
+    case toDo = 1
+    case epics = 2
+    case backlog = 3
+    case finished = 4
+    case archived = 5
+    case more = 6
 
-    static var allPageTitles: [String] { ["Backlog", "Epics", "Tasks", "Finished", "more"] }
+    static var allPageTitles: [String] { ["In Progress", "To Do", "Epics", "Backlog", "Finished", "Archived", "more"] }
 
     var pageTitle: String { toString() }
 

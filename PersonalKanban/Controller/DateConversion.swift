@@ -27,7 +27,6 @@ struct DateConversion {
     }
 }
 
-
 extension Date {
 
      func format(format: String = "dd-MM-yyyy hh-mm-ss") -> Date {
