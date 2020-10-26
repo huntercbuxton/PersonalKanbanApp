@@ -12,7 +12,7 @@ enum EditScreenUseState {
     case edit
 }
 
-class AddEditTaskVC: UIViewController, InputsInterfaceDelegate, EditTaskTableDelegate, TaskEditorOptionsTable2Delegate, EpicsSelectorDelegate, WorkflowStatusSelectionDelegate {
+class AddEditTaskVC: UIViewController, InputsInterfaceDelegate, EditTaskTableDelegate, TaskEditorOptionsTable2Delegate, EpicsSelectorDelegate, WorkflowStatusSelectionDelegate, DatePickerDelegate {
 
     // MARK: - EditTaskTableDelegate conformance
 
@@ -31,6 +31,11 @@ class AddEditTaskVC: UIViewController, InputsInterfaceDelegate, EditTaskTableDel
         self.navigationController?.pushViewController(positionScreen, animated: true)
     }
 
+    func goToDueDatePickerScreen() {
+        let pickerScreen = DatePicker(date: dueDate, delegate: self)
+        self.navigationController?.pushViewController(pickerScreen, animated: true)
+    }
+
     // MARK: - TaskEditorOptionsTable2Delegate conformance
 
     func deleteTask() {
@@ -47,20 +52,25 @@ class AddEditTaskVC: UIViewController, InputsInterfaceDelegate, EditTaskTableDel
     // MARK: - EpicsSelectorDelegate protocol conformance
 
     func selectEpic(_ selection: Epic) {
-        self.selectedEpic = selection
-        self.table.selectedEpic = selection
+        selectedEpic = selection
     }
 
-//    // MARK: - StoryPointsSelectionDelegate protocol conformance
+    // MARK: - StoryPointsSelectionDelegate protocol conformance
 
     func selectStoryPoints(_ selectedValue: StoryPoints) {
         self.storyPoints = selectedValue
     }
 
-//    // MARK: - WorkflowStatusSelectionDelegate conformance
+    // MARK: - WorkflowStatusSelectionDelegate conformance
 
     func selectStatus(newStatus: WorkflowPosition) {
         self.workflowStatus = newStatus
+    }
+
+    // MARK: - DatePickerDelegate conformance
+
+    func pickDate(_ selectedDate: Date) {
+        self.dueDate = selectedDate
     }
 
     // MARK: - InputsInterfaceDelegate conformance
@@ -81,6 +91,9 @@ class AddEditTaskVC: UIViewController, InputsInterfaceDelegate, EditTaskTableDel
                 self.saveBtn.isEnabled = true
             }
         }
+        didSet {
+            self.table.selectedEpic = selectedEpic
+        }
     }
     private lazy var storyPoints = taskMO?.storyPointsEnum ?? .unassigned {
         didSet {
@@ -89,8 +102,19 @@ class AddEditTaskVC: UIViewController, InputsInterfaceDelegate, EditTaskTableDel
     }
     private lazy var workflowStatus: WorkflowPosition = self.taskMO?.workflowStatusEnum ?? .backlog {
         didSet {
-            print("called didset with value \(workflowStatus) on AddEditTaskVC's workflowStatus")
             self.table.workflowPosition = workflowStatus
+        }
+    }
+    private lazy var dueDate: Date? = taskMO?.dueDate {
+        didSet {
+            var str  = "DUE DATE LAZY VERSION IS CHANGED "
+            if let d = dueDate  {
+                str.append(DateConversion.toString(date: d))
+            } else {
+                str.append("nil")
+            }
+
+            self.table.dueDate = self.dueDate
         }
     }
 
@@ -119,7 +143,7 @@ class AddEditTaskVC: UIViewController, InputsInterfaceDelegate, EditTaskTableDel
 
     private let useState: EditScreenUseState
     private weak var updateDelegate: CoreDataDisplayDelegate!
-//    private var inputValidationManager: InputValidationManager!
+    private var inputValidationManager: InputValidationManager!
     private let persistenceManager: PersistenceManager
     private var taskMO: Task?
 
@@ -147,7 +171,7 @@ class AddEditTaskVC: UIViewController, InputsInterfaceDelegate, EditTaskTableDel
     private func setupNavBar() {
         self.title = self.titleText
         self.navigationItem.setRightBarButton(saveBtn, animated: false)
-//        saveBtn.isEnabled = false
+        if self.useState == .create { saveBtn.isEnabled = false }
         self.navigationItem.setLeftBarButton(cancelBtn, animated: false)
     }
 
@@ -212,10 +236,10 @@ class AddEditTaskVC: UIViewController, InputsInterfaceDelegate, EditTaskTableDel
     }
 
     private func setupDataStuff() {
-//        self.inputValidationManager = InputValidationManager()
-//        self.inputValidationManager.delegate = self
-//        self.titleTextField.inputValidationDelegate = self.inputValidationManager
-//        self.notesTextView.inputValidationDelegate = self.inputValidationManager
+        self.inputValidationManager = InputValidationManager()
+        self.inputValidationManager.delegate = self
+        self.titleTextField.inputValidationDelegate = self.inputValidationManager
+        self.notesTextView.inputValidationDelegate = self.inputValidationManager
         if self.useState == .edit { prefillInputFields() }
     }
 
@@ -225,7 +249,7 @@ class AddEditTaskVC: UIViewController, InputsInterfaceDelegate, EditTaskTableDel
         self.notesTextView.text = task.quickNote
         if let current = task.epic {
             self.selectedEpic = current
-//            table.selectedEpic = selectedEpic
+            table.selectedEpic = selectedEpic
         }
     }
 
@@ -245,11 +269,7 @@ class AddEditTaskVC: UIViewController, InputsInterfaceDelegate, EditTaskTableDel
     }
 
     private func navigateToPreviousScreen() {
-        if useState == .create {
-            self.dismiss(animated: true, completion: {})
-        } else {
-            self.navigationController?.popViewController(animated: true)
-        }
+        self.navigationController?.popViewController(animated: true)
         updateDelegate.updateCoreData()
     }
 
@@ -263,7 +283,11 @@ class AddEditTaskVC: UIViewController, InputsInterfaceDelegate, EditTaskTableDel
         let date = Date()
         task.dateCreated = DateConversion.format(date)
         task.dateUpdated = DateConversion.format(date)
+        if let dDate = table.dueDate {
+            task.dueDate = DateConversion.format(dDate)
+        }
         persistenceManager.save()
+        self.updateDelegate.updateCoreData()
     }
 
     private func saveChanges() {
@@ -273,14 +297,17 @@ class AddEditTaskVC: UIViewController, InputsInterfaceDelegate, EditTaskTableDel
         task.epic = selectedEpic
         task.storyPointsEnum = storyPoints
         task.workflowStatusEnum = workflowStatus
-        var date = Date()
-        task.dateUpdated = DateConversion.format(date)
+        task.dateUpdated = DateConversion.format(Date())
+        if let dDate = self.dueDate {
+            task.dueDate = DateConversion.format(dDate)
+        }
         persistenceManager.save()
         self.updateDelegate.updateCoreData()
     }
 
 //     MARK: - initialization
 
+    // used when editing an existing task
     init(persistenceManager: PersistenceManager, useState: EditScreenUseState, task: Task? = nil, updateDelegate: CoreDataDisplayDelegate) {
         self.persistenceManager = persistenceManager
         self.useState = useState
@@ -289,11 +316,13 @@ class AddEditTaskVC: UIViewController, InputsInterfaceDelegate, EditTaskTableDel
         super.init(nibName: nil, bundle: nil)
     }
 
-    init(persistenceManager: PersistenceManager, useState: EditScreenUseState, updateDelegate: CoreDataDisplayDelegate) {
+    // used when creating a new task
+    init(persistenceManager: PersistenceManager, useState: EditScreenUseState, updateDelegate: CoreDataDisplayDelegate, defaultPosition: WorkflowPosition = .backlog) {
         self.persistenceManager = persistenceManager
         self.useState = useState
         self.updateDelegate = updateDelegate
         super.init(nibName: nil, bundle: nil)
+        self.workflowStatus = defaultPosition
     }
 
     required init?(coder aDecoder: NSCoder) {

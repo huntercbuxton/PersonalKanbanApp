@@ -11,7 +11,7 @@ enum WorkflowPosition: Int, CaseIterable {
     case inProgress = 0, toDo, backlog, finished
 
     var displayName: String {
-        let strings = ["in progress","to do","backlog","finished"]
+        let strings = ["in progress", "to do", "backlog", "finished"]
         return strings[self.rawValue]
     }
 

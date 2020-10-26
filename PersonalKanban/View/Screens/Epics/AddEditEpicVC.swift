@@ -31,13 +31,12 @@ class AddEditEpicVC: UIViewController, InputsInterfaceDelegate {
     var contentView = UIView()
     lazy var titleTextField: PaddedTextField = PaddedTextField()
     lazy var notesTextView: LargeTextView = LargeTextView(text: "")
+//    lazy var addTasksButton: UIButton = UIButton(type: .custom, primaryAction: <#T##UIAction?#>)
     lazy var table = UITableViewController()
 
     // MARK: - properties specifying UI style/layout
 
-    private var titleText: String { useState == .create ? "Create Epic" : "Edit Epic" }
-    private var titlePlaceholderText: String = "add a title"
-    private let sectionSpacing: CGFloat = 20.0
+    private var titleText: String { useState == .create ? "create epic" : "edit epic" }
     private lazy var margins: UIEdgeInsets = contentView.layoutMargins
 
     // MARK: - other properties
@@ -89,7 +88,7 @@ class AddEditEpicVC: UIViewController, InputsInterfaceDelegate {
         contentView.addSubview(titleTextField)
         titleTextField.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
         titleTextField.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
-        titleTextField.topAnchor.constraint(equalTo: contentView.topAnchor, constant: sectionSpacing).isActive = true
+        titleTextField.topAnchor.constraint(equalTo: contentView.topAnchor, constant: UIConsts.verticalSpacing).isActive = true
         titleTextField.layer.borderWidth = UIConsts.textInputBorderWidth
         titleTextField.layer.borderColor = UIConsts.textInputBorderColor
         titleTextField.layer.cornerRadius = UIConsts.textInputCornerRadius
@@ -102,7 +101,7 @@ class AddEditEpicVC: UIViewController, InputsInterfaceDelegate {
         notesTextView.topAnchor.constraint(equalTo: titleTextField.bottomAnchor, constant: UIConsts.verticalSpacing).isActive = true
         notesTextView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
         notesTextView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
-        notesTextView.heightAnchor.constraint(equalToConstant: 200.0).isActive = true
+        notesTextView.heightAnchor.constraint(equalToConstant: UIConsts.largeTextFieldHeight).isActive = true
         notesTextView.layer.borderWidth = UIConsts.textInputBorderWidth
         notesTextView.layer.borderColor = UIConsts.textInputBorderColor
         notesTextView.layer.cornerRadius = UIConsts.textInputCornerRadius
@@ -112,7 +111,7 @@ class AddEditEpicVC: UIViewController, InputsInterfaceDelegate {
         self.addChild(table)
         self.table.view.translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview(table.view)
-        self.table.view.topAnchor.constraint(equalTo: notesTextView.bottomAnchor, constant: sectionSpacing).isActive = true
+        self.table.view.topAnchor.constraint(equalTo: notesTextView.bottomAnchor, constant: UIConsts.verticalSpacing).isActive = true
         self.table.view.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: 0).isActive = true
         self.table.view.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: 0).isActive = true
         self.table.view.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 0).isActive = true

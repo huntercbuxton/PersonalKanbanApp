@@ -76,7 +76,7 @@ class ViewOnlyEpicDetailVC: UIViewController, CoreDataDisplayDelegate {
         notesTextView.layer.borderWidth = 2.5
         notesTextView.layer.borderColor = UIColor.systemGray5.cgColor
         notesTextView.layer.cornerRadius = 8
-        notesTextView.bottomAnchor.constraint(greaterThanOrEqualTo: contentView.bottomAnchor, constant: 20.0).isActive = true
+        notesTextView.bottomAnchor.constraint(greaterThanOrEqualTo: contentView.bottomAnchor, constant: 20).isActive = true
 
     }
 

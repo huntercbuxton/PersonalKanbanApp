@@ -51,6 +51,8 @@
 		71BC1B5D253DD3A3005EC646 /* InputsEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71BC1B5C253DD3A3005EC646 /* InputsEnum.swift */; };
 		71BC1B62253DD3D4005EC646 /* InputsProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71BC1B61253DD3D4005EC646 /* InputsProtocols.swift */; };
 		71D378392541B53D00F66FCC /* EnumWorkflowPositions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71D378382541B53D00F66FCC /* EnumWorkflowPositions.swift */; };
+		71D378412541C26600F66FCC /* DatePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71D378402541C26600F66FCC /* DatePicker.swift */; };
+		71DC7FB425474D8B00D0B40C /* InputValidatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71DC7FB325474D8B00D0B40C /* InputValidatorTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXBuildRule section */
@@ -203,6 +205,13 @@
 			remoteGlobalIDString = 715B72AD253BEDDE00219F07;
 			remoteInfo = PersonalKanban;
 		};
+		71DC7FB625474D8B00D0B40C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 715B72A6253BEDDD00219F07 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 715B72AD253BEDDE00219F07;
+			remoteInfo = PersonalKanban;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -256,6 +265,10 @@
 		71BC1B5C253DD3A3005EC646 /* InputsEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputsEnum.swift; sourceTree = "<group>"; };
 		71BC1B61253DD3D4005EC646 /* InputsProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputsProtocols.swift; sourceTree = "<group>"; };
 		71D378382541B53D00F66FCC /* EnumWorkflowPositions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnumWorkflowPositions.swift; sourceTree = "<group>"; };
+		71D378402541C26600F66FCC /* DatePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePicker.swift; sourceTree = "<group>"; };
+		71DC7FB125474D8B00D0B40C /* InputValidatorTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = InputValidatorTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		71DC7FB325474D8B00D0B40C /* InputValidatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputValidatorTests.swift; sourceTree = "<group>"; };
+		71DC7FB525474D8B00D0B40C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -280,9 +293,56 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		71DC7FAE25474D8B00D0B40C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		713F215A2541F4B700B4B7ED /* Task */ = {
+			isa = PBXGroup;
+			children = (
+				715B7315253C520300219F07 /* AddEditTaskVC.swift */,
+				717DCB6E253F5C9300E2156F /* SelectWorkflowStatusMenu.swift */,
+				71B72FE52541501F00D26CDC /* StoryPointsSelectionScreen.swift */,
+				71D378402541C26600F66FCC /* DatePicker.swift */,
+				717DCB28253EDAC300E2156F /* ChooseEpicsScreen.swift */,
+			);
+			path = Task;
+			sourceTree = "<group>";
+		};
+		713F215B2541F4ED00B4B7ED /* Epics */ = {
+			isa = PBXGroup;
+			children = (
+				717DCB23253ED0BE00E2156F /* AddEditEpicVC.swift */,
+				717DCB3A253F25E600E2156F /* EditEpicDetailsVC.swift */,
+				717DCB32253F0A7200E2156F /* ViewOnlyEpicDetailVC.swift */,
+				717DCB2D253EF59300E2156F /* EpicTasksTableVC.swift */,
+			);
+			path = Epics;
+			sourceTree = "<group>";
+		};
+		713F215F2541F71800B4B7ED /* Epics */ = {
+			isa = PBXGroup;
+			children = (
+				717DCB3F253F2BE000E2156F /* EpicDetailsEditorMenuVC.swift */,
+			);
+			path = Epics;
+			sourceTree = "<group>";
+		};
+		713F21602541F74F00B4B7ED /* MainMenuPages */ = {
+			isa = PBXGroup;
+			children = (
+				717DCB1B253EB75E00E2156F /* EpicsTableVC.swift */,
+				715B730D253C4B1C00219F07 /* TasksTable.swift */,
+			);
+			path = MainMenuPages;
+			sourceTree = "<group>";
+		};
 		713F7A85253C567D00D23CC7 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
@@ -300,6 +360,7 @@
 				715B72B0253BEDDE00219F07 /* PersonalKanban */,
 				715B72C7253BEDE800219F07 /* PersonalKanbanTests */,
 				715B72D2253BEDE800219F07 /* PersonalKanbanUITests */,
+				71DC7FB225474D8B00D0B40C /* InputValidatorTests */,
 				715B72AF253BEDDE00219F07 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -310,6 +371,7 @@
 				715B72AE253BEDDE00219F07 /* PersonalKanban.app */,
 				715B72C4253BEDE800219F07 /* PersonalKanbanTests.xctest */,
 				715B72CF253BEDE800219F07 /* PersonalKanbanUITests.xctest */,
+				71DC7FB125474D8B00D0B40C /* InputValidatorTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -389,15 +451,9 @@
 		71BC1B66253DD43B005EC646 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				713F215B2541F4ED00B4B7ED /* Epics */,
+				713F215A2541F4B700B4B7ED /* Task */,
 				715B72B5253BEDDE00219F07 /* MainViewController.swift */,
-				715B7315253C520300219F07 /* AddEditTaskVC.swift */,
-				717DCB23253ED0BE00E2156F /* AddEditEpicVC.swift */,
-				717DCB28253EDAC300E2156F /* ChooseEpicsScreen.swift */,
-				717DCB2D253EF59300E2156F /* EpicTasksTableVC.swift */,
-				717DCB32253F0A7200E2156F /* ViewOnlyEpicDetailVC.swift */,
-				717DCB3A253F25E600E2156F /* EditEpicDetailsVC.swift */,
-				717DCB6E253F5C9300E2156F /* SelectWorkflowStatusMenu.swift */,
-				71B72FE52541501F00D26CDC /* StoryPointsSelectionScreen.swift */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -405,13 +461,12 @@
 		71BC1B67253DD47A005EC646 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				713F21602541F74F00B4B7ED /* MainMenuPages */,
+				713F215F2541F71800B4B7ED /* Epics */,
 				715B731A253C524600219F07 /* PaddedTextField.swift */,
 				713F7A94253CD0AC00D23CC7 /* LargeTextView.swift */,
-				715B730D253C4B1C00219F07 /* TasksTable.swift */,
 				715B72FF253C39BC00219F07 /* SliderOneVC.swift */,
 				71209AEB253E3CDD0082DA0A /* TaskEditingTable.swift */,
-				717DCB1B253EB75E00E2156F /* EpicsTableVC.swift */,
-				717DCB3F253F2BE000E2156F /* EpicDetailsEditorMenuVC.swift */,
 				717DCB61253F4AAE00E2156F /* LogView.swift */,
 				71B72FEF25416DA300D26CDC /* TaskEditorOptionsTable2.swift */,
 			);
@@ -441,6 +496,15 @@
 				717DCB4C253F3DBA00E2156F /* Task+CoreDataProperties.swift */,
 			);
 			name = CoreData;
+			sourceTree = "<group>";
+		};
+		71DC7FB225474D8B00D0B40C /* InputValidatorTests */ = {
+			isa = PBXGroup;
+			children = (
+				71DC7FB325474D8B00D0B40C /* InputValidatorTests.swift */,
+				71DC7FB525474D8B00D0B40C /* Info.plist */,
+			);
+			path = InputValidatorTests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -512,13 +576,31 @@
 			productReference = 715B72CF253BEDE800219F07 /* PersonalKanbanUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
+		71DC7FB025474D8B00D0B40C /* InputValidatorTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 71DC7FBA25474D8B00D0B40C /* Build configuration list for PBXNativeTarget "InputValidatorTests" */;
+			buildPhases = (
+				71DC7FAD25474D8B00D0B40C /* Sources */,
+				71DC7FAE25474D8B00D0B40C /* Frameworks */,
+				71DC7FAF25474D8B00D0B40C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				71DC7FB725474D8B00D0B40C /* PBXTargetDependency */,
+			);
+			name = InputValidatorTests;
+			productName = InputValidatorTests;
+			productReference = 71DC7FB125474D8B00D0B40C /* InputValidatorTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		715B72A6253BEDDD00219F07 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1200;
+				LastSwiftUpdateCheck = 1210;
 				LastUpgradeCheck = 1200;
 				TargetAttributes = {
 					715B72AD253BEDDE00219F07 = {
@@ -530,6 +612,10 @@
 					};
 					715B72CE253BEDE800219F07 = {
 						CreatedOnToolsVersion = 12.0.1;
+						TestTargetID = 715B72AD253BEDDE00219F07;
+					};
+					71DC7FB025474D8B00D0B40C = {
+						CreatedOnToolsVersion = 12.1;
 						TestTargetID = 715B72AD253BEDDE00219F07;
 					};
 				};
@@ -550,6 +636,7 @@
 				715B72AD253BEDDE00219F07 /* PersonalKanban */,
 				715B72C3253BEDE800219F07 /* PersonalKanbanTests */,
 				715B72CE253BEDE800219F07 /* PersonalKanbanUITests */,
+				71DC7FB025474D8B00D0B40C /* InputValidatorTests */,
 			);
 		};
 /* End PBXProject section */
@@ -572,6 +659,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		715B72CD253BEDE800219F07 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		71DC7FAF25474D8B00D0B40C /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -613,6 +707,7 @@
 				71B72FDB2541305900D26CDC /* UIViewLayoutsExtension.swift in Sources */,
 				717DCB40253F2BE000E2156F /* EpicDetailsEditorMenuVC.swift in Sources */,
 				71209AEC253E3CDD0082DA0A /* TaskEditingTable.swift in Sources */,
+				71D378412541C26600F66FCC /* DatePicker.swift in Sources */,
 				717DCB52253F3DBA00E2156F /* Task+CoreDataProperties.swift in Sources */,
 				715B731B253C524600219F07 /* PaddedTextField.swift in Sources */,
 				71BC1B62253DD3D4005EC646 /* InputsProtocols.swift in Sources */,
@@ -664,6 +759,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		71DC7FAD25474D8B00D0B40C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				71DC7FB425474D8B00D0B40C /* InputValidatorTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -676,6 +779,11 @@
 			isa = PBXTargetDependency;
 			target = 715B72AD253BEDDE00219F07 /* PersonalKanban */;
 			targetProxy = 715B72D0253BEDE800219F07 /* PBXContainerItemProxy */;
+		};
+		71DC7FB725474D8B00D0B40C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 715B72AD253BEDDE00219F07 /* PersonalKanban */;
+			targetProxy = 71DC7FB625474D8B00D0B40C /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -929,6 +1037,48 @@
 			};
 			name = Release;
 		};
+		71DC7FB825474D8B00D0B40C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = L34A7YSYGT;
+				INFOPLIST_FILE = InputValidatorTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.hunterbuxton.InputValidatorTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PersonalKanban.app/PersonalKanban";
+			};
+			name = Debug;
+		};
+		71DC7FB925474D8B00D0B40C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = L34A7YSYGT;
+				INFOPLIST_FILE = InputValidatorTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.hunterbuxton.InputValidatorTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PersonalKanban.app/PersonalKanban";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -964,6 +1114,15 @@
 			buildConfigurations = (
 				715B72DF253BEDE800219F07 /* Debug */,
 				715B72E0253BEDE800219F07 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		71DC7FBA25474D8B00D0B40C /* Build configuration list for PBXNativeTarget "InputValidatorTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				71DC7FB825474D8B00D0B40C /* Debug */,
+				71DC7FB925474D8B00D0B40C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

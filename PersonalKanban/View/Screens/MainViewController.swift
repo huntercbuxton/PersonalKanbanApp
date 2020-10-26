@@ -50,9 +50,8 @@ class MainViewController: UIViewController, SlidingViewDelegate, MenuSelectionDe
                        options: self.animationOptions) {
             self.contentViewTwo.frame.origin.x = self.menuIsVisible ? 0 :
                 self.contentViewTwo.frame.width - self.slideInMenuPadding
-        } completion: { (_) in
-            self.menuIsVisible.toggle()
-        }
+        } completion: { (_) in }
+        self.menuIsVisible.toggle()
     }
 
     func hideMenu() {
@@ -138,18 +137,33 @@ class MainViewController: UIViewController, SlidingViewDelegate, MenuSelectionDe
     }
 
     @objc func menuBBITapped() {
+        print("called \(#function)")
         self.toggleMenuVisibility()
     }
 
     @objc func addBBITapped() {
         switch currentPage {
-        case .toDo, .inProgress, .backlog:
-            let composeVC  = AddEditTaskVC(persistenceManager: persistenceManager, useState: .create, updateDelegate: self.vcTwo)
-            present(UINavigationController(rootViewController: composeVC), animated: true, completion: { })
+        case .inProgress:
+            let composeVC = AddEditTaskVC(persistenceManager: persistenceManager, useState: .create, updateDelegate: vcTwo, defaultPosition: .inProgress)
+//            present(UINavigationController(rootViewController: composeVC), animated: true, completion: { })
+            self.navigationController?.pushViewController(composeVC, animated: true)
+        case .toDo:
+            let composeVC  = AddEditTaskVC(persistenceManager: persistenceManager, useState: .create, updateDelegate: self.vcTwo, defaultPosition: WorkflowPosition.toDo)
+//            present(UINavigationController(rootViewController: composeVC), animated: true, completion: { })
+            self.navigationController?.pushViewController(composeVC, animated: true)
+        case .backlog:
+            let composeVC = AddEditTaskVC(persistenceManager: persistenceManager, useState: .create, updateDelegate: vcTwo, defaultPosition: .backlog)
+//            present(UINavigationController(rootViewController: composeVC), animated: true, completion: { })
+            self.navigationController?.pushViewController(composeVC, animated: true)
+        case .finished:
+            let composeVC = AddEditTaskVC(persistenceManager: persistenceManager, useState: .create, updateDelegate: vcTwo, defaultPosition: .finished)
+//            present(UINavigationController(rootViewController: composeVC), animated: true, completion: { })
+            self.navigationController?.pushViewController(composeVC, animated: true)
         case .epics:
             let composeVC = AddEditEpicVC(persistenceManager: persistenceManager, useState: .create, updateDelegate: self.vcTwo)
-            present(UINavigationController(rootViewController: composeVC), animated: true, completion: { })
-        case .archived, .more, .finished:
+//            present(UINavigationController(rootViewController: composeVC), animated: true, completion: { })
+            self.navigationController?.pushViewController(composeVC, animated: true)
+        case .archived, .more:
             print("called \(#function); should probably remove the add button when on these pages.")
         default:
             fatalError("wrong case caught in \(#function)")

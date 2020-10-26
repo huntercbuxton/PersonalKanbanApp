@@ -17,11 +17,19 @@ class SelectWorkflowStatusMenu: UITableViewController {
     private weak var workflowStatusSelectionDelegate: WorkflowStatusSelectionDelegate?
     private var options: [WorkflowPosition] = WorkflowPosition.allCases as [WorkflowPosition]
     private var currentStatus: WorkflowPosition
+    var saveDate: UIBarButtonItem =  UIBarButtonItem(title: "SaveDate", style: .plain, target: nil, action: #selector(SelectWorkflowStatusMenu.saveDateTapped))// UIBarButtonItem(image: UIImage(systemName: "trash"), style: .plain, target: self, action: #selector(SelectWorkflowStatusMenu.saveDateTapped))
+    @objc func saveDateTapped() {
+        print("called \(#function)")
+//        delegate!.pickDate(picker.date)
+        self.navigationController!.popViewController(animated: true)
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.title = "select status"
         self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellReuseID)
         tableView.tableFooterView = UIView(background: .systemGroupedBackground)
+        self.navigationItem.setRightBarButton(saveDate, animated: true)
     }
 
     // MARK: - Table view data source

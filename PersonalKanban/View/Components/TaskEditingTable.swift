@@ -10,6 +10,7 @@ import UIKit
 protocol EditTaskTableDelegate: StoryPointsSelectionDelegate {
     func goToEpicSelectionScreen()
     func goToWorkflowSelectorScreen()
+    func goToDueDatePickerScreen()
 }
 
 class TaskEditingTable: UITableViewController {
@@ -31,16 +32,21 @@ class TaskEditingTable: UITableViewController {
             options[2] = workflowPositionCellTitle
         }
     }
-    var epicCellTitle: String { "Epics: \(self.selectedEpic?.title ?? "none" ) " }
+    var dueDate: Date? {
+        didSet {
+            options[3] = dueDateCellTitle
+        }
+    }
+    var epicCellTitle: String { "Epic: \(self.selectedEpic?.title ?? "none" ) " }
     var storyPointsCellTitle: String { "story points: \(storyPoints.displayTitle)" }
-    var workflowPositionCellTitle: String { "WorkflowStatus: \(self.workflowPosition.displayName)" }
-
+    var workflowPositionCellTitle: String { "workflow position: \(self.workflowPosition.displayName)" }
+    var dueDateCellTitle: String { "Due date: \( dueDate != nil ? DateConversion.toString(date: dueDate!) : "none") " }
     // MARK: - other properties
 
     private let useState: EditScreenUseState
     private weak var editingDelegate: EditTaskTableDelegate?
     private let reuseID = "TaskEditingTableCellReuseID"
-    lazy var options: [String] = [epicCellTitle, storyPointsCellTitle, workflowPositionCellTitle, "due date"] {
+    lazy var options: [String] = [epicCellTitle, storyPointsCellTitle, workflowPositionCellTitle, dueDateCellTitle] {
         didSet {
             tableView.reloadData()
         }
@@ -68,15 +74,7 @@ class TaskEditingTable: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: .default, reuseIdentifier: reuseID)
         cell.textLabel?.text = options[indexPath.row]
-
-        if indexPath.section == 0 {
-            cell.accessoryType = .disclosureIndicator
-        } else {
-            cell.textLabel?.textAlignment = .center
-            if indexPath.row == 3 {
-                cell.textLabel?.textColor = .systemRed
-            }
-        }
+        cell.accessoryType = .disclosureIndicator
         return cell
     }
 
@@ -89,7 +87,7 @@ class TaskEditingTable: UITableViewController {
         case 2:
             self.editingDelegate?.goToWorkflowSelectorScreen()
         case 3:
-            print("this selection is not yet implemented")
+            editingDelegate?.goToDueDatePickerScreen()
         default:
             fatalError("this index path \(String(describing: indexPath)) should not exist; you did something wrong in \(#file), \(#function)")
         }
