@@ -239,7 +239,7 @@ class AddEditTaskVC: UIViewController, InputsInterfaceDelegate, EditTaskTableDel
         self.inputValidationManager = InputValidationManager()
         self.inputValidationManager.delegate = self
         self.titleTextField.inputValidationDelegate = self.inputValidationManager
-        self.notesTextView.inputValidationDelegate = self.inputValidationManager
+//        self.notesTextView.inputValidationDelegate = self.inputValidationManager
         if self.useState == .edit { prefillInputFields() }
     }
 

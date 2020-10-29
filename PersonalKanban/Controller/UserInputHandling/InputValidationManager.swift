@@ -58,9 +58,9 @@ public class InputValidationManager: InputValidationDelegate {
     func inputUpdate(_ input: String?, from: Inputs) {
         inputTrackers[from]!.wrappedValue = input
         if inputTrackers[from]!.approved {
-            delegate!.enableSave()
+            delegate?.enableSave()
         } else {
-            delegate!.disableSave()
+            delegate?.disableSave()
         }
     }
     var inputTrackers = [ Inputs.title: InputTracker(textField: Inputs.title, "", nil),

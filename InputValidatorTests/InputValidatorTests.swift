@@ -6,20 +6,34 @@
 //
 
 import XCTest
+@testable import PersonalKanban
 
 class InputValidatorTests: XCTestCase {
 
+    var sut: InputValidationManager!
+
     override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+        super.setUp()
+        sut = InputValidationManager()
     }
 
     override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+        sut = nil
+        super.tearDown()
     }
 
     func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+        let titleTracker = sut.inputTrackers[.title]
+        XCTAssertTrue(titleTracker != nil, "inputvalidationmanager had a nil value for the 'title' tracker")
+
+        sut.inputUpdate(nil, from: .title)
+        XCTAssertFalse(titleTracker!.approved, "inputvalidationmanager accepted nil for the title input")
+
+        sut.inputUpdate("", from: .title)
+        XCTAssertFalse(titleTracker!.approved, "inputvalidationmanager accepted an empty string for the title input")
+
+        sut.inputUpdate("    ", from: .title)
+        XCTAssertFalse(titleTracker!.approved, "inputvalidationmanager accepted an all-whitespace string for the title input")
     }
 
     func testPerformanceExample() throws {
