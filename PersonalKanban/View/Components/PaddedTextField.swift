@@ -45,18 +45,6 @@ open class PaddedTextField: UITextField, InputValidatable, UITextFieldDelegate {
 
     // MARK: - styling and layout
 
-//    open func setupLayout(in stackView: UIStackView) {
-//        translatesAutoresizingMaskIntoConstraints = false
-//        stackView.addArrangedSubview(self)
-//        let widthConst: CGFloat = stackView.layoutMargins.right*2.0
-//        print(String(describing: -widthConst))
-//        widthAnchor.constraint(equalTo: stackView.widthAnchor, constant: -widthConst).isActive = true
-//        heightAnchor.constraint(equalToConstant: 50.0).isActive = true
-//        layer.borderWidth = 2.5
-//        layer.borderColor = UIColor.systemGray5.cgColor
-//        layer.cornerRadius = 8
-//    }
-
     @objc open func respondToChange() {
         self.inputValidationDelegate!.inputUpdate(self.text, from: inputField)
     }
@@ -64,7 +52,7 @@ open class PaddedTextField: UITextField, InputValidatable, UITextFieldDelegate {
     func firstSetup() {
         self.addTarget(self, action: #selector(respondToChange), for: UIControl.Event.editingChanged)
         self.delegate = self
-        self.backgroundColor = .white
+//        self.backgroundColor = .white
         self.spellCheckingType = .no
         self.autocapitalizationType = .none
     }

@@ -45,7 +45,7 @@ class AddEditEpicVC: UIViewController, InputsInterfaceDelegate {
     let useState: EditScreenUseState
     var epic: Epic?
     weak var updateDelegate: CoreDataDisplayDelegate!
-    //    var inputValidationManager: InputValidationManager!
+        var inputValidationManager: InputValidationManager!
     
     // MARK: - initial setup of UI components
 
@@ -63,7 +63,7 @@ class AddEditEpicVC: UIViewController, InputsInterfaceDelegate {
     private func setupNavBar() {
         self.title = self.titleText
         self.navigationItem.setRightBarButton(saveBarButton, animated: false)
-//        saveBarButton.isEnabled = false
+        if self.useState == .create { saveBarButton.isEnabled = false }
         self.navigationItem.setLeftBarButton(cancelBarButton, animated: false)
     }
 
@@ -148,11 +148,7 @@ class AddEditEpicVC: UIViewController, InputsInterfaceDelegate {
     }
 
     private func goBack() {
-        if self.useState == .create {
-            self.dismiss(animated: true, completion: {})
-        } else {
-            self.navigationController?.popViewController(animated: true)
-        }
+        self.navigationController?.popViewController(animated: true)
         self.updateDelegate.updateCoreData()
     }
 
@@ -162,9 +158,9 @@ class AddEditEpicVC: UIViewController, InputsInterfaceDelegate {
     }
 
     private func setupDataStuff() {
-//        self.inputValidationManager = InputValidationManager()
-//        self.inputValidationManager.delegate = self
-//        self.titleTextField.inputValidationDelegate = self.inputValidationManager
+        self.inputValidationManager = InputValidationManager()
+        self.inputValidationManager.delegate = self
+        self.titleTextField.inputValidationDelegate = self.inputValidationManager
 //        self.notesTextView.inputValidationDelegate = self.inputValidationManager
         if self.useState == .edit { prefillInputFields() }
     }
