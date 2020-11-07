@@ -10,7 +10,6 @@ import UIKit
 protocol EditTaskTableDelegate: StoryPointsSelectionDelegate {
     func goToEpicSelectionScreen()
     func goToWorkflowSelectorScreen()
-    func goToDueDatePickerScreen()
 }
 
 class TaskEditingTable: UITableViewController {
@@ -32,21 +31,16 @@ class TaskEditingTable: UITableViewController {
             options[2] = workflowPositionCellTitle
         }
     }
-    var dueDate: Date? {
-        didSet {
-            options[3] = dueDateCellTitle
-        }
-    }
     var epicCellTitle: String { "Epic: \(self.selectedEpic?.title ?? "none" ) " }
     var storyPointsCellTitle: String { "story points: \(storyPoints.displayTitle)" }
     var workflowPositionCellTitle: String { "workflow position: \(self.workflowPosition.displayName)" }
-    var dueDateCellTitle: String { "Due date: \( dueDate != nil ? DateConversion.toString(date: dueDate!) : "none") " }
+
     // MARK: - other properties
 
     private let useState: EditScreenUseState
     private weak var editingDelegate: EditTaskTableDelegate?
     private let reuseID = "TaskEditingTableCellReuseID"
-    lazy var options: [String] = [epicCellTitle, storyPointsCellTitle, workflowPositionCellTitle, dueDateCellTitle] {
+    lazy var options: [String] = [epicCellTitle, storyPointsCellTitle, workflowPositionCellTitle] {
         didSet {
             tableView.reloadData()
         }
@@ -86,8 +80,6 @@ class TaskEditingTable: UITableViewController {
             self.editingDelegate?.goToStoryPointsSelectionScreen()
         case 2:
             self.editingDelegate?.goToWorkflowSelectorScreen()
-        case 3:
-            editingDelegate?.goToDueDatePickerScreen()
         default:
             fatalError("this index path \(String(describing: indexPath)) should not exist; you did something wrong in \(#file), \(#function)")
         }

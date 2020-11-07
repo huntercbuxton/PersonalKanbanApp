@@ -12,7 +12,7 @@ enum EditScreenUseState {
     case edit
 }
 
-class AddEditTaskVC: UIViewController, InputsInterfaceDelegate, EditTaskTableDelegate, TaskEditorOptionsTable2Delegate, EpicsSelectorDelegate, WorkflowStatusSelectionDelegate, DatePickerDelegate {
+class AddEditTaskVC: UIViewController, InputsInterfaceDelegate, EditTaskTableDelegate, TaskEditorOptionsTable2Delegate, EpicsSelectorDelegate, WorkflowStatusSelectionDelegate {
 
     // MARK: - EditTaskTableDelegate conformance
 
@@ -29,11 +29,6 @@ class AddEditTaskVC: UIViewController, InputsInterfaceDelegate, EditTaskTableDel
     func goToWorkflowSelectorScreen() {
         let positionScreen = SelectWorkflowStatusMenu(workflowStatusSelectionDelegate: self, currentStatus: workflowStatus)
         self.navigationController?.pushViewController(positionScreen, animated: true)
-    }
-
-    func goToDueDatePickerScreen() {
-        let pickerScreen = DatePicker(date: dueDate, delegate: self)
-        self.navigationController?.pushViewController(pickerScreen, animated: true)
     }
 
     // MARK: - TaskEditorOptionsTable2Delegate conformance
@@ -65,12 +60,6 @@ class AddEditTaskVC: UIViewController, InputsInterfaceDelegate, EditTaskTableDel
 
     func selectStatus(newStatus: WorkflowPosition) {
         self.workflowStatus = newStatus
-    }
-
-    // MARK: - DatePickerDelegate conformance
-
-    func pickDate(_ selectedDate: Date) {
-        self.dueDate = selectedDate
     }
 
     // MARK: - InputsInterfaceDelegate conformance
@@ -105,18 +94,6 @@ class AddEditTaskVC: UIViewController, InputsInterfaceDelegate, EditTaskTableDel
             self.table.workflowPosition = workflowStatus
         }
     }
-    private lazy var dueDate: Date? = taskMO?.dueDate {
-        didSet {
-            var str  = "DUE DATE LAZY VERSION IS CHANGED "
-            if let d = dueDate  {
-                str.append(DateConversion.toString(date: d))
-            } else {
-                str.append("nil")
-            }
-
-            self.table.dueDate = self.dueDate
-        }
-    }
 
     // MARK: - properties storing UI Components
 
@@ -132,7 +109,7 @@ class AddEditTaskVC: UIViewController, InputsInterfaceDelegate, EditTaskTableDel
     private lazy var notesTextView: LargeTextView = LargeTextView(text: "")
     private lazy var table: TaskEditingTable = TaskEditingTable(useState: self.useState, editingDelegate: self, selectedEpic: self.selectedEpic, workflowStatus: self.workflowStatus, storyPoints: storyPoints)
     private lazy var table2 = TaskEditorOptionsTable2(delegate: self)
-    private var taskLog: LogView?// = LogView(dateCreated: taskMO?.dateCreated, dateUpdated: taskMO?.dateUpdated)
+    private var taskLog: LogView?
 
     // MARK: - properties specifying UI style/layout
 
@@ -239,7 +216,6 @@ class AddEditTaskVC: UIViewController, InputsInterfaceDelegate, EditTaskTableDel
         self.inputValidationManager = InputValidationManager()
         self.inputValidationManager.delegate = self
         self.titleTextField.inputValidationDelegate = self.inputValidationManager
-//        self.notesTextView.inputValidationDelegate = self.inputValidationManager
         if self.useState == .edit { prefillInputFields() }
     }
 
@@ -283,9 +259,6 @@ class AddEditTaskVC: UIViewController, InputsInterfaceDelegate, EditTaskTableDel
         let date = Date()
         task.dateCreated = DateConversion.format(date)
         task.dateUpdated = DateConversion.format(date)
-        if let dDate = table.dueDate {
-            task.dueDate = DateConversion.format(dDate)
-        }
         persistenceManager.save()
         self.updateDelegate.updateCoreData()
     }
@@ -298,9 +271,6 @@ class AddEditTaskVC: UIViewController, InputsInterfaceDelegate, EditTaskTableDel
         task.storyPointsEnum = storyPoints
         task.workflowStatusEnum = workflowStatus
         task.dateUpdated = DateConversion.format(Date())
-        if let dDate = self.dueDate {
-            task.dueDate = DateConversion.format(dDate)
-        }
         persistenceManager.save()
         self.updateDelegate.updateCoreData()
     }

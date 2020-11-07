@@ -46,7 +46,7 @@ class AddEditEpicVC: UIViewController, InputsInterfaceDelegate {
     var epic: Epic?
     weak var updateDelegate: CoreDataDisplayDelegate!
         var inputValidationManager: InputValidationManager!
-    
+
     // MARK: - initial setup of UI components
 
     override func viewDidLoad() {

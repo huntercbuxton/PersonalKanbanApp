@@ -35,7 +35,6 @@ class LogView: UIViewController {
         sectionLabel.setup(in: view, margin: horizontalMargin)
         sectionLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: verticalMargin).isActive = true
 
-
         dateCreatedLabel.setup(in: view, margin: horizontalMargin)
         dateCreatedLabel.topAnchor.constraint(greaterThanOrEqualTo: sectionLabel.bottomAnchor, constant: verticalItemSpacing).isActive = true
         dateCreatedLabel.text = createdLabelText
