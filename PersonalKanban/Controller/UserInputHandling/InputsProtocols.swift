@@ -14,7 +14,6 @@ protocol InputValidatable {
 
 protocol InputValidationDelegate: AnyObject {
     func inputUpdate(_ input: String?, from: Inputs)
-    func updateInputErrors()
 }
 
 public protocol InputsInterfaceDelegate: AnyObject {

@@ -51,10 +51,14 @@ class InputTracker {
 }
 
 public class InputValidationManager: InputValidationDelegate {
-    // MARK: - InputValidationManager
-    func sendErrorsUpdate() -> [InputErrors: String] { return [:] }
-    // MARK: - InputValidationDelegate
+
     weak var delegate: InputsInterfaceDelegate?
+
+    var inputTrackers = [ Inputs.title: InputTracker(textField: Inputs.title, "", nil),
+                          Inputs.notes: InputTracker(textField: .notes, "", nil) ]
+
+    // MARK: - InputValidationDelegate
+
     func inputUpdate(_ input: String?, from: Inputs) {
         inputTrackers[from]!.wrappedValue = input
         if inputTrackers[from]!.approved {
@@ -63,14 +67,5 @@ public class InputValidationManager: InputValidationDelegate {
             delegate?.disableSave()
         }
     }
-    var inputTrackers = [ Inputs.title: InputTracker(textField: Inputs.title, "", nil),
-                          Inputs.notes: InputTracker(textField: .notes, "", nil) ]
-    func updateInputErrors() { }
-    // MARK: - private implementation
-//    private var inputCheckers: [InputChecker] = []
-    var inputErrors: [InputErrors: String] = [:] {
-        didSet { }
-        willSet { }
-    }
-    func reset() { }
+
 }
