@@ -5,37 +5,28 @@
 //  Created by Hunter Buxton on 10/18/20.
 //
 
-import Foundation
 import UIKit
 
 class InputTracker {
     let textField: Inputs
     var input: String = ""
-    var approved: Bool = false {
-        didSet {
-            print("self.approved == \(self.approved). self.input == \(self.input)")
-        }
-    }
+    var approved: Bool = false { didSet { /* print("self.approved == \(self.approved). self.input == \(self.input) */ } }
     var wrappedValue: String? {
         get {
             return self.input
         }
         set {
             self.approved = true
-            if isNil(newValue) {
+            guard let inputVal = newValue else {
                 approved = false
                 return
             }
-            self.input = newValue!
-            if !isEmpty(newValue!) {
+            self.input = inputVal
+            if !isEmpty(inputVal) {
                 approved = false
                 return
             }
         }
-    }
-
-    func isNil(_ input: String?) -> Bool {
-        return input == nil
     }
 
     func isEmpty(_ input: String) -> Bool {
@@ -50,11 +41,11 @@ class InputTracker {
     }
 }
 
-public class InputValidationManager: InputValidationDelegate {
+class InputValidationManager: InputValidationDelegate {
 
     weak var delegate: InputsInterfaceDelegate?
 
-    var inputTrackers = [ Inputs.title: InputTracker(textField: Inputs.title, "", nil),
+    var inputTrackers = [ Inputs.title: InputTracker(textField: .title, "", nil),
                           Inputs.notes: InputTracker(textField: .notes, "", nil) ]
 
     // MARK: - InputValidationDelegate
