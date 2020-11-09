@@ -8,6 +8,7 @@
 import UIKit
 
 class MainViewController: UIViewController, SlidingViewDelegate, MenuSelectionDelegate {
+
     // MARK: - MenuSelectionDelegate protocol conformance
 
     typealias IdT = MainMenuOptions
@@ -69,7 +70,7 @@ class MainViewController: UIViewController, SlidingViewDelegate, MenuSelectionDe
     private lazy var contentViewOne: UIView = UIView()
     private lazy var contentViewTwo: UIView = UIView()
     private lazy var vcOne: SliderOneVC = SliderOneVC(sliderDelegate: self, selectionDelegate: self, savedSelection: MainMenuOptions.backlog)
-    private lazy var vcTwo: SlidingContentsViewContoller = TasksTable(sliderDelegate: self, persistenceManager: PersistenceManager.shared)
+    private lazy var vcTwo: SlidingContentsViewContoller = TasksTable(sliderDelegate: self, persistenceManager: persistenceManager, sortValue: .backlog)
 
     // MARK: - properties specifying UI style/layout
 
@@ -145,23 +146,18 @@ class MainViewController: UIViewController, SlidingViewDelegate, MenuSelectionDe
         switch currentPage {
         case .inProgress:
             let composeVC = AddEditTaskVC(persistenceManager: persistenceManager, useState: .create, updateDelegate: vcTwo, defaultPosition: .inProgress)
-//            present(UINavigationController(rootViewController: composeVC), animated: true, completion: { })
             self.navigationController?.pushViewController(composeVC, animated: true)
         case .toDo:
-            let composeVC  = AddEditTaskVC(persistenceManager: persistenceManager, useState: .create, updateDelegate: self.vcTwo, defaultPosition: WorkflowPosition.toDo)
-//            present(UINavigationController(rootViewController: composeVC), animated: true, completion: { })
+            let composeVC  = AddEditTaskVC(persistenceManager: persistenceManager, useState: .create, updateDelegate: vcTwo, defaultPosition: WorkflowPosition.toDo)
             self.navigationController?.pushViewController(composeVC, animated: true)
         case .backlog:
             let composeVC = AddEditTaskVC(persistenceManager: persistenceManager, useState: .create, updateDelegate: vcTwo, defaultPosition: .backlog)
-//            present(UINavigationController(rootViewController: composeVC), animated: true, completion: { })
             self.navigationController?.pushViewController(composeVC, animated: true)
         case .finished:
             let composeVC = AddEditTaskVC(persistenceManager: persistenceManager, useState: .create, updateDelegate: vcTwo, defaultPosition: .finished)
-//            present(UINavigationController(rootViewController: composeVC), animated: true, completion: { })
             self.navigationController?.pushViewController(composeVC, animated: true)
         case .epics:
-            let composeVC = AddEditEpicVC(persistenceManager: persistenceManager, useState: .create, updateDelegate: self.vcTwo)
-//            present(UINavigationController(rootViewController: composeVC), animated: true, completion: { })
+            let composeVC = AddEditEpicVC(persistenceManager: persistenceManager, useState: .create, updateDelegate: vcTwo)
             self.navigationController?.pushViewController(composeVC, animated: true)
         case .archived, .more:
             print("called \(#function); should probably remove the add button when on these pages.")

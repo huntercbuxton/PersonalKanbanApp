@@ -14,23 +14,19 @@ class TasksTable: UITableViewController, SlidingContentsViewContoller {
     private let cellReuseID = "BacklogTableVC.cellReuseID"
     weak var sliderDelegate: SlidingViewDelegate?
     private let persistenceManager: PersistenceManager
+
     private lazy var displayData: [Task] = [] {
         didSet {
             self.tableView.reloadData()
         }
     }
-//    private var fetchedData: [Task] = [] {
-//        didSet {
-//            self.displayData = sortData()
-//        }
-//    }
+
     private var updatedData: [Task] {
         get {
             return persistenceManager.sort()
         } set {
             persistenceManager.save()
             self.displayData = persistenceManager.sort(match: sortValue)
-//            self.tableView.reloadData()
         }
     }
 
@@ -45,10 +41,6 @@ class TasksTable: UITableViewController, SlidingContentsViewContoller {
         print("called loadData!!!!")
         self.updatedData = persistenceManager.sort(match: sortValue)
     }
-//
-//    func sortData() -> [Task] {
-//        return self.displayData
-//    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -71,6 +63,7 @@ class TasksTable: UITableViewController, SlidingContentsViewContoller {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: self.cellReuseID, for: indexPath)
         cell.textLabel?.text = displayData[indexPath.row].title
+        cell.accessoryType = .disclosureIndicator
         return cell
     }
 
@@ -78,9 +71,16 @@ class TasksTable: UITableViewController, SlidingContentsViewContoller {
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.sliderDelegate?.hideMenu()
-//        print("selected the cell at \(indexPath) for task titled: \(self.displayData[indexPath.row].title)")
         let editScreen = AddEditTaskVC(persistenceManager: persistenceManager, useState: .edit, task: displayData[indexPath.row], updateDelegate: self)
         self.navigationController?.pushViewController(editScreen, animated: true)
+    }
+
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            let toDelete = displayData[indexPath.row]
+            persistenceManager.delete(task: toDelete)
+            displayData.remove(at: indexPath.row)
+        }
     }
 
     // MARK: - initialization
