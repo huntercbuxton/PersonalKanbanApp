@@ -35,6 +35,22 @@ final class PersistenceManager {
         }
     }
 
+    func sortEpicTasks(for epic: Epic) -> [[Task]] {
+        let unsorted = epic.tasksList
+        var returnData: [WorkflowPosition:[Task]] = [.backlog:[],
+                                                      .toDo:[],
+                                                      .inProgress:[],
+                                                      .finished:[]
+                                                    ]
+        for task in unsorted {
+            if task.workflowStatusEnum != .defaultStatus {
+                returnData[task.workflowStatusEnum]?.append(task)
+            }
+        }
+        let taskArray = [ returnData[.backlog] ?? [], returnData[.toDo] ?? [], returnData[.inProgress] ?? [], returnData[.finished] ?? [] ]
+        return taskArray
+    }
+
     func sort(match workflowPosition: WorkflowPosition) -> [Task] {
         let entityName = String(describing: Task.self)
         let request = NSFetchRequest<Task>(entityName: entityName)

@@ -37,7 +37,8 @@ class MainViewController: UIViewController, SlidingViewDelegate, MenuSelectionDe
         case .archived:
             print("not yet implemented")
         case .more:
-            print("not yet implemented")
+            vcTwo = MorePageVC(delegate: self)
+            setupContentChildVC(child: vcTwo as! UIViewController, superView: contentViewTwo)
         }
     }
 

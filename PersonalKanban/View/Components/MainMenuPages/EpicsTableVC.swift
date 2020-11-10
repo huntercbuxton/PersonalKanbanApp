@@ -9,39 +9,41 @@ import UIKit
 
 class EpicsTableVC: UITableViewController, SlidingContentsViewContoller {
 
-    // MARK: - SlidingContentsViewContoller
+    // MARK: - SlidingContentsViewContoller conformance
 
     weak var sliderDelegate: SlidingViewDelegate?
 
     func refreshDisplay() {
-        print("called \(#function) in EpicsTableVC")
+        tableView.reloadData()
     }
 
+    // MARK: - CoreDataDisplayDelegate conformance
+
     func updateCoreData() {
-        print("called \(#function) in EpicsTableVC")
         self.epics = persistenceManager.getAllEpics()
         self.tableView.reloadData()
     }
 
-    // MARK: Data management
+    // MARK: - other instance properties
 
     let persistenceManager: PersistenceManager
-
-    func loadData() {
-        print("called loadData!!!!")
-        self.epics = persistenceManager.getAllEpics()
-    }
-
+    private let cellReuseID = "EpicsTableVC.CellReuseID"
     lazy var epics: [Epic] = []
 
-    private let cellReuseID = "EpicsTableVC.CellReuseID"
+    // MARK: - UIViewController function overrides
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        loadData()
+        epics = persistenceManager.getAllEpics()
         self.view.translatesAutoresizingMaskIntoConstraints = false
         self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: self.cellReuseID)
         self.tableView.tableFooterView = UITableViewHeaderFooterView()
+    }
+
+    // this is what updates the displayed titles of the epics if they've been edited since last time we saw this table
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        self.refreshDisplay()
     }
 
     // MARK: - Table view data source
@@ -61,14 +63,26 @@ class EpicsTableVC: UITableViewController, SlidingContentsViewContoller {
         return cell
     }
 
-    // MARK: UITableViewDelegate conformance
+    // MARK: UITableViewDelegate
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.sliderDelegate?.hideMenu()
-//        print("selected the cell at \(indexPath) for task titled: \(self.epics[indexPath.row].title)")
-      //  let detailView = AddEditEpicVC(persistenceManager: persistenceManager, useState: .edit, epic: epics[indexPath.row], updateDelegate: self)
-        let detailView = EpicTasksTableVC(persistenceManager: persistenceManager, epic: epics[indexPath.row])
+        let detailView = EpicDetailViewFirstScreen(persistenceManager: persistenceManager, epic: epics[indexPath.row])
         self.navigationController?.pushViewController(detailView, animated: true)
+    }
+
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            let alert = UIAlertController(title: "Are you sure?", message: "deleting this epic will also delete all its tasks.", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil ))
+            alert.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: { _ in
+                let epic = self.epics[indexPath.row]
+                self.persistenceManager.delete(epic: epic)
+                self.epics.remove(at: indexPath.row)
+                tableView.deleteRows(at: [indexPath], with: .fade)
+            }))
+            present(alert, animated: true, completion: nil)
+        }
     }
 
     // MARK: - initialization

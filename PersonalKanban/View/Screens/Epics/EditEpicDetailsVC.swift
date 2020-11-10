@@ -19,7 +19,17 @@ protocol EpicDetailsMenuDelegate: AnyObject {
     func unassignTasks()
 }
 
-class EditEpicDetailsVC: UIViewController, EpicDetailsMenuDelegate {
+class EditEpicDetailsVC: UIViewController, EpicDetailsMenuDelegate, InputsInterfaceDelegate {
+
+    // MARK: - InputsInterfaceDelegate conformance
+
+    func enableSave() {
+        self.saveBtn.isEnabled = true
+    }
+
+    func disableSave() {
+        self.saveBtn.isEnabled = false
+    }
 
     // MARK: EpicDetailsMenuDelegate conformance
 
@@ -39,6 +49,7 @@ class EditEpicDetailsVC: UIViewController, EpicDetailsMenuDelegate {
     weak var displayDelegate: CoreDataDisplayDelegate!
 
     let persistenceManager: PersistenceManager!
+    private var inputValidationManager: InputValidationManager!
     let epic: Epic!
 
     lazy var saveBtn: UIBarButtonItem = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(saveBtnTapped))
@@ -55,11 +66,13 @@ class EditEpicDetailsVC: UIViewController, EpicDetailsMenuDelegate {
         self.title = titleText
         self.navigationItem.setLeftBarButton(cancelBtn, animated: false)
         self.navigationItem.setRightBarButton(saveBtn, animated: true)
-        self.saveBtn.isEnabled = false
+        setupScrollView()
+        setupContentView()
+        setupInputFields()
+        setupDataStuff()
     }
 
-    private func setupUIElements() {
-
+    private func setupScrollView() {
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         self.view.addSubview(scrollView)
         NSLayoutConstraint.activate([
@@ -68,7 +81,9 @@ class EditEpicDetailsVC: UIViewController, EpicDetailsMenuDelegate {
             scrollView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor),
             scrollView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor)
         ])
+    }
 
+    private func setupContentView() {
         self.contentView.translatesAutoresizingMaskIntoConstraints = false
         self.scrollView.addSubview(self.contentView)
         NSLayoutConstraint.activate([
@@ -78,7 +93,9 @@ class EditEpicDetailsVC: UIViewController, EpicDetailsMenuDelegate {
             contentView.bottomAnchor.constraint(equalTo: self.scrollView.bottomAnchor),
             contentView.widthAnchor.constraint(equalTo: self.scrollView.widthAnchor)
         ])
+    }
 
+    private func setupInputFields() {
         let widthConst: CGFloat = contentView.layoutMargins.right
 
         titleTextField.translatesAutoresizingMaskIntoConstraints = false
@@ -115,12 +132,26 @@ class EditEpicDetailsVC: UIViewController, EpicDetailsMenuDelegate {
         table.view.heightAnchor.constraint(equalToConstant: newSize.height).isActive = true
     }
 
+    private func setupDataStuff() {
+        self.inputValidationManager = InputValidationManager()
+        self.inputValidationManager.delegate = self
+        self.titleTextField.inputValidationDelegate = self.inputValidationManager
+        prefillInputFields()
+    }
+
+    private func prefillInputFields() {
+        titleTextField.text = self.epic.title
+        notesTextView.text = epic.quickNote
+    }
+
     @objc func saveBtnTapped() {
         saveChanges()
         goBack()
     }
 
     func saveChanges() {
+        self.epic.title = self.titleTextField.text
+        self.epic.quickNote = self.notesTextView.text
         persistenceManager.save()
     }
 
@@ -130,6 +161,7 @@ class EditEpicDetailsVC: UIViewController, EpicDetailsMenuDelegate {
     }
 
     private func goBack() {
+        self.displayDelegate.updateCoreData()
         self.navigationController?.popViewController(animated: true)
         if self.editStatus == .deleted {
             self.navigationController?.popViewController(animated: true)

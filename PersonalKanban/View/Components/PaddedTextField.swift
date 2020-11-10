@@ -52,7 +52,6 @@ open class PaddedTextField: UITextField, InputValidatable, UITextFieldDelegate {
     func firstSetup() {
         self.addTarget(self, action: #selector(respondToChange), for: UIControl.Event.editingChanged)
         self.delegate = self
-//        self.backgroundColor = .white
         self.spellCheckingType = .no
         self.autocapitalizationType = .none
     }

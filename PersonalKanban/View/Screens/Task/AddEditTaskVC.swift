@@ -14,6 +14,16 @@ enum EditScreenUseState {
 
 class AddEditTaskVC: UIViewController, InputsInterfaceDelegate, EditTaskTableDelegate, TaskEditorOptionsTable2Delegate, EpicsSelectorDelegate, WorkflowStatusSelectionDelegate {
 
+    // MARK: - InputsInterfaceDelegate conformance
+
+    func enableSave() {
+        self.saveBtn.isEnabled = true
+    }
+
+    func disableSave() {
+        self.saveBtn.isEnabled = false
+    }
+
     // MARK: - EditTaskTableDelegate conformance
 
     func goToEpicSelectionScreen() {
@@ -44,13 +54,13 @@ class AddEditTaskVC: UIViewController, InputsInterfaceDelegate, EditTaskTableDel
         self.present(alert, animated: true, completion: nil)
     }
 
-    // MARK: - EpicsSelectorDelegate protocol conformance
+    // MARK: - EpicsSelectorDelegate conformance
 
     func selectEpic(_ selection: Epic) {
         selectedEpic = selection
     }
 
-    // MARK: - StoryPointsSelectionDelegate protocol conformance
+    // MARK: - StoryPointsSelectionDelegate conformance
 
     func selectStoryPoints(_ selectedValue: StoryPoints) {
         self.storyPoints = selectedValue
@@ -60,16 +70,6 @@ class AddEditTaskVC: UIViewController, InputsInterfaceDelegate, EditTaskTableDel
 
     func selectStatus(newStatus: WorkflowPosition) {
         self.workflowStatus = newStatus
-    }
-
-    // MARK: - InputsInterfaceDelegate conformance
-
-    func enableSave() {
-        self.saveBtn.isEnabled = true
-    }
-
-    func disableSave() {
-        self.saveBtn.isEnabled = false
     }
 
     // MARK: - properties storing working updates to the task data which has not been saved.

@@ -29,7 +29,7 @@
 		717DCB1C253EB75E00E2156F /* EpicsTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 717DCB1B253EB75E00E2156F /* EpicsTableVC.swift */; };
 		717DCB24253ED0BE00E2156F /* AddEditEpicVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 717DCB23253ED0BE00E2156F /* AddEditEpicVC.swift */; };
 		717DCB29253EDAC300E2156F /* ChooseEpicsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 717DCB28253EDAC300E2156F /* ChooseEpicsScreen.swift */; };
-		717DCB2E253EF59300E2156F /* EpicTasksTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 717DCB2D253EF59300E2156F /* EpicTasksTableVC.swift */; };
+		717DCB2E253EF59300E2156F /* EpicDetailViewFirstScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 717DCB2D253EF59300E2156F /* EpicDetailViewFirstScreen.swift */; };
 		717DCB33253F0A7200E2156F /* ViewOnlyEpicDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 717DCB32253F0A7200E2156F /* ViewOnlyEpicDetailVC.swift */; };
 		717DCB3B253F25E600E2156F /* EditEpicDetailsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 717DCB3A253F25E600E2156F /* EditEpicDetailsVC.swift */; };
 		717DCB40253F2BE000E2156F /* EpicDetailsEditorMenuVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 717DCB3F253F2BE000E2156F /* EpicDetailsEditorMenuVC.swift */; };
@@ -52,6 +52,9 @@
 		71BC1B62253DD3D4005EC646 /* InputsProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71BC1B61253DD3D4005EC646 /* InputsProtocols.swift */; };
 		71D378392541B53D00F66FCC /* EnumWorkflowPositions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71D378382541B53D00F66FCC /* EnumWorkflowPositions.swift */; };
 		71DC7FB425474D8B00D0B40C /* InputValidatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71DC7FB325474D8B00D0B40C /* InputValidatorTests.swift */; };
+		71DC7FC8255A612800D0B40C /* EpicViewDetailsTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71DC7FC7255A612800D0B40C /* EpicViewDetailsTableVC.swift */; };
+		71DC7FCE255A624300D0B40C /* MorePageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71DC7FCD255A624300D0B40C /* MorePageVC.swift */; };
+		71DC7FD4255AC86F00D0B40C /* EpicTasksList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71DC7FD3255AC86F00D0B40C /* EpicTasksList.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXBuildRule section */
@@ -242,7 +245,7 @@
 		717DCB1B253EB75E00E2156F /* EpicsTableVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpicsTableVC.swift; sourceTree = "<group>"; };
 		717DCB23253ED0BE00E2156F /* AddEditEpicVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEditEpicVC.swift; sourceTree = "<group>"; };
 		717DCB28253EDAC300E2156F /* ChooseEpicsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseEpicsScreen.swift; sourceTree = "<group>"; };
-		717DCB2D253EF59300E2156F /* EpicTasksTableVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpicTasksTableVC.swift; sourceTree = "<group>"; };
+		717DCB2D253EF59300E2156F /* EpicDetailViewFirstScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpicDetailViewFirstScreen.swift; sourceTree = "<group>"; };
 		717DCB32253F0A7200E2156F /* ViewOnlyEpicDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewOnlyEpicDetailVC.swift; sourceTree = "<group>"; };
 		717DCB3A253F25E600E2156F /* EditEpicDetailsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditEpicDetailsVC.swift; sourceTree = "<group>"; };
 		717DCB3F253F2BE000E2156F /* EpicDetailsEditorMenuVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpicDetailsEditorMenuVC.swift; sourceTree = "<group>"; };
@@ -267,6 +270,9 @@
 		71DC7FB125474D8B00D0B40C /* InputValidatorTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = InputValidatorTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		71DC7FB325474D8B00D0B40C /* InputValidatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputValidatorTests.swift; sourceTree = "<group>"; };
 		71DC7FB525474D8B00D0B40C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		71DC7FC7255A612800D0B40C /* EpicViewDetailsTableVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpicViewDetailsTableVC.swift; sourceTree = "<group>"; };
+		71DC7FCD255A624300D0B40C /* MorePageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MorePageVC.swift; sourceTree = "<group>"; };
+		71DC7FD3255AC86F00D0B40C /* EpicTasksList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpicTasksList.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -318,7 +324,6 @@
 				717DCB23253ED0BE00E2156F /* AddEditEpicVC.swift */,
 				717DCB3A253F25E600E2156F /* EditEpicDetailsVC.swift */,
 				717DCB32253F0A7200E2156F /* ViewOnlyEpicDetailVC.swift */,
-				717DCB2D253EF59300E2156F /* EpicTasksTableVC.swift */,
 			);
 			path = Epics;
 			sourceTree = "<group>";
@@ -327,6 +332,9 @@
 			isa = PBXGroup;
 			children = (
 				717DCB3F253F2BE000E2156F /* EpicDetailsEditorMenuVC.swift */,
+				71DC7FC7255A612800D0B40C /* EpicViewDetailsTableVC.swift */,
+				717DCB2D253EF59300E2156F /* EpicDetailViewFirstScreen.swift */,
+				71DC7FD3255AC86F00D0B40C /* EpicTasksList.swift */,
 			);
 			path = Epics;
 			sourceTree = "<group>";
@@ -336,6 +344,7 @@
 			children = (
 				717DCB1B253EB75E00E2156F /* EpicsTableVC.swift */,
 				715B730D253C4B1C00219F07 /* TasksTable.swift */,
+				71DC7FCD255A624300D0B40C /* MorePageVC.swift */,
 			);
 			path = MainMenuPages;
 			sourceTree = "<group>";
@@ -701,6 +710,7 @@
 				7146AC3E253E1E7500DA7D03 /* MainMenuData.swift in Sources */,
 				717DCB1C253EB75E00E2156F /* EpicsTableVC.swift in Sources */,
 				7146AC52253E2DA100DA7D03 /* MainMenuOptions.swift in Sources */,
+				71DC7FD4255AC86F00D0B40C /* EpicTasksList.swift in Sources */,
 				71B72FDB2541305900D26CDC /* UIViewLayoutsExtension.swift in Sources */,
 				717DCB40253F2BE000E2156F /* EpicDetailsEditorMenuVC.swift in Sources */,
 				71209AEC253E3CDD0082DA0A /* TaskEditingTable.swift in Sources */,
@@ -709,12 +719,13 @@
 				71BC1B62253DD3D4005EC646 /* InputsProtocols.swift in Sources */,
 				717DCB4E253F3DBA00E2156F /* Epic+CoreDataProperties.swift in Sources */,
 				717DCB6F253F5C9300E2156F /* SelectWorkflowStatusMenu.swift in Sources */,
-				717DCB2E253EF59300E2156F /* EpicTasksTableVC.swift in Sources */,
+				717DCB2E253EF59300E2156F /* EpicDetailViewFirstScreen.swift in Sources */,
 				713F7A87253C569B00D23CC7 /* InputValidationManager.swift in Sources */,
 				715B72B2253BEDDE00219F07 /* AppDelegate.swift in Sources */,
 				71B72FE62541501F00D26CDC /* StoryPointsSelectionScreen.swift in Sources */,
 				71BC1B5D253DD3A3005EC646 /* InputsEnum.swift in Sources */,
 				713F7A95253CD0AC00D23CC7 /* LargeTextView.swift in Sources */,
+				71DC7FC8255A612800D0B40C /* EpicViewDetailsTableVC.swift in Sources */,
 				717DCB29253EDAC300E2156F /* ChooseEpicsScreen.swift in Sources */,
 				715B7301253C39BC00219F07 /* SliderOneVC.swift in Sources */,
 				717DCB3B253F25E600E2156F /* EditEpicDetailsVC.swift in Sources */,
@@ -727,6 +738,7 @@
 				717DCB5D253F3FF900E2156F /* DateConversion.swift in Sources */,
 				717DCB51253F3DBA00E2156F /* Task+CoreDataClass.swift in Sources */,
 				71D378392541B53D00F66FCC /* EnumWorkflowPositions.swift in Sources */,
+				71DC7FCE255A624300D0B40C /* MorePageVC.swift in Sources */,
 				715B72EF253BF39000219F07 /* UIConsts.swift in Sources */,
 				7146AC39253E19B000DA7D03 /* MainMenuProtocols.swift in Sources */,
 				715B730E253C4B1C00219F07 /* TasksTable.swift in Sources */,

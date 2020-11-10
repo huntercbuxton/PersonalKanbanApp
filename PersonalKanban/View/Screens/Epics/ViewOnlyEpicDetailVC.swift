@@ -9,7 +9,13 @@ import UIKit
 
 class ViewOnlyEpicDetailVC: UIViewController, CoreDataDisplayDelegate {
 
-    private let titleText = "Epic Details"
+    // MARK: - CoeeDataDisplayDelegate conformance
+
+    func updateCoreData() {
+        self.loadData()
+    }
+
+    private let titleText = "Details"
     let persistenceManager: PersistenceManager!
     let epic: Epic!
     private let sectionSpacing: CGFloat = 20.0
