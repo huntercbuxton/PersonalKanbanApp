@@ -84,6 +84,7 @@ class EditEpicDetailsVC: UIViewController, EpicDetailsMenuDelegate, InputsInterf
 
     private func setupContentView() {
         self.contentView.translatesAutoresizingMaskIntoConstraints = false
+        contentView.backgroundColor = .systemGroupedBackground
         self.scrollView.addSubview(self.contentView)
         NSLayoutConstraint.activate([
             contentView.leadingAnchor.constraint(equalTo: self.scrollView.leadingAnchor),
@@ -114,12 +115,12 @@ class EditEpicDetailsVC: UIViewController, EpicDetailsMenuDelegate, InputsInterf
         self.table.view.translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview(table.view)
         self.table.view.topAnchor.constraint(equalTo: notesTextView.bottomAnchor, constant: sectionSpacing).isActive = true
-        self.table.view.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
-        self.table.view.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
-        self.table.view.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
+        table.view.constrainHEdgesAnchors(contentView)
         table.view.sizeThatFits(CGSize(width: contentView.bounds.width, height: CGFloat.greatestFiniteMagnitude))
         let newSize = table.view.sizeThatFits(CGSize(width: contentView.bounds.width, height: CGFloat.greatestFiniteMagnitude))
         table.view.heightAnchor.constraint(equalToConstant: newSize.height).isActive = true
+
+        self.table.view.bottomAnchor.constraint(lessThanOrEqualTo: contentView.bottomAnchor, constant: -SavedLayouts.shortVerticalSpacing).isActive = true
     }
 
     private func setupDataStuff() {

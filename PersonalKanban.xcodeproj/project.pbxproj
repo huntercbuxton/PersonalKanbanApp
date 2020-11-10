@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7116FDC5255B522C00C84084 /* UnassignedTasksSelectionTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7116FDC4255B522C00C84084 /* UnassignedTasksSelectionTableVC.swift */; };
 		71209AEC253E3CDD0082DA0A /* TaskEditingTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71209AEB253E3CDD0082DA0A /* TaskEditingTable.swift */; };
 		713D0D40255B20C60031C303 /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 713D0D3F255B20C60031C303 /* UIColorExtension.swift */; };
 		713D0D46255B23740031C303 /* Alata-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 713D0D45255B23740031C303 /* Alata-Regular.ttf */; };
@@ -276,6 +277,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		7116FDC4255B522C00C84084 /* UnassignedTasksSelectionTableVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnassignedTasksSelectionTableVC.swift; sourceTree = "<group>"; };
 		71209AEB253E3CDD0082DA0A /* TaskEditingTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskEditingTable.swift; sourceTree = "<group>"; };
 		713D0D3F255B20C60031C303 /* UIColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
 		713D0D45255B23740031C303 /* Alata-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Alata-Regular.ttf"; sourceTree = "<group>"; };
@@ -432,6 +434,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7116FDC3255B51EF00C84084 /* SelectTasksForEpic */ = {
+			isa = PBXGroup;
+			children = (
+				7116FDC4255B522C00C84084 /* UnassignedTasksSelectionTableVC.swift */,
+			);
+			path = SelectTasksForEpic;
+			sourceTree = "<group>";
+		};
 		71170C09255AF1A000D5F2F2 /* EpicFirstDetailView */ = {
 			isa = PBXGroup;
 			children = (
@@ -704,6 +714,7 @@
 		71BC1B66253DD43B005EC646 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				7116FDC3255B51EF00C84084 /* SelectTasksForEpic */,
 				71170C10255AF23700D5F2F2 /* DetailsEditorEpicDetailViewTwo */,
 				71170C0F255AF21E00D5F2F2 /* ViewOnlyEpicDetailViewTwo */,
 				71170C17255AF3E400D5F2F2 /* TaskEditingPropertySelectors */,
@@ -1203,6 +1214,7 @@
 				713D0D52255B28570031C303 /* CustomUIColorsFromHex.swift in Sources */,
 				71209AEC253E3CDD0082DA0A /* TaskEditingTable.swift in Sources */,
 				717DCB52253F3DBA00E2156F /* Task+CoreDataProperties.swift in Sources */,
+				7116FDC5255B522C00C84084 /* UnassignedTasksSelectionTableVC.swift in Sources */,
 				715B731B253C524600219F07 /* PaddedTextField.swift in Sources */,
 				71BC1B62253DD3D4005EC646 /* InputsProtocols.swift in Sources */,
 				717DCB4E253F3DBA00E2156F /* Epic+CoreDataProperties.swift in Sources */,

@@ -74,6 +74,11 @@ final class PersistenceManager {
         return tasks
     }
 
+    func getUnassignedTasks() -> [Task] {
+        var tasks = self.getAllTasks()
+        return tasks.filter({$0.epic == nil})
+    }
+
     func getAllEpics() -> [Epic] {
         let epics = self.fetch(Epic.self)
         print("these are the current epics:")

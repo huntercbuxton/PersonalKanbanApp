@@ -34,6 +34,7 @@ class EpicTasksList: UITableViewController, EditorStateControllable {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.tableView.isScrollEnabled = false
         self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellReuseID)
         taskLists = persistenceManager.sortEpicTasks(for: epic)
         self.tableView.tableFooterView = UIView(background: .systemGroupedBackground)
@@ -47,10 +48,11 @@ class EpicTasksList: UITableViewController, EditorStateControllable {
     }
 
     func reloadDisplay() {
-        loadData()
+        taskLists = persistenceManager.sortEpicTasks(for: epic)
+        self.tableView.tableFooterView = UIView(background: .systemGroupedBackground)
         tableView.reloadData()
     }
-    
+
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -62,9 +64,9 @@ class EpicTasksList: UITableViewController, EditorStateControllable {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell(style: .subtitle, reuseIdentifier: cellReuseID)
+        let cell = UITableViewCell(style: .default, reuseIdentifier: cellReuseID)
         cell.textLabel?.text = taskLists[indexPath.section][indexPath.row].title
-        cell.detailTextLabel?.text = taskLists[indexPath.section][indexPath.row].quickNote
+//        cell.detailTextLabel?.text = taskLists[indexPath.section][indexPath.row].quickNote
         return cell
     }
 
@@ -105,6 +107,20 @@ class EpicTasksList: UITableViewController, EditorStateControllable {
         label.textColor = SavedCustomColors.defaultTableHeaderFontColor
         label.text = taskLists[section].isEmpty ? titleIfEmpty : titleIfNotEmpty
         return label
+    }
+
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+//        switch section {
+//        case 0...3:
+//            return SavedLayouts.defaultTableHeaderHeight
+//        default:
+//            return 0
+//        }
+        return SavedLayouts.defaultTableHeaderHeight
+    }
+
+    override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return SavedLayouts.defaultTableHeaderHeight
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

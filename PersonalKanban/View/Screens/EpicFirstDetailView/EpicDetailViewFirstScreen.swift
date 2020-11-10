@@ -43,6 +43,7 @@ class EpicDetailViewFirstScreen: UIViewController, EpicViewDetailsOptionTableDel
     private lazy var tableVC1: EpicDetailScreenOneTopTableVC =  EpicDetailScreenOneTopTableVC(delegate: self)
     private lazy var taskTableLabel = UILabel()
     private lazy var taskListTableVC: EpicTasksList = EpicTasksList(persistenceManager: self.persistenceManager, selectionDelegate: self, epic: self.epic)
+    var heightConstraint: NSLayoutConstraint?
 
     // MARK: - misc instance properties
     
@@ -67,8 +68,8 @@ class EpicDetailViewFirstScreen: UIViewController, EpicViewDetailsOptionTableDel
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         taskListTableVC.reloadDisplay()
+        adjustHeightConstraint()
     }
-    
 
     private func setupNavItems() {
         title = self.epic.title
@@ -115,13 +116,24 @@ class EpicDetailViewFirstScreen: UIViewController, EpicViewDetailsOptionTableDel
         contentView.addSubview(taskListTableVC.view)
         taskListTableVC.view.topAnchor.constraint(equalTo: taskTableLabel.bottomAnchor, constant: SavedLayouts.shortVerticalSpacing).isActive = true
         taskListTableVC.view.constrainHEdgesAnchors(contentView)
-        var newSize1 = taskListTableVC.view.sizeThatFits(CGSize(width: contentView.bounds.width, height: CGFloat.greatestFiniteMagnitude))
-        taskListTableVC.view.heightAnchor.constraint(equalToConstant: newSize1.height).isActive = true
 
-        taskListTableVC.view.bottomAnchor.constraint(lessThanOrEqualTo: contentView.bottomAnchor, constant: -SavedLayouts.shortVerticalSpacing).isActive = true
+        var newSize1 = taskListTableVC.view.sizeThatFits(CGSize(width: contentView.bounds.width, height: CGFloat.greatestFiniteMagnitude))
+//        taskListTableVC.view.heightAnchor.constraint(equalToConstant: newSize1.height).isActive = true
+
+        self.heightConstraint = self.taskListTableVC.view.heightAnchor.constraint(equalToConstant: newSize1.height)
+        heightConstraint?.isActive = true
+
+        taskListTableVC.view.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -SavedLayouts.shortVerticalSpacing).isActive = true
     }
 
     // MARK: - misc instance methods
+
+    private func adjustHeightConstraint() {
+        print("called \(#function)!!!!!!")
+        var newSize1 = taskListTableVC.view.sizeThatFits(CGSize(width: contentView.bounds.width, height: CGFloat.greatestFiniteMagnitude))
+        self.heightConstraint?.constant = newSize1.height
+        self.taskListTableVC.view.layoutIfNeeded()
+    }
 
     @objc func editBarButtonTapped() {
         self.editorState = .editEnabled
