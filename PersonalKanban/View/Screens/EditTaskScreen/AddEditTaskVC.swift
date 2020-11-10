@@ -133,11 +133,11 @@ class AddEditTaskVC: UIViewController, InputsInterfaceDelegate, EditTaskTableDel
         setupScrollViewAndContentView()
         setupInputFields()
         setupTable(table)
-        table.view.topAnchor.constraint(equalTo: notesTextView.bottomAnchor, constant: UIConsts.verticalSpacing).isActive = true
+        table.view.topAnchor.constraint(equalTo: notesTextView.bottomAnchor, constant: SavedLayouts.verticalSpacing).isActive = true
 
         if useState == .edit {
             setupTable(table2)
-            table2.view.topAnchor.constraint(equalTo: table.view.bottomAnchor, constant: UIConsts.verticalSpacing).isActive = true
+            table2.view.topAnchor.constraint(equalTo: table.view.bottomAnchor, constant: SavedLayouts.verticalSpacing).isActive = true
             setupLog()
         } else {
             table.view.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -contentView.layoutMargins.bottom).isActive = true
@@ -174,20 +174,13 @@ class AddEditTaskVC: UIViewController, InputsInterfaceDelegate, EditTaskTableDel
         titleTextField.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
         titleTextField.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
         titleTextField.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 0).isActive = true
-        titleTextField.layer.borderWidth = UIConsts.textInputBorderWidth
-        titleTextField.layer.borderColor = UIConsts.textInputBorderColor
-        titleTextField.layer.cornerRadius = UIConsts.textInputCornerRadius
         titleTextField.placeholder = UIConsts.titleFieldPlaceholderText
 
         notesTextView.translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview(notesTextView)
-        notesTextView.topAnchor.constraint(equalTo: titleTextField.bottomAnchor, constant: UIConsts.verticalSpacing).isActive = true
+        notesTextView.topAnchor.constraint(equalTo: titleTextField.bottomAnchor, constant: SavedLayouts.verticalSpacing).isActive = true
         notesTextView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 0).isActive = true
         notesTextView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: 0).isActive = true
-        notesTextView.heightAnchor.constraint(equalToConstant: UIConsts.defaultTextViewHeight).isActive = true
-        notesTextView.layer.borderWidth = UIConsts.textInputBorderWidth
-        notesTextView.layer.borderColor = UIConsts.textInputBorderColor
-        notesTextView.layer.cornerRadius = UIConsts.textInputCornerRadius
     }
 
     private func setupTable(_ tableVC: UITableViewController) {
@@ -207,7 +200,7 @@ class AddEditTaskVC: UIViewController, InputsInterfaceDelegate, EditTaskTableDel
         taskLog?.view.translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview((taskLog!.view)!)
         taskLog?.view.heightAnchor.constraint(equalToConstant: 300).isActive = true
-        taskLog?.view.topAnchor.constraint(equalTo: table2.view.bottomAnchor, constant: UIConsts.verticalSpacing).isActive = true
+        taskLog?.view.topAnchor.constraint(equalTo: table2.view.bottomAnchor, constant: SavedLayouts.verticalSpacing).isActive = true
         taskLog?.view.constrainHEdgesAnchors(contentView)
         taskLog?.view.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -50).isActive = true
     }

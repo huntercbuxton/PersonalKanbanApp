@@ -40,6 +40,17 @@ class EpicTasksList: UITableViewController, EditorStateControllable {
         self.view.backgroundColor = UIConsts.defaultBackgroundColor
     }
 
+    private func loadData() {
+        taskLists = persistenceManager.sortEpicTasks(for: epic)
+        self.tableView.tableFooterView = UIView(background: .systemGroupedBackground)
+        self.view.backgroundColor = UIConsts.defaultBackgroundColor
+    }
+
+    func reloadDisplay() {
+        loadData()
+        tableView.reloadData()
+    }
+    
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -87,11 +98,11 @@ class EpicTasksList: UITableViewController, EditorStateControllable {
 
     private func mkSectionHeaderViewWith(titleIfEmpty: String, titleIfNotEmpty: String, for section: Int) -> UILabel {
         let label = UILabel()
-        label.heightAnchor.constraint(equalToConstant: UIConsts.defaultTableHeaderHeight).isActive = true
-        label.backgroundColor = .systemGroupedBackground
+        label.heightAnchor.constraint(equalToConstant: SavedLayouts.defaultTableHeaderHeight).isActive = true
+//        label.backgroundColor = .systemGroupedBackground
         label.textAlignment = .center
-        label.font = UIConsts.defaultTableHeaderFont
-        label.textColor = UIConsts.defaultTableHeaderFontColor
+        label.font = SavedCustomFonts.defaultTableHeaderFont
+        label.textColor = SavedCustomColors.defaultTableHeaderFontColor
         label.text = taskLists[section].isEmpty ? titleIfEmpty : titleIfNotEmpty
         return label
     }

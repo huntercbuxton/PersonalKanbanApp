@@ -18,7 +18,6 @@ class ViewOnlyEpicDetailVC: UIViewController, CoreDataDisplayDelegate {
     private let titleText = "Details"
     let persistenceManager: PersistenceManager!
     let epic: Epic!
-    private let sectionSpacing: CGFloat = 20.0
     private let margins: CGFloat = 10.0
 
     lazy var editBarButton: UIBarButtonItem = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(editBarButtonTapped))
@@ -76,10 +75,9 @@ class ViewOnlyEpicDetailVC: UIViewController, CoreDataDisplayDelegate {
 
         notesTextView.translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview(notesTextView)
-        notesTextView.topAnchor.constraint(equalTo: titleTextField.bottomAnchor, constant: sectionSpacing).isActive = true
+        notesTextView.topAnchor.constraint(equalTo: titleTextField.bottomAnchor, constant: SavedLayouts.verticalSpacing).isActive = true
         notesTextView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: widthConst).isActive = true
         notesTextView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -widthConst).isActive = true
-        notesTextView.heightAnchor.constraint(equalToConstant: 200.0).isActive = true
         notesTextView.bottomAnchor.constraint(greaterThanOrEqualTo: contentView.bottomAnchor, constant: 20).isActive = true
     }
 
@@ -93,8 +91,8 @@ class ViewOnlyEpicDetailVC: UIViewController, CoreDataDisplayDelegate {
     }
 
     init(persistenceManager: PersistenceManager, epic: Epic, updateDelegate: CoreDataDisplayDelegate) {
-        self.epic = epic
         self.persistenceManager = persistenceManager
+        self.epic = epic
         super.init(nibName: nil, bundle: nil)
     }
 

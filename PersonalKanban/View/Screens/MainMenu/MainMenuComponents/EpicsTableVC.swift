@@ -14,6 +14,7 @@ class EpicsTableVC: UITableViewController, SlidingContentsViewContoller {
     weak var sliderDelegate: SlidingViewDelegate?
 
     func refreshDisplay() {
+        self.epics = persistenceManager.getAllEpics()
         tableView.reloadData()
     }
 

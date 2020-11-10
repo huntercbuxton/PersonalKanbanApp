@@ -45,7 +45,6 @@ class EditEpicDetailsVC: UIViewController, EpicDetailsMenuDelegate, InputsInterf
     private var titleText = "Edit Details"
     private var titlePlaceholderText: String = "add a title"
     private let sectionSpacing: CGFloat = 20.0
-
     weak var displayDelegate: CoreDataDisplayDelegate!
 
     let persistenceManager: PersistenceManager!
@@ -58,7 +57,7 @@ class EditEpicDetailsVC: UIViewController, EpicDetailsMenuDelegate, InputsInterf
     var contentView = UIView()
     lazy var titleTextField: PaddedTextField = PaddedTextField()
     lazy var notesTextView: LargeTextView = LargeTextView(text: self.epic.quickNote ?? "")
-    lazy var table: EpicDetailsEditorMenuVC = EpicDetailsEditorMenuVC(selectionDelegate: self)
+    lazy var table: EpicDetailsEditorMenuVC = EpicDetailsEditorMenuVC(persistenceManager: self.persistenceManager, epic: self.epic, selectionDelegate: self)
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -102,31 +101,22 @@ class EditEpicDetailsVC: UIViewController, EpicDetailsMenuDelegate, InputsInterf
         contentView.addSubview(titleTextField)
         titleTextField.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: widthConst).isActive = true
         titleTextField.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -widthConst).isActive = true
-        titleTextField.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 0.0).isActive = true
-        titleTextField.layer.borderWidth = 2.5
-        titleTextField.layer.borderColor = UIColor.systemGray5.cgColor
-        titleTextField.layer.cornerRadius = 8
+        titleTextField.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
         titleTextField.placeholder = titlePlaceholderText
 
         notesTextView.translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview(notesTextView)
-        print(String(describing: widthConst))
         notesTextView.topAnchor.constraint(equalTo: titleTextField.bottomAnchor, constant: sectionSpacing).isActive = true
         notesTextView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: widthConst).isActive = true
         notesTextView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -widthConst).isActive = true
-        notesTextView.heightAnchor.constraint(equalToConstant: 200.0).isActive = true
-        notesTextView.isScrollEnabled = false
-        notesTextView.layer.borderWidth = 2.5
-        notesTextView.layer.borderColor = UIColor.systemGray5.cgColor
-        notesTextView.layer.cornerRadius = 8
 
         self.addChild(table)
         self.table.view.translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview(table.view)
         self.table.view.topAnchor.constraint(equalTo: notesTextView.bottomAnchor, constant: sectionSpacing).isActive = true
-        self.table.view.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: 0.0).isActive = true
-        self.table.view.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: 0.0).isActive = true
-        self.table.view.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 0.0).isActive = true
+        self.table.view.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
+        self.table.view.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
+        self.table.view.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
         table.view.sizeThatFits(CGSize(width: contentView.bounds.width, height: CGFloat.greatestFiniteMagnitude))
         let newSize = table.view.sizeThatFits(CGSize(width: contentView.bounds.width, height: CGFloat.greatestFiniteMagnitude))
         table.view.heightAnchor.constraint(equalToConstant: newSize.height).isActive = true

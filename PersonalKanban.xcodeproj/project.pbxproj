@@ -12,6 +12,8 @@
 		713D0D46255B23740031C303 /* Alata-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 713D0D45255B23740031C303 /* Alata-Regular.ttf */; };
 		713D0D4C255B26330031C303 /* CustomFontImportStuff.swift in Sources */ = {isa = PBXBuildFile; fileRef = 713D0D4B255B26330031C303 /* CustomFontImportStuff.swift */; };
 		713D0D52255B28570031C303 /* CustomUIColorsFromHex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 713D0D51255B28570031C303 /* CustomUIColorsFromHex.swift */; };
+		713D0D5E255B34E30031C303 /* Favicon Notes.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 713D0D5D255B34E30031C303 /* Favicon Notes.rtf */; };
+		713D0D64255B358C0031C303 /* AppIconNotes.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 713D0D63255B358C0031C303 /* AppIconNotes.rtf */; };
 		713F7A87253C569B00D23CC7 /* InputValidationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 713F7A86253C569B00D23CC7 /* InputValidationManager.swift */; };
 		713F7A95253CD0AC00D23CC7 /* LargeTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 713F7A94253CD0AC00D23CC7 /* LargeTextView.swift */; };
 		7146AC39253E19B000DA7D03 /* MainMenuProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7146AC38253E19B000DA7D03 /* MainMenuProtocols.swift */; };
@@ -279,6 +281,8 @@
 		713D0D45255B23740031C303 /* Alata-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Alata-Regular.ttf"; sourceTree = "<group>"; };
 		713D0D4B255B26330031C303 /* CustomFontImportStuff.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomFontImportStuff.swift; sourceTree = "<group>"; };
 		713D0D51255B28570031C303 /* CustomUIColorsFromHex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomUIColorsFromHex.swift; sourceTree = "<group>"; };
+		713D0D5D255B34E30031C303 /* Favicon Notes.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = "Favicon Notes.rtf"; sourceTree = "<group>"; };
+		713D0D63255B358C0031C303 /* AppIconNotes.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = AppIconNotes.rtf; sourceTree = "<group>"; };
 		713F7A86253C569B00D23CC7 /* InputValidationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputValidationManager.swift; sourceTree = "<group>"; };
 		713F7A94253CD0AC00D23CC7 /* LargeTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LargeTextView.swift; sourceTree = "<group>"; };
 		7146AC38253E19B000DA7D03 /* MainMenuProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuProtocols.swift; sourceTree = "<group>"; };
@@ -457,6 +461,7 @@
 		71170C10255AF23700D5F2F2 /* DetailsEditorEpicDetailViewTwo */ = {
 			isa = PBXGroup;
 			children = (
+				713D0D6D255B380D0031C303 /* DetailsEditorComponents */,
 				717DCB3A253F25E600E2156F /* EditEpicDetailsVC.swift */,
 			);
 			path = DetailsEditorEpicDetailViewTwo;
@@ -534,30 +539,54 @@
 			path = EditTaskScreenComponents;
 			sourceTree = "<group>";
 		};
-		71170C2A255AF68300D5F2F2 /* ViewProtocols */ = {
+		71170C2A255AF68300D5F2F2 /* ProtocolsForViewObjects */ = {
 			isa = PBXGroup;
 			children = (
 				715B7305253C3A3900219F07 /* SlidingViewsVCProtocols.swift */,
 				7146AC38253E19B000DA7D03 /* MainMenuProtocols.swift */,
 			);
-			path = ViewProtocols;
+			path = ProtocolsForViewObjects;
 			sourceTree = "<group>";
 		};
-		71170C2B255AF69900D5F2F2 /* ViewMiscFiles */ = {
+		71170C2B255AF69900D5F2F2 /* MiscFiles */ = {
 			isa = PBXGroup;
 			children = (
 				715B72EE253BF39000219F07 /* UIConsts.swift */,
 				713D0D4B255B26330031C303 /* CustomFontImportStuff.swift */,
 				713D0D51255B28570031C303 /* CustomUIColorsFromHex.swift */,
 			);
-			path = ViewMiscFiles;
+			path = MiscFiles;
+			sourceTree = "<group>";
+		};
+		713D0D57255B34250031C303 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				713D0D45255B23740031C303 /* Alata-Regular.ttf */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
+		713D0D58255B342C0031C303 /* LogoFiles */ = {
+			isa = PBXGroup;
+			children = (
+				71DC7FDA255AEA8800D0B40C /* apple-touch-icon */,
+				71DC801C255AEA8800D0B40C /* favicon_io */,
+			);
+			path = LogoFiles;
+			sourceTree = "<group>";
+		};
+		713D0D6D255B380D0031C303 /* DetailsEditorComponents */ = {
+			isa = PBXGroup;
+			children = (
+				717DCB3F253F2BE000E2156F /* EpicDetailsEditorMenuVC.swift */,
+			);
+			path = DetailsEditorComponents;
 			sourceTree = "<group>";
 		};
 		713F215F2541F71800B4B7ED /* Epics */ = {
 			isa = PBXGroup;
 			children = (
 				71DC8068255AEC6D00D0B40C /* EpicDetailView */,
-				717DCB3F253F2BE000E2156F /* EpicDetailsEditorMenuVC.swift */,
 			);
 			path = Epics;
 			sourceTree = "<group>";
@@ -633,11 +662,11 @@
 		715B72EA253BF00700219F07 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				71170C2B255AF69900D5F2F2 /* ViewMiscFiles */,
-				71170C2A255AF68300D5F2F2 /* ViewProtocols */,
+				71170C2B255AF69900D5F2F2 /* MiscFiles */,
+				71170C2A255AF68300D5F2F2 /* ProtocolsForViewObjects */,
 				71170C13255AF2F200D5F2F2 /* GHTUIReusableComponents */,
 				71170C12255AF2C300D5F2F2 /* PersonalKanbanReusedComponents */,
-				71BC1B68253DD48A005EC646 /* ViewTypeExtensions */,
+				71BC1B68253DD48A005EC646 /* UIKitTypeExtensions */,
 				71BC1B67253DD47A005EC646 /* ReusedComponents */,
 				71BC1B66253DD43B005EC646 /* Screens */,
 			);
@@ -695,14 +724,14 @@
 			path = ReusedComponents;
 			sourceTree = "<group>";
 		};
-		71BC1B68253DD48A005EC646 /* ViewTypeExtensions */ = {
+		71BC1B68253DD48A005EC646 /* UIKitTypeExtensions */ = {
 			isa = PBXGroup;
 			children = (
 				71B72FDA2541305900D26CDC /* UIViewLayoutsExtension.swift */,
 				71B72FEA25416BCD00D26CDC /* MiscellaneousUIKitExtensions.swift */,
 				713D0D3F255B20C60031C303 /* UIColorExtension.swift */,
 			);
-			path = ViewTypeExtensions;
+			path = UIKitTypeExtensions;
 			sourceTree = "<group>";
 		};
 		71BC1B69253DD509005EC646 /* CoreData */ = {
@@ -730,9 +759,8 @@
 		71DC7FD9255AEA6800D0B40C /* resources */ = {
 			isa = PBXGroup;
 			children = (
-				713D0D45255B23740031C303 /* Alata-Regular.ttf */,
-				71DC7FDA255AEA8800D0B40C /* apple-touch-icon */,
-				71DC801C255AEA8800D0B40C /* favicon_io */,
+				713D0D58255B342C0031C303 /* LogoFiles */,
+				713D0D57255B34250031C303 /* Fonts */,
 			);
 			path = resources;
 			sourceTree = "<group>";
@@ -744,6 +772,7 @@
 				71DC7FF1255AEA8800D0B40C /* android */,
 				71DC7FFF255AEA8800D0B40C /* imessenger */,
 				71DC800E255AEA8800D0B40C /* watchkit */,
+				713D0D63255B358C0031C303 /* AppIconNotes.rtf */,
 			);
 			path = "apple-touch-icon";
 			sourceTree = "<group>";
@@ -903,6 +932,7 @@
 				71DC8021255AEA8800D0B40C /* android-chrome-512x512.png */,
 				71DC8022255AEA8800D0B40C /* site.webmanifest */,
 				71DC8023255AEA8800D0B40C /* favicon-32x32.png */,
+				713D0D5D255B34E30031C303 /* Favicon Notes.rtf */,
 			);
 			path = favicon_io;
 			sourceTree = "<group>";
@@ -1062,6 +1092,7 @@
 				71DC802D255AEA8800D0B40C /* Icon-App-20x20@2x.png in Resources */,
 				71DC8025255AEA8800D0B40C /* Icon-App-76x76@2x.png in Resources */,
 				71DC8039255AEA8800D0B40C /* playstore-icon.png in Resources */,
+				713D0D64255B358C0031C303 /* AppIconNotes.rtf in Resources */,
 				715B72BE253BEDE800219F07 /* LaunchScreen.storyboard in Resources */,
 				71DC8050255AEA8800D0B40C /* Icon-108@2x.png in Resources */,
 				71DC8027255AEA8800D0B40C /* Icon-App-40x40@1x.png in Resources */,
@@ -1088,6 +1119,7 @@
 				71DC803C255AEA8800D0B40C /* ic_launcher.png in Resources */,
 				71DC8057255AEA8800D0B40C /* Icon-98@2x.png in Resources */,
 				71DC802F255AEA8800D0B40C /* Icon-App-40x40@2x.png in Resources */,
+				713D0D5E255B34E30031C303 /* Favicon Notes.rtf in Resources */,
 				71DC8041255AEA8800D0B40C /* icon-messages-transcript-32x24@3x.png in Resources */,
 				71DC8037255AEA8800D0B40C /* iTunesArtwork@3x.png in Resources */,
 				71DC804E255AEA8800D0B40C /* Icon-50@2x.png in Resources */,

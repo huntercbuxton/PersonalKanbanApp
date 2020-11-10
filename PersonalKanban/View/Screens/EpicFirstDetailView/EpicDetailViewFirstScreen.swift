@@ -39,6 +39,7 @@ class EpicDetailViewFirstScreen: UIViewController, EpicViewDetailsOptionTableDel
     private lazy var editBarButton: UIBarButtonItem = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(editBarButtonTapped))
     private lazy var doneEditingBarButton: UIBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(doneEditingBarButtonTapped))
 //    private lazy var detailsButtonTableVC: EpicViewDetailsTableVC = EpicViewDetailsTableVC(delegate: self)
+    weak var epicsTable: EpicsTableVC!
     private lazy var tableVC1: EpicDetailScreenOneTopTableVC =  EpicDetailScreenOneTopTableVC(delegate: self)
     private lazy var taskTableLabel = UILabel()
     private lazy var taskListTableVC: EpicTasksList = EpicTasksList(persistenceManager: self.persistenceManager, selectionDelegate: self, epic: self.epic)
@@ -61,6 +62,13 @@ class EpicDetailViewFirstScreen: UIViewController, EpicViewDetailsOptionTableDel
         setupScrollViewAndContentView()
         setupContentComponents()
     }
+
+    // this is what updates the displayed tasks of the epics if they've been deleted since last time we saw this table
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        taskListTableVC.reloadDisplay()
+    }
+    
 
     private func setupNavItems() {
         title = self.epic.title
@@ -97,20 +105,20 @@ class EpicDetailViewFirstScreen: UIViewController, EpicViewDetailsOptionTableDel
         taskTableLabel.text = taskTableLabelText
         taskTableLabel.textAlignment = .center
         taskTableLabel.font = UIConsts.sectionLabelFont
-        taskTableLabel.topAnchor.constraint(equalTo: tableVC1.view.bottomAnchor, constant: UIConsts.verticalSpacing).isActive = true
+        taskTableLabel.topAnchor.constraint(equalTo: tableVC1.view.bottomAnchor, constant: SavedLayouts.verticalSpacing).isActive = true
         taskTableLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
         taskTableLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
-        taskTableLabel.heightAnchor.constraint(equalToConstant: UIConsts.sectionLabelHeight).isActive = true
+        taskTableLabel.heightAnchor.constraint(equalToConstant: SavedLayouts.sectionLabelHeight).isActive = true
 
         self.addChild(taskListTableVC)
         taskListTableVC.view.translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview(taskListTableVC.view)
-        taskListTableVC.view.topAnchor.constraint(equalTo: taskTableLabel.bottomAnchor, constant: UIConsts.shortVerticalSpacing).isActive = true
+        taskListTableVC.view.topAnchor.constraint(equalTo: taskTableLabel.bottomAnchor, constant: SavedLayouts.shortVerticalSpacing).isActive = true
         taskListTableVC.view.constrainHEdgesAnchors(contentView)
         var newSize1 = taskListTableVC.view.sizeThatFits(CGSize(width: contentView.bounds.width, height: CGFloat.greatestFiniteMagnitude))
         taskListTableVC.view.heightAnchor.constraint(equalToConstant: newSize1.height).isActive = true
 
-        taskListTableVC.view.bottomAnchor.constraint(lessThanOrEqualTo: contentView.bottomAnchor, constant: -UIConsts.shortVerticalSpacing).isActive = true
+        taskListTableVC.view.bottomAnchor.constraint(lessThanOrEqualTo: contentView.bottomAnchor, constant: -SavedLayouts.shortVerticalSpacing).isActive = true
     }
 
     // MARK: - misc instance methods
@@ -132,8 +140,8 @@ class EpicDetailViewFirstScreen: UIViewController, EpicViewDetailsOptionTableDel
     // MARK: - initialization
 
     init(persistenceManager: PersistenceManager, epic: Epic) {
-        self.epic = epic
         self.persistenceManager = persistenceManager
+        self.epic = epic
         super.init(nibName: nil, bundle: nil)
     }
 

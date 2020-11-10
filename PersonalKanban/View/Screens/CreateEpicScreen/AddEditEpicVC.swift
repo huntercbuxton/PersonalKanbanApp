@@ -88,30 +88,23 @@ class AddEditEpicVC: UIViewController, InputsInterfaceDelegate {
         contentView.addSubview(titleTextField)
         titleTextField.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
         titleTextField.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
-        titleTextField.topAnchor.constraint(equalTo: contentView.topAnchor, constant: UIConsts.verticalSpacing).isActive = true
-        titleTextField.layer.borderWidth = UIConsts.textInputBorderWidth
-        titleTextField.layer.borderColor = UIConsts.textInputBorderColor
-        titleTextField.layer.cornerRadius = UIConsts.textInputCornerRadius
+        titleTextField.topAnchor.constraint(equalTo: contentView.topAnchor, constant: SavedLayouts.verticalSpacing).isActive = true
         titleTextField.placeholder = UIConsts.titleFieldPlaceholderText
     }
 
     private func setupTextView() {
         notesTextView.translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview(notesTextView)
-        notesTextView.topAnchor.constraint(equalTo: titleTextField.bottomAnchor, constant: UIConsts.verticalSpacing).isActive = true
+        notesTextView.topAnchor.constraint(equalTo: titleTextField.bottomAnchor, constant: SavedLayouts.verticalSpacing).isActive = true
         notesTextView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
         notesTextView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
-        notesTextView.heightAnchor.constraint(equalToConstant: UIConsts.defaultTextViewHeight).isActive = true
-        notesTextView.layer.borderWidth = UIConsts.textInputBorderWidth
-        notesTextView.layer.borderColor = UIConsts.textInputBorderColor
-        notesTextView.layer.cornerRadius = UIConsts.textInputCornerRadius
     }
 
     private func setupTable() {
         self.addChild(table)
         self.table.view.translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview(table.view)
-        self.table.view.topAnchor.constraint(equalTo: notesTextView.bottomAnchor, constant: UIConsts.verticalSpacing).isActive = true
+        self.table.view.topAnchor.constraint(equalTo: notesTextView.bottomAnchor, constant: SavedLayouts.verticalSpacing).isActive = true
         self.table.view.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: 0).isActive = true
         self.table.view.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: 0).isActive = true
         self.table.view.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 0).isActive = true
@@ -161,7 +154,6 @@ class AddEditEpicVC: UIViewController, InputsInterfaceDelegate {
         self.inputValidationManager = InputValidationManager()
         self.inputValidationManager.delegate = self
         self.titleTextField.inputValidationDelegate = self.inputValidationManager
-//        self.notesTextView.inputValidationDelegate = self.inputValidationManager
         if self.useState == .edit { prefillInputFields() }
     }
 
