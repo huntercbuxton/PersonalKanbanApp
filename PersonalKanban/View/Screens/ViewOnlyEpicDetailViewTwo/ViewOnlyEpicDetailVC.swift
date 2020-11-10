@@ -28,19 +28,23 @@ class ViewOnlyEpicDetailVC: UIViewController, CoreDataDisplayDelegate {
 
     lazy var titleTextField: PaddedTextField = PaddedTextField()
 
-    lazy var notesTextView: LargeTextView = LargeTextView(text: "")
+    lazy var notesTextView: LargeTextView = LargeTextView(text: self.epic.quickNote)
 
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemGroupedBackground
-        self.title = titleText
-        self.navigationItem.setRightBarButton(editBarButton, animated: true)
-        self.setupUIElements()
+        setupNavBar()
+        setupScrollAndContentView()
+        setupContentComponents()
         self.loadData()
     }
 
-    private func setupUIElements() {
+    private func setupNavBar() {
+        self.title = titleText
+        self.navigationItem.setRightBarButton(editBarButton, animated: true)
+    }
 
+    private func setupScrollAndContentView() {
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         self.view.addSubview(scrollView)
         NSLayoutConstraint.activate([
@@ -59,6 +63,8 @@ class ViewOnlyEpicDetailVC: UIViewController, CoreDataDisplayDelegate {
             contentView.bottomAnchor.constraint(equalTo: self.scrollView.bottomAnchor),
             contentView.widthAnchor.constraint(equalTo: self.scrollView.widthAnchor)
         ])
+    }
+    private func setupContentComponents() {
 
         let widthConst: CGFloat = contentView.layoutMargins.right
 
@@ -67,23 +73,14 @@ class ViewOnlyEpicDetailVC: UIViewController, CoreDataDisplayDelegate {
         titleTextField.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: widthConst).isActive = true
         titleTextField.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -widthConst).isActive = true
         titleTextField.topAnchor.constraint(equalTo: contentView.topAnchor, constant: self.margins).isActive = true
-        titleTextField.layer.borderWidth = 2.5
-        titleTextField.layer.borderColor = UIColor.systemGray5.cgColor
-        titleTextField.layer.cornerRadius = 8
 
         notesTextView.translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview(notesTextView)
-        print(String(describing: widthConst))
         notesTextView.topAnchor.constraint(equalTo: titleTextField.bottomAnchor, constant: sectionSpacing).isActive = true
         notesTextView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: widthConst).isActive = true
         notesTextView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -widthConst).isActive = true
         notesTextView.heightAnchor.constraint(equalToConstant: 200.0).isActive = true
-        notesTextView.isScrollEnabled = false
-        notesTextView.layer.borderWidth = 2.5
-        notesTextView.layer.borderColor = UIColor.systemGray5.cgColor
-        notesTextView.layer.cornerRadius = 8
         notesTextView.bottomAnchor.constraint(greaterThanOrEqualTo: contentView.bottomAnchor, constant: 20).isActive = true
-
     }
 
     private func loadData() {

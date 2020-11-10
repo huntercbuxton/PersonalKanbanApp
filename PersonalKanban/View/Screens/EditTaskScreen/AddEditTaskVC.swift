@@ -184,7 +184,7 @@ class AddEditTaskVC: UIViewController, InputsInterfaceDelegate, EditTaskTableDel
         notesTextView.topAnchor.constraint(equalTo: titleTextField.bottomAnchor, constant: UIConsts.verticalSpacing).isActive = true
         notesTextView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 0).isActive = true
         notesTextView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: 0).isActive = true
-        notesTextView.heightAnchor.constraint(equalToConstant: UIConsts.largeTextFieldHeight).isActive = true
+        notesTextView.heightAnchor.constraint(equalToConstant: UIConsts.defaultTextViewHeight).isActive = true
         notesTextView.layer.borderWidth = UIConsts.textInputBorderWidth
         notesTextView.layer.borderColor = UIConsts.textInputBorderColor
         notesTextView.layer.cornerRadius = UIConsts.textInputCornerRadius

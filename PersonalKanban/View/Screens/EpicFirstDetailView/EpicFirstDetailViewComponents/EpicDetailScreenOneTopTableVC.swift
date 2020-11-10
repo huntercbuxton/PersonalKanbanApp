@@ -27,9 +27,7 @@ class EpicDetailScreenOneTopTableVC: UITableViewController, EditorStateControlla
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        let footerView = UITableViewHeaderFooterView()
-        footerView.backgroundColor = .systemGroupedBackground
-        tableView.tableFooterView = footerView
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellReuseID)
         tableView.isScrollEnabled = false
     }
 
@@ -47,8 +45,15 @@ class EpicDetailScreenOneTopTableVC: UITableViewController, EditorStateControlla
         let cell = UITableViewCell(style: .default, reuseIdentifier: cellReuseID)
         cell.accessoryType = .disclosureIndicator
         cell.textLabel?.text = options[indexPath.row]
-        cell.contentView.heightAnchor.constraint(equalToConstant: 70.0).isActive = true
         return cell
+    }
+
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UIConsts.defaultLargeTableRowHeight
+    }
+
+    override func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UIConsts.defaultLargeTableRowHeight
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

@@ -40,6 +40,7 @@ class EpicDetailViewFirstScreen: UIViewController, EpicViewDetailsOptionTableDel
     private lazy var doneEditingBarButton: UIBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(doneEditingBarButtonTapped))
 //    private lazy var detailsButtonTableVC: EpicViewDetailsTableVC = EpicViewDetailsTableVC(delegate: self)
     private lazy var tableVC1: EpicDetailScreenOneTopTableVC =  EpicDetailScreenOneTopTableVC(delegate: self)
+    private lazy var taskTableLabel = UILabel()
     private lazy var taskListTableVC: EpicTasksList = EpicTasksList(persistenceManager: self.persistenceManager, selectionDelegate: self, epic: self.epic)
 
     // MARK: - misc instance properties
@@ -47,16 +48,18 @@ class EpicDetailViewFirstScreen: UIViewController, EpicViewDetailsOptionTableDel
     let persistenceManager: PersistenceManager
     let epic: Epic!
     private var editorState: EditableState = .editDisabled
-    var detailsCellTitle: String { self.editorState == EditableState.editDisabled ? "View Details" : "Edit Details" }
+    private var detailsCellTitle: String { self.editorState == EditableState.editDisabled ? "View Details" : "Edit Details" }
+    private let taskTableLabelText = "Tasks Lists"
     private lazy var margins: UIEdgeInsets = contentView.layoutMargins
 
     // MARK: - UIViewController overrides
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = .systemGroupedBackground
         setupNavItems()
         setupScrollViewAndContentView()
-        setupChildVCs()
+        setupContentComponents()
     }
 
     private func setupNavItems() {
@@ -79,24 +82,35 @@ class EpicDetailViewFirstScreen: UIViewController, EpicViewDetailsOptionTableDel
         contentView.widthAnchor.constraint(equalTo: self.scrollView.widthAnchor, constant: -(margins.left + margins.right)).isActive = true
     }
 
-    private func setupChildVCs() {
+    private func setupContentComponents() {
 
         self.addChild(self.tableVC1)
         tableVC1.view.translatesAutoresizingMaskIntoConstraints = false
         self.contentView.addSubview(tableVC1.view)
-        tableVC1.view.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 0).isActive = true
+        tableVC1.view.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
         tableVC1.view.constrainHEdgesAnchors(contentView)
         var newSize = tableVC1.view.sizeThatFits(CGSize(width: contentView.bounds.width, height: CGFloat.greatestFiniteMagnitude))
         tableVC1.view.heightAnchor.constraint(equalToConstant: newSize.height).isActive = true
 
+        taskTableLabel.translatesAutoresizingMaskIntoConstraints = false
+        contentView.addSubview(taskTableLabel)
+        taskTableLabel.text = taskTableLabelText
+        taskTableLabel.textAlignment = .center
+        taskTableLabel.font = NonSytemStyleConstants.logoFont!
+        taskTableLabel.topAnchor.constraint(equalTo: tableVC1.view.bottomAnchor, constant: UIConsts.verticalSpacing).isActive = true
+        taskTableLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
+        taskTableLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
+        taskTableLabel.heightAnchor.constraint(equalToConstant: UIConsts.sectionLabelHeight).isActive = true
+
         self.addChild(taskListTableVC)
         taskListTableVC.view.translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview(taskListTableVC.view)
-        taskListTableVC.view.topAnchor.constraint(equalTo: tableVC1.view.bottomAnchor, constant: UIConsts.verticalSpacing).isActive = true
+        taskListTableVC.view.topAnchor.constraint(equalTo: taskTableLabel.bottomAnchor, constant: UIConsts.shortVerticalSpacing).isActive = true
         taskListTableVC.view.constrainHEdgesAnchors(contentView)
-        taskListTableVC.view.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
-        newSize = taskListTableVC.view.sizeThatFits(CGSize(width: contentView.bounds.width, height: CGFloat.greatestFiniteMagnitude))
-        taskListTableVC.view.heightAnchor.constraint(equalToConstant: newSize.height).isActive = true
+        var newSize1 = taskListTableVC.view.sizeThatFits(CGSize(width: contentView.bounds.width, height: CGFloat.greatestFiniteMagnitude))
+        taskListTableVC.view.heightAnchor.constraint(equalToConstant: newSize1.height).isActive = true
+
+        taskListTableVC.view.bottomAnchor.constraint(lessThanOrEqualTo: contentView.bottomAnchor, constant: -UIConsts.shortVerticalSpacing).isActive = true
     }
 
     // MARK: - misc instance methods

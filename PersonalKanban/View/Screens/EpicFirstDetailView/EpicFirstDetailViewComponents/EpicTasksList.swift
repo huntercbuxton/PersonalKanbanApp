@@ -37,7 +37,7 @@ class EpicTasksList: UITableViewController, EditorStateControllable {
         self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellReuseID)
         taskLists = persistenceManager.sortEpicTasks(for: epic)
         self.tableView.tableFooterView = UIView(background: .systemGroupedBackground)
-        self.view.backgroundColor = .systemGroupedBackground
+        self.view.backgroundColor = UIConsts.defaultBackgroundColor
     }
 
     // MARK: - Table view data source
@@ -87,12 +87,11 @@ class EpicTasksList: UITableViewController, EditorStateControllable {
 
     private func mkSectionHeaderViewWith(titleIfEmpty: String, titleIfNotEmpty: String, for section: Int) -> UILabel {
         let label = UILabel()
-        label.heightAnchor.constraint(equalToConstant: 40.0).isActive = true
+        label.heightAnchor.constraint(equalToConstant: UIConsts.defaultTableHeaderHeight).isActive = true
         label.backgroundColor = .systemGroupedBackground
         label.textAlignment = .center
-        // font styles to mimic the default for a UITableView Header: https://ianmcdowell.net/blog/uitableview-default-fonts/
-        label.font = UIFont.preferredFont(forTextStyle: UIFont.TextStyle.body)
-        label.textColor = UIColor(red: 0.42, green: 0.42, blue: 0.44, alpha: 1.0)
+        label.font = UIConsts.defaultTableHeaderFont
+        label.textColor = UIConsts.defaultTableHeaderFontColor
         label.text = taskLists[section].isEmpty ? titleIfEmpty : titleIfNotEmpty
         return label
     }

@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		71209AEC253E3CDD0082DA0A /* TaskEditingTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71209AEB253E3CDD0082DA0A /* TaskEditingTable.swift */; };
+		713D0D40255B20C60031C303 /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 713D0D3F255B20C60031C303 /* UIColorExtension.swift */; };
+		713D0D46255B23740031C303 /* Alata-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 713D0D45255B23740031C303 /* Alata-Regular.ttf */; };
 		713F7A87253C569B00D23CC7 /* InputValidationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 713F7A86253C569B00D23CC7 /* InputValidationManager.swift */; };
 		713F7A95253CD0AC00D23CC7 /* LargeTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 713F7A94253CD0AC00D23CC7 /* LargeTextView.swift */; };
 		7146AC39253E19B000DA7D03 /* MainMenuProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7146AC38253E19B000DA7D03 /* MainMenuProtocols.swift */; };
@@ -271,6 +273,8 @@
 
 /* Begin PBXFileReference section */
 		71209AEB253E3CDD0082DA0A /* TaskEditingTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskEditingTable.swift; sourceTree = "<group>"; };
+		713D0D3F255B20C60031C303 /* UIColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
+		713D0D45255B23740031C303 /* Alata-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Alata-Regular.ttf"; sourceTree = "<group>"; };
 		713F7A86253C569B00D23CC7 /* InputValidationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputValidationManager.swift; sourceTree = "<group>"; };
 		713F7A94253CD0AC00D23CC7 /* LargeTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LargeTextView.swift; sourceTree = "<group>"; };
 		7146AC38253E19B000DA7D03 /* MainMenuProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuProtocols.swift; sourceTree = "<group>"; };
@@ -420,47 +424,136 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		713F215A2541F4B700B4B7ED /* Task */ = {
+		71170C09255AF1A000D5F2F2 /* EpicFirstDetailView */ = {
 			isa = PBXGroup;
 			children = (
+				71170C0E255AF1EE00D5F2F2 /* EpicFirstDetailViewComponents */,
+				717DCB2D253EF59300E2156F /* EpicDetailViewFirstScreen.swift */,
+			);
+			path = EpicFirstDetailView;
+			sourceTree = "<group>";
+		};
+		71170C0E255AF1EE00D5F2F2 /* EpicFirstDetailViewComponents */ = {
+			isa = PBXGroup;
+			children = (
+				71DC7FC7255A612800D0B40C /* EpicDetailScreenOneTopTableVC.swift */,
+				71DC7FD3255AC86F00D0B40C /* EpicTasksList.swift */,
+			);
+			path = EpicFirstDetailViewComponents;
+			sourceTree = "<group>";
+		};
+		71170C0F255AF21E00D5F2F2 /* ViewOnlyEpicDetailViewTwo */ = {
+			isa = PBXGroup;
+			children = (
+				717DCB32253F0A7200E2156F /* ViewOnlyEpicDetailVC.swift */,
+			);
+			path = ViewOnlyEpicDetailViewTwo;
+			sourceTree = "<group>";
+		};
+		71170C10255AF23700D5F2F2 /* DetailsEditorEpicDetailViewTwo */ = {
+			isa = PBXGroup;
+			children = (
+				717DCB3A253F25E600E2156F /* EditEpicDetailsVC.swift */,
+			);
+			path = DetailsEditorEpicDetailViewTwo;
+			sourceTree = "<group>";
+		};
+		71170C11255AF2A500D5F2F2 /* CreateEpicScreen */ = {
+			isa = PBXGroup;
+			children = (
+				717DCB23253ED0BE00E2156F /* AddEditEpicVC.swift */,
+			);
+			path = CreateEpicScreen;
+			sourceTree = "<group>";
+		};
+		71170C12255AF2C300D5F2F2 /* PersonalKanbanReusedComponents */ = {
+			isa = PBXGroup;
+			children = (
+				715B730D253C4B1C00219F07 /* TasksTable.swift */,
+			);
+			path = PersonalKanbanReusedComponents;
+			sourceTree = "<group>";
+		};
+		71170C13255AF2F200D5F2F2 /* GHTUIReusableComponents */ = {
+			isa = PBXGroup;
+			children = (
+				715B731A253C524600219F07 /* PaddedTextField.swift */,
+				713F7A94253CD0AC00D23CC7 /* LargeTextView.swift */,
+			);
+			path = GHTUIReusableComponents;
+			sourceTree = "<group>";
+		};
+		71170C14255AF36F00D5F2F2 /* MainMenu */ = {
+			isa = PBXGroup;
+			children = (
+				71170C15255AF38700D5F2F2 /* MainMenuComponents */,
+				715B72B5253BEDDE00219F07 /* MainViewController.swift */,
+			);
+			path = MainMenu;
+			sourceTree = "<group>";
+		};
+		71170C15255AF38700D5F2F2 /* MainMenuComponents */ = {
+			isa = PBXGroup;
+			children = (
+				715B72FF253C39BC00219F07 /* SliderOneVC.swift */,
+				717DCB1B253EB75E00E2156F /* EpicsTableVC.swift */,
+				71DC7FCD255A624300D0B40C /* MorePageVC.swift */,
+			);
+			path = MainMenuComponents;
+			sourceTree = "<group>";
+		};
+		71170C16255AF3C100D5F2F2 /* EditTaskScreen */ = {
+			isa = PBXGroup;
+			children = (
+				71170C19255AF45600D5F2F2 /* EditTaskScreenComponents */,
 				715B7315253C520300219F07 /* AddEditTaskVC.swift */,
+			);
+			path = EditTaskScreen;
+			sourceTree = "<group>";
+		};
+		71170C17255AF3E400D5F2F2 /* TaskEditingPropertySelectors */ = {
+			isa = PBXGroup;
+			children = (
 				717DCB6E253F5C9300E2156F /* SelectWorkflowStatusMenu.swift */,
 				71B72FE52541501F00D26CDC /* StoryPointsSelectionScreen.swift */,
 				717DCB28253EDAC300E2156F /* ChooseEpicsScreen.swift */,
 			);
-			path = Task;
+			path = TaskEditingPropertySelectors;
 			sourceTree = "<group>";
 		};
-		713F215B2541F4ED00B4B7ED /* Epics */ = {
+		71170C19255AF45600D5F2F2 /* EditTaskScreenComponents */ = {
 			isa = PBXGroup;
 			children = (
-				717DCB23253ED0BE00E2156F /* AddEditEpicVC.swift */,
-				717DCB3A253F25E600E2156F /* EditEpicDetailsVC.swift */,
-				717DCB32253F0A7200E2156F /* ViewOnlyEpicDetailVC.swift */,
+				71209AEB253E3CDD0082DA0A /* TaskEditingTable.swift */,
+				71B72FEF25416DA300D26CDC /* TaskEditorOptionsTable2.swift */,
 			);
-			path = Epics;
+			path = EditTaskScreenComponents;
+			sourceTree = "<group>";
+		};
+		71170C2A255AF68300D5F2F2 /* ViewProtocols */ = {
+			isa = PBXGroup;
+			children = (
+				715B7305253C3A3900219F07 /* SlidingViewsVCProtocols.swift */,
+				7146AC38253E19B000DA7D03 /* MainMenuProtocols.swift */,
+			);
+			path = ViewProtocols;
+			sourceTree = "<group>";
+		};
+		71170C2B255AF69900D5F2F2 /* ViewMiscFiles */ = {
+			isa = PBXGroup;
+			children = (
+				715B72EE253BF39000219F07 /* UIConsts.swift */,
+			);
+			path = ViewMiscFiles;
 			sourceTree = "<group>";
 		};
 		713F215F2541F71800B4B7ED /* Epics */ = {
 			isa = PBXGroup;
 			children = (
-				717DCB2D253EF59300E2156F /* EpicDetailViewFirstScreen.swift */,
-				71DC7FC7255A612800D0B40C /* EpicDetailScreenOneTopTableVC.swift */,
-				71DC7FD3255AC86F00D0B40C /* EpicTasksList.swift */,
 				71DC8068255AEC6D00D0B40C /* EpicDetailView */,
 				717DCB3F253F2BE000E2156F /* EpicDetailsEditorMenuVC.swift */,
 			);
 			path = Epics;
-			sourceTree = "<group>";
-		};
-		713F21602541F74F00B4B7ED /* MainMenuPages */ = {
-			isa = PBXGroup;
-			children = (
-				717DCB1B253EB75E00E2156F /* EpicsTableVC.swift */,
-				715B730D253C4B1C00219F07 /* TasksTable.swift */,
-				71DC7FCD255A624300D0B40C /* MorePageVC.swift */,
-			);
-			path = MainMenuPages;
 			sourceTree = "<group>";
 		};
 		713F7A85253C567D00D23CC7 /* Controller */ = {
@@ -534,8 +627,12 @@
 		715B72EA253BF00700219F07 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				71BC1B68253DD48A005EC646 /* Other */,
-				71BC1B67253DD47A005EC646 /* Components */,
+				71170C2B255AF69900D5F2F2 /* ViewMiscFiles */,
+				71170C2A255AF68300D5F2F2 /* ViewProtocols */,
+				71170C13255AF2F200D5F2F2 /* GHTUIReusableComponents */,
+				71170C12255AF2C300D5F2F2 /* PersonalKanbanReusedComponents */,
+				71BC1B68253DD48A005EC646 /* ViewTypeExtensions */,
+				71BC1B67253DD47A005EC646 /* ReusedComponents */,
 				71BC1B66253DD43B005EC646 /* Screens */,
 			);
 			path = View;
@@ -572,38 +669,34 @@
 		71BC1B66253DD43B005EC646 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
-				713F215B2541F4ED00B4B7ED /* Epics */,
-				713F215A2541F4B700B4B7ED /* Task */,
-				715B72B5253BEDDE00219F07 /* MainViewController.swift */,
+				71170C10255AF23700D5F2F2 /* DetailsEditorEpicDetailViewTwo */,
+				71170C0F255AF21E00D5F2F2 /* ViewOnlyEpicDetailViewTwo */,
+				71170C17255AF3E400D5F2F2 /* TaskEditingPropertySelectors */,
+				71170C16255AF3C100D5F2F2 /* EditTaskScreen */,
+				71170C09255AF1A000D5F2F2 /* EpicFirstDetailView */,
+				71170C11255AF2A500D5F2F2 /* CreateEpicScreen */,
+				71170C14255AF36F00D5F2F2 /* MainMenu */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
 		};
-		71BC1B67253DD47A005EC646 /* Components */ = {
+		71BC1B67253DD47A005EC646 /* ReusedComponents */ = {
 			isa = PBXGroup;
 			children = (
-				713F21602541F74F00B4B7ED /* MainMenuPages */,
 				713F215F2541F71800B4B7ED /* Epics */,
-				715B731A253C524600219F07 /* PaddedTextField.swift */,
-				713F7A94253CD0AC00D23CC7 /* LargeTextView.swift */,
-				715B72FF253C39BC00219F07 /* SliderOneVC.swift */,
-				71209AEB253E3CDD0082DA0A /* TaskEditingTable.swift */,
 				717DCB61253F4AAE00E2156F /* LogView.swift */,
-				71B72FEF25416DA300D26CDC /* TaskEditorOptionsTable2.swift */,
 			);
-			path = Components;
+			path = ReusedComponents;
 			sourceTree = "<group>";
 		};
-		71BC1B68253DD48A005EC646 /* Other */ = {
+		71BC1B68253DD48A005EC646 /* ViewTypeExtensions */ = {
 			isa = PBXGroup;
 			children = (
-				715B72EE253BF39000219F07 /* UIConsts.swift */,
-				715B7305253C3A3900219F07 /* SlidingViewsVCProtocols.swift */,
-				7146AC38253E19B000DA7D03 /* MainMenuProtocols.swift */,
 				71B72FDA2541305900D26CDC /* UIViewLayoutsExtension.swift */,
 				71B72FEA25416BCD00D26CDC /* MiscellaneousUIKitExtensions.swift */,
+				713D0D3F255B20C60031C303 /* UIColorExtension.swift */,
 			);
-			path = Other;
+			path = ViewTypeExtensions;
 			sourceTree = "<group>";
 		};
 		71BC1B69253DD509005EC646 /* CoreData */ = {
@@ -631,6 +724,7 @@
 		71DC7FD9255AEA6800D0B40C /* resources */ = {
 			isa = PBXGroup;
 			children = (
+				713D0D45255B23740031C303 /* Alata-Regular.ttf */,
 				71DC7FDA255AEA8800D0B40C /* apple-touch-icon */,
 				71DC801C255AEA8800D0B40C /* favicon_io */,
 			);
@@ -810,16 +904,8 @@
 		71DC8068255AEC6D00D0B40C /* EpicDetailView */ = {
 			isa = PBXGroup;
 			children = (
-				71DC8069255AEC7A00D0B40C /* ScreenOne */,
 			);
 			path = EpicDetailView;
-			sourceTree = "<group>";
-		};
-		71DC8069255AEC7A00D0B40C /* ScreenOne */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = ScreenOne;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -976,6 +1062,7 @@
 				71DC805B255AEA8800D0B40C /* android-chrome-192x192.png in Resources */,
 				71DC8030255AEA8800D0B40C /* Icon-App-60x60@3x.png in Resources */,
 				71DC8055255AEA8800D0B40C /* Icon-86@2x.png in Resources */,
+				713D0D46255B23740031C303 /* Alata-Regular.ttf in Resources */,
 				71DC8032255AEA8800D0B40C /* Icon-App-76x76@1x.png in Resources */,
 				71DC802A255AEA8800D0B40C /* Icon-App-20x20@3x.png in Resources */,
 				71DC8024255AEA8800D0B40C /* iTunesArtwork@1x.png in Resources */,
@@ -1086,6 +1173,7 @@
 				715B72B2253BEDDE00219F07 /* AppDelegate.swift in Sources */,
 				71B72FE62541501F00D26CDC /* StoryPointsSelectionScreen.swift in Sources */,
 				71BC1B5D253DD3A3005EC646 /* InputsEnum.swift in Sources */,
+				713D0D40255B20C60031C303 /* UIColorExtension.swift in Sources */,
 				713F7A95253CD0AC00D23CC7 /* LargeTextView.swift in Sources */,
 				71DC7FC8255A612800D0B40C /* EpicDetailScreenOneTopTableVC.swift in Sources */,
 				717DCB29253EDAC300E2156F /* ChooseEpicsScreen.swift in Sources */,

@@ -101,7 +101,7 @@ class AddEditEpicVC: UIViewController, InputsInterfaceDelegate {
         notesTextView.topAnchor.constraint(equalTo: titleTextField.bottomAnchor, constant: UIConsts.verticalSpacing).isActive = true
         notesTextView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
         notesTextView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
-        notesTextView.heightAnchor.constraint(equalToConstant: UIConsts.largeTextFieldHeight).isActive = true
+        notesTextView.heightAnchor.constraint(equalToConstant: UIConsts.defaultTextViewHeight).isActive = true
         notesTextView.layer.borderWidth = UIConsts.textInputBorderWidth
         notesTextView.layer.borderColor = UIConsts.textInputBorderColor
         notesTextView.layer.cornerRadius = UIConsts.textInputCornerRadius
