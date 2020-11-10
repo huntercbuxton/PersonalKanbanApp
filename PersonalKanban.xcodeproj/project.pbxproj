@@ -52,7 +52,7 @@
 		71BC1B62253DD3D4005EC646 /* InputsProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71BC1B61253DD3D4005EC646 /* InputsProtocols.swift */; };
 		71D378392541B53D00F66FCC /* EnumWorkflowPositions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71D378382541B53D00F66FCC /* EnumWorkflowPositions.swift */; };
 		71DC7FB425474D8B00D0B40C /* InputValidatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71DC7FB325474D8B00D0B40C /* InputValidatorTests.swift */; };
-		71DC7FC8255A612800D0B40C /* EpicViewDetailsTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71DC7FC7255A612800D0B40C /* EpicViewDetailsTableVC.swift */; };
+		71DC7FC8255A612800D0B40C /* EpicDetailScreenOneTopTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71DC7FC7255A612800D0B40C /* EpicDetailScreenOneTopTableVC.swift */; };
 		71DC7FCE255A624300D0B40C /* MorePageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71DC7FCD255A624300D0B40C /* MorePageVC.swift */; };
 		71DC7FD4255AC86F00D0B40C /* EpicTasksList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71DC7FD3255AC86F00D0B40C /* EpicTasksList.swift */; };
 		71DC8024255AEA8800D0B40C /* iTunesArtwork@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = 71DC7FDC255AEA8800D0B40C /* iTunesArtwork@1x.png */; };
@@ -75,13 +75,8 @@
 		71DC8035255AEA8800D0B40C /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 71DC7FEE255AEA8800D0B40C /* README.md */; };
 		71DC8036255AEA8800D0B40C /* iTunesArtwork@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 71DC7FEF255AEA8800D0B40C /* iTunesArtwork@2x.png */; };
 		71DC8037255AEA8800D0B40C /* iTunesArtwork@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 71DC7FF0255AEA8800D0B40C /* iTunesArtwork@3x.png */; };
-		71DC8038255AEA8800D0B40C /* ic_launcher.png in Resources */ = {isa = PBXBuildFile; fileRef = 71DC7FF3255AEA8800D0B40C /* ic_launcher.png */; };
 		71DC8039255AEA8800D0B40C /* playstore-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 71DC7FF4255AEA8800D0B40C /* playstore-icon.png */; };
-		71DC803A255AEA8800D0B40C /* ic_launcher.png in Resources */ = {isa = PBXBuildFile; fileRef = 71DC7FF6255AEA8800D0B40C /* ic_launcher.png */; };
-		71DC803B255AEA8800D0B40C /* ic_launcher.png in Resources */ = {isa = PBXBuildFile; fileRef = 71DC7FF8255AEA8800D0B40C /* ic_launcher.png */; };
 		71DC803C255AEA8800D0B40C /* ic_launcher.png in Resources */ = {isa = PBXBuildFile; fileRef = 71DC7FFA255AEA8800D0B40C /* ic_launcher.png */; };
-		71DC803D255AEA8800D0B40C /* ic_launcher.png in Resources */ = {isa = PBXBuildFile; fileRef = 71DC7FFC255AEA8800D0B40C /* ic_launcher.png */; };
-		71DC803E255AEA8800D0B40C /* ic_launcher.png in Resources */ = {isa = PBXBuildFile; fileRef = 71DC7FFE255AEA8800D0B40C /* ic_launcher.png */; };
 		71DC803F255AEA8800D0B40C /* icon-messages-app-iPhone-60x45@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = 71DC8000255AEA8800D0B40C /* icon-messages-app-iPhone-60x45@1x.png */; };
 		71DC8040255AEA8800D0B40C /* icon-messages-app-iPadAir-67x50@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 71DC8001255AEA8800D0B40C /* icon-messages-app-iPadAir-67x50@2x.png */; };
 		71DC8041255AEA8800D0B40C /* icon-messages-transcript-32x24@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 71DC8002255AEA8800D0B40C /* icon-messages-transcript-32x24@3x.png */; };
@@ -103,9 +98,7 @@
 		71DC8051255AEA8800D0B40C /* Icon-44@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 71DC8014255AEA8800D0B40C /* Icon-44@2x.png */; };
 		71DC8052255AEA8800D0B40C /* Icon-29@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 71DC8015255AEA8800D0B40C /* Icon-29@3x.png */; };
 		71DC8053255AEA8800D0B40C /* Icon-27.5@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 71DC8016255AEA8800D0B40C /* Icon-27.5@2x.png */; };
-		71DC8054255AEA8800D0B40C /* ItunesArtwork@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 71DC8017255AEA8800D0B40C /* ItunesArtwork@2x.png */; };
 		71DC8055255AEA8800D0B40C /* Icon-86@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 71DC8018255AEA8800D0B40C /* Icon-86@2x.png */; };
-		71DC8056255AEA8800D0B40C /* Contents.json in Resources */ = {isa = PBXBuildFile; fileRef = 71DC8019255AEA8800D0B40C /* Contents.json */; };
 		71DC8057255AEA8800D0B40C /* Icon-98@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 71DC801A255AEA8800D0B40C /* Icon-98@2x.png */; };
 		71DC8058255AEA8800D0B40C /* Icon-24@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 71DC801B255AEA8800D0B40C /* Icon-24@2x.png */; };
 		71DC8059255AEA8800D0B40C /* favicon-16x16.png in Resources */ = {isa = PBXBuildFile; fileRef = 71DC801D255AEA8800D0B40C /* favicon-16x16.png */; };
@@ -330,7 +323,7 @@
 		71DC7FB125474D8B00D0B40C /* InputValidatorTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = InputValidatorTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		71DC7FB325474D8B00D0B40C /* InputValidatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputValidatorTests.swift; sourceTree = "<group>"; };
 		71DC7FB525474D8B00D0B40C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		71DC7FC7255A612800D0B40C /* EpicViewDetailsTableVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpicViewDetailsTableVC.swift; sourceTree = "<group>"; };
+		71DC7FC7255A612800D0B40C /* EpicDetailScreenOneTopTableVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpicDetailScreenOneTopTableVC.swift; sourceTree = "<group>"; };
 		71DC7FCD255A624300D0B40C /* MorePageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MorePageVC.swift; sourceTree = "<group>"; };
 		71DC7FD3255AC86F00D0B40C /* EpicTasksList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpicTasksList.swift; sourceTree = "<group>"; };
 		71DC7FDC255AEA8800D0B40C /* iTunesArtwork@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iTunesArtwork@1x.png"; sourceTree = "<group>"; };
@@ -451,10 +444,11 @@
 		713F215F2541F71800B4B7ED /* Epics */ = {
 			isa = PBXGroup;
 			children = (
-				717DCB3F253F2BE000E2156F /* EpicDetailsEditorMenuVC.swift */,
-				71DC7FC7255A612800D0B40C /* EpicViewDetailsTableVC.swift */,
 				717DCB2D253EF59300E2156F /* EpicDetailViewFirstScreen.swift */,
+				71DC7FC7255A612800D0B40C /* EpicDetailScreenOneTopTableVC.swift */,
 				71DC7FD3255AC86F00D0B40C /* EpicTasksList.swift */,
+				71DC8068255AEC6D00D0B40C /* EpicDetailView */,
+				717DCB3F253F2BE000E2156F /* EpicDetailsEditorMenuVC.swift */,
 			);
 			path = Epics;
 			sourceTree = "<group>";
@@ -813,6 +807,21 @@
 			path = favicon_io;
 			sourceTree = "<group>";
 		};
+		71DC8068255AEC6D00D0B40C /* EpicDetailView */ = {
+			isa = PBXGroup;
+			children = (
+				71DC8069255AEC7A00D0B40C /* ScreenOne */,
+			);
+			path = EpicDetailView;
+			sourceTree = "<group>";
+		};
+		71DC8069255AEC7A00D0B40C /* ScreenOne */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ScreenOne;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -970,13 +979,9 @@
 				71DC8032255AEA8800D0B40C /* Icon-App-76x76@1x.png in Resources */,
 				71DC802A255AEA8800D0B40C /* Icon-App-20x20@3x.png in Resources */,
 				71DC8024255AEA8800D0B40C /* iTunesArtwork@1x.png in Resources */,
-				71DC8054255AEA8800D0B40C /* ItunesArtwork@2x.png in Resources */,
 				71DC8029255AEA8800D0B40C /* Icon-App-83.5x83.5@2x.png in Resources */,
 				71DC8052255AEA8800D0B40C /* Icon-29@3x.png in Resources */,
-				71DC803A255AEA8800D0B40C /* ic_launcher.png in Resources */,
-				71DC8056255AEA8800D0B40C /* Contents.json in Resources */,
 				71DC8043255AEA8800D0B40C /* icon-messages-transcript-32x24@2x.png in Resources */,
-				71DC803B255AEA8800D0B40C /* ic_launcher.png in Resources */,
 				71DC8042255AEA8800D0B40C /* icon-messages-app-27x20@1x.png in Resources */,
 				71DC805A255AEA8800D0B40C /* favicon.ico in Resources */,
 				71DC804A255AEA8800D0B40C /* icon-messages-app-iPhone-60x45@3x.png in Resources */,
@@ -984,12 +989,9 @@
 				71DC8040255AEA8800D0B40C /* icon-messages-app-iPadAir-67x50@2x.png in Resources */,
 				71DC8046255AEA8800D0B40C /* icon-messages-app-27x20@3x.png in Resources */,
 				71DC8031255AEA8800D0B40C /* Icon-App-60x60@2x.png in Resources */,
-				71DC803E255AEA8800D0B40C /* ic_launcher.png in Resources */,
 				71DC8059255AEA8800D0B40C /* favicon-16x16.png in Resources */,
 				715B72BB253BEDE800219F07 /* Assets.xcassets in Resources */,
-				71DC8038255AEA8800D0B40C /* ic_launcher.png in Resources */,
 				71DC804B255AEA8800D0B40C /* icon-messages-app-iPhone-60x45@2x.png in Resources */,
-				71DC803D255AEA8800D0B40C /* ic_launcher.png in Resources */,
 				71DC803C255AEA8800D0B40C /* ic_launcher.png in Resources */,
 				71DC8057255AEA8800D0B40C /* Icon-98@2x.png in Resources */,
 				71DC802F255AEA8800D0B40C /* Icon-App-40x40@2x.png in Resources */,
@@ -1085,7 +1087,7 @@
 				71B72FE62541501F00D26CDC /* StoryPointsSelectionScreen.swift in Sources */,
 				71BC1B5D253DD3A3005EC646 /* InputsEnum.swift in Sources */,
 				713F7A95253CD0AC00D23CC7 /* LargeTextView.swift in Sources */,
-				71DC7FC8255A612800D0B40C /* EpicViewDetailsTableVC.swift in Sources */,
+				71DC7FC8255A612800D0B40C /* EpicDetailScreenOneTopTableVC.swift in Sources */,
 				717DCB29253EDAC300E2156F /* ChooseEpicsScreen.swift in Sources */,
 				715B7301253C39BC00219F07 /* SliderOneVC.swift in Sources */,
 				717DCB3B253F25E600E2156F /* EditEpicDetailsVC.swift in Sources */,

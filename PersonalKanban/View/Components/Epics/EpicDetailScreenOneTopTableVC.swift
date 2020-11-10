@@ -11,7 +11,7 @@ protocol EpicViewDetailsOptionTableDelegate: AnyObject {
     func goToDetailsScreen()
 }
 
-class EpicViewDetailsTableVC: UITableViewController, EditorStateControllable {
+class EpicDetailScreenOneTopTableVC: UITableViewController, EditorStateControllable {
 
     // MARK: - EditorStateControllable conformance
 

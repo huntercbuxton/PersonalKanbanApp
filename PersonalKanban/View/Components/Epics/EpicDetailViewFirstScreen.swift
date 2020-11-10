@@ -38,8 +38,8 @@ class EpicDetailViewFirstScreen: UIViewController, EpicViewDetailsOptionTableDel
     private lazy var contentView = UIView()
     private lazy var editBarButton: UIBarButtonItem = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(editBarButtonTapped))
     private lazy var doneEditingBarButton: UIBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(doneEditingBarButtonTapped))
-    private lazy var detailsButtonTableVC: EpicViewDetailsTableVC = EpicViewDetailsTableVC(delegate: self)
-    private lazy var tableVC1: EpicViewDetailsTableVC =  EpicViewDetailsTableVC(delegate: self)
+//    private lazy var detailsButtonTableVC: EpicViewDetailsTableVC = EpicViewDetailsTableVC(delegate: self)
+    private lazy var tableVC1: EpicDetailScreenOneTopTableVC =  EpicDetailScreenOneTopTableVC(delegate: self)
     private lazy var taskListTableVC: EpicTasksList = EpicTasksList(persistenceManager: self.persistenceManager, selectionDelegate: self, epic: self.epic)
 
     // MARK: - misc instance properties
