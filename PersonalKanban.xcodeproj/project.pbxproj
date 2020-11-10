@@ -10,6 +10,8 @@
 		71209AEC253E3CDD0082DA0A /* TaskEditingTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71209AEB253E3CDD0082DA0A /* TaskEditingTable.swift */; };
 		713D0D40255B20C60031C303 /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 713D0D3F255B20C60031C303 /* UIColorExtension.swift */; };
 		713D0D46255B23740031C303 /* Alata-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 713D0D45255B23740031C303 /* Alata-Regular.ttf */; };
+		713D0D4C255B26330031C303 /* CustomFontImportStuff.swift in Sources */ = {isa = PBXBuildFile; fileRef = 713D0D4B255B26330031C303 /* CustomFontImportStuff.swift */; };
+		713D0D52255B28570031C303 /* CustomUIColorsFromHex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 713D0D51255B28570031C303 /* CustomUIColorsFromHex.swift */; };
 		713F7A87253C569B00D23CC7 /* InputValidationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 713F7A86253C569B00D23CC7 /* InputValidationManager.swift */; };
 		713F7A95253CD0AC00D23CC7 /* LargeTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 713F7A94253CD0AC00D23CC7 /* LargeTextView.swift */; };
 		7146AC39253E19B000DA7D03 /* MainMenuProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7146AC38253E19B000DA7D03 /* MainMenuProtocols.swift */; };
@@ -275,6 +277,8 @@
 		71209AEB253E3CDD0082DA0A /* TaskEditingTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskEditingTable.swift; sourceTree = "<group>"; };
 		713D0D3F255B20C60031C303 /* UIColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
 		713D0D45255B23740031C303 /* Alata-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Alata-Regular.ttf"; sourceTree = "<group>"; };
+		713D0D4B255B26330031C303 /* CustomFontImportStuff.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomFontImportStuff.swift; sourceTree = "<group>"; };
+		713D0D51255B28570031C303 /* CustomUIColorsFromHex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomUIColorsFromHex.swift; sourceTree = "<group>"; };
 		713F7A86253C569B00D23CC7 /* InputValidationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputValidationManager.swift; sourceTree = "<group>"; };
 		713F7A94253CD0AC00D23CC7 /* LargeTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LargeTextView.swift; sourceTree = "<group>"; };
 		7146AC38253E19B000DA7D03 /* MainMenuProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuProtocols.swift; sourceTree = "<group>"; };
@@ -543,6 +547,8 @@
 			isa = PBXGroup;
 			children = (
 				715B72EE253BF39000219F07 /* UIConsts.swift */,
+				713D0D4B255B26330031C303 /* CustomFontImportStuff.swift */,
+				713D0D51255B28570031C303 /* CustomUIColorsFromHex.swift */,
 			);
 			path = ViewMiscFiles;
 			sourceTree = "<group>";
@@ -1162,6 +1168,7 @@
 				71DC7FD4255AC86F00D0B40C /* EpicTasksList.swift in Sources */,
 				71B72FDB2541305900D26CDC /* UIViewLayoutsExtension.swift in Sources */,
 				717DCB40253F2BE000E2156F /* EpicDetailsEditorMenuVC.swift in Sources */,
+				713D0D52255B28570031C303 /* CustomUIColorsFromHex.swift in Sources */,
 				71209AEC253E3CDD0082DA0A /* TaskEditingTable.swift in Sources */,
 				717DCB52253F3DBA00E2156F /* Task+CoreDataProperties.swift in Sources */,
 				715B731B253C524600219F07 /* PaddedTextField.swift in Sources */,
@@ -1196,6 +1203,7 @@
 				717DCB62253F4AAE00E2156F /* LogView.swift in Sources */,
 				715B7306253C3A3900219F07 /* SlidingViewsVCProtocols.swift in Sources */,
 				717DCB4D253F3DBA00E2156F /* Epic+CoreDataClass.swift in Sources */,
+				713D0D4C255B26330031C303 /* CustomFontImportStuff.swift in Sources */,
 				717DCB24253ED0BE00E2156F /* AddEditEpicVC.swift in Sources */,
 				717DCB50253F3DBA00E2156F /* Note+CoreDataProperties.swift in Sources */,
 			);

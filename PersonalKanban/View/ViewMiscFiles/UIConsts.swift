@@ -62,6 +62,7 @@ struct UIConsts {
     static let verticalSpacing: CGFloat = 20
     static let shortVerticalSpacing: CGFloat = 10
     static let sectionLabelHeight: CGFloat = 50
+    static let sectionLabelFont: UIFont = UIFont.preferredFont(forTextStyle: .headline)
 
     // other defaults
 
@@ -81,27 +82,16 @@ struct LayoutConsts {
 
 struct NonSytemStyleConstants {
 
-    static let logoBackgroundColorHexStr = "#55ff55"
-    static let logoTextColorHexStr = "#0000ff"
-    static let logoFontFamilyName = "Alata"
-    static let logoFontName = "Alata-Regular"
+//    static let logoBackgroundColorHexStr = "#55ff55ff"
+////    static let logoTextColorHexStr = "#0000ffff"
+//    static let logoFontFamilyName = "Alata"
+//    static let logoFontName = "Alata-Regular"
     static let faviconFontSize = 110
     static let websiteURL = "https://personalkanbanapp.hunterbuxton.com"
     static let githubURL = "https:github.com/huntercbuxton/PersonalKanbanApp.git"
-    static let logoBackgroundUIColor: UIColor = UIColor(hex: NonSytemStyleConstants.logoBackgroundColorHexStr)!
-    static let logoTextUIColor: UIColor = UIColor(hex: NonSytemStyleConstants.logoTextColorHexStr)!
-    static let logoFont: UIFont? = UIFont(fontStyle: .alataReg, size: 20)
+//    static let logoBackgroundUIColor: UIColor = UIColor(hex: NonSytemStyleConstants.logoBackgroundColorHexStr)!
+//    static let logoTextUIColor: UIColor = UIColor(hex: NonSytemStyleConstants.logoTextColorHexStr)!
+//    static let logoFont: UIFont? = UIFont(fontStyle: .alataReg, size: 20)
 
 }
 
-enum FontStyle: String {
-    case alataReg = "Alata-Regular"
-}
-
-// https://zonneveld.dev/adding-custom-fonts-to-your-ios-app/
-
-extension UIFont {
-    convenience init?(fontStyle: FontStyle, size: CGFloat) {
-        self.init(name: fontStyle.rawValue, size: size)
-    }
-}

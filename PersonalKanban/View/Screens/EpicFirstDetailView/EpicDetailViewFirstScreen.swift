@@ -96,7 +96,7 @@ class EpicDetailViewFirstScreen: UIViewController, EpicViewDetailsOptionTableDel
         contentView.addSubview(taskTableLabel)
         taskTableLabel.text = taskTableLabelText
         taskTableLabel.textAlignment = .center
-        taskTableLabel.font = NonSytemStyleConstants.logoFont!
+        taskTableLabel.font = UIConsts.sectionLabelFont
         taskTableLabel.topAnchor.constraint(equalTo: tableVC1.view.bottomAnchor, constant: UIConsts.verticalSpacing).isActive = true
         taskTableLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
         taskTableLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
