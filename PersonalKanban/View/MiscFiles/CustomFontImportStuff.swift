@@ -9,6 +9,8 @@ import UIKit
 
 struct SavedCustomFonts {
     static let logoFont: UIFont = FontStyle.alataReg.convertToUIFont()
+    // font styles to mimic the default for a UITableView Header: https://ianmcdowell.net/blog/uitableview-default-fonts/
+    static let defaultTableHeaderFont: UIFont = UIFont.preferredFont(forTextStyle: UIFont.TextStyle.body)
 }
 
 enum FontStyle: String {
