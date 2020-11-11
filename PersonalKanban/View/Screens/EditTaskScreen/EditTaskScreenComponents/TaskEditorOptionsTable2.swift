@@ -48,7 +48,7 @@ class TaskEditorOptionsTable2: UITableViewController {
         let cell = UITableViewCell(style: .default, reuseIdentifier: cellReuseID)
         cell.textLabel?.text = options[indexPath.row]
         cell.textLabel?.textAlignment = .center
-        if indexPath.row == 2 {
+        if indexPath.row == 1 {
             cell.textLabel?.textColor = .systemRed
         }
         return cell

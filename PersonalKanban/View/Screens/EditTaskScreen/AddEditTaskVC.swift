@@ -149,10 +149,11 @@ class AddEditTaskVC: UIViewController, InputsInterfaceDelegate, EditTaskTableDel
         if useState == .edit {
             setupTable(table2)
             table2.view.topAnchor.constraint(equalTo: table.view.bottomAnchor, constant: SavedLayouts.verticalSpacing).isActive = true
-            setupLog()
+            table2.view.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -contentView.layoutMargins.bottom).isActive = true
         } else {
             table.view.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -contentView.layoutMargins.bottom).isActive = true
         }
+
         setupDataStuff()
     }
 
@@ -203,20 +204,6 @@ class AddEditTaskVC: UIViewController, InputsInterfaceDelegate, EditTaskTableDel
         tableVC.view.constrainHEdgesAnchors(contentView, constant: widthConst)
         let newSize = tableVC.view.sizeThatFits(CGSize(width: contentView.bounds.width, height: CGFloat.greatestFiniteMagnitude))
         tableVC.view.heightAnchor.constraint(equalToConstant: newSize.height).isActive = true
-    }
-
-    private func setupLog() {
-        let widthConst: CGFloat = contentView.layoutMargins.right
-        guard let task = self.taskMO else { fatalError("taskMO was nil in edit mode (called in \(#function)") }
-        guard let d1 = task.dateCreated, let d2 = task.dateUpdated else { fatalError("in \(#function) the dates retrieved from taskMO were nil") }
-        self.taskLog = LogView(dateCreated: d1, dateUpdated: d2)
-        self.addChild(taskLog!)
-        taskLog?.view.translatesAutoresizingMaskIntoConstraints = false
-        contentView.addSubview((taskLog!.view)!)
-        taskLog?.view.heightAnchor.constraint(equalToConstant: 300).isActive = true
-        taskLog?.view.topAnchor.constraint(equalTo: table2.view.bottomAnchor, constant: SavedLayouts.verticalSpacing).isActive = true
-        taskLog?.view.constrainHEdgesAnchors(contentView, constant: widthConst)
-        taskLog?.view.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -SavedLayouts.verticalSpacing).isActive = true
     }
 
     private func setupDataStuff() {
