@@ -1,13 +1,13 @@
 //
-//  ViewOnlyEpicDetailVC.swift
+//  ReadOnlyTaskDetailVC.swift
 //  PersonalKanban
 //
-//  Created by Hunter Buxton on 10/20/20.
+//  Created by Hunter Buxton on 11/11/20.
 //
 
 import UIKit
 
-class ViewOnlyEpicDetailVC: UIViewController, CoreDataDisplayDelegate {
+class ReadOnlyTaskDetailVC: UIViewController, CoreDataDisplayDelegate {
 
     // MARK: - CoeeDataDisplayDelegate conformance
 
@@ -15,10 +15,11 @@ class ViewOnlyEpicDetailVC: UIViewController, CoreDataDisplayDelegate {
         self.loadData()
     }
 
-    private let titleText = "Details"
     let persistenceManager: PersistenceManager!
-    let epic: Epic!
+    let task: Task!
     private let margins: CGFloat = 10.0
+    lazy var titleText = task.title
+
 
     lazy var editBarButton: UIBarButtonItem = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(editBarButtonTapped))
 
@@ -27,7 +28,9 @@ class ViewOnlyEpicDetailVC: UIViewController, CoreDataDisplayDelegate {
 
     lazy var titleTextField: PaddedTextField = PaddedTextField()
 
-    lazy var notesTextView: LargeTextView = LargeTextView(text: self.epic.quickNote)
+    lazy var notesTextView: LargeTextView = LargeTextView(text: self.task.quickNote)
+
+    lazy var table: TaskDetailsTableVC = TaskDetailsTableVC(persistenceManager: self.persistenceManager, task: self.task)
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,6 +39,11 @@ class ViewOnlyEpicDetailVC: UIViewController, CoreDataDisplayDelegate {
         setupScrollAndContentView()
         setupContentComponents()
         self.loadData()
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        loadData()
     }
 
     private func setupNavBar() {
@@ -63,6 +71,8 @@ class ViewOnlyEpicDetailVC: UIViewController, CoreDataDisplayDelegate {
             contentView.widthAnchor.constraint(equalTo: self.scrollView.widthAnchor)
         ])
     }
+
+
     private func setupContentComponents() {
 
         let widthConst: CGFloat = contentView.layoutMargins.right
@@ -78,28 +88,39 @@ class ViewOnlyEpicDetailVC: UIViewController, CoreDataDisplayDelegate {
         notesTextView.topAnchor.constraint(equalTo: titleTextField.bottomAnchor, constant: SavedLayouts.verticalSpacing).isActive = true
         notesTextView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: widthConst).isActive = true
         notesTextView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -widthConst).isActive = true
-        notesTextView.bottomAnchor.constraint(greaterThanOrEqualTo: contentView.bottomAnchor, constant: 20).isActive = true
+//        notesTextView.bottomAnchor.constraint(greaterThanOrEqualTo: contentView.bottomAnchor, constant: 20).isActive = true
 
+        addChild(table)
+        table.view.translatesAutoresizingMaskIntoConstraints = false
+        contentView.addSubview(table.view)
+        table.view.topAnchor.constraint(equalTo: notesTextView.bottomAnchor, constant: SavedLayouts.verticalSpacing).isActive = true
+        table.view.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: widthConst).isActive = true
+        table.view.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -widthConst).isActive = true
+        let newSize = table.view.sizeThatFits(CGSize(width: contentView.bounds.width, height: CGFloat.greatestFiniteMagnitude))
+        table.view.heightAnchor.constraint(equalToConstant: newSize.height).isActive = true
+        table.view.bottomAnchor.constraint(greaterThanOrEqualTo: contentView.bottomAnchor, constant: SavedLayouts.verticalSpacing).isActive = true
 
     }
 
     private func loadData() {
-        self.titleTextField.text = epic.title
-        self.notesTextView.text = epic.quickNote
+        print("called \(#function) on the read-only view!")
+        self.titleTextField.text = task.title
+        self.notesTextView.text = task.quickNote
+        self.table.update(self.task)
     }
 
     @objc func editBarButtonTapped() {
-        self.navigationController?.pushViewController(EditEpicDetailsVC(persistenceManager: persistenceManager, epic: epic, displayDelegate: self), animated: true)
+        let vc = AddEditTaskVC(persistenceManager: persistenceManager, useState: .edit, task: task, updateDelegate: self)
+        self.navigationController?.pushViewController(vc, animated: true)
     }
 
-    init(persistenceManager: PersistenceManager, epic: Epic, updateDelegate: CoreDataDisplayDelegate) {
+    init(persistenceManager: PersistenceManager, task: Task, updateDelegate: CoreDataDisplayDelegate) {
         self.persistenceManager = persistenceManager
-        self.epic = epic
+        self.task = task
         super.init(nibName: nil, bundle: nil)
     }
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
 }

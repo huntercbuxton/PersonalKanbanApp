@@ -59,6 +59,8 @@
 		71BC1B5D253DD3A3005EC646 /* InputsEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71BC1B5C253DD3A3005EC646 /* InputsEnum.swift */; };
 		71BC1B62253DD3D4005EC646 /* InputsProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71BC1B61253DD3D4005EC646 /* InputsProtocols.swift */; };
 		71D32659255BEB1B0045998B /* ArchivedTasksTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71D32658255BEB1B0045998B /* ArchivedTasksTableVC.swift */; };
+		71D32663255BF8860045998B /* ReadOnlyTaskDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71D32662255BF8860045998B /* ReadOnlyTaskDetailVC.swift */; };
+		71D32669255BFC560045998B /* TaskDetailsTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71D32668255BFC560045998B /* TaskDetailsTableVC.swift */; };
 		71D378392541B53D00F66FCC /* EnumWorkflowPositions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71D378382541B53D00F66FCC /* EnumWorkflowPositions.swift */; };
 		71DC7FB425474D8B00D0B40C /* InputValidatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71DC7FB325474D8B00D0B40C /* InputValidatorTests.swift */; };
 		71DC7FC8255A612800D0B40C /* EpicDetailScreenOneTopTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71DC7FC7255A612800D0B40C /* EpicDetailScreenOneTopTableVC.swift */; };
@@ -336,6 +338,8 @@
 		71BC1B5C253DD3A3005EC646 /* InputsEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputsEnum.swift; sourceTree = "<group>"; };
 		71BC1B61253DD3D4005EC646 /* InputsProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputsProtocols.swift; sourceTree = "<group>"; };
 		71D32658255BEB1B0045998B /* ArchivedTasksTableVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchivedTasksTableVC.swift; sourceTree = "<group>"; };
+		71D32662255BF8860045998B /* ReadOnlyTaskDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadOnlyTaskDetailVC.swift; sourceTree = "<group>"; };
+		71D32668255BFC560045998B /* TaskDetailsTableVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskDetailsTableVC.swift; sourceTree = "<group>"; };
 		71D378382541B53D00F66FCC /* EnumWorkflowPositions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnumWorkflowPositions.swift; sourceTree = "<group>"; };
 		71DC7FB125474D8B00D0B40C /* InputValidatorTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = InputValidatorTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		71DC7FB325474D8B00D0B40C /* InputValidatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputValidatorTests.swift; sourceTree = "<group>"; };
@@ -725,6 +729,8 @@
 				71170C09255AF1A000D5F2F2 /* EpicFirstDetailView */,
 				71170C11255AF2A500D5F2F2 /* CreateEpicScreen */,
 				71170C14255AF36F00D5F2F2 /* MainMenu */,
+				71D32662255BF8860045998B /* ReadOnlyTaskDetailVC.swift */,
+				71D32668255BFC560045998B /* TaskDetailsTableVC.swift */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -1211,6 +1217,7 @@
 				7146AC3E253E1E7500DA7D03 /* MainMenuData.swift in Sources */,
 				717DCB1C253EB75E00E2156F /* EpicsTableVC.swift in Sources */,
 				7146AC52253E2DA100DA7D03 /* MainMenuOptions.swift in Sources */,
+				71D32669255BFC560045998B /* TaskDetailsTableVC.swift in Sources */,
 				71DC7FD4255AC86F00D0B40C /* EpicTasksList.swift in Sources */,
 				71B72FDB2541305900D26CDC /* UIViewLayoutsExtension.swift in Sources */,
 				717DCB40253F2BE000E2156F /* EpicDetailsEditorMenuVC.swift in Sources */,
@@ -1224,6 +1231,7 @@
 				717DCB6F253F5C9300E2156F /* SelectWorkflowStatusMenu.swift in Sources */,
 				717DCB2E253EF59300E2156F /* EpicDetailViewFirstScreen.swift in Sources */,
 				713F7A87253C569B00D23CC7 /* InputValidationManager.swift in Sources */,
+				71D32663255BF8860045998B /* ReadOnlyTaskDetailVC.swift in Sources */,
 				715B72B2253BEDDE00219F07 /* AppDelegate.swift in Sources */,
 				71B72FE62541501F00D26CDC /* StoryPointsSelectionScreen.swift in Sources */,
 				71BC1B5D253DD3A3005EC646 /* InputsEnum.swift in Sources */,

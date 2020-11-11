@@ -58,7 +58,7 @@ class ArchivedTasksTableVC: UITableViewController, SlidingContentsViewContoller 
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.sliderDelegate?.hideMenu()
-        let vc = AddEditTaskVC(persistenceManager: persistenceManager, useState: .edit, task: data[indexPath.row], updateDelegate: self)
+        let vc = ReadOnlyTaskDetailVC(persistenceManager: persistenceManager, task: data[indexPath.row], updateDelegate: self) //AddEditTaskVC(persistenceManager: persistenceManager, useState: .edit, task: data[indexPath.row], updateDelegate: self)
         self.navigationController?.pushViewController(vc, animated: true)
     }
 

@@ -49,7 +49,7 @@ class AddEditTaskVC: UIViewController, InputsInterfaceDelegate, EditTaskTableDel
         alert.addAction(UIAlertAction(title: "Delete", style: UIAlertAction.Style.destructive, handler: {_ in
             guard let task = self.taskMO else { fatalError("taskMO was nil when executing \(#function)") }
             self.persistenceManager.delete(task: task)
-            self.navigateToPreviousScreen()
+            self.navigationController?.popToRootViewController(animated: true)
         }))
         self.present(alert, animated: true, completion: nil)
     }

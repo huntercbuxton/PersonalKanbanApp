@@ -49,7 +49,11 @@ class TasksTable: UITableViewController, SlidingContentsViewContoller {
         self.view.translatesAutoresizingMaskIntoConstraints = false
         self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: self.cellReuseID)
         self.tableView.tableFooterView = UITableViewHeaderFooterView()
+    }
 
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        updateCoreData()
     }
 
     // MARK: - Table view data source
@@ -73,7 +77,7 @@ class TasksTable: UITableViewController, SlidingContentsViewContoller {
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.sliderDelegate?.hideMenu()
-        let editScreen = AddEditTaskVC(persistenceManager: persistenceManager, useState: .edit, task: displayData[indexPath.row], updateDelegate: self)
+        let editScreen = ReadOnlyTaskDetailVC(persistenceManager: persistenceManager, task: displayData[indexPath.row], updateDelegate: self) //AddEditTaskVC(persistenceManager: persistenceManager, useState: .edit, task: displayData[indexPath.row], updateDelegate: self)
         self.navigationController?.pushViewController(editScreen, animated: true)
     }
 
