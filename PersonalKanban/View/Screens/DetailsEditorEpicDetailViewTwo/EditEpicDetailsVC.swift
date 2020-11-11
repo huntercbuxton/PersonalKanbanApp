@@ -75,8 +75,8 @@ class EditEpicDetailsVC: UIViewController, EpicDetailsMenuDelegate, InputsInterf
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         self.view.addSubview(scrollView)
         NSLayoutConstraint.activate([
-            scrollView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
-            scrollView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
+            scrollView.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor),
+            scrollView.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor),
             scrollView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor),
             scrollView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor)
         ])
@@ -100,22 +100,23 @@ class EditEpicDetailsVC: UIViewController, EpicDetailsMenuDelegate, InputsInterf
 
         titleTextField.translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview(titleTextField)
-        titleTextField.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: widthConst).isActive = true
-        titleTextField.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -widthConst).isActive = true
-        titleTextField.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
+        titleTextField.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant:  widthConst).isActive = true
+        titleTextField.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant:  -widthConst).isActive = true
+        titleTextField.topAnchor.constraint(equalTo: contentView.topAnchor, constant: SavedLayouts.verticalSpacing).isActive = true
         titleTextField.placeholder = titlePlaceholderText
 
         notesTextView.translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview(notesTextView)
         notesTextView.topAnchor.constraint(equalTo: titleTextField.bottomAnchor, constant: sectionSpacing).isActive = true
-        notesTextView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: widthConst).isActive = true
-        notesTextView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -widthConst).isActive = true
+        notesTextView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant:  widthConst).isActive = true
+        notesTextView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant:  -widthConst).isActive = true
 
         self.addChild(table)
         self.table.view.translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview(table.view)
+//        table.view.backgroundColor = .blue
         self.table.view.topAnchor.constraint(equalTo: notesTextView.bottomAnchor, constant: sectionSpacing).isActive = true
-        table.view.constrainHEdgesAnchors(contentView)
+        table.view.constrainHEdgesAnchors(contentView, constant: widthConst)
         table.view.sizeThatFits(CGSize(width: contentView.bounds.width, height: CGFloat.greatestFiniteMagnitude))
         let newSize = table.view.sizeThatFits(CGSize(width: contentView.bounds.width, height: CGFloat.greatestFiniteMagnitude))
         table.view.heightAnchor.constraint(equalToConstant: newSize.height).isActive = true

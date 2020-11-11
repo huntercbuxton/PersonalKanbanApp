@@ -51,7 +51,7 @@ class MainViewController: UIViewController, SlidingViewDelegate, MenuSelectionDe
                        initialSpringVelocity: self.animationInitialSpringVelocity,
                        options: self.animationOptions) {
             self.contentViewTwo.frame.origin.x = self.menuIsVisible ? 0 :
-                self.contentViewTwo.frame.width - self.slideInMenuPadding
+                abs(self.contentViewTwo.frame.width - self.slideInMenuPadding)
         } completion: { (_) in }
         self.menuIsVisible.toggle()
     }

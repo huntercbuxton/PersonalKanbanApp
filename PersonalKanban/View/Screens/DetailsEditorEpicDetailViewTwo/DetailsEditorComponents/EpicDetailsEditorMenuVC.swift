@@ -115,24 +115,42 @@ class EpicDetailsEditorMenuVC: UITableViewController, UnassignedTasksSelectionDe
     }
 
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        guard section == 0 else {
-            return mkSectionHeaderView()
-        }
-        return nil
+//        guard section == 0 else {
+//            return mkSectionHeaderView()
+//        }
+//        return nil
+        return mkSectionHeaderView()
     }
 
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        guard section == 0 else {
+//        guard section == 0 else {
+//            return SavedLayouts.defaultTableHeaderHeight
+//        }
+//        return CGFloat(0)
+        return SavedLayouts.defaultTableHeaderHeight
+    }
+
+    override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        if section == 1 {
             return SavedLayouts.defaultTableHeaderHeight
         }
-        return CGFloat(0)
+        return 0
     }
+
+    override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        if section == 1 {
+            return mkSectionHeaderView()
+        } else {
+            return nil
+        }
+    }
+    
 
     private func mkSectionHeaderView() -> UILabel {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.heightAnchor.constraint(equalToConstant: SavedLayouts.defaultTableHeaderHeight).isActive = true
-        label.textAlignment = .center
+//        label.textAlignment = .center
         label.backgroundColor = .systemGroupedBackground
         label.text = "   "
         return label

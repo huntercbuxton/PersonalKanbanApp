@@ -31,7 +31,6 @@ class AddEditEpicVC: UIViewController, InputsInterfaceDelegate {
     var contentView = UIView()
     lazy var titleTextField: PaddedTextField = PaddedTextField()
     lazy var notesTextView: LargeTextView = LargeTextView(text: "")
-//    lazy var addTasksButton: UIButton = UIButton(type: .custom, primaryAction: <#T##UIAction?#>)
     lazy var table = UITableViewController()
 
     // MARK: - properties specifying UI style/layout
@@ -71,8 +70,8 @@ class AddEditEpicVC: UIViewController, InputsInterfaceDelegate {
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         self.view.addSubview(scrollView)
         NSLayoutConstraint.activate([
-            scrollView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
-            scrollView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
+            scrollView.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor),
+            scrollView.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor),
             scrollView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor),
             scrollView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor)
         ])
@@ -84,30 +83,33 @@ class AddEditEpicVC: UIViewController, InputsInterfaceDelegate {
     }
 
     private func setupTextField() {
+        let widthConst: CGFloat = contentView.layoutMargins.right
         titleTextField.translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview(titleTextField)
-        titleTextField.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
-        titleTextField.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
+        titleTextField.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: widthConst).isActive = true
+        titleTextField.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -widthConst).isActive = true
         titleTextField.topAnchor.constraint(equalTo: contentView.topAnchor, constant: SavedLayouts.verticalSpacing).isActive = true
         titleTextField.placeholder = UIConsts.titleFieldPlaceholderText
     }
 
     private func setupTextView() {
+        let widthConst: CGFloat = contentView.layoutMargins.right
         notesTextView.translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview(notesTextView)
         notesTextView.topAnchor.constraint(equalTo: titleTextField.bottomAnchor, constant: SavedLayouts.verticalSpacing).isActive = true
-        notesTextView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
-        notesTextView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
+        notesTextView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: widthConst).isActive = true
+        notesTextView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -widthConst).isActive = true
     }
 
     private func setupTable() {
+        let widthConst: CGFloat = contentView.layoutMargins.right
         self.addChild(table)
         self.table.view.translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview(table.view)
         self.table.view.topAnchor.constraint(equalTo: notesTextView.bottomAnchor, constant: SavedLayouts.verticalSpacing).isActive = true
-        self.table.view.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: 0).isActive = true
-        self.table.view.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: 0).isActive = true
-        self.table.view.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 0).isActive = true
+        self.table.view.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -widthConst).isActive = true
+        self.table.view.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -SavedLayouts.verticalSpacing).isActive = true
+        self.table.view.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: widthConst).isActive = true
         table.view.sizeThatFits(CGSize(width: contentView.bounds.width, height: CGFloat.greatestFiniteMagnitude))
         let newSize = table.view.sizeThatFits(CGSize(width: contentView.bounds.width, height: CGFloat.greatestFiniteMagnitude))
         table.view.heightAnchor.constraint(equalToConstant: newSize.height).isActive = true

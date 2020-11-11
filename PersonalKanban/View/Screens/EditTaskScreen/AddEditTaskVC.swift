@@ -163,8 +163,8 @@ class AddEditTaskVC: UIViewController, InputsInterfaceDelegate, EditTaskTableDel
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(scrollView)
         NSLayoutConstraint.activate([
-            scrollView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
-            scrollView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
+            scrollView.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor),
+            scrollView.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor),
             scrollView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor),
             scrollView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor)
         ])
@@ -176,30 +176,33 @@ class AddEditTaskVC: UIViewController, InputsInterfaceDelegate, EditTaskTableDel
     }
 
     private func setupInputFields() {
+        let widthConst: CGFloat = contentView.layoutMargins.right
         titleTextField.translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview(titleTextField)
-        titleTextField.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
-        titleTextField.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
+        titleTextField.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: widthConst).isActive = true
+        titleTextField.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -widthConst).isActive = true
         titleTextField.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 0).isActive = true
         titleTextField.placeholder = UIConsts.titleFieldPlaceholderText
 
         notesTextView.translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview(notesTextView)
         notesTextView.topAnchor.constraint(equalTo: titleTextField.bottomAnchor, constant: SavedLayouts.verticalSpacing).isActive = true
-        notesTextView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 0).isActive = true
-        notesTextView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: 0).isActive = true
+        notesTextView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: widthConst).isActive = true
+        notesTextView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -widthConst).isActive = true
     }
 
     private func setupTable(_ tableVC: UITableViewController) {
+        let widthConst: CGFloat = contentView.layoutMargins.right
         self.addChild(tableVC)
         tableVC.view.translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview(tableVC.view)
-        tableVC.view.constrainHEdgesAnchors(contentView)
+        tableVC.view.constrainHEdgesAnchors(contentView, constant: widthConst)
         let newSize = tableVC.view.sizeThatFits(CGSize(width: contentView.bounds.width, height: CGFloat.greatestFiniteMagnitude))
         tableVC.view.heightAnchor.constraint(equalToConstant: newSize.height).isActive = true
     }
 
     private func setupLog() {
+        let widthConst: CGFloat = contentView.layoutMargins.right
         guard let task = self.taskMO else { fatalError("taskMO was nil in edit mode (called in \(#function)") }
         guard let d1 = task.dateCreated, let d2 = task.dateUpdated else { fatalError("in \(#function) the dates retrieved from taskMO were nil") }
         self.taskLog = LogView(dateCreated: d1, dateUpdated: d2)
@@ -208,8 +211,8 @@ class AddEditTaskVC: UIViewController, InputsInterfaceDelegate, EditTaskTableDel
         contentView.addSubview((taskLog!.view)!)
         taskLog?.view.heightAnchor.constraint(equalToConstant: 300).isActive = true
         taskLog?.view.topAnchor.constraint(equalTo: table2.view.bottomAnchor, constant: SavedLayouts.verticalSpacing).isActive = true
-        taskLog?.view.constrainHEdgesAnchors(contentView)
-        taskLog?.view.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -50).isActive = true
+        taskLog?.view.constrainHEdgesAnchors(contentView, constant: widthConst)
+        taskLog?.view.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -SavedLayouts.verticalSpacing).isActive = true
     }
 
     private func setupDataStuff() {

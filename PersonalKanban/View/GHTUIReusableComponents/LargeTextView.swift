@@ -34,6 +34,8 @@ public class LargeTextView: UITextView, UITextViewDelegate {
 
         translatesAutoresizingMaskIntoConstraints = false
         heightAnchor.constraint(equalToConstant: SavedLayouts.defaultTextViewHeight).isActive = true
+
+        
     }
 
     public init() {

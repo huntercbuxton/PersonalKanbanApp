@@ -60,6 +60,8 @@ open class PaddedTextField: UITextField, InputValidatable, UITextFieldDelegate {
         layer.borderColor = SavedStyles.textInputBorderColor
         layer.cornerRadius = SavedStyles.textInputCornerRadius
 
+        backgroundColor = .systemBackground
+
     }
 
     // MARK: - initializers

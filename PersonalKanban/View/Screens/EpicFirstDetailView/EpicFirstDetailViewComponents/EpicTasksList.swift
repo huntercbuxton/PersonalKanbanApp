@@ -38,12 +38,13 @@ class EpicTasksList: UITableViewController, EditorStateControllable {
         self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellReuseID)
         taskLists = persistenceManager.sortEpicTasks(for: epic)
         self.tableView.tableFooterView = UIView(background: .systemGroupedBackground)
-        self.view.backgroundColor = UIConsts.defaultBackgroundColor
+        view.backgroundColor = .systemGroupedBackground
+        self.view.clipsToBounds = true
     }
 
     private func loadData() {
         taskLists = persistenceManager.sortEpicTasks(for: epic)
-        self.view.backgroundColor = UIConsts.defaultBackgroundColor
+//        self.view.backgroundColor = UIConsts.defaultBackgroundColor
     }
 
     func reloadDisplay() {
@@ -67,7 +68,7 @@ class EpicTasksList: UITableViewController, EditorStateControllable {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: .default, reuseIdentifier: cellReuseID)
         cell.textLabel?.text = taskLists[indexPath.section][indexPath.row].title
-        print("called \(#function) with indexPath: \(String(describing: indexPath))")
+//        print("called \(#function) with indexPath: \(String(describing: indexPath))")
 //        cell.contentView.backgroundColor = .blue
         return cell
     }
@@ -101,11 +102,11 @@ class EpicTasksList: UITableViewController, EditorStateControllable {
     }
 
     override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        return nil
+        return UIView(background: .systemGroupedBackground)
     }
 
     override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return 0
+        return 10
     }
 
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -116,7 +117,7 @@ class EpicTasksList: UITableViewController, EditorStateControllable {
     private func mkSectionHeaderViewWith(titleIfEmpty: String, titleIfNotEmpty: String, for section: Int) -> UILabel {
         let label = UILabel()
         label.heightAnchor.constraint(equalToConstant: SavedLayouts.defaultTableHeaderHeight).isActive = true
-//        label.backgroundColor = .systemGroupedBackground
+        label.backgroundColor = .systemBackground
         label.textAlignment = .center
         label.font = SavedCustomFonts.defaultTableHeaderFont
         label.textColor = SavedCustomColors.defaultTableHeaderFontColor

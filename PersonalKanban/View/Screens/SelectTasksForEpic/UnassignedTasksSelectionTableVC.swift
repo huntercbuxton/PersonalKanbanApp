@@ -12,15 +12,21 @@ protocol UnassignedTasksSelectionDelegate: AnyObject {
 }
 
 class UnassignedTasksSelectionTableVC: UITableViewController {
-
+//    private lazy var margins = view.safeAreaInsets
     override func viewDidLoad() {
         super.viewDidLoad()
         self.taskList = persistenceManager.getUnassignedTasks()
         self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellReuseID)
         tableView.allowsMultipleSelection = true
         self.navigationItem.setRightBarButton(self.addBtn, animated: false)
+
+        viewSafeAreaInsetsDidChange()
+        tableView.tableFooterView = UIView()
+        tableView.backgroundColor = .systemBackground
+        view.backgroundColor = .systemGroupedBackground
     }
 
+    
     private let persistenceManager: PersistenceManager
     private var taskList: [Task] = []
     private var selectedList: [IndexPath] = []
