@@ -37,16 +37,23 @@ final class PersistenceManager {
 
     func sortEpicTasks(for epic: Epic) -> [[Task]] {
         let unsorted = epic.tasksList
-        var returnData: [WorkflowPosition:[Task]] = [.backlog:[],
-                                                      .toDo:[],
-                                                      .inProgress:[],
-                                                      .finished:[]
+        var returnData: [WorkflowPosition:[Task]] = [.backlog: [],
+                                                      .toDo: [],
+                                                      .inProgress: [],
+                                                      .finished: []
                                                     ]
         for task in unsorted {
-            returnData[task.workflowStatusEnum]?.append(task)
+            if let status: WorkflowPosition = task.workflowStatusEnum {
+                returnData[status]?.append(task)
+            }
         }
         let taskArray = [ returnData[.backlog] ?? [], returnData[.toDo] ?? [], returnData[.inProgress] ?? [], returnData[.finished] ?? [] ]
         return taskArray
+    }
+
+    func getArchivedTasks() -> [Task] {
+        var allTasks = self.getAllTasks()
+        return allTasks.filter({$0.isArchived})
     }
 
     func sort(match workflowPosition: WorkflowPosition) -> [Task] {

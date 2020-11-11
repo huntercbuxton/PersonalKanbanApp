@@ -54,6 +54,10 @@ class AddEditTaskVC: UIViewController, InputsInterfaceDelegate, EditTaskTableDel
         self.present(alert, animated: true, completion: nil)
     }
 
+    func archiveTask() {
+        self.taskMO?.isArchived = true
+    }
+
     // MARK: - EpicsSelectorDelegate conformance
 
     func selectEpic(_ selection: Epic) {
@@ -262,6 +266,9 @@ class AddEditTaskVC: UIViewController, InputsInterfaceDelegate, EditTaskTableDel
         let date = Date()
         task.dateCreated = DateConversion.format(date)
         task.dateUpdated = DateConversion.format(date)
+        if table2.isArchived {
+            task.isArchived = true
+        }
         persistenceManager.save()
         self.updateDelegate.updateCoreData()
     }
@@ -274,6 +281,9 @@ class AddEditTaskVC: UIViewController, InputsInterfaceDelegate, EditTaskTableDel
         task.storyPointsEnum = storyPoints
         task.workflowStatusEnum = workflowStatus
         task.dateUpdated = DateConversion.format(Date())
+        if table2.isArchived {
+            task.isArchived = true
+        }
         persistenceManager.save()
         self.updateDelegate.updateCoreData()
     }

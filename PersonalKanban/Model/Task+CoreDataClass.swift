@@ -12,6 +12,19 @@ import CoreData
 @objc(Task)
 public class Task: NSManagedObject {
 
+    var isArchived: Bool {
+        get {
+            return self.workflowStatus > 3
+        }
+        set {
+            if newValue {
+                self.workflowStatus = Int64(5)
+            } else {
+                self.workflowStatus = Int64(0)
+            }
+        }
+    }
+
     var notesList: [Note] {
         get { return self.taskNotes?.array as! [Note] }
         set { taskNotes = NSOrderedSet(array: newValue) }
@@ -27,14 +40,20 @@ public class Task: NSManagedObject {
         }
     }
 
-    var workflowStatusEnum: WorkflowPosition {
+    var workflowStatusEnum: WorkflowPosition? {
         get {
-            guard let converted = WorkflowPosition(rawValue: Int(self.workflowStatus)) else {fatalError("the value of \(self.workflowStatus) failed to initialize the enumerated type") }
+            guard let converted = WorkflowPosition(rawValue: Int(self.workflowStatus)) else {
+                return nil
+            }
             print("workflowStatusEnum.get returned \(converted)")
             return converted
         }
         set {
-            self.workflowStatus = Int64(newValue.rawValue)
+            guard let num = newValue else {
+                self.workflowStatus = Int64(5)
+                return
+            }
+            self.workflowStatus =  Int64(num.rawValue)
         }
     }
 }

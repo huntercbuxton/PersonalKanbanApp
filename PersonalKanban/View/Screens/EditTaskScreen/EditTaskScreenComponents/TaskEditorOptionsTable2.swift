@@ -9,6 +9,7 @@ import UIKit
 
 protocol TaskEditorOptionsTable2Delegate: AnyObject {
     func deleteTask()
+    func archiveTask()
 }
 
 class TaskEditorOptionsTable2: UITableViewController {
@@ -16,8 +17,14 @@ class TaskEditorOptionsTable2: UITableViewController {
     // MARK: - properties
 
     private let cellReuseID = "TaskEditorOptionsTable2.cellReuseID"
-    private let options = ["copy data", "archive", "delete"]
+    private let options = ["archive", "delete"]
     private weak var delegate: TaskEditorOptionsTable2Delegate?
+
+    var isArchived: Bool = false {
+        didSet {
+            delegate?.archiveTask()
+        }
+    }
 
     // MARK: - methods
 
@@ -51,9 +58,10 @@ class TaskEditorOptionsTable2: UITableViewController {
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch indexPath.row {
-        case 0, 1:
+        case 0:
+            self.isArchived = true
             print("not yet implemented actions for indexPath: \(indexPath)")
-        case 2:
+        case 1:
             self.delegate?.deleteTask()
         default:
             fatalError("this index path \(String(describing: indexPath)) should not exist; you did something wrong in \(#file), \(#function)")
