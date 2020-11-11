@@ -113,7 +113,6 @@ class EpicTasksList: UITableViewController, EditorStateControllable {
         return SavedLayouts.defaultTableHeaderHeight
     }
 
-
     private func mkSectionHeaderViewWith(titleIfEmpty: String, titleIfNotEmpty: String, for section: Int) -> UILabel {
         let label = UILabel()
         label.heightAnchor.constraint(equalToConstant: SavedLayouts.defaultTableHeaderHeight).isActive = true

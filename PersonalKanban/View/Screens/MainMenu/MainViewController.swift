@@ -35,7 +35,8 @@ class MainViewController: UIViewController, SlidingViewDelegate, MenuSelectionDe
             vcTwo = EpicsTableVC(sliderDelegate: self, persistenceManager: persistenceManager)
             setupContentChildVC(child: vcTwo as! UIViewController, superView: contentViewTwo)
         case .archived:
-            print("not yet implemented")
+            vcTwo = ArchivedTasksTableVC(sliderDelegate: self, persistenceManager: self.persistenceManager)
+            setupContentChildVC(child: vcTwo as! UIViewController, superView: contentViewTwo)
         case .more:
             vcTwo = MorePageVC(delegate: self)
             setupContentChildVC(child: vcTwo as! UIViewController, superView: contentViewTwo)
@@ -169,7 +170,10 @@ class MainViewController: UIViewController, SlidingViewDelegate, MenuSelectionDe
         case .epics:
             let composeVC = AddEditEpicVC(persistenceManager: persistenceManager, useState: .create, updateDelegate: vcTwo)
             self.navigationController?.pushViewController(composeVC, animated: true)
-        case .archived, .more:
+        case .archived:
+             let composeVC = AddEditTaskVC(persistenceManager: persistenceManager, useState: .create, updateDelegate: vcTwo, defaultPosition: .backlog)
+             self.navigationController?.pushViewController(composeVC, animated: true)
+        case .more:
             print("called \(#function); should probably remove the add button when on these pages.")
         default:
             fatalError("wrong case caught in \(#function)")

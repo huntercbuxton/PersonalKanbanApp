@@ -58,6 +58,7 @@
 		71BC1B44253DCC6C005EC646 /* PersistenceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71BC1B43253DCC6C005EC646 /* PersistenceManager.swift */; };
 		71BC1B5D253DD3A3005EC646 /* InputsEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71BC1B5C253DD3A3005EC646 /* InputsEnum.swift */; };
 		71BC1B62253DD3D4005EC646 /* InputsProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71BC1B61253DD3D4005EC646 /* InputsProtocols.swift */; };
+		71D32659255BEB1B0045998B /* ArchivedTasksTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71D32658255BEB1B0045998B /* ArchivedTasksTableVC.swift */; };
 		71D378392541B53D00F66FCC /* EnumWorkflowPositions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71D378382541B53D00F66FCC /* EnumWorkflowPositions.swift */; };
 		71DC7FB425474D8B00D0B40C /* InputValidatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71DC7FB325474D8B00D0B40C /* InputValidatorTests.swift */; };
 		71DC7FC8255A612800D0B40C /* EpicDetailScreenOneTopTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71DC7FC7255A612800D0B40C /* EpicDetailScreenOneTopTableVC.swift */; };
@@ -335,6 +336,7 @@
 		71BC1B43253DCC6C005EC646 /* PersistenceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceManager.swift; sourceTree = "<group>"; };
 		71BC1B5C253DD3A3005EC646 /* InputsEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputsEnum.swift; sourceTree = "<group>"; };
 		71BC1B61253DD3D4005EC646 /* InputsProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputsProtocols.swift; sourceTree = "<group>"; };
+		71D32658255BEB1B0045998B /* ArchivedTasksTableVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchivedTasksTableVC.swift; sourceTree = "<group>"; };
 		71D378382541B53D00F66FCC /* EnumWorkflowPositions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnumWorkflowPositions.swift; sourceTree = "<group>"; };
 		71DC7FB125474D8B00D0B40C /* InputValidatorTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = InputValidatorTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		71DC7FB325474D8B00D0B40C /* InputValidatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputValidatorTests.swift; sourceTree = "<group>"; };
@@ -519,6 +521,7 @@
 				715B72FF253C39BC00219F07 /* SliderOneVC.swift */,
 				717DCB1B253EB75E00E2156F /* EpicsTableVC.swift */,
 				71DC7FCD255A624300D0B40C /* MorePageVC.swift */,
+				71D32658255BEB1B0045998B /* ArchivedTasksTableVC.swift */,
 			);
 			path = MainMenuComponents;
 			sourceTree = "<group>";
@@ -1251,6 +1254,7 @@
 				717DCB62253F4AAE00E2156F /* LogView.swift in Sources */,
 				715B7306253C3A3900219F07 /* SlidingViewsVCProtocols.swift in Sources */,
 				717DCB4D253F3DBA00E2156F /* Epic+CoreDataClass.swift in Sources */,
+				71D32659255BEB1B0045998B /* ArchivedTasksTableVC.swift in Sources */,
 				713D0D4C255B26330031C303 /* CustomFontImportStuff.swift in Sources */,
 				717DCB24253ED0BE00E2156F /* AddEditEpicVC.swift in Sources */,
 				717DCB50253F3DBA00E2156F /* Note+CoreDataProperties.swift in Sources */,
