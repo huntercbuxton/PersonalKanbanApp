@@ -62,7 +62,6 @@
 		71D378392541B53D00F66FCC /* EnumWorkflowPositions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71D378382541B53D00F66FCC /* EnumWorkflowPositions.swift */; };
 		71DC7FB425474D8B00D0B40C /* InputValidatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71DC7FB325474D8B00D0B40C /* InputValidatorTests.swift */; };
 		71DC7FC8255A612800D0B40C /* EpicDetailScreenOneTopTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71DC7FC7255A612800D0B40C /* EpicDetailScreenOneTopTableVC.swift */; };
-		71DC7FCE255A624300D0B40C /* MorePageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71DC7FCD255A624300D0B40C /* MorePageVC.swift */; };
 		71DC7FD4255AC86F00D0B40C /* EpicTasksList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71DC7FD3255AC86F00D0B40C /* EpicTasksList.swift */; };
 		71DC8024255AEA8800D0B40C /* iTunesArtwork@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = 71DC7FDC255AEA8800D0B40C /* iTunesArtwork@1x.png */; };
 		71DC8025255AEA8800D0B40C /* Icon-App-76x76@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 71DC7FDE255AEA8800D0B40C /* Icon-App-76x76@2x.png */; };
@@ -342,7 +341,6 @@
 		71DC7FB325474D8B00D0B40C /* InputValidatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputValidatorTests.swift; sourceTree = "<group>"; };
 		71DC7FB525474D8B00D0B40C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		71DC7FC7255A612800D0B40C /* EpicDetailScreenOneTopTableVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpicDetailScreenOneTopTableVC.swift; sourceTree = "<group>"; };
-		71DC7FCD255A624300D0B40C /* MorePageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MorePageVC.swift; sourceTree = "<group>"; };
 		71DC7FD3255AC86F00D0B40C /* EpicTasksList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpicTasksList.swift; sourceTree = "<group>"; };
 		71DC7FDC255AEA8800D0B40C /* iTunesArtwork@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iTunesArtwork@1x.png"; sourceTree = "<group>"; };
 		71DC7FDE255AEA8800D0B40C /* Icon-App-76x76@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-App-76x76@2x.png"; sourceTree = "<group>"; };
@@ -520,7 +518,6 @@
 			children = (
 				715B72FF253C39BC00219F07 /* SliderOneVC.swift */,
 				717DCB1B253EB75E00E2156F /* EpicsTableVC.swift */,
-				71DC7FCD255A624300D0B40C /* MorePageVC.swift */,
 				71D32658255BEB1B0045998B /* ArchivedTasksTableVC.swift */,
 			);
 			path = MainMenuComponents;
@@ -1245,7 +1242,6 @@
 				717DCB5D253F3FF900E2156F /* DateConversion.swift in Sources */,
 				717DCB51253F3DBA00E2156F /* Task+CoreDataClass.swift in Sources */,
 				71D378392541B53D00F66FCC /* EnumWorkflowPositions.swift in Sources */,
-				71DC7FCE255A624300D0B40C /* MorePageVC.swift in Sources */,
 				715B72EF253BF39000219F07 /* UIConsts.swift in Sources */,
 				7146AC39253E19B000DA7D03 /* MainMenuProtocols.swift in Sources */,
 				715B730E253C4B1C00219F07 /* TasksTable.swift in Sources */,

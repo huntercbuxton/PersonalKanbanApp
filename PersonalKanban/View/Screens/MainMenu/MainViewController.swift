@@ -37,9 +37,6 @@ class MainViewController: UIViewController, SlidingViewDelegate, MenuSelectionDe
         case .archived:
             vcTwo = ArchivedTasksTableVC(sliderDelegate: self, persistenceManager: self.persistenceManager)
             setupContentChildVC(child: vcTwo as! UIViewController, superView: contentViewTwo)
-        case .more:
-            vcTwo = MorePageVC(delegate: self)
-            setupContentChildVC(child: vcTwo as! UIViewController, superView: contentViewTwo)
         }
     }
 
@@ -173,8 +170,6 @@ class MainViewController: UIViewController, SlidingViewDelegate, MenuSelectionDe
         case .archived:
              let composeVC = AddEditTaskVC(persistenceManager: persistenceManager, useState: .create, updateDelegate: vcTwo, defaultPosition: .backlog)
              self.navigationController?.pushViewController(composeVC, animated: true)
-        case .more:
-            print("called \(#function); should probably remove the add button when on these pages.")
         default:
             fatalError("wrong case caught in \(#function)")
         }

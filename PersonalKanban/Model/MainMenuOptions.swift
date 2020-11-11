@@ -14,9 +14,8 @@ public enum MainMenuOptions: Int, MenuOptionRepresentable {
     case backlog = 3
     case finished = 4
     case archived = 5
-    case more = 6
 
-    static var allPageTitles: [String] { ["In Progress", "To Do", "Epics", "Backlog", "Finished", "Archived", "more"] }
+    static var allPageTitles: [String] { ["In Progress", "To Do", "Epics", "Backlog", "Finished", "Archived"] }
 
     var pageTitle: String { toString() }
 
