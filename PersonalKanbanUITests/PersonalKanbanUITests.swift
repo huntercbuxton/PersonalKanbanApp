@@ -6,30 +6,58 @@
 //
 
 import XCTest
+//@testable import PersonalKanban
+
+// https://www.swiftbysundell.com/articles/getting-started-with-xcode-ui-testing-in-swift/
 
 class PersonalKanbanUITests: XCTestCase {
 
+    var app: XCUIApplication!
+
+    // MARK: - XCTestCase
+
     override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+        super.setUp()
 
-        // In UI tests it is usually best to stop immediately when a failure occurs.
-        continueAfterFailure = false
+        app = XCUIApplication()
+        app.launchArguments = ["enable-testing"]
+        app.launch()
 
-        // In UI tests it’s important to set the initial state - such as interface orientation - required for your tests before they run. The setUp method is a good place to do this.
     }
 
     override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+        super.tearDown()
     }
 
-    func testExample() throws {
-        // UI tests must launch the application that they test.
-        let app = XCUIApplication()
-        app.launch()
+    // MARK: - Tests
 
-        // Use recording to get started writing UI tests.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+    func testDisplayingEditTaskScreen() {
+
+        XCTAssertTrue(app.isDisplayingMainScreen, "UI test failed in \(#function) app.isDisplayingMainScreen returned false")
+
+        let navigationBarButtons = app.navigationBars.buttons
+        let addButton = navigationBarButtons["addBBI"]
+        addButton.tap()
+
+        XCTAssertTrue(app.isDisplayingTaskEditor, "UI test failed in \(#function) app.isDisplayingTaskEditor returned false")
+
+
+        let saveBtn = navigationBarButtons["saveBtn"]
+        XCTAssertFalse(saveBtn.isEnabled,  "UI test failed in \(#function) saveBtn.isEnabled was true when AddEditTaskScreen had not recieved any inputs")
+
+        let titleTextField = app.textFields["titleTextField"]
+        titleTextField.tap()
+        titleTextField.typeText("alphanumeric string example")
+        XCTAssertTrue(saveBtn.isEnabled,  "UI test failed in \(#function) saveBtn.isEnabled was false when AddEditTaskScreen had already recieved alphanumeric input")
+
+        let cancelBtn = navigationBarButtons["cancelBtn"]
+        XCTAssertTrue(cancelBtn.isEnabled,  "UI test failed in \(#function) cancelBtn.isEnabled was true")
+
+        saveBtn.tap()
+        XCTAssertFalse(app.isDisplayingTaskEditor, "UI test failed in \(#function), addEditTaskScreen was still presented after saveBtn was enabled and tapped")
+
     }
+
 
     func testLaunchPerformance() throws {
         if #available(macOS 10.15, iOS 13.0, tvOS 13.0, *) {
@@ -40,3 +68,14 @@ class PersonalKanbanUITests: XCTestCase {
         }
     }
 }
+
+
+extension XCUIApplication {
+    var isDisplayingMainScreen: Bool {
+        return otherElements["mainParentVCID"].exists
+    }
+    var isDisplayingTaskEditor: Bool {
+        return otherElements["taskEditorVCID"].exists
+    }
+}
+

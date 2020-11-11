@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		7116FDC5255B522C00C84084 /* UnassignedTasksSelectionTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7116FDC4255B522C00C84084 /* UnassignedTasksSelectionTableVC.swift */; };
+		7116FDCF255B7B8100C84084 /* AccessibilityIDs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7116FDCE255B7B8100C84084 /* AccessibilityIDs.swift */; };
 		71209AEC253E3CDD0082DA0A /* TaskEditingTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71209AEB253E3CDD0082DA0A /* TaskEditingTable.swift */; };
 		713D0D40255B20C60031C303 /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 713D0D3F255B20C60031C303 /* UIColorExtension.swift */; };
 		713D0D46255B23740031C303 /* Alata-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 713D0D45255B23740031C303 /* Alata-Regular.ttf */; };
@@ -278,6 +279,7 @@
 
 /* Begin PBXFileReference section */
 		7116FDC4255B522C00C84084 /* UnassignedTasksSelectionTableVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnassignedTasksSelectionTableVC.swift; sourceTree = "<group>"; };
+		7116FDCE255B7B8100C84084 /* AccessibilityIDs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessibilityIDs.swift; sourceTree = "<group>"; };
 		71209AEB253E3CDD0082DA0A /* TaskEditingTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskEditingTable.swift; sourceTree = "<group>"; };
 		713D0D3F255B20C60031C303 /* UIColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
 		713D0D45255B23740031C303 /* Alata-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Alata-Regular.ttf"; sourceTree = "<group>"; };
@@ -564,6 +566,7 @@
 				715B72EE253BF39000219F07 /* UIConsts.swift */,
 				713D0D4B255B26330031C303 /* CustomFontImportStuff.swift */,
 				713D0D51255B28570031C303 /* CustomUIColorsFromHex.swift */,
+				7116FDCE255B7B8100C84084 /* AccessibilityIDs.swift */,
 			);
 			path = MiscFiles;
 			sourceTree = "<group>";
@@ -1244,6 +1247,7 @@
 				7146AC39253E19B000DA7D03 /* MainMenuProtocols.swift in Sources */,
 				715B730E253C4B1C00219F07 /* TasksTable.swift in Sources */,
 				715B7316253C520300219F07 /* AddEditTaskVC.swift in Sources */,
+				7116FDCF255B7B8100C84084 /* AccessibilityIDs.swift in Sources */,
 				717DCB62253F4AAE00E2156F /* LogView.swift in Sources */,
 				715B7306253C3A3900219F07 /* SlidingViewsVCProtocols.swift in Sources */,
 				717DCB4D253F3DBA00E2156F /* Epic+CoreDataClass.swift in Sources */,

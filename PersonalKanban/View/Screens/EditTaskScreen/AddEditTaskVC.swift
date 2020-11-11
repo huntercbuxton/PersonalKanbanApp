@@ -128,6 +128,13 @@ class AddEditTaskVC: UIViewController, InputsInterfaceDelegate, EditTaskTableDel
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        // used in the first UITest file
+        view.accessibilityIdentifier = "taskEditorVCID"
+        saveBtn.accessibilityIdentifier = "saveBtn"
+        cancelBtn.accessibilityIdentifier = "cancelBtn"
+        titleTextField.accessibilityIdentifier = "titleTextField"
+
+        
         self.view.backgroundColor = .systemGroupedBackground
         setupNavBar()
         setupScrollViewAndContentView()

@@ -97,14 +97,23 @@ class MainViewController: UIViewController, SlidingViewDelegate, MenuSelectionDe
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        // used in the first 'example' UITest
+        view.accessibilityIdentifier = "mainParentVCID"
+//        navigationController!.navigationBar.accessibilityIdentifier = "featureNavigationBar"
+        addBBI.accessibilityIdentifier = "addBBI"
+        menuBBI.accessibilityIdentifier = "menuBBI"
+
         view.backgroundColor = .systemBackground
         setupSubviews()
         setupContentChildVC(child: vcOne, superView: contentViewOne)
         setupContentChildVC(child: vcTwo as! UIViewController, superView: contentViewTwo)
+
     }
 
     private func setupSubviews() {
         title = self.currentPage.pageTitle
+//        self.navigationItem.title = "a title for some reason"
         navigationItem.setLeftBarButton(menuBBI, animated: false)
         navigationItem.setRightBarButton(addBBI, animated: false)
 

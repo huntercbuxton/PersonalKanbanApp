@@ -56,6 +56,7 @@ class SliderOneVC: UITableViewController, MenuController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: tableViewCellReuseID)
         tableView.tableFooterView = UITableViewHeaderFooterView()
     }

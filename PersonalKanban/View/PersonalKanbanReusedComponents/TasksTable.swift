@@ -44,10 +44,12 @@ class TasksTable: UITableViewController, SlidingContentsViewContoller {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         loadData()
         self.view.translatesAutoresizingMaskIntoConstraints = false
         self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: self.cellReuseID)
         self.tableView.tableFooterView = UITableViewHeaderFooterView()
+
     }
 
     // MARK: - Table view data source
