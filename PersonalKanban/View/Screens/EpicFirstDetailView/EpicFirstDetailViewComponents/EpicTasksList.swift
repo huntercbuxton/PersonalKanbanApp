@@ -122,6 +122,8 @@ class EpicTasksList: UITableViewController, EditorStateControllable {
         label.font = SavedCustomFonts.defaultTableHeaderFont
         label.textColor = SavedCustomColors.defaultTableHeaderFontColor
         label.text = taskLists[section].isEmpty ? titleIfEmpty : titleIfNotEmpty
+        label.layer.borderWidth = 0.4
+        label.layer.borderColor =  UIColor.white.cgColor
         return label
     }
 
