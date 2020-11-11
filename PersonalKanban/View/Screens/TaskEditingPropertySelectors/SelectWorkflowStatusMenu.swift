@@ -17,10 +17,9 @@ class SelectWorkflowStatusMenu: UITableViewController {
     private weak var workflowStatusSelectionDelegate: WorkflowStatusSelectionDelegate?
     private var options: [WorkflowPosition] = WorkflowPosition.allCases as [WorkflowPosition]
     private var currentStatus: WorkflowPosition
-    var saveDate: UIBarButtonItem =  UIBarButtonItem(title: "SaveDate", style: .plain, target: nil, action: #selector(SelectWorkflowStatusMenu.saveDateTapped))// UIBarButtonItem(image: UIImage(systemName: "trash"), style: .plain, target: self, action: #selector(SelectWorkflowStatusMenu.saveDateTapped))
-    @objc func saveDateTapped() {
+    var saveBtn: UIBarButtonItem =  UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(saveBtnTapped))
+    @objc func saveBtnTapped() {
         print("called \(#function)")
-//        delegate!.pickDate(picker.date)
         self.navigationController!.popViewController(animated: true)
     }
 
@@ -29,7 +28,7 @@ class SelectWorkflowStatusMenu: UITableViewController {
         self.title = "select status"
         self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellReuseID)
         tableView.tableFooterView = UIView(background: .systemGroupedBackground)
-        self.navigationItem.setRightBarButton(saveDate, animated: true)
+        self.navigationItem.setRightBarButton(saveBtn, animated: true)
     }
 
     // MARK: - Table view data source

@@ -26,7 +26,7 @@ class UnassignedTasksSelectionTableVC: UITableViewController {
     private var selectedList: [IndexPath] = []
     private let epic: Epic
     private let cellReuseID = "UnassignedTasksSelectionTableVC.cellReuseID"
-    private lazy var addBtn: UIBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addBtnTapped))
+    private lazy var addBtn: UIBarButtonItem = UIBarButtonItem(title: "Add", style: .plain, target: self, action: #selector(addBtnTapped))
     weak var selectionDelegate: UnassignedTasksSelectionDelegate!
 
     // MARK: - Table view data source
