@@ -117,13 +117,13 @@ class EpicDetailViewFirstScreen: UIViewController, EpicViewDetailsOptionTableDel
         taskListTableVC.view.topAnchor.constraint(equalTo: taskTableLabel.bottomAnchor, constant: SavedLayouts.shortVerticalSpacing).isActive = true
         taskListTableVC.view.constrainHEdgesAnchors(contentView)
 
+        taskListTableVC.view.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -SavedLayouts.shortVerticalSpacing).isActive = true
         var newSize1 = taskListTableVC.view.sizeThatFits(CGSize(width: contentView.bounds.width, height: CGFloat.greatestFiniteMagnitude))
-//        taskListTableVC.view.heightAnchor.constraint(equalToConstant: newSize1.height).isActive = true
 
         self.heightConstraint = self.taskListTableVC.view.heightAnchor.constraint(equalToConstant: newSize1.height)
         heightConstraint?.isActive = true
 
-        taskListTableVC.view.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -SavedLayouts.shortVerticalSpacing).isActive = true
+
     }
 
     // MARK: - misc instance methods

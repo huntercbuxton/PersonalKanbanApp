@@ -43,13 +43,14 @@ class EpicTasksList: UITableViewController, EditorStateControllable {
 
     private func loadData() {
         taskLists = persistenceManager.sortEpicTasks(for: epic)
-        self.tableView.tableFooterView = UIView(background: .systemGroupedBackground)
         self.view.backgroundColor = UIConsts.defaultBackgroundColor
     }
 
     func reloadDisplay() {
         taskLists = persistenceManager.sortEpicTasks(for: epic)
-        self.tableView.tableFooterView = UIView(background: .systemGroupedBackground)
+        print("called reloadDisplay()")
+        print("taskList contains the following sized arrays:")
+        taskLists.forEach({print($0.count)})
         tableView.reloadData()
     }
 
@@ -66,7 +67,8 @@ class EpicTasksList: UITableViewController, EditorStateControllable {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: .default, reuseIdentifier: cellReuseID)
         cell.textLabel?.text = taskLists[indexPath.section][indexPath.row].title
-//        cell.detailTextLabel?.text = taskLists[indexPath.section][indexPath.row].quickNote
+        print("called \(#function) with indexPath: \(String(describing: indexPath))")
+//        cell.contentView.backgroundColor = .blue
         return cell
     }
 
@@ -94,9 +96,22 @@ class EpicTasksList: UITableViewController, EditorStateControllable {
         case 3:
             return mkSectionHeaderViewWith(titleIfEmpty: "you have no finished tasks for this epic", titleIfNotEmpty: "finished tasks", for: section)
         default:
-            return UIView(background: .systemGroupedBackground)
+            return mkSectionHeaderViewWith(titleIfEmpty: "   ", titleIfNotEmpty: "   ", for: section)
         }
     }
+
+    override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        return nil
+    }
+
+    override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 0
+    }
+
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return SavedLayouts.defaultTableHeaderHeight
+    }
+
 
     private func mkSectionHeaderViewWith(titleIfEmpty: String, titleIfNotEmpty: String, for section: Int) -> UILabel {
         let label = UILabel()
@@ -107,20 +122,6 @@ class EpicTasksList: UITableViewController, EditorStateControllable {
         label.textColor = SavedCustomColors.defaultTableHeaderFontColor
         label.text = taskLists[section].isEmpty ? titleIfEmpty : titleIfNotEmpty
         return label
-    }
-
-    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-//        switch section {
-//        case 0...3:
-//            return SavedLayouts.defaultTableHeaderHeight
-//        default:
-//            return 0
-//        }
-        return SavedLayouts.defaultTableHeaderHeight
-    }
-
-    override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return SavedLayouts.defaultTableHeaderHeight
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

@@ -270,6 +270,16 @@ class AddEditTaskVC: UIViewController, InputsInterfaceDelegate, EditTaskTableDel
 
 //     MARK: - initialization
 
+    // used when creating  anew task for a given epic
+    init(persistenceManager: PersistenceManager, useState: EditScreenUseState, task: Task? = nil, updateDelegate: CoreDataDisplayDelegate, selectedEpic: Epic) {
+        self.persistenceManager = persistenceManager
+        self.useState = useState
+        self.taskMO = task
+        self.updateDelegate = updateDelegate
+        self.selectedEpic = selectedEpic
+        super.init(nibName: nil, bundle: nil)
+    }
+
     // used when editing an existing task
     init(persistenceManager: PersistenceManager, useState: EditScreenUseState, task: Task? = nil, updateDelegate: CoreDataDisplayDelegate) {
         self.persistenceManager = persistenceManager

@@ -7,7 +7,13 @@
 
 import UIKit
 
-class EpicDetailsEditorMenuVC: UITableViewController, UnassignedTasksSelectionDelegate {
+class EpicDetailsEditorMenuVC: UITableViewController, UnassignedTasksSelectionDelegate, CoreDataDisplayDelegate {
+
+    // MARK: - CoreDataDisplayDelegate conformance
+
+    func updateCoreData() {
+        print("called \(#function) but no action has been implemented here yet")
+    }
 
     // MARK: - UnassignedTasksSelectionDelegate conformance
 
@@ -67,7 +73,8 @@ class EpicDetailsEditorMenuVC: UITableViewController, UnassignedTasksSelectionDe
             case 0:
                 self.navigationController?.pushViewController(UnassignedTasksSelectionTableVC(persistenceManager: self.persistenceManager, selectionDelegate: self, epic: self.epic), animated: true)
             case 1:
-                print("placeholder in case \(1)")
+                let vc = AddEditTaskVC(persistenceManager: persistenceManager, useState: .create, updateDelegate: self, selectedEpic: self.epic)
+                self.navigationController?.pushViewController(vc, animated: true)
             default:
                 assertionFailure("\(#function) argument was an invalid/unexpected index path with value \(String(describing: indexPath))")
             }

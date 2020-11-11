@@ -43,9 +43,7 @@ final class PersistenceManager {
                                                       .finished:[]
                                                     ]
         for task in unsorted {
-            if task.workflowStatusEnum != .defaultStatus {
-                returnData[task.workflowStatusEnum]?.append(task)
-            }
+            returnData[task.workflowStatusEnum]?.append(task)
         }
         let taskArray = [ returnData[.backlog] ?? [], returnData[.toDo] ?? [], returnData[.inProgress] ?? [], returnData[.finished] ?? [] ]
         return taskArray
