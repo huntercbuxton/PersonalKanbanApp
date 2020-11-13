@@ -20,7 +20,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // https://learnappmaking.com/scene-delegate-app-delegate-xcode-11-ios-13/
         if let windowScene = scene as? UIWindowScene {
             let window = UIWindow(windowScene: windowScene)
-            let rootVC = MainViewController(page: .backlog, persistenceManager: PersistenceManager.shared)
+            let displayController = MainMenuController()
+            let rootVC = MainVC(persistenceManager: PersistenceManager.shared, displayController: displayController)
             let navigation = UINavigationController(rootViewController: rootVC)
             window.rootViewController = navigation
             self.window = window

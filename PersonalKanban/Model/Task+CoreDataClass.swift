@@ -19,7 +19,7 @@ public class Task: NSManagedObject {
         set {
             if newValue {
                 self.workflowStatus = Int64(5)
-            } else {
+            } else if isArchived {
                 self.workflowStatus = Int64(0)
             }
         }
@@ -42,32 +42,13 @@ public class Task: NSManagedObject {
 
     var workflowStatusEnum: WorkflowPosition? {
         get {
-            guard let converted = WorkflowPosition(rawValue: Int(self.workflowStatus)) else {
-                return nil
-            }
-            print("workflowStatusEnum.get returned \(converted)")
-            return converted
+            return WorkflowPosition(rawValue: Int(self.workflowStatus))
         }
         set {
             guard let num = newValue else {
-                self.workflowStatus = Int64(5)
-                return
+                fatalError("cannot set the wprkflowStatus of a task by setting nil to the workflowStatusEnum property; only cases of the WorkflowPosition enum can be converted to rawValues. If you with to archive the task, set workflowStatus to 5 or more, or set isArchived to true ")
             }
             self.workflowStatus =  Int64(num.rawValue)
         }
     }
-}
-
-enum StoryPoints: Int, RawRepresentable, CaseIterable {
-    case unassigned = 0
-    case two = 1
-    case four = 2
-    case eight = 3
-    case sixteen = 4
-
-    init?(from value: Int64) {
-        self.init(rawValue: Int(value))
-    }
-
-    var displayTitle: String { String(describing: self) }
 }
