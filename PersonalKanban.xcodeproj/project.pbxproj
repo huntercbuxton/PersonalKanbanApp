@@ -31,7 +31,6 @@
 		715B7306253C3A3900219F07 /* SlidingViewsVCProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 715B7305253C3A3900219F07 /* SlidingViewsVCProtocols.swift */; };
 		715B731B253C524600219F07 /* PaddedTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 715B731A253C524600219F07 /* PaddedTextField.swift */; };
 		716C718B255E22A100373F16 /* ChooseEpicsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 716C7186255E22A100373F16 /* ChooseEpicsScreen.swift */; };
-		716C718C255E22A100373F16 /* ReadOnlyTaskDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 716C7187255E22A100373F16 /* ReadOnlyTaskDetailVC.swift */; };
 		716C718D255E22A100373F16 /* SelectWorkflowStatusMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 716C7188255E22A100373F16 /* SelectWorkflowStatusMenu.swift */; };
 		716C718E255E22A100373F16 /* StoryPointsSelectionScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 716C7189255E22A100373F16 /* StoryPointsSelectionScreen.swift */; };
 		716C718F255E22A100373F16 /* AddEditTaskVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 716C718A255E22A100373F16 /* AddEditTaskVC.swift */; };
@@ -322,7 +321,6 @@
 		715B7305253C3A3900219F07 /* SlidingViewsVCProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlidingViewsVCProtocols.swift; sourceTree = "<group>"; };
 		715B731A253C524600219F07 /* PaddedTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaddedTextField.swift; sourceTree = "<group>"; };
 		716C7186255E22A100373F16 /* ChooseEpicsScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChooseEpicsScreen.swift; sourceTree = "<group>"; };
-		716C7187255E22A100373F16 /* ReadOnlyTaskDetailVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReadOnlyTaskDetailVC.swift; sourceTree = "<group>"; };
 		716C7188255E22A100373F16 /* SelectWorkflowStatusMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectWorkflowStatusMenu.swift; sourceTree = "<group>"; };
 		716C7189255E22A100373F16 /* StoryPointsSelectionScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoryPointsSelectionScreen.swift; sourceTree = "<group>"; };
 		716C718A255E22A100373F16 /* AddEditTaskVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddEditTaskVC.swift; sourceTree = "<group>"; };
@@ -508,18 +506,18 @@
 			children = (
 				715B72B5253BEDDE00219F07 /* MainVC.swift */,
 				715B72FF253C39BC00219F07 /* MainMenu.swift */,
-				71170C15255AF38700D5F2F2 /* ContentChosenFromMenu */,
+				71170C15255AF38700D5F2F2 /* Content */,
 			);
 			path = "MainMenu&Displays";
 			sourceTree = "<group>";
 		};
-		71170C15255AF38700D5F2F2 /* ContentChosenFromMenu */ = {
+		71170C15255AF38700D5F2F2 /* Content */ = {
 			isa = PBXGroup;
 			children = (
 				71D182D1255C920700E86C50 /* TasksListDisplayVC.swift */,
 				717DCB1B253EB75E00E2156F /* EpicsTable.swift */,
 			);
-			path = ContentChosenFromMenu;
+			path = Content;
 			sourceTree = "<group>";
 		};
 		71239FCA255E1DB400B3A1F1 /* Unused */ = {
@@ -645,7 +643,6 @@
 			children = (
 				716C719D255E233700373F16 /* Create&Edit */,
 				716C7194255E22BC00373F16 /* TaskDetailsTableVC.swift */,
-				716C7187255E22A100373F16 /* ReadOnlyTaskDetailVC.swift */,
 			);
 			path = Task;
 			sourceTree = "<group>";
@@ -1332,7 +1329,6 @@
 				71D182D2255C920700E86C50 /* TasksListDisplayVC.swift in Sources */,
 				713D0D4C255B26330031C303 /* CustomFontImportStuff.swift in Sources */,
 				717DCB24253ED0BE00E2156F /* AddEditEpicVC.swift in Sources */,
-				716C718C255E22A100373F16 /* ReadOnlyTaskDetailVC.swift in Sources */,
 				717DCB50253F3DBA00E2156F /* Note+CoreDataProperties.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

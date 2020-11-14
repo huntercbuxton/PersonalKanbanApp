@@ -7,7 +7,7 @@
 
 import UIKit
 
-enum EditScreenUseState {
+enum CreateOrEdit {
     case create
     case edit
 }
@@ -23,23 +23,6 @@ class AddEditTaskVC: UIViewController, InputsInterfaceDelegate, TaskEditorOption
     func disableSave() {
         self.saveBtn.isEnabled = false
     }
-
-    // MARK: - EditTaskTableDelegate conformance
-
-//    func goToEpicSelectionScreen() {
-//        let epicsScreen = ChooseEpicsScreen(persistenceManager: persistenceManager, selectionDelegate: self)
-//        self.navigationController?.pushViewController(epicsScreen, animated: true)
-//    }
-
-    func goToStoryPointsSelectionScreen() {
-//        let storyPointsVC = StoryPointsSelectionScreen(delegate: self, currentSelection: storyPoints)
-//        self.navigationController?.pushViewController(storyPointsVC, animated: true)
-    }
-
-//    func goToWorkflowSelectorScreen() {
-//        let positionScreen = SelectWorkflowStatusMenu(workflowStatusSelectionDelegate: self, currentStatus: workflowStatus)
-//        self.navigationController?.pushViewController(positionScreen, animated: true)
-//    }
 
     // MARK: - TaskEditorOptionsTable2Delegate conformance
 
@@ -58,63 +41,18 @@ class AddEditTaskVC: UIViewController, InputsInterfaceDelegate, TaskEditorOption
     var selectedToArchive: Bool = false
 
     func archiveTask() {
-//        self.taskMO?.isArchived = true
         self.table.workflowPosition = nil
         selectedToArchive = true
-        archiveChangeDelegate?.changedArchivePropertyTo(true)
     }
 
     func unArchiveTask() {
-//        self.taskMO?.isArchived = false
         self.table.workflowPosition = taskMO?.workflowStatusEnum ?? self.defaultStatus
         selectedToArchive = false
-        archiveChangeDelegate?.changedArchivePropertyTo(false)
     }
-
-    // MARK: - EpicsSelectorDelegate conformance
-
-//    func selectEpic(_ selection: Epic) {
-//        selectedEpic = selection
-//    }
-
-    // MARK: - StoryPointsSelectionDelegate conformance
-//
-//    func selectStoryPoints(_ selectedValue: StoryPoints) {
-//        self.storyPoints = selectedValue
-//    }
-
-    // MARK: - WorkflowStatusSelectionDelegate conformance
-//
-//    func selectStatus(newStatus: WorkflowPosition) {
-//        self.workflowStatus = newStatus
-//    }
-
-    // MARK: - properties storing working updates to the task data which has not been saved.
-
-//    var selectedEpic: Epic? {
-//        willSet {
-//            if newValue != selectedEpic {
-//                self.saveBtn.isEnabled = true
-//            }
-//        }
-//        didSet {
-//            self.table.selectedEpic = selectedEpic
-//        }
-//    }
-//    private lazy var storyPoints = taskMO?.storyPointsEnum ?? .unassigned {
-//        didSet {
-//            self.table.storyPoints = storyPoints
-//        }
-//    }
-//    private lazy var workflowStatus: WorkflowPosition = self.taskMO?.workflowStatusEnum ?? .backlog {
-//        didSet {
-//            self.table.workflowPosition = workflowStatus
-//        }
-//    }
 
     // MARK: - properties storing UI Components
 
-    weak var archiveChangeDelegate: ArchiveChangeDisplayDelegate?
+   // weak var archiveChangeDelegate: ArchiveChangeDisplayDelegate?
     private lazy var scrollView = UIScrollView()
     private lazy var contentView = UIView()
     private lazy var saveBtn = UIBarButtonItem(barButtonSystemItem: .save,
@@ -132,12 +70,11 @@ class AddEditTaskVC: UIViewController, InputsInterfaceDelegate, TaskEditorOption
 
     // MARK: - properties specifying UI style/layout
 
-    private var titleText: String { useState == .create ? "Create Task" : "Edit Task" }
     private lazy var margins: UIEdgeInsets = contentView.layoutMargins
 
     // MARK: - other properties
 
-    private let useState: EditScreenUseState
+    private let useState: CreateOrEdit
     private weak var updateDelegate: CoreDataDisplayDelegate!
     private var inputValidationManager: InputValidationManager!
     private let persistenceManager: PersistenceManager
@@ -153,7 +90,6 @@ class AddEditTaskVC: UIViewController, InputsInterfaceDelegate, TaskEditorOption
         cancelBtn.accessibilityIdentifier = "cancelBtn"
         titleTextField.accessibilityIdentifier = "titleTextField"
 
-        
         self.view.backgroundColor = .systemGroupedBackground
         setupNavBar()
         setupScrollViewAndContentView()
@@ -173,9 +109,11 @@ class AddEditTaskVC: UIViewController, InputsInterfaceDelegate, TaskEditorOption
     }
 
     private func setupNavBar() {
-        self.title = self.titleText
+        if useState  == .create {
+            self.title = "create a task"
+        }
         self.navigationItem.setRightBarButton(saveBtn, animated: false)
-        if self.useState == .create { saveBtn.isEnabled = false }
+        saveBtn.isEnabled = false
         self.navigationItem.setLeftBarButton(cancelBtn, animated: false)
     }
 
@@ -289,7 +227,7 @@ class AddEditTaskVC: UIViewController, InputsInterfaceDelegate, TaskEditorOption
 //     MARK: - initialization
 
     // used when creating  anew task for a given epic
-    init(persistenceManager: PersistenceManager, useState: EditScreenUseState, task: Task? = nil, updateDelegate: CoreDataDisplayDelegate, selectedEpic: Epic) {
+    init(persistenceManager: PersistenceManager, useState: CreateOrEdit, task: Task? = nil, updateDelegate: CoreDataDisplayDelegate, selectedEpic: Epic) {
         self.persistenceManager = persistenceManager
         self.useState = useState
         self.taskMO = task
@@ -300,7 +238,7 @@ class AddEditTaskVC: UIViewController, InputsInterfaceDelegate, TaskEditorOption
     }
 
     // used when editing an existing task
-    init(persistenceManager: PersistenceManager, useState: EditScreenUseState, task: Task? = nil, updateDelegate: CoreDataDisplayDelegate) {
+    init(persistenceManager: PersistenceManager, useState: CreateOrEdit, task: Task? = nil, updateDelegate: CoreDataDisplayDelegate) {
         self.persistenceManager = persistenceManager
         self.useState = useState
         self.taskMO = task
@@ -310,7 +248,7 @@ class AddEditTaskVC: UIViewController, InputsInterfaceDelegate, TaskEditorOption
     }
 
     // used when creating a new task
-    init(persistenceManager: PersistenceManager, useState: EditScreenUseState, updateDelegate: CoreDataDisplayDelegate, defaultPosition: WorkflowPosition = .backlog) {
+    init(persistenceManager: PersistenceManager, useState: CreateOrEdit, updateDelegate: CoreDataDisplayDelegate, defaultPosition: WorkflowPosition = .backlog) {
         self.persistenceManager = persistenceManager
         self.useState = useState
         self.defaultStatus = defaultPosition

@@ -91,7 +91,7 @@ class TasksListDisplayVC: UIViewController, UITableViewDelegate, UITableViewData
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         sliderDelegate?.hideMenu()
-        let detailVC = ReadOnlyTaskDetailVC(persistenceManager: persistenceManager, task: taskLists[indexPath.section][indexPath.row], updateDelegate: self)
+        let detailVC = AddEditTaskVC(persistenceManager: persistenceManager, useState: .edit, task: taskLists[indexPath.section][indexPath.row], updateDelegate: self)
         navigationController?.pushViewController(detailVC, animated: true)
     }
 

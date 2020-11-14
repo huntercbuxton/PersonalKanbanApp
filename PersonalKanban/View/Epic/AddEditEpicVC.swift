@@ -41,7 +41,7 @@ class AddEditEpicVC: UIViewController, InputsInterfaceDelegate {
     // MARK: - other properties
 
     let persistenceManager: PersistenceManager
-    let useState: EditScreenUseState
+    let useState: CreateOrEdit
     var epic: Epic?
     weak var updateDelegate: CoreDataDisplayDelegate!
         var inputValidationManager: InputValidationManager!
@@ -170,7 +170,7 @@ class AddEditEpicVC: UIViewController, InputsInterfaceDelegate {
 
     // MARK: initialization
 
-    init(persistenceManager: PersistenceManager, useState: EditScreenUseState, epic: Epic? = nil, updateDelegate: CoreDataDisplayDelegate) {
+    init(persistenceManager: PersistenceManager, useState: CreateOrEdit, epic: Epic? = nil, updateDelegate: CoreDataDisplayDelegate) {
         self.persistenceManager = persistenceManager
         self.useState = useState
         self.epic = epic
