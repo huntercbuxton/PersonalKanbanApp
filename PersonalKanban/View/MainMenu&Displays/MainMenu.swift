@@ -52,8 +52,8 @@ class MainMenu: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let optionType = options[indexPath.row]
         self.delegateResponder.detectedSelection(optionType)
-        if indexPath.row != 0 || indexPath.section != 0 {
-            tableView.cellForRow(at: IndexPath(row: 0, section: 0))?.setSelected(false, animated: true)
+        if indexPath.row !=  MainMenuOptions.inProgress.rawValue || indexPath.section != 0 {
+            tableView.cellForRow(at: IndexPath(row: MainMenuOptions.inProgress.rawValue, section: 0))?.setSelected(false, animated: true)
         }
     }
 

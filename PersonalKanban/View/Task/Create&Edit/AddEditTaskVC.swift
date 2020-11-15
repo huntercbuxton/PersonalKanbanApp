@@ -14,20 +14,12 @@ enum CreateOrEdit {
 
 class AddEditTaskVC: UIViewController, InputsInterfaceDelegate, TaskEditorOptionsTable2Delegate, InputStateManagerDelegate {
 
+    // MARK: - InputStateManagerDelegate conformance
+
     func updateState(_ state: InputState) {
         saveBtn.isEnabled = state == .valid
     }
 
-
-    // MARK: - InputsInterfaceDelegate conformance
-
-    func enableSave() {
-        self.saveBtn.isEnabled = true
-    }
-
-    func disableSave() {
-        self.saveBtn.isEnabled = false
-    }
 
     // MARK: - TaskEditorOptionsTable2Delegate conformance
 
@@ -163,7 +155,7 @@ class AddEditTaskVC: UIViewController, InputsInterfaceDelegate, TaskEditorOption
 
     @objc func saveBtnTapped() {
         if useState == .create {
-//            createTask(title: self.titleTextField.text!, notes: self.notesTextView.text)
+            createTask(title: self.titleAndStickyNote.titleInput.text!, notes: self.titleAndStickyNote.titleInput.text!)
         } else {
             saveChanges()
         }

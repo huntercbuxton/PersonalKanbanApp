@@ -8,14 +8,27 @@
 import Foundation
 
 public enum MainMenuOptions: Int, MenuOptionRepresentable, CaseIterable {
-    case inProgress = 0
-    case toDo = 1
-    case epics = 2
+    case toDo = 0
+    case epics = 1
+    case inProgress = 2
     case backlog = 3
     case finished = 4
     case archived = 5
 
-    static var allPageTitles: [String] { ["In Progress", "To Do", "Epics", "Backlog", "Finished", "Archived"] }
+    static var allPageTitles: [String] { Self.allCases.map({ MainMenuOptions[$0] }) }
+
+    static subscript(index: MainMenuOptions) -> String {
+        get {
+            switch index {
+            case .toDo: return "To-Do"
+            case .epics: return "Epics"
+            case .inProgress: return "In Progress"
+            case .backlog: return "Backlog"
+            case .finished: return "Finished"
+            case .archived: return "Archived"
+            }
+        }
+    }
 
     var pageTitle: String { toString() }
 
@@ -25,3 +38,4 @@ public enum MainMenuOptions: Int, MenuOptionRepresentable, CaseIterable {
         return MainMenuOptions.allPageTitles[self.rawValue]
     }
 }
+
