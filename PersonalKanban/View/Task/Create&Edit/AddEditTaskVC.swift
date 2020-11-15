@@ -12,7 +12,12 @@ enum CreateOrEdit {
     case edit
 }
 
-class AddEditTaskVC: UIViewController, InputsInterfaceDelegate, TaskEditorOptionsTable2Delegate {
+class AddEditTaskVC: UIViewController, InputsInterfaceDelegate, TaskEditorOptionsTable2Delegate, InputStateManagerDelegate {
+
+    func updateState(_ state: InputState) {
+        saveBtn.isEnabled = state == .valid
+    }
+
 
     // MARK: - InputsInterfaceDelegate conformance
 
@@ -61,8 +66,7 @@ class AddEditTaskVC: UIViewController, InputsInterfaceDelegate, TaskEditorOption
     private lazy var cancelBtn = UIBarButtonItem(barButtonSystemItem: .cancel,
                                                                 target: self,
                                                                 action: #selector(cancelBtnTapped))
-    private lazy var titleTextField: PaddedTextField = PaddedTextField()
-    private lazy var notesTextView: LargeTextView = LargeTextView(text: "")
+    var titleAndStickyNote: TitleAndStickyNote!
     private lazy var table: TaskDetailsTableVC = TaskDetailsTableVC(coreDataDAO: persistenceManager, task: taskMO, isReadOnly: false)
     // TaskEditingTable(useState: self.useState, editingDelegate: self, selectedEpic: self.selectedEpic, workflowStatus: self.workflowStatus, storyPoints: storyPoints)
     private lazy var table2 = TaskEditorOptionsTable2(delegate: self)
@@ -76,7 +80,7 @@ class AddEditTaskVC: UIViewController, InputsInterfaceDelegate, TaskEditorOption
 
     private let useState: CreateOrEdit
     private weak var updateDelegate: CoreDataDisplayDelegate!
-    private var inputValidationManager: InputValidationManager!
+    lazy var inputStateManager: InputStateManager = InputStateManager(delegate: self)
     private let persistenceManager: PersistenceManager
     private var taskMO: Task?
 
@@ -88,90 +92,78 @@ class AddEditTaskVC: UIViewController, InputsInterfaceDelegate, TaskEditorOption
         view.accessibilityIdentifier = "taskEditorVCID"
         saveBtn.accessibilityIdentifier = "saveBtn"
         cancelBtn.accessibilityIdentifier = "cancelBtn"
-        titleTextField.accessibilityIdentifier = "titleTextField"
 
         self.view.backgroundColor = .systemGroupedBackground
-        setupNavBar()
-        setupScrollViewAndContentView()
-        setupInputFields()
-        setupTable(table)
-        table.view.topAnchor.constraint(equalTo: notesTextView.bottomAnchor, constant: SavedLayouts.verticalSpacing).isActive = true
+        if useState  == .create {
+            self.title = "create a task"
+            self.navigationItem.setLeftBarButton(cancelBtn, animated: false)
+        }
+        self.navigationItem.setRightBarButton(saveBtn, animated: false)
+        saveBtn.isEnabled = false
+
+        scrollView.layoutWithGuide(in: view)
+        contentView.translatesAutoresizingMaskIntoConstraints = false
+        scrollView.addSubview(contentView)
+        contentView.constrainEdgeAnchors(to: scrollView, insets: margins)
+        contentView.widthAnchor.constraint(equalTo: self.scrollView.widthAnchor, constant: -(margins.right*2)).isActive = true
+
+        titleAndStickyNote = TitleAndStickyNote(task: taskMO, titleObserver: self.inputStateManager)
+        self.addChild(titleAndStickyNote)
+        titleAndStickyNote.view.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(titleAndStickyNote.view)
+        titleAndStickyNote.view.translatesAutoresizingMaskIntoConstraints = false
+        titleAndStickyNote.view.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
+        titleAndStickyNote.view.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
+        titleAndStickyNote.view.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
+
+        self.addChild(table)
+        table.view.translatesAutoresizingMaskIntoConstraints = false
+        contentView.addSubview(table.view)
+        table.view.constrainHEdgesAnchors(contentView, constant: margins.right)
+        let newSize = table.view.sizeThatFits(CGSize(width: contentView.bounds.width, height: CGFloat.greatestFiniteMagnitude))
+        table.view.heightAnchor.constraint(equalToConstant: newSize.height).isActive = true
+        table.view.topAnchor.constraint(equalTo: titleAndStickyNote.view.bottomAnchor, constant: SavedLayouts.verticalSpacing).isActive = true
 
         if useState == .edit {
-            setupTable(table2)
+            self.addChild(table2)
+            table2.view.translatesAutoresizingMaskIntoConstraints = false
+            contentView.addSubview(table.view)
+            table.view.constrainHEdgesAnchors(contentView, constant: margins.right)
+            let newSize = table.view.sizeThatFits(CGSize(width: contentView.bounds.width, height: CGFloat.greatestFiniteMagnitude))
+            table2.view.heightAnchor.constraint(equalToConstant: newSize.height).isActive = true
             table2.view.topAnchor.constraint(equalTo: table.view.bottomAnchor, constant: SavedLayouts.verticalSpacing).isActive = true
             table2.view.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -contentView.layoutMargins.bottom).isActive = true
         } else {
             table.view.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -contentView.layoutMargins.bottom).isActive = true
         }
 
-        setupDataStuff()
+//        titleAndStickyNote.titleInput.delegate =
+
     }
 
-    private func setupNavBar() {
-        if useState  == .create {
-            self.title = "create a task"
-        }
-        self.navigationItem.setRightBarButton(saveBtn, animated: false)
-        saveBtn.isEnabled = false
-        self.navigationItem.setLeftBarButton(cancelBtn, animated: false)
-    }
-
-    private func setupScrollViewAndContentView() {
-        scrollView.layoutWithGuide(in: view)
-        contentView.translatesAutoresizingMaskIntoConstraints = false
-        scrollView.addSubview(contentView)
-        contentView.constrainEdgeAnchors(to: scrollView, insets: margins)
-        contentView.widthAnchor.constraint(equalTo: self.scrollView.widthAnchor, constant: -(margins.right*2)).isActive = true
-    }
-
-    private func setupInputFields() {
-        titleTextField.translatesAutoresizingMaskIntoConstraints = false
-        contentView.addSubview(titleTextField)
-        titleTextField.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: margins.right).isActive = true
-        titleTextField.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -margins.right).isActive = true
-        titleTextField.topAnchor.constraint(equalTo: contentView.topAnchor, constant: SavedLayouts.verticalSpacing).isActive = true
-        titleTextField.placeholder = UIConsts.titleFieldPlaceholderText
-
-        notesTextView.translatesAutoresizingMaskIntoConstraints = false
-        contentView.addSubview(notesTextView)
-        notesTextView.topAnchor.constraint(equalTo: titleTextField.bottomAnchor, constant: SavedLayouts.verticalSpacing).isActive = true
-        notesTextView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: margins.right).isActive = true
-        notesTextView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -margins.right).isActive = true
-    }
-
-    private func setupTable(_ tableVC: UITableViewController) {
-        self.addChild(tableVC)
-        tableVC.view.translatesAutoresizingMaskIntoConstraints = false
-        contentView.addSubview(tableVC.view)
-        tableVC.view.constrainHEdgesAnchors(contentView, constant: margins.right)
-        let newSize = tableVC.view.sizeThatFits(CGSize(width: contentView.bounds.width, height: CGFloat.greatestFiniteMagnitude))
-        tableVC.view.heightAnchor.constraint(equalToConstant: newSize.height).isActive = true
-    }
-
-    private func setupDataStuff() {
-        self.inputValidationManager = InputValidationManager()
-        self.inputValidationManager.delegate = self
-        self.titleTextField.inputValidationDelegate = self.inputValidationManager
-        if self.useState == .edit { prefillInputFields() }
-    }
-
-    private func prefillInputFields() {
-        guard let task = taskMO else { fatalError("taskMO was nil when executing \(#function)") }
-        self.titleTextField.text = task.title
-        self.notesTextView.text = task.quickNote
-        if let markAsArchived = taskMO?.isArchived {
-            if markAsArchived {
-                self.table2.isArchived = true
-            }
-        }
-    }
+//    private func setupDataStuff() {
+//        self.inputValidationManager = InputValidationManager()
+//        self.inputValidationManager.delegate = self
+//        self.titleTextField.inputValidationDelegate = self.inputValidationManager
+//        if self.useState == .edit { prefillInputFields() }
+//    }
+//
+//    private func prefillInputFields() {
+//        guard let task = taskMO else { fatalError("taskMO was nil when executing \(#function)") }
+//        self.titleTextField.text = task.title
+//        self.notesTextView.text = task.quickNote
+//        if let markAsArchived = taskMO?.isArchived {
+//            if markAsArchived {
+//                self.table2.isArchived = true
+//            }
+//        }
+//    }
 
     // MARK: - other methods
 
     @objc func saveBtnTapped() {
         if useState == .create {
-            createTask(title: self.titleTextField.text!, notes: self.notesTextView.text)
+//            createTask(title: self.titleTextField.text!, notes: self.notesTextView.text)
         } else {
             saveChanges()
         }
@@ -207,8 +199,8 @@ class AddEditTaskVC: UIViewController, InputsInterfaceDelegate, TaskEditorOption
 
     private func saveChanges() {
         guard let task = taskMO else { fatalError("taskMO was nil when executing \(#function)") }
-        task.title = titleTextField.text
-        task.quickNote = notesTextView.text
+//        task.title = titleTextField.text
+//        task.quickNote = notesTextView.text
         task.epic = table.selectedEpic
         task.storyPointsEnum = table.storyPoints
         if selectedToArchive {

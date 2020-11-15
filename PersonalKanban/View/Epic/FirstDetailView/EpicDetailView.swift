@@ -11,7 +11,7 @@ enum EditableState {
     case editEnabled, editDisabled
 }
 
-class EpicDetailViewFirstScreen: UIViewController, EpicViewDetailsOptionTableDelegate, CoreDataDisplayDelegate {
+class EpicDetailView: UIViewController, EpicViewDetailsOptionTableDelegate, CoreDataDisplayDelegate {
 
     // MARK: - EpicViewDetailsOptionTableDelegate conformance
 
@@ -43,7 +43,7 @@ class EpicDetailViewFirstScreen: UIViewController, EpicViewDetailsOptionTableDel
     let epic: Epic!
     private var editorState: EditableState = .editDisabled
     private var detailsCellTitle: String { self.editorState == EditableState.editDisabled ? "View Details" : "Edit Details" }
-    private let taskTableLabelText = "Tasks Lists"
+    private let taskTableLabelText = "Tasks:"
     private lazy var margins: UIEdgeInsets = contentView.layoutMargins
 
     // MARK: - UIViewController overrides

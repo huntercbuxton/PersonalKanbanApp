@@ -7,13 +7,15 @@
 
 import UIKit
 
-open class PaddedTextField: UITextField, InputValidatable, UITextFieldDelegate {
+open class PaddedTextField: UITextField, UITextFieldDelegate {
 
     // MARK: - InputValidatable
 
     let inputField = Inputs.title
 
-    weak var inputValidationDelegate: InputValidationDelegate?
+    weak var groupObserver: GroupUpdateObserver?
+    let groupID = Inputs.title  // "PaddedTextField.titleInput"
+//    weak var inputValidationDelegate: InputValidationDelegate?
 
     // MARK: - UITextFieldDelegate
 
@@ -46,7 +48,8 @@ open class PaddedTextField: UITextField, InputValidatable, UITextFieldDelegate {
     // MARK: - styling and layout
 
     @objc open func respondToChange() {
-        self.inputValidationDelegate!.inputUpdate(self.text, from: inputField)
+//        self.inputValidationDelegate!.inputUpdate(self.text, from: inputField)
+        groupObserver?.update(value: self.text, from: .title)
     }
 
     func firstSetup() {
@@ -71,6 +74,15 @@ open class PaddedTextField: UITextField, InputValidatable, UITextFieldDelegate {
          self.placeholder = text
      }
 
+    public init(placeholder: String, group: GroupUpdateObserver, text: String = "") {
+        super.init(frame: .zero)
+        firstSetup()
+        self.placeholder = placeholder
+        self.groupObserver = group
+        self.text = text
+        self.groupObserver?.register(groupID: self.groupID, savedValue: self.text)
+    }
+    
     public init() {
         super.init(frame: .zero)
         firstSetup()

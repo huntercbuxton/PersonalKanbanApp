@@ -68,7 +68,7 @@ class EpicsTable: UITableViewController, SlidingContentsVC {
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.sliderDelegate?.hideMenu()
-        let detailView = EpicDetailViewFirstScreen(persistenceManager: persistenceManager, epic: epics[indexPath.row])
+        let detailView = EpicDetailView(persistenceManager: persistenceManager, epic: epics[indexPath.row])
         self.navigationController?.pushViewController(detailView, animated: true)
     }
 

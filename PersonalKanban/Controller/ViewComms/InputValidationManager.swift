@@ -27,4 +27,9 @@ class InputValidationManager: InputValidationDelegate {
         }
     }
 
+    init(delegate: InputsInterfaceDelegate) {
+        self.delegate = delegate
+    }
+
+    init() {}
 }

@@ -145,7 +145,7 @@ class AddEditEpicVC: UIViewController, InputsInterfaceDelegate {
     private func setupDataStuff() {
         self.inputValidationManager = InputValidationManager()
         self.inputValidationManager.delegate = self
-        self.titleTextField.inputValidationDelegate = self.inputValidationManager
+//        self.titleTextField.inputValidationDelegate = self.inputValidationManager
         if self.useState == .edit { prefillInputFields() }
     }
 

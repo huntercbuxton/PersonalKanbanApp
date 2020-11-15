@@ -106,7 +106,7 @@ class EditEpicDetailsVC: UIViewController, EpicDetailsMenuDelegate, InputsInterf
     private func setupDataStuff() {
         self.inputValidationManager = InputValidationManager()
         self.inputValidationManager.delegate = self
-        self.titleTextField.inputValidationDelegate = self.inputValidationManager
+//        self.titleTextField.inputValidationDelegate = self.inputValidationManager
         prefillInputFields()
     }
 

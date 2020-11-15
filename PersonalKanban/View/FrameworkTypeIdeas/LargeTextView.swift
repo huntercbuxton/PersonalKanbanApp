@@ -14,6 +14,8 @@ public class LargeTextView: UITextView, UITextViewDelegate {
     let inputField = Inputs.notes
 
     weak var inputValidationDelegate: InputValidationDelegate?
+    weak var groupObserver: GroupUpdateObserver?
+    let groupID = Inputs.notes
 
     static let defaultInsets = UIEdgeInsets(top: 10.0, left: 10.0, bottom: 10.0, right: 10.0)
 
@@ -27,6 +29,19 @@ public class LargeTextView: UITextView, UITextViewDelegate {
 
     convenience init(text: String? = "") {
         self.init()
+//        layer.cornerRadius = SavedStyles.textInputCornerRadius
+//        layer.borderWidth = SavedStyles.textInputBorderWidth
+//        layer.borderColor = SavedStyles.textInputBorderColor
+//        font = SavedStyles.defaultTextViewFont
+//
+//        translatesAutoresizingMaskIntoConstraints = false
+//        heightAnchor.constraint(equalToConstant: SavedLayouts.defaultTextViewHeight).isActive = true
+
+        
+    }
+
+    public init(placeholder: String, group: GroupUpdateObserver, text: String = "") {
+        super.init(frame: .zero, textContainer: nil)
         layer.cornerRadius = SavedStyles.textInputCornerRadius
         layer.borderWidth = SavedStyles.textInputBorderWidth
         layer.borderColor = SavedStyles.textInputBorderColor
@@ -35,7 +50,13 @@ public class LargeTextView: UITextView, UITextViewDelegate {
         translatesAutoresizingMaskIntoConstraints = false
         heightAnchor.constraint(equalToConstant: SavedLayouts.defaultTextViewHeight).isActive = true
 
-        
+        self.textContainerInset = SavedLayouts.defaultTextViewInsets
+        self.delegate = self
+
+        self.groupObserver = group
+        self.text = text
+        self.groupObserver?.register(groupID: groupID, savedValue: self.text)
+
     }
 
     public init() {
