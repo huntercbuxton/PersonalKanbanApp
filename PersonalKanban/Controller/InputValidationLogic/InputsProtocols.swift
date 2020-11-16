@@ -20,8 +20,3 @@ public protocol InputsInterfaceDelegate: AnyObject {
     func enableSave()
     func disableSave()
 }
-
-extension InputsInterfaceDelegate {
-    func enableSave() {}
-    func disableSave() {}
-}

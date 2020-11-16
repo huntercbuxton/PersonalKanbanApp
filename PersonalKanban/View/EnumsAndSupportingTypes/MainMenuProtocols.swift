@@ -8,7 +8,7 @@
 import Foundation
 
 protocol MenuOptionRepresentable: CaseIterable, Hashable {
-    func toString() -> String
+   
 }
 
 protocol MenuRepresentable {

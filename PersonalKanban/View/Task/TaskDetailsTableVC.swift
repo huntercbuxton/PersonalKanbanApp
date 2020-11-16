@@ -22,31 +22,37 @@ class TaskDetailsTableVC: UITableViewController {
             tableView.reloadData()
         }
     }
+
     var selectedEpic: Epic? {
         didSet {
+            task?.epic = selectedEpic
             print("selectedEpic has valus \(selectedEpic?.title) ")
             self.titles[0] = epicCellTitle
             tableView.reloadRows(at: [IndexPath(row: 0, section: 0)], with: .fade)
         }
     }
+
     var storyPoints: StoryPoints = .unassigned {
         didSet {
-            print("storyPoonts has valus \(storyPoints.displayTitle) ")
+            task?.storyPointsEnum = storyPoints
+            print("storyPoonts has valus \(storyPoints.toString) ")
             self.titles[1] = storyPointsCellTitle
             tableView.reloadRows(at: [IndexPath(row: 1, section: 0)], with: .fade)
         }
     }
+    
     var workflowPosition: WorkflowPosition? {
         didSet {
-            print("storyPoonts has valus \(workflowPosition?.displayName) ")
+            task?.workflowStatusEnum = workflowPosition
+            print("storyPoonts has valus \(workflowPosition?.toString) ")
             self.titles[2] = workflowPositionCellTitle
             tableView.reloadRows(at: [IndexPath(row: 2, section: 0)], with: .fade)
         }
     }
 
     var epicCellTitle: String { "Epic: \(selectedEpic?.title! ?? "none" ) " }
-    var storyPointsCellTitle: String { "story points: \(storyPoints.displayTitle)" }
-    var workflowPositionCellTitle: String { "workflow position: \(workflowPosition?.displayName ?? "none")" }
+    var storyPointsCellTitle: String { "story points: \(storyPoints.toString)" }
+    var workflowPositionCellTitle: String { "workflow position: \(workflowPosition?.toString ?? "none")" }
     lazy var titles: [String] = [ epicCellTitle, storyPointsCellTitle, workflowPositionCellTitle ]
 
     override func viewDidLoad() {

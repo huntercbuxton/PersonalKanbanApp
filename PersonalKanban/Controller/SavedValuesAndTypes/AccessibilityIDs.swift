@@ -20,4 +20,3 @@ public struct AccessibilityIDs {
     public static let taskEditorScreenTextField = "titleTextField"
     public static let taskEditorScreencancelBtn = "cancelBtn"
 }
-

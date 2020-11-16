@@ -12,8 +12,8 @@ class MainMenu: UITableViewController {
     // MARK: - other instance properties
 
     private let cellReuseID = "MainMenuVC.cellReuseID"
-    private let options: [MainMenuOptions] = MainMenuOptions.allCases
-    private var savedSelection: MainMenuOptions!
+    private let options: [MainMenuPages] = MainMenuPages.allCases
+    private var savedSelection: MainMenuPages!
     var delegateResponder: MenuInteractionsResponder!
 
     // MARK: - miscellaneous instance methods
@@ -21,7 +21,7 @@ class MainMenu: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellReuseID)
-        tableView.tableFooterView = UITableViewHeaderFooterView()
+        tableView.tableFooterView = UIView()
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -42,7 +42,7 @@ class MainMenu: UITableViewController {
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: .default, reuseIdentifier: self.cellReuseID)
-        cell.textLabel?.text = options[indexPath.row].pageTitle
+        cell.textLabel?.text = options[indexPath.row].toString
         cell.selectionStyle = .default
         return cell
     }
@@ -52,14 +52,14 @@ class MainMenu: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let optionType = options[indexPath.row]
         self.delegateResponder.detectedSelection(optionType)
-        if indexPath.row !=  MainMenuOptions.inProgress.rawValue || indexPath.section != 0 {
-            tableView.cellForRow(at: IndexPath(row: MainMenuOptions.inProgress.rawValue, section: 0))?.setSelected(false, animated: true)
+        if indexPath.row !=  MainMenuPages.inProgress.rawValue || indexPath.section != 0 {
+            tableView.cellForRow(at: IndexPath(row: MainMenuPages.inProgress.rawValue, section: 0))?.setSelected(false, animated: true)
         }
     }
 
     // MARK: - initialization
 
-    init(sliderDelegate: SlidingViewDelegate, selectionDelegate: MainMenuController?, savedSelection: MainMenuOptions) {
+    init(sliderDelegate: SlidingViewDelegate, selectionDelegate: MainMenuController?, savedSelection: MainMenuPages) {
         self.savedSelection = savedSelection
         super.init(nibName: nil, bundle: nil)
     }

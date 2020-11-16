@@ -42,13 +42,13 @@ class StoryPointsSelectionScreen: UITableViewController {
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: .default, reuseIdentifier: cellReuseID)
-        cell.textLabel?.text = options[indexPath.row].displayTitle
+        cell.textLabel?.text = options[indexPath.row].toString
         if options[indexPath.row] != .unassigned {
             cell.isSelected = true
         }
         return cell
     }
-
+    
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 //        delegate?.selectStoryPoints(options[indexPath.row])
         delegate?.select(storyPoints: options[indexPath.row])

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="17192" systemVersion="19H2" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="17192" systemVersion="19H15" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Epic" representedClassName="Epic" syncable="YES">
         <attribute name="dateCreated" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="dateLastUpdated" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
@@ -18,11 +18,13 @@
     </entity>
     <entity name="Task" representedClassName="Task" syncable="YES">
         <attribute name="dateCreated" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="dateTrashed" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="dateUpdated" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="dueDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="folder" attributeType="Integer 64" usesScalarValueType="YES"/>
         <attribute name="primaryKey" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="priority" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="quickNote" optional="YES" attributeType="String"/>
+        <attribute name="stickyNote" optional="YES" attributeType="String"/>
         <attribute name="storypoints" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="title" attributeType="String"/>
         <attribute name="workflowStatus" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
@@ -32,6 +34,6 @@
     <elements>
         <element name="Epic" positionX="-63" positionY="18" width="128" height="148"/>
         <element name="Note" positionX="-54" positionY="9" width="128" height="118"/>
-        <element name="Task" positionX="-63" positionY="-18" width="128" height="208"/>
+        <element name="Task" positionX="-63" positionY="-18" width="128" height="28"/>
     </elements>
 </model>

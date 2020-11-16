@@ -11,38 +11,35 @@ enum EditableState {
     case editEnabled, editDisabled
 }
 
-class EpicDetailView: UIViewController, EpicViewDetailsOptionTableDelegate, CoreDataDisplayDelegate {
+class EpicDetailView: UIViewController, CoreDataDisplayDelegate, InputStateManagerDelegate {
 
-    // MARK: - EpicViewDetailsOptionTableDelegate conformance
+    // MARK : - InputStateManagerDelegate
 
-    func goToDetailsScreen() {
-        if editorState == .editDisabled {
-            let detailsView = ViewOnlyEpicDetailVC(persistenceManager: persistenceManager, epic: self.epic, updateDelegate: self)
-            self.navigationController?.pushViewController(detailsView, animated: true)
-        } else {
-            let detailsView = EditEpicDetailsVC(persistenceManager: persistenceManager, epic: self.epic, displayDelegate: self)
-            self.navigationController?.pushViewController(detailsView, animated: true)
-        }
+    func updateState(_ state: InputState) {
+        saveBtn.isEnabled = state == .valid
     }
 
     // MARK: - properties storing UI Components
 
+    private lazy var saveBtn = UIBarButtonItem(barButtonSystemItem: .save,
+                                                              target: self,
+                                                              action: #selector(saveBtnTapped))
+    private lazy var cancelBtn = UIBarButtonItem(barButtonSystemItem: .cancel,
+                                                                target: self,
+                                                                action: #selector(cancelBtnTapped))
     private lazy var scrollView = UIScrollView()
     private lazy var contentView = UIView()
-    private lazy var editBarButton: UIBarButtonItem = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(editBarButtonTapped))
-    private lazy var doneEditingBarButton: UIBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(doneEditingBarButtonTapped))
-    weak var epicsTable: EpicsTable!
-    private lazy var tableVC1: NavToEpicDetails =  NavToEpicDetails(delegate: self)
+    var titleAndStickyNote: TitleAndStickyNote!
     private lazy var taskTableLabel = UILabel()
     private lazy var taskListTableVC: EpicTasksList = EpicTasksList(persistenceManager: self.persistenceManager, epic: self.epic)
-    var heightConstraint: NSLayoutConstraint?
 
     // MARK: - misc instance properties
 
+    var heightConstraint: NSLayoutConstraint?
+    private let useState: CreateOrEdit
     let persistenceManager: PersistenceManager
     let epic: Epic!
-    private var editorState: EditableState = .editDisabled
-    private var detailsCellTitle: String { self.editorState == EditableState.editDisabled ? "View Details" : "Edit Details" }
+    lazy var inputStateManager: InputStateManager = InputStateManager(delegate: self)
     private let taskTableLabelText = "Tasks:"
     private lazy var margins: UIEdgeInsets = contentView.layoutMargins
 
@@ -51,48 +48,35 @@ class EpicDetailView: UIViewController, EpicViewDetailsOptionTableDelegate, Core
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemGroupedBackground
-        setupNavItems()
-        setupScrollViewAndContentView()
-        setupContentComponents()
-    }
+        if useState  == .create {
+            self.title = "create an epic"
+            self.navigationItem.setLeftBarButton(cancelBtn, animated: false)
+        }
+        self.navigationItem.setRightBarButton(saveBtn, animated: false)
+        saveBtn.isEnabled = false
 
-    // this is what updates the displayed tasks of the epics if they've been deleted since last time we saw this table
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        taskListTableVC.reloadDisplay()
-        adjustHeightConstraint()
-    }
-
-    private func setupNavItems() {
-        title = self.epic.title
-        self.navigationItem.setRightBarButton(self.editBarButton, animated: true)
-    }
-
-    private func setupScrollViewAndContentView() {
         scrollView.layoutWithGuide(in: view)
-
         contentView.translatesAutoresizingMaskIntoConstraints = false
         scrollView.addSubview(contentView)
         contentView.constrainEdgeAnchors(to: scrollView, insets: margins)
         contentView.widthAnchor.constraint(equalTo: self.scrollView.widthAnchor, constant: -(margins.left + margins.right)).isActive = true
-    }
 
-    private func setupContentComponents() {
 
-        self.addChild(self.tableVC1)
-        tableVC1.view.translatesAutoresizingMaskIntoConstraints = false
-        self.contentView.addSubview(tableVC1.view)
-        tableVC1.view.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
-        tableVC1.view.constrainHEdgesAnchors(contentView)
-        let newSize = tableVC1.view.sizeThatFits(CGSize(width: contentView.bounds.width, height: CGFloat.greatestFiniteMagnitude))
-        tableVC1.view.heightAnchor.constraint(equalToConstant: newSize.height).isActive = true
+        titleAndStickyNote = TitleAndStickyNote(epic: epic, titleObserver: self.inputStateManager)
+        self.addChild(titleAndStickyNote)
+        titleAndStickyNote.view.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(titleAndStickyNote.view)
+        titleAndStickyNote.view.translatesAutoresizingMaskIntoConstraints = false
+        titleAndStickyNote.view.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
+        titleAndStickyNote.view.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
+        titleAndStickyNote.view.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
 
         taskTableLabel.translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview(taskTableLabel)
         taskTableLabel.text = taskTableLabelText
         taskTableLabel.textAlignment = .center
         taskTableLabel.font = UIConsts.sectionLabelFont
-        taskTableLabel.topAnchor.constraint(equalTo: tableVC1.view.bottomAnchor, constant: SavedLayouts.verticalSpacing).isActive = true
+        taskTableLabel.topAnchor.constraint(equalTo: titleAndStickyNote.view.bottomAnchor, constant: SavedLayouts.verticalSpacing).isActive = true
         taskTableLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
         taskTableLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
         taskTableLabel.heightAnchor.constraint(equalToConstant: SavedLayouts.sectionLabelHeight).isActive = true
@@ -110,7 +94,50 @@ class EpicDetailView: UIViewController, EpicViewDetailsOptionTableDelegate, Core
         heightConstraint?.isActive = true
     }
 
+    // this is what updates the displayed tasks of the epics if they've been deleted since last time we saw this table
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        taskListTableVC.reloadDisplay()
+        adjustHeightConstraint()
+    }
+
     // MARK: - misc instance methods
+
+
+    @objc func saveBtnTapped() {
+        if useState == .create {
+            createEpic(title: self.titleAndStickyNote.titleInput.text!, notes: titleAndStickyNote.stickyNoteInput.text)
+        } else {
+            saveChanges()
+        }
+        navigateToPreviousScreen()
+    }
+
+    @objc func cancelBtnTapped() {
+        navigateToPreviousScreen()
+    }
+
+
+    private func navigateToPreviousScreen() {
+        self.navigationController?.popViewController(animated: true)
+//        updateDelegate.updateCoreData()
+    }
+
+
+    private func createEpic(title: String, notes: String) {
+        let epic = Epic(context: persistenceManager.context)
+        epic.title = title
+        epic.quickNote = notes
+        persistenceManager.save()
+    }
+
+    private func saveChanges() {
+        guard let epic = epic else { fatalError("epic was nil when executing \(#function)") }
+        epic.title = titleAndStickyNote.titleInput.text!
+        epic.quickNote = titleAndStickyNote.stickyNoteInput.text
+        persistenceManager.save()
+//        self.updateDelegate.updateCoreData()
+    }
 
     private func adjustHeightConstraint() {
         let newSize1 = taskListTableVC.view.sizeThatFits(CGSize(width: contentView.bounds.width, height: CGFloat.greatestFiniteMagnitude))
@@ -118,25 +145,13 @@ class EpicDetailView: UIViewController, EpicViewDetailsOptionTableDelegate, Core
         self.taskListTableVC.view.layoutIfNeeded()
     }
 
-    @objc func editBarButtonTapped() {
-        self.editorState = .editEnabled
-        self.tableVC1.updateEditorState(self.editorState)
-        self.taskListTableVC.updateEditorState(self.editorState)
-        self.navigationItem.setRightBarButton(self.doneEditingBarButton, animated: true)
-    }
-
-    @objc func doneEditingBarButtonTapped() {
-        self.editorState = .editDisabled
-        self.tableVC1.updateEditorState(self.editorState)
-        self.taskListTableVC.updateEditorState(self.editorState)
-        self.navigationItem.setRightBarButton(self.editBarButton, animated: true)
-    }
 
     // MARK: - initialization
 
-    init(persistenceManager: PersistenceManager, epic: Epic) {
+    init(persistenceManager: PersistenceManager, epic: Epic, useState: CreateOrEdit) {
         self.persistenceManager = persistenceManager
         self.epic = epic
+        self.useState = useState
         super.init(nibName: nil, bundle: nil)
     }
 

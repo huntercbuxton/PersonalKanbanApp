@@ -21,19 +21,12 @@ class SelectWorkflowStatusMenu: UITableViewController {
     private weak var delegate: WorkflowStatusSelectorDelegate?
     private var options: [WorkflowPosition] = WorkflowPosition.allCases as [WorkflowPosition]
     private var currentStatus: WorkflowPosition?
-//    var saveBtn: UIBarButtonItem =  UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(saveBtnTapped))
-//
-//    @objc func saveBtnTapped() {
-//        print("called \(#function)")
-//        self.navigationController!.popViewController(animated: true)
-//    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "select status"
         self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellReuseID)
         tableView.tableFooterView = UIView(background: .systemGroupedBackground)
-//        self.navigationItem.setRightBarButton(saveBtn, animated: true)
     }
 
     // MARK: - Table view data source
@@ -48,7 +41,7 @@ class SelectWorkflowStatusMenu: UITableViewController {
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: .default, reuseIdentifier: cellReuseID)
-        cell.textLabel?.text = options[indexPath.row].displayName
+        cell.textLabel?.text = options[indexPath.row].toString
         if let status = currentStatus {
             if status == options[indexPath.row] {
                 cell.isSelected = true

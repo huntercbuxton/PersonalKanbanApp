@@ -7,15 +7,17 @@
 
 import UIKit
 
-class MainVC: UIViewController, SlidingViewDelegate, MainMenuControllerDelegate, CoreDataDisplayDelegate {
+class MainVC: UIViewController, SlidingViewDelegate, MainMenuControllerDelegate, CoreDataDisplayDelegate, UINavigationControllerDelegate {
 
-    // MARK: - MenuSelectionDelegate protocol conformance
+    // MARK: - MenuSelectionDelegate conformance
 
-    private var displayController: MainMenuController!
+    private var menuControl: MainMenuController!
     private lazy var displayRequestHandler: ContentRequestHandler = ContentRequestHandler(persistenceManager: self.persistenceManager, delegateRef: self)
-    var page: MainMenuOptions?
+    var page: MainMenuPages?
 
-    func updateDisplay(for option: MainMenuOptions) {
+    // MARK: - MainMenuControllerDelegate conformance
+
+    func updateDisplay(for option: MainMenuPages) {
         print("called \(#function) with argument option = \(option) in MainVC!!!")
         removeSlidingVCContents()
         page = option
@@ -55,8 +57,8 @@ class MainVC: UIViewController, SlidingViewDelegate, MainMenuControllerDelegate,
     private lazy var addBtn: UIBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addBtnTapped))
     private lazy var menuContainerView: UIView = UIView()
     private lazy var contentView: UIView = UIView()
-    private lazy var menuVC: MainMenu = MainMenu(sliderDelegate: self, selectionDelegate: displayController, savedSelection: displayController.initialSelection)
-    private lazy var displayVC: SlidingContentsVC = displayRequestHandler.mainMenuRequest(displayController.initialSelection)
+    private lazy var menuVC: MainMenu = MainMenu(sliderDelegate: self, selectionDelegate: menuControl, savedSelection: menuControl.initialSelection)
+    private lazy var displayVC: SlidingContentsVC = displayRequestHandler.mainMenuRequest(menuControl.initialSelection)
 
     // MARK: - other instance properties
 
@@ -75,29 +77,18 @@ class MainVC: UIViewController, SlidingViewDelegate, MainMenuControllerDelegate,
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .systemBackground
-        assignAccessibilityIdentifiers()
-        setupNavBar()
-        setupContentViews()
-        setupContentChildVC(child: menuVC, superView: menuContainerView)
-        setupContentChildVC(child: displayVC as! UIViewController, superView: contentView)
-
-    }
-
-    private func assignAccessibilityIdentifiers() {
+        navigationController?.delegate = self
         // used in the first UI Test
         view.accessibilityIdentifier = AccessibilityIDs.mainVCview
         addBtn.accessibilityIdentifier =  AccessibilityIDs.mainVCaddBtn
         menuBtn.accessibilityIdentifier = AccessibilityIDs.mainVCmenuBtn
-    }
 
-    private func setupNavBar() {
-        title = self.displayController.initialSelection.pageTitle
+        title = self.menuControl.initialSelection.toString
         navigationItem.setLeftBarButton(menuBtn, animated: false)
         navigationItem.setRightBarButton(addBtn, animated: false)
-    }
 
-    private func setupContentViews() {
+        view.backgroundColor = .systemBackground
+
         view.addSubview(menuContainerView)
         menuContainerView.translatesAutoresizingMaskIntoConstraints = false
         menuContainerView.constrainVEdgeAnchors(view, constant: 0)
@@ -110,6 +101,14 @@ class MainVC: UIViewController, SlidingViewDelegate, MainMenuControllerDelegate,
         contentView.layer.shadowOffset = CGSize(width: 0, height: 1)
         contentView.layer.shadowOpacity = 0.6
         contentView.layer.shadowRadius = 4.0
+
+        setupContentChildVC(child: menuVC, superView: menuContainerView)
+        setupContentChildVC(child: displayVC as! UIViewController, superView: contentView)
+
+    }
+
+    func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
+        persistenceManager.save()
     }
 
     // MARK: - other methods
@@ -133,7 +132,7 @@ class MainVC: UIViewController, SlidingViewDelegate, MainMenuControllerDelegate,
     }
 
     @objc func addBtnTapped() {
-        let newVC = displayRequestHandler.composeBtnRequest(currentPage: self.page ?? displayController.selection, updateDelegate: displayVC)
+        let newVC = displayRequestHandler.composeBtnRequest(currentPage: self.page ?? menuControl.selection, updateDelegate: displayVC)
         self.navigationController?.pushViewController(newVC, animated: true)
         hideMenu()
     }
@@ -142,10 +141,10 @@ class MainVC: UIViewController, SlidingViewDelegate, MainMenuControllerDelegate,
 
     init(persistenceManager: PersistenceManager, displayController: MainMenuController) {
         self.persistenceManager = persistenceManager
-        self.displayController = displayController
+        self.menuControl = displayController
         super.init(nibName: nil, bundle: nil)
-        self.displayController.controllerDelegate = self
-        self.menuVC.delegateResponder = self.displayController
+        self.menuControl.controllerDelegate = self
+        self.menuVC.delegateResponder = self.menuControl
     }
 
     required init?(coder aDecoder: NSCoder) {

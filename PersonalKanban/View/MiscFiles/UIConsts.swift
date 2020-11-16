@@ -64,7 +64,7 @@ struct SavedLayouts {
 
     // text view defaults
 
-    static let defaultTextViewHeight: CGFloat = 200
+    static let defaultTextViewHeight: CGFloat = 130
     static let defaultTextViewInsets = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
 
 }

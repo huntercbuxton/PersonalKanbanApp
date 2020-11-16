@@ -19,17 +19,7 @@ protocol EpicDetailsMenuDelegate: AnyObject {
     func unassignTasks()
 }
 
-class EditEpicDetailsVC: UIViewController, EpicDetailsMenuDelegate, InputsInterfaceDelegate {
-
-    // MARK: - InputsInterfaceDelegate conformance
-
-    func enableSave() {
-        self.saveBtn.isEnabled = true
-    }
-
-    func disableSave() {
-        self.saveBtn.isEnabled = false
-    }
+class EditEpicDetailsVC: UIViewController, EpicDetailsMenuDelegate {
 
     // MARK: EpicDetailsMenuDelegate conformance
 
@@ -105,7 +95,7 @@ class EditEpicDetailsVC: UIViewController, EpicDetailsMenuDelegate, InputsInterf
 
     private func setupDataStuff() {
         self.inputValidationManager = InputValidationManager()
-        self.inputValidationManager.delegate = self
+//        self.inputValidationManager.delegate = self
 //        self.titleTextField.inputValidationDelegate = self.inputValidationManager
         prefillInputFields()
     }

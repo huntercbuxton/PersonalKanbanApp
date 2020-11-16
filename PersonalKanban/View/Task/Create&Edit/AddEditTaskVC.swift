@@ -12,7 +12,7 @@ enum CreateOrEdit {
     case edit
 }
 
-class AddEditTaskVC: UIViewController, InputsInterfaceDelegate, TaskEditorOptionsTable2Delegate, InputStateManagerDelegate {
+class AddEditTaskVC: UIViewController, TaskEditorOptionsTable2Delegate, InputStateManagerDelegate {
 
     // MARK: - InputStateManagerDelegate conformance
 
@@ -27,7 +27,7 @@ class AddEditTaskVC: UIViewController, InputsInterfaceDelegate, TaskEditorOption
         let alert = UIAlertController(title: "Alert", message: "Are you sure you want to delete this task?", preferredStyle: UIAlertController.Style.alert)
         alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel, handler: { _ in print("called handler for Cancel action") }))
         alert.addAction(UIAlertAction(title: "Delete", style: UIAlertAction.Style.destructive, handler: {_ in
-            guard let task = self.taskMO else { fatalError("taskMO was nil when executing \(#function)") }
+            guard let task = self.task else { fatalError("taskMO was nil when executing \(#function)") }
             self.persistenceManager.delete(task: task)
             self.navigationController?.popToRootViewController(animated: true)
         }))
@@ -38,29 +38,27 @@ class AddEditTaskVC: UIViewController, InputsInterfaceDelegate, TaskEditorOption
     var selectedToArchive: Bool = false
 
     func archiveTask() {
-        self.table.workflowPosition = nil
+        self.propertiesTable.workflowPosition = nil
         selectedToArchive = true
     }
 
     func unArchiveTask() {
-        self.table.workflowPosition = taskMO?.workflowStatusEnum ?? self.defaultStatus
+        self.propertiesTable.workflowPosition = task?.workflowStatusEnum ?? self.defaultStatus
         selectedToArchive = false
     }
 
     // MARK: - properties storing UI Components
 
-   // weak var archiveChangeDelegate: ArchiveChangeDisplayDelegate?
-    private lazy var scrollView = UIScrollView()
-    private lazy var contentView = UIView()
     private lazy var saveBtn = UIBarButtonItem(barButtonSystemItem: .save,
                                                               target: self,
                                                               action: #selector(saveBtnTapped))
     private lazy var cancelBtn = UIBarButtonItem(barButtonSystemItem: .cancel,
                                                                 target: self,
                                                                 action: #selector(cancelBtnTapped))
+    private lazy var scrollView = UIScrollView()
+    private lazy var contentView = UIView()
     var titleAndStickyNote: TitleAndStickyNote!
-    private lazy var table: TaskDetailsTableVC = TaskDetailsTableVC(coreDataDAO: persistenceManager, task: taskMO, isReadOnly: false)
-    // TaskEditingTable(useState: self.useState, editingDelegate: self, selectedEpic: self.selectedEpic, workflowStatus: self.workflowStatus, storyPoints: storyPoints)
+    private lazy var propertiesTable: TaskDetailsTableVC = TaskDetailsTableVC(coreDataDAO: persistenceManager, task: task, isReadOnly: false)
     private lazy var table2 = TaskEditorOptionsTable2(delegate: self)
     private var taskLog: LogView?
 
@@ -74,12 +72,13 @@ class AddEditTaskVC: UIViewController, InputsInterfaceDelegate, TaskEditorOption
     private weak var updateDelegate: CoreDataDisplayDelegate!
     lazy var inputStateManager: InputStateManager = InputStateManager(delegate: self)
     private let persistenceManager: PersistenceManager
-    private var taskMO: Task?
+    private var task: Task?
 
     // MARK: - initial setup of UI components
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
         // used in the first UITest file
         view.accessibilityIdentifier = "taskEditorVCID"
         saveBtn.accessibilityIdentifier = "saveBtn"
@@ -99,7 +98,7 @@ class AddEditTaskVC: UIViewController, InputsInterfaceDelegate, TaskEditorOption
         contentView.constrainEdgeAnchors(to: scrollView, insets: margins)
         contentView.widthAnchor.constraint(equalTo: self.scrollView.widthAnchor, constant: -(margins.right*2)).isActive = true
 
-        titleAndStickyNote = TitleAndStickyNote(task: taskMO, titleObserver: self.inputStateManager)
+        titleAndStickyNote = TitleAndStickyNote(task: task, titleObserver: self.inputStateManager)
         self.addChild(titleAndStickyNote)
         titleAndStickyNote.view.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(titleAndStickyNote.view)
@@ -108,57 +107,38 @@ class AddEditTaskVC: UIViewController, InputsInterfaceDelegate, TaskEditorOption
         titleAndStickyNote.view.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
         titleAndStickyNote.view.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
 
-        self.addChild(table)
-        table.view.translatesAutoresizingMaskIntoConstraints = false
-        contentView.addSubview(table.view)
-        table.view.constrainHEdgesAnchors(contentView, constant: margins.right)
-        let newSize = table.view.sizeThatFits(CGSize(width: contentView.bounds.width, height: CGFloat.greatestFiniteMagnitude))
-        table.view.heightAnchor.constraint(equalToConstant: newSize.height).isActive = true
-        table.view.topAnchor.constraint(equalTo: titleAndStickyNote.view.bottomAnchor, constant: SavedLayouts.verticalSpacing).isActive = true
+        self.addChild(propertiesTable)
+        propertiesTable.view.translatesAutoresizingMaskIntoConstraints = false
+        contentView.addSubview(propertiesTable.view)
+        propertiesTable.view.constrainHEdgesAnchors(contentView, constant: margins.right)
+        let newSize = propertiesTable.view.sizeThatFits(CGSize(width: contentView.bounds.width, height: CGFloat.greatestFiniteMagnitude))
+        propertiesTable.view.heightAnchor.constraint(equalToConstant: newSize.height).isActive = true
+        propertiesTable.view.topAnchor.constraint(equalTo: titleAndStickyNote.view.bottomAnchor, constant: SavedLayouts.verticalSpacing).isActive = true
 
         if useState == .edit {
             self.addChild(table2)
             table2.view.translatesAutoresizingMaskIntoConstraints = false
-            contentView.addSubview(table.view)
-            table.view.constrainHEdgesAnchors(contentView, constant: margins.right)
-            let newSize = table.view.sizeThatFits(CGSize(width: contentView.bounds.width, height: CGFloat.greatestFiniteMagnitude))
+            contentView.addSubview(table2.view)
+            table2.view.constrainHEdgesAnchors(contentView, constant: margins.right)
+            let newSize = table2.view.sizeThatFits(CGSize(width: contentView.bounds.width, height: CGFloat.greatestFiniteMagnitude))
             table2.view.heightAnchor.constraint(equalToConstant: newSize.height).isActive = true
-            table2.view.topAnchor.constraint(equalTo: table.view.bottomAnchor, constant: SavedLayouts.verticalSpacing).isActive = true
+            table2.view.topAnchor.constraint(equalTo: propertiesTable.view.bottomAnchor, constant: SavedLayouts.verticalSpacing).isActive = true
             table2.view.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -contentView.layoutMargins.bottom).isActive = true
         } else {
-            table.view.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -contentView.layoutMargins.bottom).isActive = true
+            propertiesTable.view.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -contentView.layoutMargins.bottom).isActive = true
         }
-
-//        titleAndStickyNote.titleInput.delegate =
-
     }
-
-//    private func setupDataStuff() {
-//        self.inputValidationManager = InputValidationManager()
-//        self.inputValidationManager.delegate = self
-//        self.titleTextField.inputValidationDelegate = self.inputValidationManager
-//        if self.useState == .edit { prefillInputFields() }
-//    }
-//
-//    private func prefillInputFields() {
-//        guard let task = taskMO else { fatalError("taskMO was nil when executing \(#function)") }
-//        self.titleTextField.text = task.title
-//        self.notesTextView.text = task.quickNote
-//        if let markAsArchived = taskMO?.isArchived {
-//            if markAsArchived {
-//                self.table2.isArchived = true
-//            }
-//        }
-//    }
 
     // MARK: - other methods
 
     @objc func saveBtnTapped() {
         if useState == .create {
-            createTask(title: self.titleAndStickyNote.titleInput.text!, notes: self.titleAndStickyNote.titleInput.text!)
+            self.task = Task(titleAndStickyNote.titleInput.text!, stickyNote: titleAndStickyNote.stickyNoteInput.text!, folder: TaskFolder.statusDic[self.propertiesTable.workflowPosition!]!)
         } else {
             saveChanges()
         }
+        persistenceManager.save()
+        self.updateDelegate.updateCoreData()
         navigateToPreviousScreen()
     }
 
@@ -171,34 +151,16 @@ class AddEditTaskVC: UIViewController, InputsInterfaceDelegate, TaskEditorOption
         updateDelegate.updateCoreData()
     }
 
-    private func createTask(title: String, notes: String) {
-        let task = Task(context: persistenceManager.context)
-        task.title = title
-        task.quickNote = notes
-        task.epic = table.selectedEpic
-        task.storyPointsEnum = table.storyPoints
-        let date = Date()
-        task.dateCreated = DateConversion.format(date)
-        task.dateUpdated = DateConversion.format(date)
-        if selectedToArchive {
-            task.isArchived = true
-        } else {
-            task.workflowStatusEnum = table.workflowPosition ?? self.defaultStatus
-        }
-        persistenceManager.save()
-        self.updateDelegate.updateCoreData()
-    }
-
     private func saveChanges() {
-        guard let task = taskMO else { fatalError("taskMO was nil when executing \(#function)") }
-//        task.title = titleTextField.text
-//        task.quickNote = notesTextView.text
-        task.epic = table.selectedEpic
-        task.storyPointsEnum = table.storyPoints
+        guard let task = task else { fatalError("taskMO was nil when executing \(#function)") }
+        task.title = self.titleAndStickyNote.titleInput.text!
+        task.stickyNote = self.titleAndStickyNote.stickyNoteInput.text
+        task.epic = propertiesTable.selectedEpic
+        task.storyPointsEnum = propertiesTable.storyPoints
         if selectedToArchive {
             task.isArchived = true
         } else {
-            task.workflowStatusEnum = table.workflowPosition ?? self.defaultStatus
+            task.workflowStatusEnum = propertiesTable.workflowPosition ?? self.defaultStatus
         }
         task.dateUpdated = DateConversion.format(Date())
         if table2.isArchived {
@@ -211,21 +173,21 @@ class AddEditTaskVC: UIViewController, InputsInterfaceDelegate, TaskEditorOption
 //     MARK: - initialization
 
     // used when creating  anew task for a given epic
-    init(persistenceManager: PersistenceManager, useState: CreateOrEdit, task: Task? = nil, updateDelegate: CoreDataDisplayDelegate, selectedEpic: Epic) {
+    init(persistenceManager: PersistenceManager, useState: CreateOrEdit, task: Task? = nil, updateDelegate: CoreDataDisplayDelegate, selectedEpic: Epic? = nil) {
         self.persistenceManager = persistenceManager
         self.useState = useState
-        self.taskMO = task
+        self.task = task
         self.defaultStatus = task?.workflowStatusEnum ?? .inProgress
         self.updateDelegate = updateDelegate
         super.init(nibName: nil, bundle: nil)
-        self.table.selectedEpic = selectedEpic
+        self.propertiesTable.selectedEpic = selectedEpic
     }
 
     // used when editing an existing task
     init(persistenceManager: PersistenceManager, useState: CreateOrEdit, task: Task? = nil, updateDelegate: CoreDataDisplayDelegate) {
         self.persistenceManager = persistenceManager
         self.useState = useState
-        self.taskMO = task
+        self.task = task
         self.defaultStatus = task!.workflowStatusEnum ?? .inProgress
         self.updateDelegate = updateDelegate
         super.init(nibName: nil, bundle: nil)
@@ -238,7 +200,7 @@ class AddEditTaskVC: UIViewController, InputsInterfaceDelegate, TaskEditorOption
         self.defaultStatus = defaultPosition
         self.updateDelegate = updateDelegate
         super.init(nibName: nil, bundle: nil)
-        self.table.workflowPosition = self.defaultStatus
+        self.propertiesTable.workflowPosition = self.defaultStatus
     }
 
     required init?(coder aDecoder: NSCoder) {

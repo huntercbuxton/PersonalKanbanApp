@@ -7,21 +7,20 @@
 
 import UIKit
 
-class TitleAndStickyNote: UIViewController, InputsInterfaceDelegate {
+class TitleAndStickyNote: UIViewController {
 
     // MARK: - properties
 
     var task: Task?
+    var epic: Epic?
     var titleInput: PaddedTextField!
     var stickyNoteInput: LargeTextView!
-//    lazy var inputManager: InputValidationManager = InputValidationManager(delegate: self)
 
     // MARK: - methods
 
     override func viewDidLoad() {
         super.viewDidLoad()
         layoutInputs()
-        
     }
 
     private func layoutInputs() {
@@ -41,10 +40,17 @@ class TitleAndStickyNote: UIViewController, InputsInterfaceDelegate {
 
     // MARK: - initializers
 
+    init(epic: Epic?, titleObserver: GroupUpdateObserver) {
+        self.epic = epic
+        self.titleInput = PaddedTextField(placeholder: "title", group: titleObserver, text: epic?.title ?? "")
+        self.stickyNoteInput = LargeTextView(placeholder: "notes", group: titleObserver, text: (epic?.quickNote) ?? "")
+        super.init(nibName: nil, bundle: nil)
+    }
+
     init(task: Task?, titleObserver: GroupUpdateObserver) {
         self.task = task
         self.titleInput = PaddedTextField(placeholder: "title", group: titleObserver, text: task?.title ?? "")
-        self.stickyNoteInput = LargeTextView(placeholder: "notes", group: titleObserver, text: (task?.quickNote) ?? "")
+        self.stickyNoteInput = LargeTextView(placeholder: "notes", group: titleObserver, text: (task?.stickyNote) ?? "")
         super.init(nibName: nil, bundle: nil)
     }
 

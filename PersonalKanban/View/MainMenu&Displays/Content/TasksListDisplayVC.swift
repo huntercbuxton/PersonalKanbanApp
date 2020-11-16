@@ -10,19 +10,11 @@ import UIKit
 protocol TaskTableDataSource {
     var dao: PersistenceManager { get }
     func getData() -> [[Task]]
-    func getSectionHeaders() -> [UILabel?]
-    func getSectionFooters() -> [UILabel?]
 }
 
 extension TaskTableDataSource {
     func getData() -> [[Task]] {
         return [dao.getAllTasks()]
-    }
-    func getSectionHeaders() -> [UILabel?] {
-        return [nil]
-    }
-    func getSectionFooters() -> [UILabel?] {
-        return [nil]
     }
 }
 
@@ -59,8 +51,6 @@ class TasksListDisplayVC: UIViewController, UITableViewDelegate, UITableViewData
         super.viewDidLoad()
         self.view.backgroundColor = .systemGroupedBackground
         taskLists = dataSource.getData()
-        sectionHeaders = dataSource.getSectionHeaders()
-        sectionFooters = dataSource.getSectionFooters()
         tableViewSetup()
     }
 
