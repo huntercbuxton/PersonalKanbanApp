@@ -10,6 +10,11 @@ import Foundation
 public enum Inputs: String, Hashable {
     case title = "UITextField - title for Compose Task"
     case notes = "UITextView - notes for Compose Task"
+    case epic
+    case folder
+    case position
+    case storypoints
+    case archive
 }
 
 public enum InputErrors: Int, Hashable {

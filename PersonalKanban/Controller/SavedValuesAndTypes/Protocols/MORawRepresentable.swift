@@ -8,16 +8,37 @@
 import Foundation
 
 protocol MORawRepresentable: RawRepresentable {
-    associatedtype MORawVal: Equatable
-    var moRawVal: MORawVal { get }
-    var key: String { get }
+    associatedtype MOValue: Equatable
+
+    var moValue: MOValue { get }
+    var moPropertyKey: String { get }
     var fetchPredicate: NSPredicate { get }
-    func equals(_ moRawVal: MORawVal) -> Bool
+    var string: String { get }
+
+    static var caseDefault: MOValue { get }
+
+    init()
+    init?(moValue: MOValue)
+    init(_ moValue: MOValue?)
 }
 
 extension MORawRepresentable {
-    var fetchPredicate: NSPredicate { NSPredicate(format: "\(self.key) == \(self.moRawVal)") }
-    func equals(_ moRawVal: MORawVal) -> Bool { self.moRawVal == moRawVal }
+    var string: String { String(describing: self) }
+    var fetchPredicate: NSPredicate { NSPredicate(format: "\(self.moPropertyKey) == \(self.moValue)") }
+}
+
+extension MORawRepresentable where MOValue == Int64, RawValue == Int {
+    var moValue: MOValue { MOValue(self.rawValue) }
+
+    init() {
+        self.init(Self.caseDefault)
+    }
+    init?(moValue: MOValue) {
+        self.init(rawValue: Int(moValue))
+    }
+    init(_ moValue: MOValue?) {
+        self.init(moValue: moValue ?? Self.caseDefault)!
+    }
 }
 
 

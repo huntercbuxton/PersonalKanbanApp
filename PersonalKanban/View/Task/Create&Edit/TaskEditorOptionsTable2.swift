@@ -7,11 +7,6 @@
 
 import UIKit
 
-protocol TaskEditorOptionsTable2Delegate: AnyObject {
-    func deleteTask()
-    func archiveTask()
-    func unArchiveTask()
-}
 
 class TaskEditorOptionsTable2: UITableViewController {
 
@@ -67,10 +62,8 @@ class TaskEditorOptionsTable2: UITableViewController {
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch indexPath.row {
-        case 0:
-            self.isArchived.toggle()
-        case 1:
-            self.delegate?.deleteTask()
+        case 0: self.isArchived.toggle()
+        case 1: self.delegate?.deleteTask()
         default:
             fatalError("this index path \(String(describing: indexPath)) should not exist; you did something wrong in \(#file), \(#function)")
         }

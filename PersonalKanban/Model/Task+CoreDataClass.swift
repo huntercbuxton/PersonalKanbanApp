@@ -12,37 +12,28 @@ import CoreData
 @objc(Task)
 public class Task: NSManagedObject {
 
+    // MARK: - computed properties
+
     var isArchived: Bool {
         get { self.folder == MainMenuPages.archived.int64 }
-        set {
-            self.folder = newValue ?  MainMenuPages.archived.int64 :  MainMenuPages.defaultVal.int64
-        }
+        set { self.folder = newValue ?  MainMenuPages.archived.int64 :  MainMenuPages.defaultVal.int64 }
     }
+
+    var computedFolder: TaskFolder {
+        get { TaskFolder(self.folder)  }
+        set { self.folder = newValue.moValue }
+    }
+
+    var storyPointsEnum: StoryPoints {
+        get { StoryPoints(self.storypoints) }
+        set { self.storypoints = newValue.moValue }
+    }
+
+    var workflowStatusEnum: WorkflowPosition? { computedFolder.status }
 
     var notesList: [Note] {
         get { self.taskNotes?.array as! [Note] }
         set { taskNotes = NSOrderedSet(array: newValue) }
-    }
-
-    var storyPointsEnum: StoryPoints {
-        get {
-            guard let converted = StoryPoints(self.storypoints) else { fatalError("the value of \(self.storypoints) failed to initialize the enumerated type") }
-            return converted
-        }
-        set {
-            self.storypoints = Int64(newValue.rawValue)
-        }
-    }
-
-    var workflowStatusEnum: WorkflowPosition? {
-        get { return WorkflowPosition(int64: self.workflowStatus) }
-        set {
-            guard let num = newValue else {
-                fatalError("cannot set the wprkflowStatus of a task by setting nil to the workflowStatusEnum property; only cases of the WorkflowPosition enum can be converted to rawValues. If you with to archive the task, set workflowStatus to 5 or more, or set isArchived to true ")
-            }
-            self.workflowStatus =  num.int64
-            self.folder = num.int64
-        }
     }
 
     private func setDefaultInitialValues() {
@@ -51,9 +42,8 @@ public class Task: NSManagedObject {
         self.primaryKey = TaskDefaults.primaryKey
         self.priority = TaskDefaults.priority
         self.stickyNote = TaskDefaults.stickyNote
-        self.storypoints = Int64(TaskDefaults.storypoints.rawValue)
+        self.storypoints = TaskDefaults.storypoints.moValue
         self.title = TaskDefaults.title
-        self.workflowStatus = Int64(TaskDefaults.workflowStatus.rawValue)
     }
 
     private func initializeDates(dueDate due: Date? = TaskDefaults.dueDate) {
@@ -63,23 +53,21 @@ public class Task: NSManagedObject {
         if let dueDate = due { self.dueDate = DateConversion.format(dueDate) }
     }
 
-    convenience init(title: String, stickyNote: String?, storypoints: StoryPoints, folder: Int, priority: Int, workflowStatus: WorkflowPosition, dueDate: Date?) {
+    convenience init(title: String, stickyNote: String?, storypoints: StoryPoints, folder: TaskFolder) { //, priority: TaskPriority, dueDate: Date?) {
         self.init()
         self.title = title
         self.stickyNote = stickyNote
-        self.storypoints = Int64(storypoints.rawValue)
-        self.folder = Int64(folder)
-        self.priority = Int64(priority)
-        self.workflowStatus = Int64(workflowStatus.rawValue)
-        initializeDates(dueDate: dueDate)
+        self.storypoints = storypoints.moValue
+        self.folder = folder.moValue
+//        self.priority = priority.moValue
+        initializeDates(dueDate: nil)
     }
 
     convenience init(_ title: String, stickyNote: String?, folder: TaskFolder) {
         self.init()
         self.title = title
         self.stickyNote = stickyNote
-        self.folder = folder.moRawVal
-        self.workflowStatus = folder.moRawVal
+        self.folder = folder.moValue
     }
 
     convenience init() {

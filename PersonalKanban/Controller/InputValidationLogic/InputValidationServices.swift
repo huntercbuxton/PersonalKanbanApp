@@ -58,11 +58,4 @@ struct InputValidationServices {
     }
 }
 
-public enum ChangeResult: Hashable, CaseIterable {
-    case noChange
-    case noError
-    case erEmpty
-    case erTooLong
-    case erDuplicate
-    case erOther
-}
+

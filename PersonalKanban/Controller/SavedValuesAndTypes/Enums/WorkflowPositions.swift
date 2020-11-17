@@ -7,16 +7,17 @@
 
 import Foundation
 
-enum WorkflowPosition: Int, CaseIterable, MORawRepresentable {
+public enum WorkflowPosition: Int, CaseIterable, MORawRepresentable {
     case inProgress = 0, toDo, backlog, finished
 
-    typealias MORawVal = Int64
-    var defaultVal: MORawVal { WorkflowPosition.backlog.int64 }
-    var moRawVal: MORawVal { int64 }
-    var key: String { "workflowStatus" }
+    typealias MOValue = Int64
+
+    var moPropertyKey: String { "workflowStatus" }
+
+    static var caseDefault: MOValue { Self.toDo.moValue }
 
     var toString: String { String(describing: self) }
-    var int64: Int64 { Int64(rawValue) }
+
     var menuPage: MainMenuPages? {
         switch self {
         case .inProgress: return .inProgress
@@ -26,8 +27,5 @@ enum WorkflowPosition: Int, CaseIterable, MORawRepresentable {
         }
     }
 
-    static var defaultVal: WorkflowPosition { return .backlog }
-
-    init?(int64: Int64) { self.init(rawValue: Int(int64)) }
-
+    var folder: TaskFolder { TaskFolder.statusDic[self]! }
 }

@@ -7,7 +7,9 @@
 
 import UIKit
 
-class MainVC: UIViewController, SlidingViewDelegate, MainMenuControllerDelegate, CoreDataDisplayDelegate, UINavigationControllerDelegate {
+
+class MainVC: UIViewController, SlidingViewDelegate, MainMenuControllerDelegate, CoreDataDisplayDelegate {
+    func updateCoreData() { }
 
     // MARK: - MenuSelectionDelegate conformance
 
@@ -107,10 +109,6 @@ class MainVC: UIViewController, SlidingViewDelegate, MainMenuControllerDelegate,
 
     }
 
-    func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
-        persistenceManager.save()
-    }
-
     // MARK: - other methods
 
     private func removeSlidingVCContents() {
@@ -132,8 +130,8 @@ class MainVC: UIViewController, SlidingViewDelegate, MainMenuControllerDelegate,
     }
 
     @objc func addBtnTapped() {
-        let newVC = displayRequestHandler.composeBtnRequest(currentPage: self.page ?? menuControl.selection, updateDelegate: displayVC)
-        self.navigationController?.pushViewController(newVC, animated: true)
+        var vc = displayRequestHandler.composeBtnRequest(currentPage: self.page ?? menuControl.selection, updateDelegate: displayVC)
+        self.navigationController?.pushViewController(vc, animated: true)
         hideMenu()
     }
 
@@ -149,5 +147,11 @@ class MainVC: UIViewController, SlidingViewDelegate, MainMenuControllerDelegate,
 
     required init?(coder aDecoder: NSCoder) {
         fatalError("\(#function) has not been implemented")
+    }
+}
+
+extension MainVC: UINavigationControllerDelegate {
+    func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
+        displayVC.updateCoreData()
     }
 }

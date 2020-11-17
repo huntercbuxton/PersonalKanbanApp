@@ -10,9 +10,11 @@ import Foundation
 enum TaskFolder: Int, MORawRepresentable, CaseIterable, Hashable {
     case toDo = 0, inProgress, backlog, finished, archived//, trashed
 
-    typealias MORawVal = Int64
-    var moRawVal: Int64 { Int64(self.rawValue) }
-    var key: String { "folder" }
+    typealias MOValue = Int64
+
+    var moPropertyKey: String { "folder" }
+
+    static var caseDefault: MOValue { Self.toDo.moValue }
 
     var page: MainMenuPages? {
         switch self {
@@ -34,11 +36,14 @@ enum TaskFolder: Int, MORawRepresentable, CaseIterable, Hashable {
         }
     }
 
+    static var workflowPages: [TaskFolder] { Self.allCases.filter( { $0.status != nil }) }
+
     static var pageDic: [MainMenuPages: TaskFolder] {
         Self.allCases.reduce(into: [MainMenuPages: TaskFolder]()) { $0[$1.page!] = $1 }
     }
 
     static var statusDic: [WorkflowPosition: TaskFolder] {
-        Self.allCases.reduce(into: [WorkflowPosition : TaskFolder]() ) { $0[$1.status!] = $1 }
+        Self.workflowPages.reduce(into: [WorkflowPosition : TaskFolder]() ) { $0[$1.status!] = $1 }
     }
+    
 }

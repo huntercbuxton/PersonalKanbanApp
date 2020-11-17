@@ -40,14 +40,14 @@ class TitleAndStickyNote: UIViewController {
 
     // MARK: - initializers
 
-    init(epic: Epic?, titleObserver: GroupUpdateObserver) {
+    init(epic: Epic?, titleObserver: InputsModelManager) {
         self.epic = epic
         self.titleInput = PaddedTextField(placeholder: "title", group: titleObserver, text: epic?.title ?? "")
         self.stickyNoteInput = LargeTextView(placeholder: "notes", group: titleObserver, text: (epic?.quickNote) ?? "")
         super.init(nibName: nil, bundle: nil)
     }
 
-    init(task: Task?, titleObserver: GroupUpdateObserver) {
+    init(task: Task?, titleObserver: InputsModelManager) {
         self.task = task
         self.titleInput = PaddedTextField(placeholder: "title", group: titleObserver, text: task?.title ?? "")
         self.stickyNoteInput = LargeTextView(placeholder: "notes", group: titleObserver, text: (task?.stickyNote) ?? "")

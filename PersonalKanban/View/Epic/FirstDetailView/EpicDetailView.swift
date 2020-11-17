@@ -11,7 +11,7 @@ enum EditableState {
     case editEnabled, editDisabled
 }
 
-class EpicDetailView: UIViewController, CoreDataDisplayDelegate, InputStateManagerDelegate {
+class EpicDetailView: UIViewController, CoreDataDisplayDelegate {
 
     // MARK : - InputStateManagerDelegate
 
@@ -39,7 +39,7 @@ class EpicDetailView: UIViewController, CoreDataDisplayDelegate, InputStateManag
     private let useState: CreateOrEdit
     let persistenceManager: PersistenceManager
     let epic: Epic!
-    lazy var inputStateManager: InputStateManager = InputStateManager(delegate: self)
+//    lazy var inputStateManager: InputStateManager = InputStateManager(delegate: self)
     private let taskTableLabelText = "Tasks:"
     private lazy var margins: UIEdgeInsets = contentView.layoutMargins
 
@@ -62,7 +62,7 @@ class EpicDetailView: UIViewController, CoreDataDisplayDelegate, InputStateManag
         contentView.widthAnchor.constraint(equalTo: self.scrollView.widthAnchor, constant: -(margins.left + margins.right)).isActive = true
 
 
-        titleAndStickyNote = TitleAndStickyNote(epic: epic, titleObserver: self.inputStateManager)
+//        titleAndStickyNote = TitleAndStickyNote(epic: epic, titleObserver: self.inputStateManager)
         self.addChild(titleAndStickyNote)
         titleAndStickyNote.view.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(titleAndStickyNote.view)

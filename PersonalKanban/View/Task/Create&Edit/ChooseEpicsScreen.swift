@@ -7,7 +7,7 @@
 
 import UIKit
 
-protocol EpicsSelectorDelegate: AnyObject {
+public protocol EpicsSelectorDelegate: AnyObject {
     func select( epic: Epic)
 }
 

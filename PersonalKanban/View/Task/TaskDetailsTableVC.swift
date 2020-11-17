@@ -13,20 +13,19 @@ class TaskDetailsTableVC: UITableViewController {
     private let isReadOnly: Bool
     private let persistenceManager: PersistenceManager
     private let cellReuseID = "TaskDetailsTableVC.cellReuseID"
+    var modelManager: InputsModelManager?
 
     var task: Task? {
         didSet {
-            self.selectedEpic = task?.epic
+            self.epic = task?.epic
             self.storyPoints = task?.storyPointsEnum ?? .unassigned
             self.workflowPosition = task?.workflowStatusEnum
             tableView.reloadData()
         }
     }
 
-    var selectedEpic: Epic? {
+    var epic: Epic? {
         didSet {
-            task?.epic = selectedEpic
-            print("selectedEpic has valus \(selectedEpic?.title) ")
             self.titles[0] = epicCellTitle
             tableView.reloadRows(at: [IndexPath(row: 0, section: 0)], with: .fade)
         }
@@ -34,30 +33,29 @@ class TaskDetailsTableVC: UITableViewController {
 
     var storyPoints: StoryPoints = .unassigned {
         didSet {
-            task?.storyPointsEnum = storyPoints
-            print("storyPoonts has valus \(storyPoints.toString) ")
             self.titles[1] = storyPointsCellTitle
             tableView.reloadRows(at: [IndexPath(row: 1, section: 0)], with: .fade)
         }
     }
-    
+
     var workflowPosition: WorkflowPosition? {
         didSet {
-            task?.workflowStatusEnum = workflowPosition
-            print("storyPoonts has valus \(workflowPosition?.toString) ")
             self.titles[2] = workflowPositionCellTitle
             tableView.reloadRows(at: [IndexPath(row: 2, section: 0)], with: .fade)
         }
     }
 
-    var epicCellTitle: String { "Epic: \(selectedEpic?.title! ?? "none" ) " }
-    var storyPointsCellTitle: String { "story points: \(storyPoints.toString)" }
-    var workflowPositionCellTitle: String { "workflow position: \(workflowPosition?.toString ?? "none")" }
+    var epicCellTitle: String { "Epic: \(epic?.title! ?? "none" ) " }
+    var storyPointsCellTitle: String { "story points: \(storyPoints.string)" }
+    var workflowPositionCellTitle: String { "workflow position: \(workflowPosition?.string ?? "none")" }
     lazy var titles: [String] = [ epicCellTitle, storyPointsCellTitle, workflowPositionCellTitle ]
 
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellReuseID)
+        self.workflowPosition = modelManager?.register(groupID: Inputs.position)
+        self.epic = modelManager?.register(groupID: .epic)
+        self.storyPoints = modelManager!.register(groupID: .storypoints)
     }
 
     // MARK: - Table view data source
@@ -84,18 +82,12 @@ class TaskDetailsTableVC: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard !isReadOnly else { return }
         switch indexPath.row {
-        case 0:
-            self.navigationController?.pushViewController(ChooseEpicsScreen(persistenceManager: self.persistenceManager, selectionDelegate: self), animated: true)
-        case 1:
-            self.navigationController?.pushViewController(StoryPointsSelectionScreen(delegate: self, currentSelection: self.storyPoints), animated: true)
-        case 2:
-            navigationController?.pushViewController(SelectWorkflowStatusMenu(workflowStatusSelectionDelegate: self, currentStatus: workflowPosition), animated: true)
-        default:
-            assertionFailure("the call of function \(#function) had argument IndexPath = \(String(describing: indexPath)). there should be no cell at that path")
+        case 0: self.navigationController?.pushViewController(ChooseEpicsScreen(persistenceManager: self.persistenceManager, selectionDelegate: modelManager!), animated: true)
+        case 1: self.navigationController?.pushViewController(StoryPointsSelectionScreen(delegate: modelManager!, currentSelection: self.storyPoints), animated: true)
+        case 2: navigationController?.pushViewController(SelectWorkflowStatusMenu(workflowStatusSelectionDelegate: modelManager!, currentStatus: workflowPosition), animated: true)
+        default: assertionFailure("the call of function \(#function) had argument IndexPath = \(String(describing: indexPath)). there should be no cell at that path")
         }
     }
-
-
 
     init(coreDataDAO: PersistenceManager, isReadOnly: Bool) {
         self.persistenceManager = coreDataDAO
@@ -106,7 +98,7 @@ class TaskDetailsTableVC: UITableViewController {
     init(coreDataDAO: PersistenceManager, task: Task?, isReadOnly: Bool) {
         self.persistenceManager = coreDataDAO
         self.task = task
-        selectedEpic = self.task?.epic
+        epic = self.task?.epic
         storyPoints = self.task?.storyPointsEnum ?? .unassigned
         workflowPosition = self.task?.workflowStatusEnum
         self.isReadOnly = isReadOnly
@@ -120,32 +112,3 @@ class TaskDetailsTableVC: UITableViewController {
 
 // MARK: - other protocol conformances
 
-// EpicsSelectorDelegate protocol conformances
-extension TaskDetailsTableVC: EpicsSelectorDelegate {
-    func select(epic: Epic) {
-        print("called \(#function)")
-        selectedEpic = epic
-//        tableView.reloadRows(at: [IndexPath(row: 0, section: 0)], with: .fade) //
-//        self.tableView.reloadData()
-    }
-}
-
-// StoryPointsSelectorDelegat mprotocol conformances
-extension TaskDetailsTableVC: StoryPointSelectorDelegate {
-    func select(storyPoints: StoryPoints) {
-        print("called \(#function)")
-        self.storyPoints = storyPoints
-//        tableView.reloadRows(at: [IndexPath(row: 1, section: 0)], with: .fade)
-//        self.tableView.reloadData()
-    }
-}
-
-// WorkflowStatusSelectorDelegate protocol conformances
-extension TaskDetailsTableVC: WorkflowStatusSelectorDelegate {
-    func select(workflowStatus: WorkflowPosition) {
-        print("called \(#function)")
-        self.workflowPosition = workflowStatus
-//        tableView.reloadRows(at: [IndexPath(row: 2, section: 0)], with: .fade)
-//        self.tableView.reloadData()
-    }
-}

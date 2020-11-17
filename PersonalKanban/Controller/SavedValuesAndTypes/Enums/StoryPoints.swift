@@ -8,17 +8,15 @@
 import Foundation
 import UIKit
 
-enum StoryPoints: Int, CaseIterable {
+public enum StoryPoints: Int, CaseIterable, MORawRepresentable {
     case unassigned = 0, two, four, eight, sixteen
 
-    var rawValueInt64: Int64 { Int64(self.rawValue) }
-    var toString: String { String(describing: self) }
+    typealias MOValue = Int64
 
-    public static let defaultVal: StoryPoints = .unassigned
+    var moPropertyKey: String { "storypoints" }
 
-    init?(_ rawValue: Int64) {
-        self.init(rawValue: Int(rawValue))
-    }
+    static var caseDefault: MOValue { Self.unassigned.moValue }
+
 }
 
 

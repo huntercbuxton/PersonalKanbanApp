@@ -59,13 +59,13 @@ class FRCTaskLists: UITableViewController, SlidingContentsVC, NSFetchedResultsCo
         let task = fetchedResultsController?.object(at: indexPath)
         cell.textLabel?.text = task!.title
         cell.detailTextLabel?.text = task!.stickyNote
-        print("task: \(task?.title) with status: \(task?.workflowStatusEnum?.toString) and folder: \(task?.folder) ")
+        print("task: \(task?.title) with status: \(task?.workflowStatusEnum?.toString), storypoints: \(task?.storyPointsEnum) and folder: \(task?.computedFolder) ")
            return cell
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         sliderDelegate?.hideMenu()
-        let detailVC = AddEditTaskVC(persistenceManager: persistenceManager, useState: .edit, task: fetchedResultsController?.object(at: indexPath), updateDelegate: self)
+        let detailVC = AddEditTaskVC(persistenceManager: persistenceManager, useState: .edit, task: fetchedResultsController!.object(at: indexPath), updateDelegate: self)
         navigationController?.pushViewController(detailVC, animated: true)
     }
 

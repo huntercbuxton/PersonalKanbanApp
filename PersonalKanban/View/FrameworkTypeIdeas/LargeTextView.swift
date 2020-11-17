@@ -14,7 +14,7 @@ public class LargeTextView: UITextView, UITextViewDelegate {
     let inputField = Inputs.notes
 
     weak var inputValidationDelegate: InputValidationDelegate?
-    weak var groupObserver: GroupUpdateObserver?
+    weak var groupObserver: InputsModelManager?
     let groupID = Inputs.notes
 
     static let defaultInsets = UIEdgeInsets(top: 10.0, left: 10.0, bottom: 10.0, right: 10.0)
@@ -40,7 +40,7 @@ public class LargeTextView: UITextView, UITextViewDelegate {
         
     }
 
-    public init(placeholder: String, group: GroupUpdateObserver, text: String = "") {
+    public init(placeholder: String, group: InputsModelManager, text: String = "") {
         super.init(frame: .zero, textContainer: nil)
         layer.cornerRadius = SavedStyles.textInputCornerRadius
         layer.borderWidth = SavedStyles.textInputBorderWidth

@@ -7,11 +7,7 @@
 
 import UIKit
 
-//protocol WorkflowStatusSelectionDelegate: AnyObject {
-//    func selectStatus(newStatus: WorkflowPosition)
-//}
-
-protocol WorkflowStatusSelectorDelegate: AnyObject {
+public protocol WorkflowStatusSelectorDelegate: AnyObject {
     func select(workflowStatus: WorkflowPosition)
 }
 
@@ -43,9 +39,7 @@ class SelectWorkflowStatusMenu: UITableViewController {
         let cell = UITableViewCell(style: .default, reuseIdentifier: cellReuseID)
         cell.textLabel?.text = options[indexPath.row].toString
         if let status = currentStatus {
-            if status == options[indexPath.row] {
-                cell.isSelected = true
-            }
+            if status == options[indexPath.row] { cell.isSelected = true }
         }
         return cell
     }

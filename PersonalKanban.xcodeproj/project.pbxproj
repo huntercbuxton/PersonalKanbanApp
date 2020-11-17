@@ -60,6 +60,7 @@
 		719427BD25626686007C3B31 /* TaskDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 719427BC25626686007C3B31 /* TaskDefaults.swift */; };
 		719427CB25628894007C3B31 /* TaskFolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 719427CA25628894007C3B31 /* TaskFolder.swift */; };
 		719427D225628981007C3B31 /* MORawRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 719427D125628981007C3B31 /* MORawRepresentable.swift */; };
+		719427D82563402F007C3B31 /* InputsManagerServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 719427D72563402F007C3B31 /* InputsManagerServices.swift */; };
 		71B72FDB2541305900D26CDC /* UIViewLayoutsExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71B72FDA2541305900D26CDC /* UIViewLayoutsExtension.swift */; };
 		71B72FEB25416BCD00D26CDC /* MiscellaneousUIKitExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71B72FEA25416BCD00D26CDC /* MiscellaneousUIKitExtensions.swift */; };
 		71BC1B3C253DC948005EC646 /* PersonalKanban.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 71BC1B3A253DC948005EC646 /* PersonalKanban.xcdatamodeld */; };
@@ -71,8 +72,6 @@
 		71C6C88D2560CEC90056CCCF /* InputValidationServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71C6C88C2560CEC80056CCCF /* InputValidationServices.swift */; };
 		71C6C893256113AD0056CCCF /* FRCTaskLists.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71C6C892256113AD0056CCCF /* FRCTaskLists.swift */; };
 		71D182C8255C8D9700E86C50 /* ContentRequestHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71D182C7255C8D9700E86C50 /* ContentRequestHandler.swift */; };
-		71D182D2255C920700E86C50 /* TasksListDisplayVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71D182D1255C920700E86C50 /* TasksListDisplayVC.swift */; };
-		71D182D9255CABE900E86C50 /* TaskListDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71D182D8255CABE900E86C50 /* TaskListDataSource.swift */; };
 		71D182DF255CAC4400E86C50 /* FetchRequestInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71D182DE255CAC4400E86C50 /* FetchRequestInfo.swift */; };
 		71D182F3255CB58600E86C50 /* LocalizationNotes.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 71D182F2255CB58600E86C50 /* LocalizationNotes.rtf */; };
 		71D182F9255CB5A400E86C50 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 71D182F8255CB5A400E86C50 /* InfoPlist.strings */; };
@@ -358,6 +357,7 @@
 		719427BC25626686007C3B31 /* TaskDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskDefaults.swift; sourceTree = "<group>"; };
 		719427CA25628894007C3B31 /* TaskFolder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskFolder.swift; sourceTree = "<group>"; };
 		719427D125628981007C3B31 /* MORawRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MORawRepresentable.swift; sourceTree = "<group>"; };
+		719427D72563402F007C3B31 /* InputsManagerServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputsManagerServices.swift; sourceTree = "<group>"; };
 		71B72FDA2541305900D26CDC /* UIViewLayoutsExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewLayoutsExtension.swift; sourceTree = "<group>"; };
 		71B72FEA25416BCD00D26CDC /* MiscellaneousUIKitExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiscellaneousUIKitExtensions.swift; sourceTree = "<group>"; };
 		71BC1B3B253DC948005EC646 /* PersonalKanban.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = PersonalKanban.xcdatamodel; sourceTree = "<group>"; };
@@ -369,8 +369,6 @@
 		71C6C88C2560CEC80056CCCF /* InputValidationServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputValidationServices.swift; sourceTree = "<group>"; };
 		71C6C892256113AD0056CCCF /* FRCTaskLists.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FRCTaskLists.swift; sourceTree = "<group>"; };
 		71D182C7255C8D9700E86C50 /* ContentRequestHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentRequestHandler.swift; sourceTree = "<group>"; };
-		71D182D1255C920700E86C50 /* TasksListDisplayVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksListDisplayVC.swift; sourceTree = "<group>"; };
-		71D182D8255CABE900E86C50 /* TaskListDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListDataSource.swift; sourceTree = "<group>"; };
 		71D182DE255CAC4400E86C50 /* FetchRequestInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchRequestInfo.swift; sourceTree = "<group>"; };
 		71D182F2255CB58600E86C50 /* LocalizationNotes.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = LocalizationNotes.rtf; sourceTree = "<group>"; };
 		71D182F8255CB5A400E86C50 /* InfoPlist.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = InfoPlist.strings; sourceTree = "<group>"; };
@@ -530,7 +528,6 @@
 		71170C15255AF38700D5F2F2 /* Content */ = {
 			isa = PBXGroup;
 			children = (
-				71D182D1255C920700E86C50 /* TasksListDisplayVC.swift */,
 				71C6C892256113AD0056CCCF /* FRCTaskLists.swift */,
 				717DCB1B253EB75E00E2156F /* EpicsTable.swift */,
 			);
@@ -870,8 +867,8 @@
 			children = (
 				713F7A86253C569B00D23CC7 /* InputValidationManager.swift */,
 				71D18333255D12A000E86C50 /* MainMenuController.swift */,
-				71D182D8255CABE900E86C50 /* TaskListDataSource.swift */,
 				71C6C882255F959F0056CCCF /* InputsManager.swift */,
+				719427D72563402F007C3B31 /* InputsManagerServices.swift */,
 			);
 			path = ViewComms;
 			sourceTree = "<group>";
@@ -1336,7 +1333,6 @@
 				7146AC52253E2DA100DA7D03 /* MainMenuPages.swift in Sources */,
 				71DC7FD4255AC86F00D0B40C /* EpicTasksList.swift in Sources */,
 				71D75FA8255DDEB90027858D /* UILabelExtension.swift in Sources */,
-				71D182D9255CABE900E86C50 /* TaskListDataSource.swift in Sources */,
 				71B72FDB2541305900D26CDC /* UIViewLayoutsExtension.swift in Sources */,
 				717DCB40253F2BE000E2156F /* EpicDetailsEditorMenuVC.swift in Sources */,
 				719427CB25628894007C3B31 /* TaskFolder.swift in Sources */,
@@ -1374,6 +1370,7 @@
 				71C6C893256113AD0056CCCF /* FRCTaskLists.swift in Sources */,
 				717DCB5D253F3FF900E2156F /* DateConversion.swift in Sources */,
 				717DCB51253F3DBA00E2156F /* Task+CoreDataClass.swift in Sources */,
+				719427D82563402F007C3B31 /* InputsManagerServices.swift in Sources */,
 				716C71DC255E304200373F16 /* ModifyRequest.swift in Sources */,
 				716C718E255E22A100373F16 /* StoryPointsSelectionScreen.swift in Sources */,
 				71D378392541B53D00F66FCC /* WorkflowPositions.swift in Sources */,
@@ -1390,7 +1387,6 @@
 				715B7306253C3A3900219F07 /* SlidingViewsVCProtocols.swift in Sources */,
 				716C71AD255E264D00373F16 /* StoryPoints.swift in Sources */,
 				717DCB4D253F3DBA00E2156F /* Epic+CoreDataClass.swift in Sources */,
-				71D182D2255C920700E86C50 /* TasksListDisplayVC.swift in Sources */,
 				713D0D4C255B26330031C303 /* CustomFontImportStuff.swift in Sources */,
 				717DCB24253ED0BE00E2156F /* AddEditEpicVC.swift in Sources */,
 				717DCB50253F3DBA00E2156F /* Note+CoreDataProperties.swift in Sources */,

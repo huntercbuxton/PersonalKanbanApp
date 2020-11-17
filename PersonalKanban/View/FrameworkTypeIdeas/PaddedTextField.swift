@@ -13,7 +13,7 @@ open class PaddedTextField: UITextField, UITextFieldDelegate {
 
     let inputField = Inputs.title
 
-    weak var groupObserver: GroupUpdateObserver?
+    weak var groupObserver: InputsModelManager?
     let groupID = Inputs.title  // "PaddedTextField.titleInput"
 //    weak var inputValidationDelegate: InputValidationDelegate?
 
@@ -74,7 +74,7 @@ open class PaddedTextField: UITextField, UITextFieldDelegate {
          self.placeholder = text
      }
 
-    public init(placeholder: String, group: GroupUpdateObserver, text: String = "") {
+    public init(placeholder: String, group: InputsModelManager, text: String = "") {
         super.init(frame: .zero)
         firstSetup()
         self.placeholder = placeholder

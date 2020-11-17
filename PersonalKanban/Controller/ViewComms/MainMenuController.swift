@@ -9,6 +9,7 @@ import UIKit
 
 protocol MenuInteractionsResponder {
     func detectedSelection(_ option: MainMenuPages)
+    var initialSelection: MainMenuPages { get }
 }
 
 protocol MainMenuControllerDelegate: SlidingViewDelegate {
@@ -20,7 +21,7 @@ public class MainMenuController: MenuInteractionsResponder {
 
     weak var controllerDelegate: MainMenuControllerDelegate?
 
-    var initialSelection: MainMenuPages = .inProgress
+    var initialSelection: MainMenuPages = .toDo
 
     func detectedSelection(_ option: MainMenuPages) {
         print("called \(#function) in MainMenuController!! with argument opetion = \(option.toString)")

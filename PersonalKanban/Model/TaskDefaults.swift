@@ -14,7 +14,6 @@ struct TaskDefaults {
     static let primaryKey: UUID? = nil
     static let priority: Int64 = 0
     static let stickyNote: String? = nil
-    static let storypoints: StoryPoints = .defaultVal
+    static let storypoints: StoryPoints = StoryPoints()
     static let title: String = "default title text"
-    static let workflowStatus: WorkflowPosition = .toDo
 }

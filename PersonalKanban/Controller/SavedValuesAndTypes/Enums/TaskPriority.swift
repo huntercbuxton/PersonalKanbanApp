@@ -8,13 +8,13 @@
 import Foundation
 
 
-enum TaskPriority: Int, CaseIterable {
+enum TaskPriority: Int, CaseIterable, MORawRepresentable {
     case unassigned = 0, low, medium, high, highest
 
-    var int64: Int64 { Int64(self.rawValue) }
-    var string: String { String(describing: self) }
+    typealias MOValue = Int64
 
-    static let defaultVal: TaskPriority = .unassigned
-    init?(int64: Int64) { self.init(rawValue: Int(int64)) }
+    var moPropertyKey: String { "priority" }
+
+    static var caseDefault: Int64 { Self.unassigned.moValue }
 }
 

@@ -12,18 +12,21 @@ enum CreateOrEdit {
     case edit
 }
 
-class AddEditTaskVC: UIViewController, TaskEditorOptionsTable2Delegate, InputStateManagerDelegate {
+protocol TaskEditorOptionsTable2Delegate: AnyObject {
+    func deleteTask()
+    func archiveTask()
+    func unArchiveTask()
+}
 
-    // MARK: - InputStateManagerDelegate conformance
+extension TaskEditorOptionsTable2Delegate {
+    func deleteTask() {}
+    func archiveTask() {}
+    func unArchiveTask() {}
+}
 
-    func updateState(_ state: InputState) {
-        saveBtn.isEnabled = state == .valid
-    }
+class AddEditTaskVC: UIViewController, TaskEditorOptionsTable2Delegate, ManagedInputsStateDelegate {
 
-
-    // MARK: - TaskEditorOptionsTable2Delegate conformance
-
-    func deleteTask() {
+    func delete() {
         let alert = UIAlertController(title: "Alert", message: "Are you sure you want to delete this task?", preferredStyle: UIAlertController.Style.alert)
         alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel, handler: { _ in print("called handler for Cancel action") }))
         alert.addAction(UIAlertAction(title: "Delete", style: UIAlertAction.Style.destructive, handler: {_ in
@@ -34,45 +37,48 @@ class AddEditTaskVC: UIViewController, TaskEditorOptionsTable2Delegate, InputSta
         self.present(alert, animated: true, completion: nil)
     }
 
-    let defaultStatus: WorkflowPosition!
-    var selectedToArchive: Bool = false
 
-    func archiveTask() {
-        self.propertiesTable.workflowPosition = nil
-        selectedToArchive = true
+    // MARK: - InputStateManagerDelegate conformance
+
+    func updateState(_ state: InputState) {
+        saveBtn.isEnabled = state == .valid
+        if state == .valid {
+            self.task?.title = headerInputs.titleInput.text!
+            self.task?.stickyNote = headerInputs.stickyNoteInput.text!
+        }
     }
 
-    func unArchiveTask() {
-        self.propertiesTable.workflowPosition = task?.workflowStatusEnum ?? self.defaultStatus
-        selectedToArchive = false
+    func update(position: WorkflowPosition?, at: Inputs)  {
+        workflowOptionsTable.workflowPosition = position
+    }
+
+    func update(epic: Epic?, at: Inputs) {
+        workflowOptionsTable.epic = epic
+    }
+
+    func update(storyPoints: StoryPoints, at: Inputs) {
+        workflowOptionsTable.storyPoints = storyPoints
     }
 
     // MARK: - properties storing UI Components
 
-    private lazy var saveBtn = UIBarButtonItem(barButtonSystemItem: .save,
-                                                              target: self,
-                                                              action: #selector(saveBtnTapped))
-    private lazy var cancelBtn = UIBarButtonItem(barButtonSystemItem: .cancel,
-                                                                target: self,
-                                                                action: #selector(cancelBtnTapped))
+    private lazy var saveBtn = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(saveBtnTapped))
+    private lazy var cancelBtn = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(cancelBtnTapped))
     private lazy var scrollView = UIScrollView()
     private lazy var contentView = UIView()
-    var titleAndStickyNote: TitleAndStickyNote!
-    private lazy var propertiesTable: TaskDetailsTableVC = TaskDetailsTableVC(coreDataDAO: persistenceManager, task: task, isReadOnly: false)
-    private lazy var table2 = TaskEditorOptionsTable2(delegate: self)
-    private var taskLog: LogView?
-
-    // MARK: - properties specifying UI style/layout
-
-    private lazy var margins: UIEdgeInsets = contentView.layoutMargins
+    private var headerInputs: TitleAndStickyNote!
+    private lazy var workflowOptionsTable: TaskDetailsTableVC = TaskDetailsTableVC(coreDataDAO: persistenceManager, task: task, isReadOnly: false)
+    private lazy var deleteEtcActionsTable = TaskEditorOptionsTable2(delegate: self)
 
     // MARK: - other properties
 
-    private let useState: CreateOrEdit
-    private weak var updateDelegate: CoreDataDisplayDelegate!
-    lazy var inputStateManager: InputStateManager = InputStateManager(delegate: self)
+    let defaultFolder: TaskFolder!
+    var selectedToArchive: Bool = false
+    lazy var inputStateManager: InputStateManager = InputStateManager(persistence: persistenceManager, task: task, stateDelegate: self, defaultFolder: nil)
+    private lazy var margins: UIEdgeInsets = contentView.layoutMargins
     private let persistenceManager: PersistenceManager
     private var task: Task?
+    private let useState: CreateOrEdit
 
     // MARK: - initial setup of UI components
 
@@ -88,9 +94,9 @@ class AddEditTaskVC: UIViewController, TaskEditorOptionsTable2Delegate, InputSta
         if useState  == .create {
             self.title = "create a task"
             self.navigationItem.setLeftBarButton(cancelBtn, animated: false)
+            self.navigationItem.setRightBarButton(saveBtn, animated: false)
+            saveBtn.isEnabled = false
         }
-        self.navigationItem.setRightBarButton(saveBtn, animated: false)
-        saveBtn.isEnabled = false
 
         scrollView.layoutWithGuide(in: view)
         contentView.translatesAutoresizingMaskIntoConstraints = false
@@ -98,34 +104,36 @@ class AddEditTaskVC: UIViewController, TaskEditorOptionsTable2Delegate, InputSta
         contentView.constrainEdgeAnchors(to: scrollView, insets: margins)
         contentView.widthAnchor.constraint(equalTo: self.scrollView.widthAnchor, constant: -(margins.right*2)).isActive = true
 
-        titleAndStickyNote = TitleAndStickyNote(task: task, titleObserver: self.inputStateManager)
-        self.addChild(titleAndStickyNote)
-        titleAndStickyNote.view.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(titleAndStickyNote.view)
-        titleAndStickyNote.view.translatesAutoresizingMaskIntoConstraints = false
-        titleAndStickyNote.view.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
-        titleAndStickyNote.view.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
-        titleAndStickyNote.view.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
+        headerInputs = TitleAndStickyNote(task: task, titleObserver: self.inputStateManager)
+        self.addChild(headerInputs)
+        headerInputs.view.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(headerInputs.view)
+        headerInputs.view.translatesAutoresizingMaskIntoConstraints = false
+        headerInputs.view.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
+        headerInputs.view.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
+        headerInputs.view.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
 
-        self.addChild(propertiesTable)
-        propertiesTable.view.translatesAutoresizingMaskIntoConstraints = false
-        contentView.addSubview(propertiesTable.view)
-        propertiesTable.view.constrainHEdgesAnchors(contentView, constant: margins.right)
-        let newSize = propertiesTable.view.sizeThatFits(CGSize(width: contentView.bounds.width, height: CGFloat.greatestFiniteMagnitude))
-        propertiesTable.view.heightAnchor.constraint(equalToConstant: newSize.height).isActive = true
-        propertiesTable.view.topAnchor.constraint(equalTo: titleAndStickyNote.view.bottomAnchor, constant: SavedLayouts.verticalSpacing).isActive = true
+        workflowOptionsTable.modelManager = self.inputStateManager
+        workflowOptionsTable.workflowPosition = inputStateManager.folderUpdate.status
+        self.addChild(workflowOptionsTable)
+        workflowOptionsTable.view.translatesAutoresizingMaskIntoConstraints = false
+        contentView.addSubview(workflowOptionsTable.view)
+        workflowOptionsTable.view.constrainHEdgesAnchors(contentView, constant: margins.right)
+        let newSize = workflowOptionsTable.view.sizeThatFits(CGSize(width: contentView.bounds.width, height: CGFloat.greatestFiniteMagnitude))
+        workflowOptionsTable.view.heightAnchor.constraint(equalToConstant: newSize.height).isActive = true
+        workflowOptionsTable.view.topAnchor.constraint(equalTo: headerInputs.view.bottomAnchor, constant: SavedLayouts.verticalSpacing).isActive = true
 
         if useState == .edit {
-            self.addChild(table2)
-            table2.view.translatesAutoresizingMaskIntoConstraints = false
-            contentView.addSubview(table2.view)
-            table2.view.constrainHEdgesAnchors(contentView, constant: margins.right)
-            let newSize = table2.view.sizeThatFits(CGSize(width: contentView.bounds.width, height: CGFloat.greatestFiniteMagnitude))
-            table2.view.heightAnchor.constraint(equalToConstant: newSize.height).isActive = true
-            table2.view.topAnchor.constraint(equalTo: propertiesTable.view.bottomAnchor, constant: SavedLayouts.verticalSpacing).isActive = true
-            table2.view.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -contentView.layoutMargins.bottom).isActive = true
+            self.addChild(deleteEtcActionsTable)
+            deleteEtcActionsTable.view.translatesAutoresizingMaskIntoConstraints = false
+            contentView.addSubview(deleteEtcActionsTable.view)
+            deleteEtcActionsTable.view.constrainHEdgesAnchors(contentView, constant: margins.right)
+            let newSize = deleteEtcActionsTable.view.sizeThatFits(CGSize(width: contentView.bounds.width, height: CGFloat.greatestFiniteMagnitude))
+            deleteEtcActionsTable.view.heightAnchor.constraint(equalToConstant: newSize.height).isActive = true
+            deleteEtcActionsTable.view.topAnchor.constraint(equalTo: workflowOptionsTable.view.bottomAnchor, constant: SavedLayouts.verticalSpacing).isActive = true
+            deleteEtcActionsTable.view.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -contentView.layoutMargins.bottom).isActive = true
         } else {
-            propertiesTable.view.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -contentView.layoutMargins.bottom).isActive = true
+            workflowOptionsTable.view.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -contentView.layoutMargins.bottom).isActive = true
         }
     }
 
@@ -133,12 +141,9 @@ class AddEditTaskVC: UIViewController, TaskEditorOptionsTable2Delegate, InputSta
 
     @objc func saveBtnTapped() {
         if useState == .create {
-            self.task = Task(titleAndStickyNote.titleInput.text!, stickyNote: titleAndStickyNote.stickyNoteInput.text!, folder: TaskFolder.statusDic[self.propertiesTable.workflowPosition!]!)
-        } else {
-            saveChanges()
+            self.task = Task(title: headerInputs.titleInput.text!, stickyNote: headerInputs.stickyNoteInput.text!, storypoints: inputStateManager.storyPoints, folder: inputStateManager.folderUpdate)
         }
-        persistenceManager.save()
-        self.updateDelegate.updateCoreData()
+        //persistenceManager.save()
         navigateToPreviousScreen()
     }
 
@@ -146,61 +151,59 @@ class AddEditTaskVC: UIViewController, TaskEditorOptionsTable2Delegate, InputSta
         navigateToPreviousScreen()
     }
 
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        print("&&&&&&&&&&&&& called \(#function)")
+        if self.task != nil {
+            print("4444433333333333 task != nil ")
+            saveChanges()
+        }
+    }
+
     private func navigateToPreviousScreen() {
         self.navigationController?.popViewController(animated: true)
-        updateDelegate.updateCoreData()
+       // updateDelegate.updateCoreData()
     }
 
     private func saveChanges() {
         guard let task = task else { fatalError("taskMO was nil when executing \(#function)") }
-        task.title = self.titleAndStickyNote.titleInput.text!
-        task.stickyNote = self.titleAndStickyNote.stickyNoteInput.text
-        task.epic = propertiesTable.selectedEpic
-        task.storyPointsEnum = propertiesTable.storyPoints
-        if selectedToArchive {
-            task.isArchived = true
-        } else {
-            task.workflowStatusEnum = propertiesTable.workflowPosition ?? self.defaultStatus
-        }
+        task.title = self.headerInputs.titleInput.text!
+        task.stickyNote = self.headerInputs.stickyNoteInput.text
+        task.epic = workflowOptionsTable.epic
+        print(" RIGHT WEJEN CALLING \(#function) the storyPoints value was \(inputStateManager.storyPoints)")
+        task.storyPointsEnum = inputStateManager.storyPoints
+        task.computedFolder = inputStateManager.folderUpdate
         task.dateUpdated = DateConversion.format(Date())
-        if table2.isArchived {
-            task.isArchived = true
-        }
         persistenceManager.save()
-        self.updateDelegate.updateCoreData()
     }
 
 //     MARK: - initialization
 
     // used when creating  anew task for a given epic
-    init(persistenceManager: PersistenceManager, useState: CreateOrEdit, task: Task? = nil, updateDelegate: CoreDataDisplayDelegate, selectedEpic: Epic? = nil) {
+    init(persistenceManager: PersistenceManager, useState: CreateOrEdit, updateDelegate: CoreDataDisplayDelegate, selectedEpic: Epic? = nil) {
         self.persistenceManager = persistenceManager
         self.useState = useState
-        self.task = task
-        self.defaultStatus = task?.workflowStatusEnum ?? .inProgress
-        self.updateDelegate = updateDelegate
+        self.defaultFolder = TaskFolder()
         super.init(nibName: nil, bundle: nil)
-        self.propertiesTable.selectedEpic = selectedEpic
+        self.workflowOptionsTable.epic = selectedEpic
+
     }
 
     // used when editing an existing task
-    init(persistenceManager: PersistenceManager, useState: CreateOrEdit, task: Task? = nil, updateDelegate: CoreDataDisplayDelegate) {
+    init(persistenceManager: PersistenceManager, useState: CreateOrEdit, task: Task, updateDelegate: CoreDataDisplayDelegate) {
         self.persistenceManager = persistenceManager
         self.useState = useState
         self.task = task
-        self.defaultStatus = task!.workflowStatusEnum ?? .inProgress
-        self.updateDelegate = updateDelegate
+        self.defaultFolder = task.computedFolder
         super.init(nibName: nil, bundle: nil)
     }
 
     // used when creating a new task
-    init(persistenceManager: PersistenceManager, useState: CreateOrEdit, updateDelegate: CoreDataDisplayDelegate, defaultPosition: WorkflowPosition = .backlog) {
+    init(persistenceManager: PersistenceManager, useState: CreateOrEdit, updateDelegate: CoreDataDisplayDelegate, defaultFolder: TaskFolder = TaskFolder()) {
         self.persistenceManager = persistenceManager
         self.useState = useState
-        self.defaultStatus = defaultPosition
-        self.updateDelegate = updateDelegate
+        self.defaultFolder = defaultFolder
         super.init(nibName: nil, bundle: nil)
-        self.propertiesTable.workflowPosition = self.defaultStatus
     }
 
     required init?(coder aDecoder: NSCoder) {
