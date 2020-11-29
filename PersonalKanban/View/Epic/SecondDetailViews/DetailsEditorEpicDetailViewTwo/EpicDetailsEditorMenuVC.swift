@@ -11,7 +11,15 @@ protocol EpicDetailsMenuDelegate: AnyObject {
     func updateTasks()
 }
 
-class EpicDetailsEditorMenuVC: UITableViewController, UnassignedTasksSelectionDelegate, CoreDataDisplayDelegate {
+class EpicDetailsEditorMenuVC: UITableViewController, UnassignedTasksSelectionDelegate, CoreDataDisplayDelegate, EpicTaskListDisplayDelegate {
+
+    // MARK: - EpicTaskListDisplayDelegate conformance
+
+    func displayAddedTask(task: Task) {
+        epic.addToTasks(task)
+        persistenceManager.save()
+        self.selectionDelegate.updateTasks()
+    }
 
     // MARK: - CoreDataDisplayDelegate conformance
 
@@ -76,7 +84,7 @@ class EpicDetailsEditorMenuVC: UITableViewController, UnassignedTasksSelectionDe
             case 0:
                 self.navigationController?.pushViewController(UnassignedTasksSelectionTableVC(persistenceManager: self.persistenceManager, selectionDelegate: self, epic: self.epic), animated: true)
             case 1:
-                let vc = AddEditTaskVC(persistenceManager: persistenceManager, useState: .create, updateDelegate: self, selectedEpic: self.epic)
+                let vc = AddEditTaskVC(persistenceManager: persistenceManager, updateDelegate: self, selectedEpic: self.epic, displayAddedTaskDelegate: self)
                 self.navigationController?.pushViewController(vc, animated: true)
             default:
                 assertionFailure("\(#function) argument was an invalid/unexpected index path with value \(String(describing: indexPath))")

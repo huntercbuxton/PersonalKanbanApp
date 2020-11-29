@@ -18,6 +18,10 @@ public protocol TaskEditorOptionsTable2Delegate: AnyObject {
     func unArchiveTask()
 }
 
+protocol EpicTaskListDisplayDelegate {
+    func displayAddedTask(task: Task)
+}
+
 
 class AddEditTaskVC: UIViewController, TaskEditorOptionsTable2Delegate, ManagedInputsStateDelegate {
 
@@ -73,6 +77,7 @@ class AddEditTaskVC: UIViewController, TaskEditorOptionsTable2Delegate, ManagedI
     private var headerInputs: TitleAndStickyNote!
     private lazy var workflowOptionsTable: TaskDetailsTableVC = TaskDetailsTableVC(coreDataDAO: persistenceManager, task: task, isReadOnly: false)
     private lazy var deleteEtcActionsTable = TaskEditorOptionsTable2(delegate: self)
+    var epicTaskListDelegate: EpicTaskListDisplayDelegate?
 
     // MARK: - other properties
 
@@ -147,6 +152,7 @@ class AddEditTaskVC: UIViewController, TaskEditorOptionsTable2Delegate, ManagedI
     @objc func saveBtnTapped() {
         if useState == .create {
             self.task = Task(title: headerInputs.titleInput.text!, stickyNote: headerInputs.stickyNoteInput.text!, storypoints: inputStateManager.storyPoints, folder: inputStateManager.folderUpdate)
+            self.epicTaskListDelegate?.displayAddedTask(task: self.task!)
         }
         //persistenceManager.save()
         navigateToPreviousScreen()
@@ -158,9 +164,9 @@ class AddEditTaskVC: UIViewController, TaskEditorOptionsTable2Delegate, ManagedI
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        print("&&&&&&&&&&&&& called \(#function)")
+        //print("&&&&&&&&&&&&& called \(#function)")
         if self.task != nil {
-            print("4444433333333333 task != nil ")
+           // print("4444433333333333 task != nil ")
             saveChanges()
         }
     }
@@ -175,7 +181,7 @@ class AddEditTaskVC: UIViewController, TaskEditorOptionsTable2Delegate, ManagedI
         task.title = self.headerInputs.titleInput.text!
         task.stickyNote = self.headerInputs.stickyNoteInput.text
         task.epic = workflowOptionsTable.epic
-        print(" RIGHT WEJEN CALLING \(#function) the storyPoints value was \(inputStateManager.storyPoints)")
+       // print(" RIGHT WEJEN CALLING \(#function) the storyPoints value was \(inputStateManager.storyPoints)")
         task.storyPointsEnum = inputStateManager.storyPoints
         task.computedFolder = inputStateManager.folderUpdate
         task.dateUpdated = DateConversion.format(Date())
@@ -185,13 +191,13 @@ class AddEditTaskVC: UIViewController, TaskEditorOptionsTable2Delegate, ManagedI
 //     MARK: - initialization
 
     // used when creating  anew task for a given epic
-    init(persistenceManager: PersistenceManager, useState: CreateOrEdit, updateDelegate: CoreDataDisplayDelegate, selectedEpic: Epic? = nil) {
+    init(persistenceManager: PersistenceManager, updateDelegate: CoreDataDisplayDelegate, selectedEpic: Epic? = nil, displayAddedTaskDelegate: EpicTaskListDisplayDelegate) {
         self.persistenceManager = persistenceManager
-        self.useState = useState
+        self.useState = .create
         self.defaultFolder = TaskFolder()
+        self.epicTaskListDelegate = displayAddedTaskDelegate
         super.init(nibName: nil, bundle: nil)
         self.workflowOptionsTable.epic = selectedEpic
-
     }
 
     // used when editing an existing task

@@ -54,8 +54,8 @@ class TaskDetailsTableVC: UITableViewController {
         super.viewDidLoad()
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellReuseID)
         self.workflowPosition = modelManager?.register(groupID: Inputs.position)
-        self.epic = modelManager?.register(groupID: .epic)
-        self.storyPoints = modelManager!.register(groupID: .storypoints)
+        if self.epic == nil { self.epic = modelManager?.register(groupID: .epic) }
+        self.storyPoints = modelManager?.register(groupID: .storypoints) ?? StoryPoints()
     }
 
     // MARK: - Table view data source
@@ -111,4 +111,3 @@ class TaskDetailsTableVC: UITableViewController {
 }
 
 // MARK: - other protocol conformances
-
