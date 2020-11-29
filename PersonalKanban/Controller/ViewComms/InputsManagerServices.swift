@@ -13,7 +13,6 @@ public enum InputState: Hashable {
 
 public protocol InputsModelManager: SelectionDelegateToRuleThemAll {
     func update(value: String?, from: Inputs) -> ChangeResult
-//    func update(status: WorkflowPosition?) -> Bool
     func register(groupID: Inputs, savedValue: String?)
     func register(groupID: Inputs) -> WorkflowPosition?
     func register(groupID: Inputs) -> StoryPoints
@@ -25,15 +24,14 @@ public protocol ManagedInputsStateDelegate: AnyObject {
     func update(position: WorkflowPosition?, at: Inputs)
     func update(epic: Epic?, at: Inputs)
     func update(storyPoints: StoryPoints, at: Inputs)
+//    func update(isArchived: Bool, at: Inputs)
 }
 
-//protocol InputModelPersistance {
-//    func persist(change group: ManagedInputGroups) -> Bool
-//}
-//
-//protocol InputModelDisplay: AnyObject {
-//    func inputModel(change value: String, for group: ManagedInputGroups)
-//}
+extension ManagedInputsStateDelegate {
+    func update(position: WorkflowPosition?, at: Inputs) { print("warning:!! default implelentation of \(#function)") }
+    func update(epic: Epic?, at: Inputs) { print("warning:!! default implelentation of \(#function)") }
+    func update(storyPoints: StoryPoints, at: Inputs) { print("warning:!! default implelentation of \(#function)") }
+}
 
 public enum ChangeResult: Hashable, CaseIterable {
     case noChange

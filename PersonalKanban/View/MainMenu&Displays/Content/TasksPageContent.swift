@@ -8,11 +8,11 @@
 import UIKit
 import CoreData
 
-class FRCTaskLists: UITableViewController, SlidingContentsVC, NSFetchedResultsControllerDelegate {
+class TasksPageContent: UITableViewController, SlidingContentsVC, NSFetchedResultsControllerDelegate {
 
     let cellReuseID = "FRCTaskLists.cellReuseID"
     var sliderDelegate: SlidingViewDelegate?
-    let persistenceManager: PersistenceManager!
+    let persistence: PersistenceManager!
     let folder: TaskFolder!
     var fetchedResultsController: NSFetchedResultsController<Task>?
 
@@ -25,7 +25,7 @@ class FRCTaskLists: UITableViewController, SlidingContentsVC, NSFetchedResultsCo
             let sortDescriptor = NSSortDescriptor(key: descriptorKey, ascending: true)
             request.fetchBatchSize = 20
             request.sortDescriptors = [sortDescriptor]
-            fetchedResultsController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: persistenceManager.context, sectionNameKeyPath: nil, cacheName: nil)
+            fetchedResultsController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: persistence.context, sectionNameKeyPath: nil, cacheName: nil)
             fetchedResultsController?.fetchRequest.predicate = taskPredicate
             fetchedResultsController?.delegate = self
         }
@@ -59,13 +59,13 @@ class FRCTaskLists: UITableViewController, SlidingContentsVC, NSFetchedResultsCo
         let task = fetchedResultsController?.object(at: indexPath)
         cell.textLabel?.text = task!.title
         cell.detailTextLabel?.text = task!.stickyNote
-        print("task: \(task?.title) with status: \(task?.workflowStatusEnum?.toString), storypoints: \(task?.storyPointsEnum) and folder: \(task?.computedFolder) ")
+        print("task: \(task!.title) with status: \(task?.workflowStatusEnum?.toString), storypoints: \(task!.storyPointsEnum) and folder: \(task!.computedFolder) ")
            return cell
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         sliderDelegate?.hideMenu()
-        let detailVC = AddEditTaskVC(persistenceManager: persistenceManager, useState: .edit, task: fetchedResultsController!.object(at: indexPath), updateDelegate: self)
+        let detailVC = AddEditTaskVC(persistenceManager: persistence, useState: .edit, task: fetchedResultsController!.object(at: indexPath), updateDelegate: self)
         navigationController?.pushViewController(detailVC, animated: true)
     }
 
@@ -109,7 +109,7 @@ class FRCTaskLists: UITableViewController, SlidingContentsVC, NSFetchedResultsCo
     // MARK: - initializers
 
     init(persistenceManager: PersistenceManager, sliderDelegate: SlidingViewDelegate?, folder: TaskFolder) {
-        self.persistenceManager = persistenceManager
+        self.persistence = persistenceManager
         self.sliderDelegate = sliderDelegate
         self.folder = folder
         super.init(nibName: nil, bundle: nil)

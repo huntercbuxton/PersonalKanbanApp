@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol EpicDetailsMenuDelegate: AnyObject {
+    func updateTasks()
+}
+
 class EpicDetailsEditorMenuVC: UITableViewController, UnassignedTasksSelectionDelegate, CoreDataDisplayDelegate {
 
     // MARK: - CoreDataDisplayDelegate conformance
@@ -20,6 +24,7 @@ class EpicDetailsEditorMenuVC: UITableViewController, UnassignedTasksSelectionDe
     func select(_ tasks: [Task]) {
         tasks.forEach({self.epic.addToTasks($0)})
         persistenceManager.save()
+        self.selectionDelegate.updateTasks()
     }
 
     private let persistenceManager: PersistenceManager
@@ -27,7 +32,7 @@ class EpicDetailsEditorMenuVC: UITableViewController, UnassignedTasksSelectionDe
     private var epic: Epic!
     weak var selectionDelegate: EpicDetailsMenuDelegate!
     let options = [ ["add existing tasks",
-                     "add new task",
+                     "add new task"
                     ],
                     [
                         "unassign tasks",

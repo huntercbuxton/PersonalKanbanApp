@@ -14,6 +14,7 @@ open class PaddedTextField: UITextField, UITextFieldDelegate {
     let inputField = Inputs.title
 
     weak var groupObserver: InputsModelManager?
+    weak var epicUpdateDelegate: EpicInputValidationManager?
     let groupID = Inputs.title  // "PaddedTextField.titleInput"
 //    weak var inputValidationDelegate: InputValidationDelegate?
 
@@ -48,8 +49,8 @@ open class PaddedTextField: UITextField, UITextFieldDelegate {
     // MARK: - styling and layout
 
     @objc open func respondToChange() {
-//        self.inputValidationDelegate!.inputUpdate(self.text, from: inputField)
         groupObserver?.update(value: self.text, from: .title)
+        epicUpdateDelegate?.inputUpdate(self.text, from: .title)
     }
 
     func firstSetup() {

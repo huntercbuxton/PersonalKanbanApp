@@ -7,7 +7,17 @@
 
 import UIKit
 
-class AddEditEpicVC: UIViewController, InputsInterfaceDelegate {
+class AddEditEpicVC: UIViewController, InputsInterfaceDelegate, EpicDetailsMenuDelegate {
+
+    // MARK: - EpicDetailsMenuDelegate conformance
+
+    func updateTasks() {
+        print("called \(#function)!!!!!")
+        self.taskTable?.reloadDisplay()
+        taskTableHeight = taskTable!.view.sizeThatFits(CGSize(width: contentView.bounds.width, height: CGFloat.greatestFiniteMagnitude)).height
+        taskTableHeightConstraint!.constant = taskTableHeight!
+        taskTable!.view.layoutIfNeeded()
+    }
 
     // MARK: - InputsInterfaceDelegate conformance
 
@@ -30,8 +40,12 @@ class AddEditEpicVC: UIViewController, InputsInterfaceDelegate {
     var scrollView: UIScrollView = UIScrollView()
     var contentView = UIView()
     lazy var titleTextField: PaddedTextField = PaddedTextField()
-    lazy var notesTextView: LargeTextView = LargeTextView(text: "")
-    lazy var table = UITableViewController()
+
+    lazy var inputValidation: EpicInputValidationManager = EpicInputValidationManager(delegate: self)
+    var editingTable: EpicDetailsEditorMenuVC?
+    var taskTable: EpicTasksList?
+    var taskTableHeight: CGFloat?
+    var taskTableHeightConstraint: NSLayoutConstraint?
 
     // MARK: - properties specifying UI style/layout
 
@@ -44,31 +58,36 @@ class AddEditEpicVC: UIViewController, InputsInterfaceDelegate {
     let useState: CreateOrEdit
     var epic: Epic?
     weak var updateDelegate: CoreDataDisplayDelegate!
-        var inputValidationManager: InputValidationManager!
-
     // MARK: - initial setup of UI components
 
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .systemGroupedBackground
+        print("useState == \(useState)")
         setupNavBar()
         setupScrollViewAndContentView()
         setupTextField()
-        setupTextView()
-        setupTable()
+        if self.useState == .edit {
+            self.editingTable = EpicDetailsEditorMenuVC(persistenceManager: self.persistenceManager, epic: self.epic!, selectionDelegate: self)
+            self.taskTable = EpicTasksList(persistenceManager: self.persistenceManager, epic: self.epic!)
+            setupTables()
+        } else {
+            titleTextField.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
+        }
         setupDataStuff()
     }
 
     private func setupNavBar() {
         self.title = self.titleText
         self.navigationItem.setRightBarButton(saveBarButton, animated: false)
-        if self.useState == .create { saveBarButton.isEnabled = false }
-        self.navigationItem.setLeftBarButton(cancelBarButton, animated: false)
+        if self.useState == .create {
+            saveBarButton.isEnabled = false
+            self.navigationItem.setLeftBarButton(cancelBarButton, animated: false)
+        }
     }
 
     private func setupScrollViewAndContentView() {
         scrollView.layoutWithGuide(in: view)
-
         contentView.translatesAutoresizingMaskIntoConstraints = false
         scrollView.addSubview(contentView)
         contentView.constrainEdgeAnchors(to: scrollView, insets: margins)
@@ -82,49 +101,51 @@ class AddEditEpicVC: UIViewController, InputsInterfaceDelegate {
         titleTextField.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -margins.right).isActive = true
         titleTextField.topAnchor.constraint(equalTo: contentView.topAnchor, constant: SavedLayouts.verticalSpacing).isActive = true
         titleTextField.placeholder = UIConsts.titleFieldPlaceholderText
+        titleTextField.text = epic?.title
     }
 
-    private func setupTextView() {
-        notesTextView.translatesAutoresizingMaskIntoConstraints = false
-        contentView.addSubview(notesTextView)
-        notesTextView.topAnchor.constraint(equalTo: titleTextField.bottomAnchor, constant: SavedLayouts.verticalSpacing).isActive = true
-        notesTextView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: margins.right).isActive = true
-        notesTextView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -margins.right).isActive = true
-    }
+    private func setupTables() {
+        self.addChild(taskTable!)
+        self.taskTable!.view.translatesAutoresizingMaskIntoConstraints = false
+        contentView.addSubview(taskTable!.view)
+        self.taskTable!.view.topAnchor.constraint(equalTo: titleTextField.bottomAnchor, constant: SavedLayouts.verticalSpacing).isActive = true
+        self.taskTable!.view.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -margins.right).isActive = true
+        self.taskTable?.view.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: margins.right).isActive = true
+        taskTable?.view.sizeThatFits(CGSize(width: contentView.bounds.width, height: CGFloat.greatestFiniteMagnitude))
+        taskTableHeight = taskTable!.view.sizeThatFits(CGSize(width: contentView.bounds.width, height: CGFloat.greatestFiniteMagnitude)).height
+        taskTableHeightConstraint = taskTable!.view.heightAnchor.constraint(equalToConstant: taskTableHeight!)
+        taskTableHeightConstraint!.isActive = true
 
-    private func setupTable() {
-        self.addChild(table)
-        self.table.view.translatesAutoresizingMaskIntoConstraints = false
-        contentView.addSubview(table.view)
-        self.table.view.topAnchor.constraint(equalTo: notesTextView.bottomAnchor, constant: SavedLayouts.verticalSpacing).isActive = true
-        self.table.view.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -margins.right).isActive = true
-        self.table.view.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -SavedLayouts.verticalSpacing).isActive = true
-        self.table.view.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: margins.right).isActive = true
-        table.view.sizeThatFits(CGSize(width: contentView.bounds.width, height: CGFloat.greatestFiniteMagnitude))
-        let newSize = table.view.sizeThatFits(CGSize(width: contentView.bounds.width, height: CGFloat.greatestFiniteMagnitude))
-        table.view.heightAnchor.constraint(equalToConstant: newSize.height).isActive = true
+        self.addChild(editingTable!)
+        self.editingTable!.view.translatesAutoresizingMaskIntoConstraints = false
+        contentView.addSubview(editingTable!.view)
+        self.editingTable!.view.topAnchor.constraint(equalTo: taskTable!.view.bottomAnchor, constant: SavedLayouts.verticalSpacing).isActive = true
+        self.editingTable!.view.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -margins.right).isActive = true
+        self.editingTable?.view.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: margins.right).isActive = true
+        editingTable?.view.sizeThatFits(CGSize(width: contentView.bounds.width, height: CGFloat.greatestFiniteMagnitude))
+        let newSize = editingTable!.view.sizeThatFits(CGSize(width: contentView.bounds.width, height: CGFloat.greatestFiniteMagnitude))
+        editingTable!.view.heightAnchor.constraint(equalToConstant: newSize.height).isActive = true
+        self.editingTable!.view.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -SavedLayouts.verticalSpacing).isActive = true
     }
 
     // MARK: - other methods
 
-    private func createEpic(title: String, notes: String) {
+    private func createEpic(title: String) {
         let epic = Epic(context: persistenceManager.context)
         epic.title = title
-        epic.quickNote = notes
         persistenceManager.save()
     }
 
     private func saveChanges() {
         guard let epic = epic else { fatalError("epic was nil when executing \(#function)") }
         epic.title = titleTextField.text!
-        epic.quickNote = notesTextView.text
         persistenceManager.save()
         self.updateDelegate.updateCoreData()
     }
 
     @objc func saveBtnTapped() {
         if useState == .create {
-            createEpic(title: self.titleTextField.text!, notes: self.notesTextView.text)
+            createEpic(title: self.titleTextField.text!)
         } else {
             saveChanges()
         }
@@ -143,19 +164,10 @@ class AddEditEpicVC: UIViewController, InputsInterfaceDelegate {
     }
 
     private func setupDataStuff() {
-        self.inputValidationManager = InputValidationManager()
-        self.inputValidationManager.delegate = self
-//        self.titleTextField.inputValidationDelegate = self.inputValidationManager
-        if self.useState == .edit { prefillInputFields() }
+        titleTextField.epicUpdateDelegate = self.inputValidation
     }
 
-    private func prefillInputFields() {
-        guard let epic = epic else { fatalError("taskMO was nil when executing \(#function)") }
-        self.titleTextField.text = epic.title
-        self.notesTextView.text = epic.quickNote
-    }
-
-    // MARK: EditTaskTableDelegate conformance
+    // MARK: - EditTaskTableDelegate conformance
 
     func deleteTask() {
         let alert = UIAlertController(title: "Alert", message: "Are you sure you want to delete this task?", preferredStyle: UIAlertController.Style.alert)

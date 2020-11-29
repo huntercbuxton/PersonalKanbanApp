@@ -7,9 +7,7 @@
 
 import UIKit
 
-
-
-class InputValidationManager: InputValidationDelegate {
+class EpicInputValidationManager: InputValidationDelegate {
 
     weak var delegate: InputsInterfaceDelegate?
 

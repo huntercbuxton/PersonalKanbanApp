@@ -12,21 +12,18 @@ enum CreateOrEdit {
     case edit
 }
 
-protocol TaskEditorOptionsTable2Delegate: AnyObject {
+public protocol TaskEditorOptionsTable2Delegate: AnyObject {
     func deleteTask()
     func archiveTask()
     func unArchiveTask()
 }
 
-extension TaskEditorOptionsTable2Delegate {
-    func deleteTask() {}
-    func archiveTask() {}
-    func unArchiveTask() {}
-}
 
 class AddEditTaskVC: UIViewController, TaskEditorOptionsTable2Delegate, ManagedInputsStateDelegate {
 
-    func delete() {
+    // MARK: - TaskEditorOptionsTable2Delegate conformance
+
+    func deleteTask() {
         let alert = UIAlertController(title: "Alert", message: "Are you sure you want to delete this task?", preferredStyle: UIAlertController.Style.alert)
         alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel, handler: { _ in print("called handler for Cancel action") }))
         alert.addAction(UIAlertAction(title: "Delete", style: UIAlertAction.Style.destructive, handler: {_ in
@@ -37,6 +34,12 @@ class AddEditTaskVC: UIViewController, TaskEditorOptionsTable2Delegate, ManagedI
         self.present(alert, animated: true, completion: nil)
     }
 
+    func archiveTask() {
+        self.inputStateManager.isArchivedUpdate = true
+    }
+    func unArchiveTask() {
+        self.inputStateManager.isArchivedUpdate = false
+    }
 
     // MARK: - InputStateManagerDelegate conformance
 
@@ -59,6 +62,7 @@ class AddEditTaskVC: UIViewController, TaskEditorOptionsTable2Delegate, ManagedI
     func update(storyPoints: StoryPoints, at: Inputs) {
         workflowOptionsTable.storyPoints = storyPoints
     }
+
 
     // MARK: - properties storing UI Components
 
@@ -124,6 +128,7 @@ class AddEditTaskVC: UIViewController, TaskEditorOptionsTable2Delegate, ManagedI
         workflowOptionsTable.view.topAnchor.constraint(equalTo: headerInputs.view.bottomAnchor, constant: SavedLayouts.verticalSpacing).isActive = true
 
         if useState == .edit {
+            deleteEtcActionsTable.isArchived = inputStateManager.isArchivedUpdate
             self.addChild(deleteEtcActionsTable)
             deleteEtcActionsTable.view.translatesAutoresizingMaskIntoConstraints = false
             contentView.addSubview(deleteEtcActionsTable.view)

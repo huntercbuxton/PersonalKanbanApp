@@ -15,7 +15,7 @@
 		713D0D52255B28570031C303 /* CustomUIColorsFromHex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 713D0D51255B28570031C303 /* CustomUIColorsFromHex.swift */; };
 		713D0D5E255B34E30031C303 /* Favicon Notes.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 713D0D5D255B34E30031C303 /* Favicon Notes.rtf */; };
 		713D0D64255B358C0031C303 /* AppIconNotes.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 713D0D63255B358C0031C303 /* AppIconNotes.rtf */; };
-		713F7A87253C569B00D23CC7 /* InputValidationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 713F7A86253C569B00D23CC7 /* InputValidationManager.swift */; };
+		713F7A87253C569B00D23CC7 /* EpicInputValidationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 713F7A86253C569B00D23CC7 /* EpicInputValidationManager.swift */; };
 		713F7A95253CD0AC00D23CC7 /* LargeTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 713F7A94253CD0AC00D23CC7 /* LargeTextView.swift */; };
 		7146AC39253E19B000DA7D03 /* MainMenuProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7146AC38253E19B000DA7D03 /* MainMenuProtocols.swift */; };
 		7146AC52253E2DA100DA7D03 /* MainMenuPages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7146AC51253E2DA100DA7D03 /* MainMenuPages.swift */; };
@@ -42,7 +42,6 @@
 		716C71DC255E304200373F16 /* ModifyRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 716C71DB255E304200373F16 /* ModifyRequest.swift */; };
 		716C71E6255E30FE00373F16 /* CreateRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 716C71E5255E30FE00373F16 /* CreateRequest.swift */; };
 		716C71F9255E31C800373F16 /* DAOErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 716C71F8255E31C800373F16 /* DAOErrors.swift */; };
-		717DCB1C253EB75E00E2156F /* EpicsTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 717DCB1B253EB75E00E2156F /* EpicsTable.swift */; };
 		717DCB24253ED0BE00E2156F /* AddEditEpicVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 717DCB23253ED0BE00E2156F /* AddEditEpicVC.swift */; };
 		717DCB2E253EF59300E2156F /* EpicDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 717DCB2D253EF59300E2156F /* EpicDetailView.swift */; };
 		717DCB33253F0A7200E2156F /* ViewOnlyEpicDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 717DCB32253F0A7200E2156F /* ViewOnlyEpicDetailVC.swift */; };
@@ -61,6 +60,7 @@
 		719427CB25628894007C3B31 /* TaskFolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 719427CA25628894007C3B31 /* TaskFolder.swift */; };
 		719427D225628981007C3B31 /* MORawRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 719427D125628981007C3B31 /* MORawRepresentable.swift */; };
 		719427D82563402F007C3B31 /* InputsManagerServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 719427D72563402F007C3B31 /* InputsManagerServices.swift */; };
+		719427E6256389DD007C3B31 /* EpicsPageContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 719427E5256389DD007C3B31 /* EpicsPageContent.swift */; };
 		71B72FDB2541305900D26CDC /* UIViewLayoutsExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71B72FDA2541305900D26CDC /* UIViewLayoutsExtension.swift */; };
 		71B72FEB25416BCD00D26CDC /* MiscellaneousUIKitExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71B72FEA25416BCD00D26CDC /* MiscellaneousUIKitExtensions.swift */; };
 		71BC1B3C253DC948005EC646 /* PersonalKanban.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 71BC1B3A253DC948005EC646 /* PersonalKanban.xcdatamodeld */; };
@@ -70,7 +70,7 @@
 		71C6C87D255F8CBC0056CCCF /* TitleAndStickyNote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71C6C87C255F8CBC0056CCCF /* TitleAndStickyNote.swift */; };
 		71C6C883255F959F0056CCCF /* InputsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71C6C882255F959F0056CCCF /* InputsManager.swift */; };
 		71C6C88D2560CEC90056CCCF /* InputValidationServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71C6C88C2560CEC80056CCCF /* InputValidationServices.swift */; };
-		71C6C893256113AD0056CCCF /* FRCTaskLists.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71C6C892256113AD0056CCCF /* FRCTaskLists.swift */; };
+		71C6C893256113AD0056CCCF /* TasksPageContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71C6C892256113AD0056CCCF /* TasksPageContent.swift */; };
 		71D182C8255C8D9700E86C50 /* ContentRequestHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71D182C7255C8D9700E86C50 /* ContentRequestHandler.swift */; };
 		71D182DF255CAC4400E86C50 /* FetchRequestInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71D182DE255CAC4400E86C50 /* FetchRequestInfo.swift */; };
 		71D182F3255CB58600E86C50 /* LocalizationNotes.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 71D182F2255CB58600E86C50 /* LocalizationNotes.rtf */; };
@@ -306,7 +306,7 @@
 		713D0D51255B28570031C303 /* CustomUIColorsFromHex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomUIColorsFromHex.swift; sourceTree = "<group>"; };
 		713D0D5D255B34E30031C303 /* Favicon Notes.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = "Favicon Notes.rtf"; sourceTree = "<group>"; };
 		713D0D63255B358C0031C303 /* AppIconNotes.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = AppIconNotes.rtf; sourceTree = "<group>"; };
-		713F7A86253C569B00D23CC7 /* InputValidationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputValidationManager.swift; sourceTree = "<group>"; };
+		713F7A86253C569B00D23CC7 /* EpicInputValidationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpicInputValidationManager.swift; sourceTree = "<group>"; };
 		713F7A94253CD0AC00D23CC7 /* LargeTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LargeTextView.swift; sourceTree = "<group>"; };
 		7146AC38253E19B000DA7D03 /* MainMenuProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuProtocols.swift; sourceTree = "<group>"; };
 		7146AC51253E2DA100DA7D03 /* MainMenuPages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuPages.swift; sourceTree = "<group>"; };
@@ -339,7 +339,6 @@
 		716C71DB255E304200373F16 /* ModifyRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModifyRequest.swift; sourceTree = "<group>"; };
 		716C71E5255E30FE00373F16 /* CreateRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateRequest.swift; sourceTree = "<group>"; };
 		716C71F8255E31C800373F16 /* DAOErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DAOErrors.swift; sourceTree = "<group>"; };
-		717DCB1B253EB75E00E2156F /* EpicsTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpicsTable.swift; sourceTree = "<group>"; };
 		717DCB23253ED0BE00E2156F /* AddEditEpicVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEditEpicVC.swift; sourceTree = "<group>"; };
 		717DCB2D253EF59300E2156F /* EpicDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpicDetailView.swift; sourceTree = "<group>"; };
 		717DCB32253F0A7200E2156F /* ViewOnlyEpicDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewOnlyEpicDetailVC.swift; sourceTree = "<group>"; };
@@ -358,6 +357,7 @@
 		719427CA25628894007C3B31 /* TaskFolder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskFolder.swift; sourceTree = "<group>"; };
 		719427D125628981007C3B31 /* MORawRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MORawRepresentable.swift; sourceTree = "<group>"; };
 		719427D72563402F007C3B31 /* InputsManagerServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputsManagerServices.swift; sourceTree = "<group>"; };
+		719427E5256389DD007C3B31 /* EpicsPageContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpicsPageContent.swift; sourceTree = "<group>"; };
 		71B72FDA2541305900D26CDC /* UIViewLayoutsExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewLayoutsExtension.swift; sourceTree = "<group>"; };
 		71B72FEA25416BCD00D26CDC /* MiscellaneousUIKitExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiscellaneousUIKitExtensions.swift; sourceTree = "<group>"; };
 		71BC1B3B253DC948005EC646 /* PersonalKanban.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = PersonalKanban.xcdatamodel; sourceTree = "<group>"; };
@@ -367,7 +367,7 @@
 		71C6C87C255F8CBC0056CCCF /* TitleAndStickyNote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleAndStickyNote.swift; sourceTree = "<group>"; };
 		71C6C882255F959F0056CCCF /* InputsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputsManager.swift; sourceTree = "<group>"; };
 		71C6C88C2560CEC80056CCCF /* InputValidationServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputValidationServices.swift; sourceTree = "<group>"; };
-		71C6C892256113AD0056CCCF /* FRCTaskLists.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FRCTaskLists.swift; sourceTree = "<group>"; };
+		71C6C892256113AD0056CCCF /* TasksPageContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksPageContent.swift; sourceTree = "<group>"; };
 		71D182C7255C8D9700E86C50 /* ContentRequestHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentRequestHandler.swift; sourceTree = "<group>"; };
 		71D182DE255CAC4400E86C50 /* FetchRequestInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchRequestInfo.swift; sourceTree = "<group>"; };
 		71D182F2255CB58600E86C50 /* LocalizationNotes.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = LocalizationNotes.rtf; sourceTree = "<group>"; };
@@ -528,8 +528,8 @@
 		71170C15255AF38700D5F2F2 /* Content */ = {
 			isa = PBXGroup;
 			children = (
-				71C6C892256113AD0056CCCF /* FRCTaskLists.swift */,
-				717DCB1B253EB75E00E2156F /* EpicsTable.swift */,
+				71C6C892256113AD0056CCCF /* TasksPageContent.swift */,
+				719427E5256389DD007C3B31 /* EpicsPageContent.swift */,
 			);
 			path = Content;
 			sourceTree = "<group>";
@@ -641,7 +641,6 @@
 		715B72EA253BF00700219F07 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				71C6C87B255F8C670056CCCF /* ReusedComponents */,
 				716C71A7255E24CA00373F16 /* MiscFiles */,
 				716C71A2255E23E000373F16 /* EnumsAndSupportingTypes */,
 				716C719C255E22CB00373F16 /* Task */,
@@ -656,6 +655,7 @@
 		716C719C255E22CB00373F16 /* Task */ = {
 			isa = PBXGroup;
 			children = (
+				71C6C87C255F8CBC0056CCCF /* TitleAndStickyNote.swift */,
 				716C719D255E233700373F16 /* Create&Edit */,
 				716C7194255E22BC00373F16 /* TaskDetailsTableVC.swift */,
 			);
@@ -854,18 +854,10 @@
 			name = ManagedObjectClasses;
 			sourceTree = "<group>";
 		};
-		71C6C87B255F8C670056CCCF /* ReusedComponents */ = {
-			isa = PBXGroup;
-			children = (
-				71C6C87C255F8CBC0056CCCF /* TitleAndStickyNote.swift */,
-			);
-			path = ReusedComponents;
-			sourceTree = "<group>";
-		};
 		71D182D7255CABA000E86C50 /* ViewComms */ = {
 			isa = PBXGroup;
 			children = (
-				713F7A86253C569B00D23CC7 /* InputValidationManager.swift */,
+				713F7A86253C569B00D23CC7 /* EpicInputValidationManager.swift */,
 				71D18333255D12A000E86C50 /* MainMenuController.swift */,
 				71C6C882255F959F0056CCCF /* InputsManager.swift */,
 				719427D72563402F007C3B31 /* InputsManagerServices.swift */,
@@ -1328,7 +1320,6 @@
 				71C6C88D2560CEC90056CCCF /* InputValidationServices.swift in Sources */,
 				716C71D6255E2FED00373F16 /* ReadRequest.swift in Sources */,
 				715B72B6253BEDDE00219F07 /* MainVC.swift in Sources */,
-				717DCB1C253EB75E00E2156F /* EpicsTable.swift in Sources */,
 				716C71E6255E30FE00373F16 /* CreateRequest.swift in Sources */,
 				7146AC52253E2DA100DA7D03 /* MainMenuPages.swift in Sources */,
 				71DC7FD4255AC86F00D0B40C /* EpicTasksList.swift in Sources */,
@@ -1348,7 +1339,7 @@
 				717DCB4E253F3DBA00E2156F /* Epic+CoreDataProperties.swift in Sources */,
 				71D182DF255CAC4400E86C50 /* FetchRequestInfo.swift in Sources */,
 				717DCB2E253EF59300E2156F /* EpicDetailView.swift in Sources */,
-				713F7A87253C569B00D23CC7 /* InputValidationManager.swift in Sources */,
+				713F7A87253C569B00D23CC7 /* EpicInputValidationManager.swift in Sources */,
 				715B72B2253BEDDE00219F07 /* AppDelegate.swift in Sources */,
 				71BC1B5D253DD3A3005EC646 /* InputsEnum.swift in Sources */,
 				713D0D40255B20C60031C303 /* UIColorExtension.swift in Sources */,
@@ -1358,6 +1349,7 @@
 				71DC7FC8255A612800D0B40C /* EpicDetailScreenOneTopTableVC.swift in Sources */,
 				715B7301253C39BC00219F07 /* MainMenu.swift in Sources */,
 				717DCB3B253F25E600E2156F /* EditEpicDetailsVC.swift in Sources */,
+				719427E6256389DD007C3B31 /* EpicsPageContent.swift in Sources */,
 				71BC1B44253DCC6C005EC646 /* PersistenceManager.swift in Sources */,
 				71C6C883255F959F0056CCCF /* InputsManager.swift in Sources */,
 				71D18334255D12A000E86C50 /* MainMenuController.swift in Sources */,
@@ -1367,7 +1359,7 @@
 				71BC1B3C253DC948005EC646 /* PersonalKanban.xcdatamodeld in Sources */,
 				715B72B4253BEDDE00219F07 /* SceneDelegate.swift in Sources */,
 				717DCB4F253F3DBA00E2156F /* Note+CoreDataClass.swift in Sources */,
-				71C6C893256113AD0056CCCF /* FRCTaskLists.swift in Sources */,
+				71C6C893256113AD0056CCCF /* TasksPageContent.swift in Sources */,
 				717DCB5D253F3FF900E2156F /* DateConversion.swift in Sources */,
 				717DCB51253F3DBA00E2156F /* Task+CoreDataClass.swift in Sources */,
 				719427D82563402F007C3B31 /* InputsManagerServices.swift in Sources */,

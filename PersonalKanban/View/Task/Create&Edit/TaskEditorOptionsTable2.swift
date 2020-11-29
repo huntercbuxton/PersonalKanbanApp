@@ -52,9 +52,7 @@ class TaskEditorOptionsTable2: UITableViewController {
         let cell = UITableViewCell(style: .default, reuseIdentifier: cellReuseID)
         cell.textLabel?.text = options[indexPath.row]
         cell.textLabel?.textAlignment = .center
-        if indexPath.row == 1 {
-            cell.textLabel?.textColor = .systemRed
-        }
+        if indexPath.row == 1 { cell.textLabel?.textColor = .systemRed }
         return cell
     }
 
@@ -64,8 +62,7 @@ class TaskEditorOptionsTable2: UITableViewController {
         switch indexPath.row {
         case 0: self.isArchived.toggle()
         case 1: self.delegate?.deleteTask()
-        default:
-            fatalError("this index path \(String(describing: indexPath)) should not exist; you did something wrong in \(#file), \(#function)")
+        default: fatalError("this index path \(String(describing: indexPath)) should not exist; you did something wrong in \(#file), \(#function)")
         }
     }
 

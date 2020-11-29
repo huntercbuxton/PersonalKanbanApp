@@ -101,7 +101,6 @@ class InputStateManager: InputsModelManager {
         self.epic = task?.epic
         self.storyPoints = task?.storyPointsEnum ?? StoryPoints()
     }
-
 }
 
 

@@ -11,7 +11,7 @@ enum EditableState {
     case editEnabled, editDisabled
 }
 
-class EpicDetailView: UIViewController, CoreDataDisplayDelegate {
+class EpicDetailView: UIViewController, ManagedInputsStateDelegate {
 
     // MARK : - InputStateManagerDelegate
 
@@ -21,15 +21,11 @@ class EpicDetailView: UIViewController, CoreDataDisplayDelegate {
 
     // MARK: - properties storing UI Components
 
-    private lazy var saveBtn = UIBarButtonItem(barButtonSystemItem: .save,
-                                                              target: self,
-                                                              action: #selector(saveBtnTapped))
-    private lazy var cancelBtn = UIBarButtonItem(barButtonSystemItem: .cancel,
-                                                                target: self,
-                                                                action: #selector(cancelBtnTapped))
+    private lazy var saveBtn = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(saveBtnTapped))
+    private lazy var cancelBtn = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(cancelBtnTapped))
     private lazy var scrollView = UIScrollView()
     private lazy var contentView = UIView()
-    var titleAndStickyNote: TitleAndStickyNote!
+//    var titleAndStickyNote: TitleAndStickyNote!
     private lazy var taskTableLabel = UILabel()
     private lazy var taskListTableVC: EpicTasksList = EpicTasksList(persistenceManager: self.persistenceManager, epic: self.epic)
 
@@ -39,7 +35,7 @@ class EpicDetailView: UIViewController, CoreDataDisplayDelegate {
     private let useState: CreateOrEdit
     let persistenceManager: PersistenceManager
     let epic: Epic!
-//    lazy var inputStateManager: InputStateManager = InputStateManager(delegate: self)
+//    lazy var inputValidation: EpicInputValidationManager = EpicInputValidationManager(delegate: self)
     private let taskTableLabelText = "Tasks:"
     private lazy var margins: UIEdgeInsets = contentView.layoutMargins
 
@@ -62,21 +58,21 @@ class EpicDetailView: UIViewController, CoreDataDisplayDelegate {
         contentView.widthAnchor.constraint(equalTo: self.scrollView.widthAnchor, constant: -(margins.left + margins.right)).isActive = true
 
 
-//        titleAndStickyNote = TitleAndStickyNote(epic: epic, titleObserver: self.inputStateManager)
-        self.addChild(titleAndStickyNote)
-        titleAndStickyNote.view.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(titleAndStickyNote.view)
-        titleAndStickyNote.view.translatesAutoresizingMaskIntoConstraints = false
-        titleAndStickyNote.view.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
-        titleAndStickyNote.view.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
-        titleAndStickyNote.view.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
+//        titleAndStickyNote = TitleAndStickyNote(epic: epic, titleObserver: self.inputValidation)
+//        self.addChild(titleAndStickyNote)
+//        titleAndStickyNote.view.translatesAutoresizingMaskIntoConstraints = false
+//        view.addSubview(titleAndStickyNote.view)
+//        titleAndStickyNote.view.translatesAutoresizingMaskIntoConstraints = false
+//        titleAndStickyNote.view.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
+//        titleAndStickyNote.view.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
+//        titleAndStickyNote.view.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
 
         taskTableLabel.translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview(taskTableLabel)
         taskTableLabel.text = taskTableLabelText
         taskTableLabel.textAlignment = .center
         taskTableLabel.font = UIConsts.sectionLabelFont
-        taskTableLabel.topAnchor.constraint(equalTo: titleAndStickyNote.view.bottomAnchor, constant: SavedLayouts.verticalSpacing).isActive = true
+//        taskTableLabel.topAnchor.constraint(equalTo: titleAndStickyNote.view.bottomAnchor, constant: SavedLayouts.verticalSpacing).isActive = true
         taskTableLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
         taskTableLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
         taskTableLabel.heightAnchor.constraint(equalToConstant: SavedLayouts.sectionLabelHeight).isActive = true
@@ -106,7 +102,7 @@ class EpicDetailView: UIViewController, CoreDataDisplayDelegate {
 
     @objc func saveBtnTapped() {
         if useState == .create {
-            createEpic(title: self.titleAndStickyNote.titleInput.text!, notes: titleAndStickyNote.stickyNoteInput.text)
+//            createEpic(title: self.titleAndStickyNote.titleInput.text!, notes: titleAndStickyNote.stickyNoteInput.text)
         } else {
             saveChanges()
         }
@@ -133,8 +129,8 @@ class EpicDetailView: UIViewController, CoreDataDisplayDelegate {
 
     private func saveChanges() {
         guard let epic = epic else { fatalError("epic was nil when executing \(#function)") }
-        epic.title = titleAndStickyNote.titleInput.text!
-        epic.quickNote = titleAndStickyNote.stickyNoteInput.text
+//        epic.title = titleAndStickyNote.titleInput.text!
+//        epic.quickNote = titleAndStickyNote.stickyNoteInput.text
         persistenceManager.save()
 //        self.updateDelegate.updateCoreData()
     }

@@ -22,10 +22,12 @@ struct ContentRequestHandler {
 
     func mainMenuRequest(_ option: MainMenuPages) -> SlidingContentsVC {
         switch option {
-        case .epics: return EpicsTable(sliderDelegate: contentViewDelegateRef, persistenceManager: persistenceManager)
+        case .epics:
+            return EpicsPageContent(persistence: persistenceManager, sliderDelegate: contentViewDelegateRef)
+        //EpicsTable(sliderDelegate: contentViewDelegateRef, persistenceManager: persistenceManager)
         default:
             let folder = TaskFolder.pageDic[option]
-            return FRCTaskLists(persistenceManager: persistenceManager, sliderDelegate: contentViewDelegateRef, folder: folder!)
+            return TasksPageContent(persistenceManager: persistenceManager, sliderDelegate: contentViewDelegateRef, folder: folder!)
         }
     }
 
