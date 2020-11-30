@@ -15,7 +15,7 @@ open class PaddedTextField: UITextField, UITextFieldDelegate {
 
     weak var groupObserver: InputsModelManager?
     weak var epicUpdateDelegate: EpicInputValidationManager?
-    let groupID = Inputs.title 
+    let groupID = Inputs.title
 
     // MARK: - UITextFieldDelegate
 
@@ -35,15 +35,15 @@ open class PaddedTextField: UITextField, UITextFieldDelegate {
 
     open override func textRect(forBounds bounds: CGRect) -> CGRect {
         return bounds.insetBy(dx: inset, dy: inset)
-      }
+    }
 
     open override func editingRect(forBounds bounds: CGRect) -> CGRect {
         return bounds.insetBy(dx: inset, dy: inset)
-      }
+    }
 
     open override func placeholderRect(forBounds bounds: CGRect) -> CGRect {
         return bounds.insetBy(dx: inset, dy: inset)
-      }
+    }
 
     // MARK: - styling and layout
 
@@ -68,6 +68,7 @@ open class PaddedTextField: UITextField, UITextFieldDelegate {
     }
 
     // MARK: - initializers
+
     public convenience init(placeholder text: String) {
          self.init()
          firstSetup()

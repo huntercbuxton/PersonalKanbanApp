@@ -75,7 +75,7 @@ class AddEditTaskVC: UIViewController, TaskEditorOptionsTable2Delegate, ManagedI
     private var headerInputs: TitleAndStickyNote!
     private lazy var workflowOptionsTable: TaskDetailsTableVC = TaskDetailsTableVC(coreDataDAO: persistenceManager, task: task, isReadOnly: false)
     private lazy var deleteEtcActionsTable = TaskEditorOptionsTable2(delegate: self)
-    var epicTaskListDelegate: EpicTaskListDisplayDelegate?
+    weak var epicTaskListDelegate: EpicTaskListDisplayDelegate?
 
     // MARK: - other properties
 

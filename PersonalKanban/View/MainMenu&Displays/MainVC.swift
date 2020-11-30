@@ -7,7 +7,6 @@
 
 import UIKit
 
-
 class MainVC: UIViewController, SlidingViewDelegate, MainMenuControllerDelegate, CoreDataDisplayDelegate {
     func updateCoreData() { }
 

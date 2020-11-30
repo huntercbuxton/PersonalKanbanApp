@@ -7,7 +7,6 @@
 
 import UIKit
 
-
 class TaskDetailsTableVC: UITableViewController {
 
     private let isReadOnly: Bool

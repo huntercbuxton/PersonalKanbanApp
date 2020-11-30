@@ -93,8 +93,7 @@ class EpicDetailsEditorMenuVC: UITableViewController, UnassignedTasksSelectionDe
             switch indexPath.row {
             case 0:
                 let alert = UIAlertController(title: "unassign all tasks from this epic", message: "do you want to continue? This action cannot be undone", preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: "Unassign Tasks", style: .destructive, handler: {
-                    _ in
+                alert.addAction(UIAlertAction(title: "Unassign Tasks", style: .destructive, handler: { _ in
                     let tasks = self.epic.tasksList
                     tasks.forEach({$0.epic = nil})
                     self.persistenceManager.save()
@@ -104,8 +103,7 @@ class EpicDetailsEditorMenuVC: UITableViewController, UnassignedTasksSelectionDe
             case 1:
                 let alert =  UIAlertController(title: "You are about to delete all tasks in this epic", message: "are you sure you want to continue?", preferredStyle: UIAlertController.Style.alert)
                 alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-                alert.addAction(UIAlertAction(title: "Delete Tasks", style: .destructive, handler: {
-                    _ in
+                alert.addAction(UIAlertAction(title: "Delete Tasks", style: .destructive, handler: { _ in
                     let tasks = self.epic.tasksList
                     tasks.forEach({self.persistenceManager.delete(task: $0)})
                 }))
@@ -113,8 +111,7 @@ class EpicDetailsEditorMenuVC: UITableViewController, UnassignedTasksSelectionDe
             case 2:
                 let alert =  UIAlertController(title: "Delete Epic", message: "this will also delete all the tasks in the epic. Do you want to continue", preferredStyle: UIAlertController.Style.alert)
                 alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-                alert.addAction(UIAlertAction(title: "Delete Epic", style: .destructive, handler: {
-                    _ in
+                alert.addAction(UIAlertAction(title: "Delete Epic", style: .destructive, handler: { _ in
                     self.persistenceManager.delete(epic: self.epic)
                     self.navigationController?.popToRootViewController(animated: true)
                 }))

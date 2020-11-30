@@ -58,15 +58,7 @@ struct SavedStyles {
 }
 
 struct NonSytemStyleConstants {
-
-//    static let logoBackgroundColorHexStr = "#55ff55ff"
-////    static let logoTextColorHexStr = "#0000ffff"
-//    static let logoFontFamilyName = "Alata"
-//    static let logoFontName = "Alata-Regular"
     static let faviconFontSize = 110
     static let websiteURL = "https://personalkanbanapp.hunterbuxton.com"
     static let githubURL = "https:github.com/huntercbuxton/PersonalKanbanApp.git"
-//    static let logoBackgroundUIColor: UIColor = UIColor(hex: NonSytemStyleConstants.logoBackgroundColorHexStr)!
-//    static let logoTextUIColor: UIColor = UIColor(hex: NonSytemStyleConstants.logoTextColorHexStr)!
-//    static let logoFont: UIFont? = UIFont(fontStyle: .alataReg, size: 20)
 }
