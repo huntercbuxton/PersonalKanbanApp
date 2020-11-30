@@ -72,6 +72,7 @@ class TasksPageContent: UITableViewController, SlidingContentsVC, NSFetchedResul
     // MARK: - NSFetchedResultsCOntroller
 
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        tableView.reloadData()
         tableView.endUpdates()
     }
 

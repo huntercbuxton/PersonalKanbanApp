@@ -67,6 +67,7 @@ class EpicsPageContent: UITableViewController, NSFetchedResultsControllerDelegat
     // MARK: - NSFetchedResultsCOntroller
 
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        tableView.reloadData()
         tableView.endUpdates()
     }
 
