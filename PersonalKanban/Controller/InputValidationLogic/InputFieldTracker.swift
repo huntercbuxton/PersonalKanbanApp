@@ -31,7 +31,6 @@ class InputTracker {
 
     func isEmpty(_ input: String) -> Bool {
         let input1 = input.trimmingCharacters(in: .whitespacesAndNewlines)
-        print(" input1.count == \(input1.count )")
         if input1.isEmpty { return false
         } else { return true }
     }
