@@ -81,7 +81,7 @@ class AddEditTaskVC: UIViewController, TaskEditorOptionsTable2Delegate, ManagedI
 
     let defaultFolder: TaskFolder!
     var selectedToArchive: Bool = false
-    lazy var inputStateManager: InputStateManager = InputStateManager(persistence: persistenceManager, task: task, stateDelegate: self, defaultFolder: nil)
+    lazy var inputStateManager: InputStateManager = InputStateManager(persistence: persistenceManager, task: task, stateDelegate: self, defaultFolder: defaultFolder)
     private lazy var margins: UIEdgeInsets = contentView.layoutMargins
     private let persistenceManager: PersistenceManager
     private var task: Task?

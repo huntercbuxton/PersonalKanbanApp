@@ -611,6 +611,7 @@
 		716C719C255E22CB00373F16 /* Task */ = {
 			isa = PBXGroup;
 			children = (
+				716C718A255E22A100373F16 /* AddEditTaskVC.swift */,
 				71C6C87C255F8CBC0056CCCF /* TitleAndStickyNote.swift */,
 				716C719D255E233700373F16 /* Create&Edit */,
 				716C7194255E22BC00373F16 /* TaskDetailsTableVC.swift */,
@@ -622,7 +623,6 @@
 			isa = PBXGroup;
 			children = (
 				716C7195255E22BC00373F16 /* TaskEditorOptionsTable2.swift */,
-				716C718A255E22A100373F16 /* AddEditTaskVC.swift */,
 				716C7186255E22A100373F16 /* ChooseEpicsScreen.swift */,
 				716C7188255E22A100373F16 /* SelectWorkflowStatusMenu.swift */,
 				716C7189255E22A100373F16 /* StoryPointsSelectionScreen.swift */,
