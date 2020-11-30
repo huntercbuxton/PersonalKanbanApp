@@ -64,7 +64,7 @@
 		71BC1B5D253DD3A3005EC646 /* InputsEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71BC1B5C253DD3A3005EC646 /* InputsEnum.swift */; };
 		71BC1B62253DD3D4005EC646 /* InputsProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71BC1B61253DD3D4005EC646 /* InputsProtocols.swift */; };
 		71C6C87D255F8CBC0056CCCF /* TitleAndStickyNote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71C6C87C255F8CBC0056CCCF /* TitleAndStickyNote.swift */; };
-		71C6C883255F959F0056CCCF /* InputsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71C6C882255F959F0056CCCF /* InputsManager.swift */; };
+		71C6C883255F959F0056CCCF /* InputsStateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71C6C882255F959F0056CCCF /* InputsStateManager.swift */; };
 		71C6C88D2560CEC90056CCCF /* InputValidationServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71C6C88C2560CEC80056CCCF /* InputValidationServices.swift */; };
 		71C6C893256113AD0056CCCF /* TasksPageContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71C6C892256113AD0056CCCF /* TasksPageContent.swift */; };
 		71D182C8255C8D9700E86C50 /* ContentRequestHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71D182C7255C8D9700E86C50 /* ContentRequestHandler.swift */; };
@@ -353,7 +353,7 @@
 		71BC1B5C253DD3A3005EC646 /* InputsEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputsEnum.swift; sourceTree = "<group>"; };
 		71BC1B61253DD3D4005EC646 /* InputsProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputsProtocols.swift; sourceTree = "<group>"; };
 		71C6C87C255F8CBC0056CCCF /* TitleAndStickyNote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleAndStickyNote.swift; sourceTree = "<group>"; };
-		71C6C882255F959F0056CCCF /* InputsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputsManager.swift; sourceTree = "<group>"; };
+		71C6C882255F959F0056CCCF /* InputsStateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputsStateManager.swift; sourceTree = "<group>"; };
 		71C6C88C2560CEC80056CCCF /* InputValidationServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputValidationServices.swift; sourceTree = "<group>"; };
 		71C6C892256113AD0056CCCF /* TasksPageContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksPageContent.swift; sourceTree = "<group>"; };
 		71D182C7255C8D9700E86C50 /* ContentRequestHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentRequestHandler.swift; sourceTree = "<group>"; };
@@ -806,7 +806,7 @@
 			children = (
 				713F7A86253C569B00D23CC7 /* EpicInputValidationManager.swift */,
 				71D18333255D12A000E86C50 /* MainMenuController.swift */,
-				71C6C882255F959F0056CCCF /* InputsManager.swift */,
+				71C6C882255F959F0056CCCF /* InputsStateManager.swift */,
 				719427D72563402F007C3B31 /* InputsManagerServices.swift */,
 			);
 			path = ViewComms;
@@ -1280,7 +1280,7 @@
 				715B7301253C39BC00219F07 /* MainMenu.swift in Sources */,
 				719427E6256389DD007C3B31 /* EpicsPageContent.swift in Sources */,
 				71BC1B44253DCC6C005EC646 /* PersistenceManager.swift in Sources */,
-				71C6C883255F959F0056CCCF /* InputsManager.swift in Sources */,
+				71C6C883255F959F0056CCCF /* InputsStateManager.swift in Sources */,
 				71D18334255D12A000E86C50 /* MainMenuController.swift in Sources */,
 				719427D225628981007C3B31 /* MORawRepresentable.swift in Sources */,
 				71B72FEB25416BCD00D26CDC /* MiscellaneousUIKitExtensions.swift in Sources */,

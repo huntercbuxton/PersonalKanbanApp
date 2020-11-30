@@ -50,7 +50,7 @@ class InputStateManager: InputsModelManager {
             if newValue {
                 folderUpdate = .archived
             } else {
-                folderUpdate = lastFolder
+                folderUpdate = lastFolder == .archived ? .toDo : lastFolder
             }
         }
     }
