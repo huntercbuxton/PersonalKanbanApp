@@ -58,10 +58,7 @@ class InputStateManager: InputsModelManager {
     var statusUpdate: WorkflowPosition? { self.folderUpdate.status }
 
     func update(value: String?, from: Inputs) -> ChangeResult {
-//        print("value.count was \(value?.count)")
-//        print("InputStateManager called \(#function) with value of \(value) ")
         let testResult = self.registeredInputs[from]!.getState(value!)
-//        print("testResult was \(testResult)")
         if testResult == .noError {
             stateDelegate?.updateState(.valid)
         } else {

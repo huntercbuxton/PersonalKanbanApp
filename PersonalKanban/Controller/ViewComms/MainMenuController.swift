@@ -24,7 +24,6 @@ public class MainMenuController: MenuInteractionsResponder {
     var initialSelection: MainMenuPages = .toDo
 
     func detectedSelection(_ option: MainMenuPages) {
-        print("called \(#function) in MainMenuController!! with argument opetion = \(option.toString)")
         controllerDelegate?.hideMenu()
         guard selection != option else { return }
         self.selection = option
@@ -33,7 +32,6 @@ public class MainMenuController: MenuInteractionsResponder {
 
     lazy var selection: MainMenuPages = .inProgress {
         didSet {
-            print("selection property in the displayController is now \(selection)")
             self.title = selection.toString
             controllerDelegate?.title = title
         }

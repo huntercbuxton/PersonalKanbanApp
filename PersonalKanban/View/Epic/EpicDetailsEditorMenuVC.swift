@@ -141,12 +141,6 @@ class EpicDetailsEditorMenuVC: UITableViewController, UnassignedTasksSelectionDe
         return section == 1 ? UILabel() : nil
     }
 
-//    private func mkSectionHeaderView() -> UILabel {
-//        let label = UILabel()
-////        label.styleForSectionHeader()
-//        return label
-//    }
-
     init(persistenceManager: PersistenceManager, epic: Epic, selectionDelegate: EpicDetailsMenuDelegate) {
         self.persistenceManager = persistenceManager
         self.epic = epic

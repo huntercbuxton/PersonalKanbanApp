@@ -20,12 +20,10 @@ class EpicsPageContent: UITableViewController, NSFetchedResultsControllerDelegat
             let entityName = String(describing: Epic.self)
             let request = NSFetchRequest<Epic>(entityName: entityName)
             let descriptorKey = "dateCreated"
-//            let taskPredicate = folder.fetchPredicate
             let sortDescriptor = NSSortDescriptor(key: descriptorKey, ascending: true)
             request.fetchBatchSize = 20
             request.sortDescriptors = [sortDescriptor]
             fetchedResultsController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: persistence.context, sectionNameKeyPath: nil, cacheName: nil)
-//            fetchedResultsController?.fetchRequest.predicate = taskPredicate
             fetchedResultsController?.delegate = self
         }
 
@@ -57,9 +55,7 @@ class EpicsPageContent: UITableViewController, NSFetchedResultsControllerDelegat
         let cell = UITableViewCell(style: .subtitle, reuseIdentifier: cellReuseID)
         let epic = fetchedResultsController?.object(at: indexPath)
         cell.textLabel?.text = epic!.title
-//        cell.detailTextLabel?.text = epic
-       // print("epic: \(epic!.title) ")
-           return cell
+        return cell
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

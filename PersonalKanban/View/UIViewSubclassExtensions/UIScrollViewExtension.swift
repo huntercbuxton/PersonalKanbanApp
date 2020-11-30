@@ -19,6 +19,4 @@ extension UIScrollView {
             bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ])
     }
-
-//    simpleLayout(in view: UIView, layoutGuide: UILayoutGuide, insetConstants: UIEdgeInsets)
 }

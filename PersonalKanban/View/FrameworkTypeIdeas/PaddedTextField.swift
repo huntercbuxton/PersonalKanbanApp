@@ -15,8 +15,7 @@ open class PaddedTextField: UITextField, UITextFieldDelegate {
 
     weak var groupObserver: InputsModelManager?
     weak var epicUpdateDelegate: EpicInputValidationManager?
-    let groupID = Inputs.title  // "PaddedTextField.titleInput"
-//    weak var inputValidationDelegate: InputValidationDelegate?
+    let groupID = Inputs.title 
 
     // MARK: - UITextFieldDelegate
 

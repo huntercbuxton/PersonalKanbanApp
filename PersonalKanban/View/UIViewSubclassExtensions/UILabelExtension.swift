@@ -21,11 +21,4 @@ public extension UILabel {
         layer.borderWidth = 0.4
         layer.borderColor =  UIColor.white.cgColor
     }
-//
-//    public func styleForSectionHeader() {
-//        translatesAutoresizingMaskIntoConstraints = false
-//        heightAnchor.constraint(equalToConstant: SavedLayouts.defaultTableHeaderHeight).isActive = true
-//        backgroundColor = .systemGroupedBackground
-//        text = "   "
-//    }
 }

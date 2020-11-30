@@ -27,7 +27,6 @@ extension Date {
          let dateFormatter = DateFormatter()
          dateFormatter.dateFormat = format
          let dateString = dateFormatter.string(from: self)
-         print("dateString: \(dateString)")
          if let newDate = dateFormatter.date(from: dateString) {
              return newDate
          } else {

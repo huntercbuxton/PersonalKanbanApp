@@ -12,7 +12,6 @@ class AddEditEpicVC: UIViewController, InputsInterfaceDelegate, EpicDetailsMenuD
     // MARK: - EpicDetailsMenuDelegate conformance
 
     func updateTasks() {
-        print("called \(#function)!!!!!")
         self.taskTable?.reloadDisplay()
         taskTableHeight = taskTable!.view.sizeThatFits(CGSize(width: contentView.bounds.width, height: CGFloat.greatestFiniteMagnitude)).height
         taskTableHeightConstraint!.constant = taskTableHeight!
@@ -63,7 +62,6 @@ class AddEditEpicVC: UIViewController, InputsInterfaceDelegate, EpicDetailsMenuD
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .systemGroupedBackground
-        print("useState == \(useState)")
         setupNavBar()
         setupScrollViewAndContentView()
         setupTextField()
@@ -150,7 +148,6 @@ class AddEditEpicVC: UIViewController, InputsInterfaceDelegate, EpicDetailsMenuD
             saveChanges()
         }
         self.goBack()
-        print("\(#function) was executed")
     }
 
     private func goBack() {
@@ -160,7 +157,6 @@ class AddEditEpicVC: UIViewController, InputsInterfaceDelegate, EpicDetailsMenuD
 
     @objc func cancelBtnTapped() {
         self.goBack()
-        print("\(#function) was completed")
     }
 
     private func setupDataStuff() {

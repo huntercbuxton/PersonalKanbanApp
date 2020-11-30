@@ -59,7 +59,7 @@ class TasksPageContent: UITableViewController, SlidingContentsVC, NSFetchedResul
         let task = fetchedResultsController?.object(at: indexPath)
         cell.textLabel?.text = task!.title
         cell.detailTextLabel?.text = task!.stickyNote
-        print("task: \(task!.title) with status: \(String(describing: task?.workflowStatusEnum?.toString)), storypoints: \(task!.storyPointsEnum) and folder: \(task!.computedFolder) ")
+//        print("task: \(task!.title) with status: \(String(describing: task?.workflowStatusEnum?.toString)), storypoints: \(task!.storyPointsEnum) and folder: \(task!.computedFolder) ")
            return cell
     }
 

@@ -20,7 +20,6 @@ class MainVC: UIViewController, SlidingViewDelegate, MainMenuControllerDelegate,
     // MARK: - MainMenuControllerDelegate conformance
 
     func updateDisplay(for option: MainMenuPages) {
-        print("called \(#function) with argument option = \(option) in MainVC!!!")
         removeSlidingVCContents()
         page = option
         displayVC = displayRequestHandler.mainMenuRequest(option)
@@ -106,7 +105,6 @@ class MainVC: UIViewController, SlidingViewDelegate, MainMenuControllerDelegate,
 
         setupContentChildVC(child: menuVC, superView: menuContainerView)
         setupContentChildVC(child: displayVC as! UIViewController, superView: contentView)
-
     }
 
     // MARK: - other methods

@@ -15,25 +15,6 @@ struct UIConsts {
 
     static let titleFieldPlaceholderText = "add a title"
 
-//    static let readOnlyTextViewMaxHeight: CGFloat = 350
-
-    // input error label
-//    static let inputErrorLabelFont: UIFont = UIFont.preferredFont(forTextStyle: .subheadline)
-//    static let inputErrorLabelFontColor: UIColor = .systemRed
-//    static let inputErrorLabelTopMarginWhenVisible: CGFloat = 5
-//    static let inputErrorLabelBottomMarginWhenVisible: CGFloat = 15
-//    static let inputErrorLabelHeightWhenHidden: CGFloat = 10
-//    static let inputErrorLabelTopMarginWhenHidden: CGFloat = 0
-
-    // log/notes displays
-
-//    static let defaultTimeStampFont: UIFont = UIFont.preferredFont(forTextStyle: .caption1)
-//    static let defaultLogEntryFont: UIFont = UIFont.preferredFont(forTextStyle: .body)
-//    static let logEntryVerticalSpacing: CGFloat = 10
-//    static let logzEntrySectionVerticalSpacing: CGFloat = 10
-//    static let logEntryInsets: UIEdgeInsets = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
-
-    // keyboard to input field spacing
     static let minimumSpacingFromKeyboard: CGFloat = 10
 
     static let sectionLabelFont: UIFont = UIFont.preferredFont(forTextStyle: .headline)
@@ -42,11 +23,6 @@ struct UIConsts {
 
     static let defaultBackgroundColor: UIColor = .systemGroupedBackground
     static let defaultLargeTableRowHeight: CGFloat = 70
-//    static let defaultMainMenuFont: UIFont = UIFont.preferredFont(forTextStyle: .headline)
-//    static let activityIndicatorFontColor: UIColor = .systemRed
-//    static let urgentTaskFontColor: UIColor = .systemOrange
-//    static let highlighterColor: UIColor = .systemYellow
-//    static let unsavedDataFontColor: UIColor = .systemBlue
 }
 
 struct SavedLayouts {

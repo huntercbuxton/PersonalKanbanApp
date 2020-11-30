@@ -162,16 +162,13 @@ class AddEditTaskVC: UIViewController, TaskEditorOptionsTable2Delegate, ManagedI
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        //print("&&&&&&&&&&&&& called \(#function)")
         if self.task != nil {
-           // print("4444433333333333 task != nil ")
             saveChanges()
         }
     }
 
     private func navigateToPreviousScreen() {
         self.navigationController?.popViewController(animated: true)
-       // updateDelegate.updateCoreData()
     }
 
     private func saveChanges() {
@@ -179,7 +176,6 @@ class AddEditTaskVC: UIViewController, TaskEditorOptionsTable2Delegate, ManagedI
         task.title = self.headerInputs.titleInput.text!
         task.stickyNote = self.headerInputs.stickyNoteInput.text
         task.epic = workflowOptionsTable.epic
-       // print(" RIGHT WEJEN CALLING \(#function) the storyPoints value was \(inputStateManager.storyPoints)")
         task.storyPointsEnum = inputStateManager.storyPoints
         task.computedFolder = inputStateManager.folderUpdate
         task.dateUpdated = DateConversion.format(Date())

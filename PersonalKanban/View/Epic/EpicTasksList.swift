@@ -34,9 +34,6 @@ class EpicTasksList: UITableViewController {
 
     func reloadDisplay() {
         taskLists = persistenceManager.sortEpicTasks(for: epic)
-        print("called reloadDisplay()")
-        print("taskList contains the following sized arrays:")
-        taskLists.forEach({print($0.count)})
         tableView.reloadData()
     }
 

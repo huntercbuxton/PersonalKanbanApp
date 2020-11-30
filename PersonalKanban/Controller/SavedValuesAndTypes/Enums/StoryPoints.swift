@@ -16,5 +16,4 @@ public enum StoryPoints: Int, CaseIterable, MORawRepresentable {
     var moPropertyKey: String { "storypoints" }
 
     static var caseDefault: MOValue { Self.unassigned.moValue }
-
 }

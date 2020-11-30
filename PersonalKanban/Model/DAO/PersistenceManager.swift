@@ -95,8 +95,6 @@ final class PersistenceManager {
 
     func getAllTasks() -> [Task] {
         let tasks = self.fetch(Task.self)
-        print("these are the current tasks:")
-//        tasks.forEach({print("task title: \($0.title) with status: \($0.workflowStatus) ")})
         return tasks
     }
 
@@ -107,8 +105,6 @@ final class PersistenceManager {
 
     func getAllEpics() -> [Epic] {
         let epics = self.fetch(Epic.self)
-        print("these are the current epics:")
-//        epics.forEach({print($0.title, "tasks.count:", $0.tasks?.count)})
         return epics
     }
 
@@ -123,7 +119,6 @@ final class PersistenceManager {
     }
 
     func deleteAllTasks() {
-        print("now calling \(#function)")
         let tasks = getAllTasks()
         tasks.forEach({self.delete(task: $0)})
     }
@@ -181,7 +176,6 @@ final class PersistenceManager {
         if context.hasChanges {
             do {
                 try context.save()
-                print("the PersistenceManager executed context.save() successfully)")
             } catch {
                 // Replace this implementation with code to handle the error appropriately.
                 // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.

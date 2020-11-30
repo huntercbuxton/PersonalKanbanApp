@@ -41,10 +41,7 @@
 		716C71D6255E2FED00373F16 /* ReadRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 716C71D5255E2FED00373F16 /* ReadRequest.swift */; };
 		716C71DC255E304200373F16 /* ModifyRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 716C71DB255E304200373F16 /* ModifyRequest.swift */; };
 		716C71E6255E30FE00373F16 /* CreateRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 716C71E5255E30FE00373F16 /* CreateRequest.swift */; };
-		716C71F9255E31C800373F16 /* DAOErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 716C71F8255E31C800373F16 /* DAOErrors.swift */; };
 		717DCB24253ED0BE00E2156F /* AddEditEpicVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 717DCB23253ED0BE00E2156F /* AddEditEpicVC.swift */; };
-		717DCB33253F0A7200E2156F /* ViewOnlyEpicDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 717DCB32253F0A7200E2156F /* ViewOnlyEpicDetailVC.swift */; };
-		717DCB3B253F25E600E2156F /* EditEpicDetailsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 717DCB3A253F25E600E2156F /* EditEpicDetailsVC.swift */; };
 		717DCB40253F2BE000E2156F /* EpicDetailsEditorMenuVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 717DCB3F253F2BE000E2156F /* EpicDetailsEditorMenuVC.swift */; };
 		717DCB4D253F3DBA00E2156F /* Epic+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 717DCB47253F3DBA00E2156F /* Epic+CoreDataClass.swift */; };
 		717DCB4E253F3DBA00E2156F /* Epic+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 717DCB48253F3DBA00E2156F /* Epic+CoreDataProperties.swift */; };
@@ -333,10 +330,7 @@
 		716C71D5255E2FED00373F16 /* ReadRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadRequest.swift; sourceTree = "<group>"; };
 		716C71DB255E304200373F16 /* ModifyRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModifyRequest.swift; sourceTree = "<group>"; };
 		716C71E5255E30FE00373F16 /* CreateRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateRequest.swift; sourceTree = "<group>"; };
-		716C71F8255E31C800373F16 /* DAOErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DAOErrors.swift; sourceTree = "<group>"; };
 		717DCB23253ED0BE00E2156F /* AddEditEpicVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEditEpicVC.swift; sourceTree = "<group>"; };
-		717DCB32253F0A7200E2156F /* ViewOnlyEpicDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewOnlyEpicDetailVC.swift; sourceTree = "<group>"; };
-		717DCB3A253F25E600E2156F /* EditEpicDetailsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditEpicDetailsVC.swift; sourceTree = "<group>"; };
 		717DCB3F253F2BE000E2156F /* EpicDetailsEditorMenuVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpicDetailsEditorMenuVC.swift; sourceTree = "<group>"; };
 		717DCB47253F3DBA00E2156F /* Epic+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Epic+CoreDataClass.swift"; sourceTree = "<group>"; };
 		717DCB48253F3DBA00E2156F /* Epic+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Epic+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -470,28 +464,11 @@
 			isa = PBXGroup;
 			children = (
 				717DCB23253ED0BE00E2156F /* AddEditEpicVC.swift */,
-				71239FD0255E1FD900B3A1F1 /* SecondDetailViews */,
-				71170C0E255AF1EE00D5F2F2 /* FirstDetailView */,
-			);
-			path = Epic;
-			sourceTree = "<group>";
-		};
-		71170C0E255AF1EE00D5F2F2 /* FirstDetailView */ = {
-			isa = PBXGroup;
-			children = (
 				71DC7FD3255AC86F00D0B40C /* EpicTasksList.swift */,
-			);
-			path = FirstDetailView;
-			sourceTree = "<group>";
-		};
-		71170C10255AF23700D5F2F2 /* DetailsEditorEpicDetailViewTwo */ = {
-			isa = PBXGroup;
-			children = (
 				7116FDC4255B522C00C84084 /* UnassignedTasksSelectionTableVC.swift */,
 				717DCB3F253F2BE000E2156F /* EpicDetailsEditorMenuVC.swift */,
-				717DCB3A253F25E600E2156F /* EditEpicDetailsVC.swift */,
 			);
-			path = DetailsEditorEpicDetailViewTwo;
+			path = Epic;
 			sourceTree = "<group>";
 		};
 		71170C13255AF2F200D5F2F2 /* FrameworkTypeIdeas */ = {
@@ -528,15 +505,6 @@
 				717DCB61253F4AAE00E2156F /* LogView.swift */,
 			);
 			path = Unused;
-			sourceTree = "<group>";
-		};
-		71239FD0255E1FD900B3A1F1 /* SecondDetailViews */ = {
-			isa = PBXGroup;
-			children = (
-				71170C10255AF23700D5F2F2 /* DetailsEditorEpicDetailViewTwo */,
-				717DCB32253F0A7200E2156F /* ViewOnlyEpicDetailVC.swift */,
-			);
-			path = SecondDetailViews;
 			sourceTree = "<group>";
 		};
 		713D0D57255B34250031C303 /* Fonts */ = {
@@ -736,7 +704,6 @@
 		716C71CF255E2CAA00373F16 /* ModelComms */ = {
 			isa = PBXGroup;
 			children = (
-				716C71F7255E31A300373F16 /* Results */,
 				716C71D4255E2ED800373F16 /* Requests */,
 				71D182DE255CAC4400E86C50 /* FetchRequestInfo.swift */,
 			);
@@ -751,14 +718,6 @@
 				716C71E5255E30FE00373F16 /* CreateRequest.swift */,
 			);
 			path = Requests;
-			sourceTree = "<group>";
-		};
-		716C71F7255E31A300373F16 /* Results */ = {
-			isa = PBXGroup;
-			children = (
-				716C71F8255E31C800373F16 /* DAOErrors.swift */,
-			);
-			path = Results;
 			sourceTree = "<group>";
 		};
 		719427BA2562660C007C3B31 /* Enums */ = {
@@ -1309,7 +1268,6 @@
 				71D1834A255D462E00E86C50 /* UIScrollViewExtension.swift in Sources */,
 				716C718D255E22A100373F16 /* SelectWorkflowStatusMenu.swift in Sources */,
 				71BC1B62253DD3D4005EC646 /* InputsProtocols.swift in Sources */,
-				716C71F9255E31C800373F16 /* DAOErrors.swift in Sources */,
 				717DCB4E253F3DBA00E2156F /* Epic+CoreDataProperties.swift in Sources */,
 				71D182DF255CAC4400E86C50 /* FetchRequestInfo.swift in Sources */,
 				713F7A87253C569B00D23CC7 /* EpicInputValidationManager.swift in Sources */,
@@ -1320,14 +1278,12 @@
 				719427A3256260DE007C3B31 /* TaskPriority.swift in Sources */,
 				713F7A95253CD0AC00D23CC7 /* LargeTextView.swift in Sources */,
 				715B7301253C39BC00219F07 /* MainMenu.swift in Sources */,
-				717DCB3B253F25E600E2156F /* EditEpicDetailsVC.swift in Sources */,
 				719427E6256389DD007C3B31 /* EpicsPageContent.swift in Sources */,
 				71BC1B44253DCC6C005EC646 /* PersistenceManager.swift in Sources */,
 				71C6C883255F959F0056CCCF /* InputsManager.swift in Sources */,
 				71D18334255D12A000E86C50 /* MainMenuController.swift in Sources */,
 				719427D225628981007C3B31 /* MORawRepresentable.swift in Sources */,
 				71B72FEB25416BCD00D26CDC /* MiscellaneousUIKitExtensions.swift in Sources */,
-				717DCB33253F0A7200E2156F /* ViewOnlyEpicDetailVC.swift in Sources */,
 				71BC1B3C253DC948005EC646 /* PersonalKanban.xcdatamodeld in Sources */,
 				715B72B4253BEDDE00219F07 /* SceneDelegate.swift in Sources */,
 				717DCB4F253F3DBA00E2156F /* Note+CoreDataClass.swift in Sources */,
