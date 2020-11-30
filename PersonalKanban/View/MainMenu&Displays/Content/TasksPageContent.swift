@@ -65,7 +65,7 @@ class TasksPageContent: UITableViewController, SlidingContentsVC, NSFetchedResul
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         sliderDelegate?.hideMenu()
-        let detailVC = AddEditTaskVC(persistenceManager: persistence, useState: .edit, task: fetchedResultsController!.object(at: indexPath), updateDelegate: self)
+        let detailVC = AddEditTaskVC(persistenceManager: persistence, useState: .edit, task: fetchedResultsController!.object(at: indexPath))
         navigationController?.pushViewController(detailVC, animated: true)
     }
 

@@ -185,7 +185,7 @@ class AddEditTaskVC: UIViewController, TaskEditorOptionsTable2Delegate, ManagedI
     // MARK: - initialization
 
     // used when creating  anew task for a given epic
-    init(persistenceManager: PersistenceManager, updateDelegate: CoreDataDisplayDelegate, selectedEpic: Epic? = nil, displayAddedTaskDelegate: EpicTaskListDisplayDelegate) {
+    init(persistenceManager: PersistenceManager, selectedEpic: Epic? = nil, displayAddedTaskDelegate: EpicTaskListDisplayDelegate) {
         self.persistenceManager = persistenceManager
         self.useState = .create
         self.defaultFolder = TaskFolder()
@@ -195,7 +195,7 @@ class AddEditTaskVC: UIViewController, TaskEditorOptionsTable2Delegate, ManagedI
     }
 
     // used when editing an existing task
-    init(persistenceManager: PersistenceManager, useState: CreateOrEdit, task: Task, updateDelegate: CoreDataDisplayDelegate) {
+    init(persistenceManager: PersistenceManager, useState: CreateOrEdit, task: Task) {
         self.persistenceManager = persistenceManager
         self.useState = useState
         self.task = task
@@ -204,7 +204,7 @@ class AddEditTaskVC: UIViewController, TaskEditorOptionsTable2Delegate, ManagedI
     }
 
     // used when creating a new task
-    init(persistenceManager: PersistenceManager, useState: CreateOrEdit, updateDelegate: CoreDataDisplayDelegate, defaultFolder: TaskFolder = TaskFolder()) {
+    init(persistenceManager: PersistenceManager, useState: CreateOrEdit, defaultFolder: TaskFolder = TaskFolder()) {
         self.persistenceManager = persistenceManager
         self.useState = useState
         self.defaultFolder = defaultFolder

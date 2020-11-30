@@ -56,7 +56,7 @@ class AddEditEpicVC: UIViewController, InputsInterfaceDelegate, EpicDetailsMenuD
     let persistenceManager: PersistenceManager
     let useState: CreateOrEdit
     var epic: Epic?
-    weak var updateDelegate: CoreDataDisplayDelegate!
+
     // MARK: - initial setup of UI components
 
     override func viewDidLoad() {
@@ -138,7 +138,6 @@ class AddEditEpicVC: UIViewController, InputsInterfaceDelegate, EpicDetailsMenuD
         guard let epic = epic else { fatalError("epic was nil when executing \(#function)") }
         epic.title = titleTextField.text!
         persistenceManager.save()
-        self.updateDelegate.updateCoreData()
     }
 
     @objc func saveBtnTapped() {
@@ -152,7 +151,6 @@ class AddEditEpicVC: UIViewController, InputsInterfaceDelegate, EpicDetailsMenuD
 
     private func goBack() {
         self.navigationController?.popViewController(animated: true)
-        self.updateDelegate.updateCoreData()
     }
 
     @objc func cancelBtnTapped() {
@@ -178,11 +176,10 @@ class AddEditEpicVC: UIViewController, InputsInterfaceDelegate, EpicDetailsMenuD
 
     // MARK: initialization
 
-    init(persistenceManager: PersistenceManager, useState: CreateOrEdit, epic: Epic? = nil, updateDelegate: CoreDataDisplayDelegate) {
+    init(persistenceManager: PersistenceManager, useState: CreateOrEdit, epic: Epic? = nil) {
         self.persistenceManager = persistenceManager
         self.useState = useState
         self.epic = epic
-        self.updateDelegate = updateDelegate
         super.init(nibName: nil, bundle: nil)
     }
 

@@ -126,7 +126,7 @@ class MainVC: UIViewController, SlidingViewDelegate, MainMenuControllerDelegate 
     }
 
     @objc func addBtnTapped() {
-        let vc = displayRequestHandler.composeBtnRequest(currentPage: self.page ?? menuControl.selection, updateDelegate: displayVC)
+        let vc = displayRequestHandler.composeBtnRequest(currentPage: self.page ?? menuControl.selection)
         self.navigationController?.pushViewController(vc, animated: true)
         hideMenu()
     }
@@ -148,6 +148,5 @@ class MainVC: UIViewController, SlidingViewDelegate, MainMenuControllerDelegate 
 
 extension MainVC: UINavigationControllerDelegate {
     func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
-        displayVC.updateCoreData()
     }
 }

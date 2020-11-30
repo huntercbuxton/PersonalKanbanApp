@@ -14,7 +14,6 @@ struct ContentRequestHandler {
     private let persistenceManager: PersistenceManager
     weak var contentViewDelegateRef: MainVC?
     weak var presenterRef: MainVC?
-    weak var updateDelegateRef: CoreDataDisplayDelegate?
 
     func getDefaultMainVCDisplay() -> SlidingContentsVC {
         return mainMenuRequest(.inProgress)
@@ -31,14 +30,14 @@ struct ContentRequestHandler {
         }
     }
 
-    func composeBtnRequest(currentPage: MainMenuPages, updateDelegate: CoreDataDisplayDelegate) -> UIViewController {
+    func composeBtnRequest(currentPage: MainMenuPages) -> UIViewController {
         switch currentPage {
-        case .toDo: return AddEditTaskVC(persistenceManager: persistenceManager, useState: .create, updateDelegate: updateDelegate, defaultFolder: .toDo)
-        case .epics: return AddEditEpicVC(persistenceManager: persistenceManager, useState: .create, updateDelegate: updateDelegate)
-        case .inProgress: return AddEditTaskVC(persistenceManager: persistenceManager, useState: .create, updateDelegate: updateDelegate, defaultFolder: .inProgress)
-        case .backlog: return AddEditTaskVC(persistenceManager: persistenceManager, useState: .create, updateDelegate: updateDelegate, defaultFolder: .backlog)
-        case .finished: return  AddEditTaskVC(persistenceManager: persistenceManager, useState: .create, updateDelegate: updateDelegate, defaultFolder: .finished)
-        case .archived: return  AddEditTaskVC(persistenceManager: persistenceManager, useState: .create, updateDelegate: updateDelegate, defaultFolder: .archived)
+        case .toDo: return AddEditTaskVC(persistenceManager: persistenceManager, useState: .create, defaultFolder: .toDo)
+        case .epics: return AddEditEpicVC(persistenceManager: persistenceManager, useState: .create)
+        case .inProgress: return AddEditTaskVC(persistenceManager: persistenceManager, useState: .create, defaultFolder: .inProgress)
+        case .backlog: return AddEditTaskVC(persistenceManager: persistenceManager, useState: .create, defaultFolder: .backlog)
+        case .finished: return  AddEditTaskVC(persistenceManager: persistenceManager, useState: .create, defaultFolder: .finished)
+        case .archived: return  AddEditTaskVC(persistenceManager: persistenceManager, useState: .create, defaultFolder: .archived)
         }
     }
 

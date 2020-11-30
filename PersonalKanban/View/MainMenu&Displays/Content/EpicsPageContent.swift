@@ -60,7 +60,7 @@ class EpicsPageContent: UITableViewController, NSFetchedResultsControllerDelegat
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         sliderDelegate?.hideMenu()
-        let detailVC = AddEditEpicVC(persistenceManager: self.persistence, useState: .edit, epic: fetchedResultsController!.object(at: indexPath), updateDelegate: self)
+        let detailVC = AddEditEpicVC(persistenceManager: self.persistence, useState: .edit, epic: fetchedResultsController!.object(at: indexPath))
         self.navigationController?.pushViewController(detailVC, animated: true)
     }
 
