@@ -36,10 +36,10 @@ class MainVC: UIViewController, SlidingViewDelegate, MainMenuControllerDelegate,
                        delay: self.animationDelay,
                        usingSpringWithDamping: self.animationSpringDamping,
                        initialSpringVelocity: self.animationInitialSpringVelocity,
-                       options: self.animationOptions) {
+                       options: self.animationOptions, animations: {
             self.contentView.frame.origin.x = self.menuIsVisible ? 0 :
                 abs(self.contentView.frame.width - self.slideInMenuPadding)
-        } completion: { (_) in }
+        }, completion: { (_) in })
         self.menuIsVisible.toggle()
     }
 

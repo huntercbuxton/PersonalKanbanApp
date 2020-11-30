@@ -26,8 +26,8 @@ class MainMenu: UITableViewController {
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        let cell = tableView.cellForRow(at: IndexPath(row: savedSelection.rawValue, section: 0))
-        cell!.setSelected(true, animated: true)
+//        let cell = tableView.cellForRow(at: IndexPath(row: savedSelection.rawValue, section: 0))
+//        cell!.setSelected(true, animated: true)
     }
 
     // MARK: UITableViewDataSource
@@ -52,9 +52,9 @@ class MainMenu: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let optionType = options[indexPath.row]
         self.delegateResponder.detectedSelection(optionType)
-        if indexPath.row != delegateResponder.initialSelection.rawValue || indexPath.section != 0 {
-            tableView.cellForRow(at: IndexPath(row: delegateResponder.initialSelection.rawValue, section: 0))?.setSelected(false, animated: true)
-        }
+//        if indexPath.row != delegateResponder.initialSelection.rawValue || indexPath.section != 0 {
+//            tableView.cellForRow(at: IndexPath(row: savedSelection.rawValue, section: 0))?.setSelected(false, animated: true)
+//        }
     }
 
     // MARK: - initialization
