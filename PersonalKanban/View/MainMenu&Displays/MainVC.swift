@@ -7,8 +7,7 @@
 
 import UIKit
 
-class MainVC: UIViewController, SlidingViewDelegate, MainMenuControllerDelegate, CoreDataDisplayDelegate {
-    func updateCoreData() { }
+class MainVC: UIViewController, SlidingViewDelegate, MainMenuControllerDelegate {
 
     // MARK: - MenuSelectionDelegate conformance
 

@@ -7,24 +7,6 @@
 
 import Foundation
 
-protocol MenuOptionRepresentable: CaseIterable, Hashable {}
-
-protocol MenuRepresentable {
-    associatedtype OptionT
-    var options: [OptionT] { get set }
-    var defaultSelection: OptionT { get set }
-    var currentSelection: OptionT? { get set }
-}
-
-protocol MenuController {
-    associatedtype SelectionT
-    associatedtype MenuT: MenuRepresentable where MenuT.OptionT == SelectionT
-    var menu: MenuT { get set }
-    func select(option: SelectionT)
-    func reset()
-    func refresh()
-}
-
 protocol SlidingContentsVC: CoreDataDisplayDelegate {
     func refreshDisplay()
     var sliderDelegate: SlidingViewDelegate? { get set }

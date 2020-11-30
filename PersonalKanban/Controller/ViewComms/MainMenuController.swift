@@ -30,7 +30,7 @@ public class MainMenuController: MenuInteractionsResponder {
         self.controllerDelegate?.updateDisplay(for: option)
     }
 
-    lazy var selection: MainMenuPages = .inProgress {
+    lazy var selection: MainMenuPages = initialSelection {
         didSet {
             self.title = selection.toString
             controllerDelegate?.title = title
