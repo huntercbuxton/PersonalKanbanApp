@@ -61,7 +61,7 @@ class UnassignedTasksSelectionTableVC: UITableViewController {
     }
 
     @objc func addBtnTapped() {
-        var tasks = selectedList.map({taskList[$0.row]})
+        let tasks = selectedList.map({taskList[$0.row]})
         self.selectionDelegate.select(tasks)
         self.navigationController?.popViewController(animated: true)
     }

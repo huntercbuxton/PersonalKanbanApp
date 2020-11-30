@@ -36,7 +36,7 @@ class InputStateManager: InputsModelManager {
     var lastFolder: TaskFolder
     var folderUpdate: TaskFolder {
         willSet {
-            if newValue != folderUpdate  { lastFolder = folderUpdate }
+            if newValue != folderUpdate { lastFolder = folderUpdate }
         }
         didSet {
             persistence.save()
@@ -47,28 +47,32 @@ class InputStateManager: InputsModelManager {
     var isArchivedUpdate: Bool {
         get { folderUpdate == .archived }
         set {
-            if newValue { folderUpdate = .archived }
-            else { folderUpdate = lastFolder }
+            if newValue {
+                folderUpdate = .archived
+            } else {
+                folderUpdate = lastFolder
+            }
         }
     }
 
     var statusUpdate: WorkflowPosition? { self.folderUpdate.status }
 
     func update(value: String?, from: Inputs) -> ChangeResult {
-
         print("value.count was \(value?.count)")
         print("InputStateManager called \(#function) with value of \(value) ")
         let testResult = self.registeredInputs[from]!.getState(value!)
         print("testResult was \(testResult)")
-        if testResult == .noError {  stateDelegate?.updateState(.valid) }
-        else { stateDelegate?.updateState(.invalid) }
+        if testResult == .noError {
+            stateDelegate?.updateState(.valid)
+        } else {
+            stateDelegate?.updateState(.invalid)
+        }
 
         loggedTest[from] = testResult
         return testResult
     }
 
-
-    var loggedTest: [Inputs : ChangeResult] = [ .title: .noChange, .notes: .noChange]
+    var loggedTest: [Inputs: ChangeResult] = [ .title: .noChange, .notes: .noChange]
 
     func register(groupID: Inputs, savedValue: String?) {
         registeredInputs[groupID] = InputValidationServices()
@@ -103,7 +107,6 @@ class InputStateManager: InputsModelManager {
     }
 }
 
-
 // EpicsSelectorDelegate protocol conformances
 extension InputStateManager {
     func select(epic: Epic) {
@@ -124,81 +127,3 @@ extension InputStateManager {
          folderUpdate = workflowStatus.folder
     }
 }
-
-
-
-
-
-
-
-
-
-
-//
-//
-//enum InputStateChange: Int {
-//    case none = 0
-//    case validate
-//    case invalidate
-//    case valid
-//    case invalid
-//    case setNone
-////    case setInvalidate
-////    case setValidate
-////    case setValid
-////    case setInvalid
-//}
-//
-//enum InputManagementType {
-//    case none
-//    case action
-//    case change
-//    case validation
-////    case metaState
-////    case nonState
-//}
-//
-//enum ManagedInputModelStates {
-//    case noInput
-//    case noChange
-//    case valid
-//    case invalid
-//    case saved
-//}
-//
-//protocol InputStateManagerDelegate: AnyObject {
-//    func updateState(_ state: InputState)
-//    func inputManager(isArchived: Bool, result: ChangeResult?)
-//    func inputManager(status: WorkflowPosition, result: ChangeResult?)
-//    func inputManager(epic: Epic?, result: ChangeResult?)
-//    func inputManager(storyPoints: StoryPoints, result: ChangeResult?)
-//    func inputManager(stickyNote: String?, result: ChangeResult?)
-//    func inputManager(title: String, result: ChangeResult?)
-//    func inputManager(dueDate: Date?, result: ChangeResult?)
-//    func inputManager(dateUpdated: Date, result: ChangeResult?)
-//
-//    func modelManager(isArchived: Bool, action: )
-//    func modelManager(status: WorkflowPosition, result: ChangeResult?)
-//    func modelManager(epic: Epic?, result: ChangeResult?)
-//    func modelManager(storyPoints: StoryPoints, result: ChangeResult?)
-//    func modelManager(stickyNote: String?, result: ChangeResult?)
-//    func modelManager(title: String, result: ChangeResult?)
-//    func modelManager(dueDate: Date?, result: ChangeResult?)
-//    func modelManager(dateUpdated: Date, result: ChangeResult?)
-//
-////    func inputChange(
-//    func delete()
-//}
-//
-//extension InputStateManagerDelegate {
-//    func updateState(_ state: InputState, error: ChangeResult?) {}
-//    func inputManager(isArchived: Bool, error: ChangeResult? = .noChange) {}
-//    func inputManager(status: WorkflowPosition, error: ChangeResult? = .noChange) {}
-//    func inputManager(epic: Epic?, error: ChangeResult? = .noChange) {}
-//    func inputManager(storyPoints: StoryPoints, error: ChangeResult? = .noChange) {}
-//    func inputManager(stickyNote: String?, error: ChangeResult? = .noChange) {}
-//    func inputManager(title: String, error: ChangeResult? = .noChange) {}
-//    func inputManager(dueDate: Date?, error: ChangeResult? = .noChange) {}
-//    func inputManager(dateUpdated: Date, error: ChangeResult? = .noChange) {}
-//    func delete() {}
-//}

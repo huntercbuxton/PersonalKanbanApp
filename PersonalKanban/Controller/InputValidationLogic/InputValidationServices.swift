@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 struct InputValidationServices {
 
     mutating func getState(_ forInput: String?) -> ChangeResult {
@@ -41,7 +40,7 @@ struct InputValidationServices {
     lazy var titleChecks: [ChangeResult: [TestPredicate]] = [
         .noChange: [self.noChanges],
         .erEmpty: [self.emptyPredicate],
-        .erTooLong: [self.titleTooLong],
+        .erTooLong: [self.titleTooLong]
     ]
     lazy var notesTests: [ChangeResult: [TestPredicate]] = [
         .noChange: [self.noChanges],
@@ -57,5 +56,3 @@ struct InputValidationServices {
         }
     }
 }
-
-

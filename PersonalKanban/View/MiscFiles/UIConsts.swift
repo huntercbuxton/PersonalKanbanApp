@@ -36,8 +36,6 @@ struct UIConsts {
     // keyboard to input field spacing
     static let minimumSpacingFromKeyboard: CGFloat = 10
 
-
-
     static let sectionLabelFont: UIFont = UIFont.preferredFont(forTextStyle: .headline)
 
     // other defaults
@@ -49,7 +47,6 @@ struct UIConsts {
 //    static let urgentTaskFontColor: UIColor = .systemOrange
 //    static let highlighterColor: UIColor = .systemYellow
 //    static let unsavedDataFontColor: UIColor = .systemBlue
-
 }
 
 struct SavedLayouts {
@@ -66,7 +63,6 @@ struct SavedLayouts {
 
     static let defaultTextViewHeight: CGFloat = 130
     static let defaultTextViewInsets = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
-
 }
 
 struct SavedStyles {
@@ -97,6 +93,4 @@ struct NonSytemStyleConstants {
 //    static let logoBackgroundUIColor: UIColor = UIColor(hex: NonSytemStyleConstants.logoBackgroundColorHexStr)!
 //    static let logoTextUIColor: UIColor = UIColor(hex: NonSytemStyleConstants.logoTextColorHexStr)!
 //    static let logoFont: UIFont? = UIFont(fontStyle: .alataReg, size: 20)
-
 }
-

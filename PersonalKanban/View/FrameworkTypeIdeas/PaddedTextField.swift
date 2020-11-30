@@ -83,7 +83,7 @@ open class PaddedTextField: UITextField, UITextFieldDelegate {
         self.text = text
         self.groupObserver?.register(groupID: self.groupID, savedValue: self.text)
     }
-    
+
     public init() {
         super.init(frame: .zero)
         firstSetup()

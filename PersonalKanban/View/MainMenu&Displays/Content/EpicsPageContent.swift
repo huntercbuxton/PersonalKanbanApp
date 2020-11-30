@@ -58,7 +58,7 @@ class EpicsPageContent: UITableViewController, NSFetchedResultsControllerDelegat
         let epic = fetchedResultsController?.object(at: indexPath)
         cell.textLabel?.text = epic!.title
 //        cell.detailTextLabel?.text = epic
-        print("task: \(epic!.title) ")
+       // print("epic: \(epic!.title) ")
            return cell
     }
 
@@ -80,8 +80,8 @@ class EpicsPageContent: UITableViewController, NSFetchedResultsControllerDelegat
     }
 
     func configureCell(_ cell: UITableViewCell, at indexPath: IndexPath) {
-        let task = fetchedResultsController?.object(at: indexPath)
-        cell.textLabel?.text = task?.title
+        let epic = fetchedResultsController?.object(at: indexPath)
+        cell.textLabel?.text = epic?.title
     }
 
     func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange sectionInfo: NSFetchedResultsSectionInfo, atSectionIndex sectionIndex: Int, for type: NSFetchedResultsChangeType) {

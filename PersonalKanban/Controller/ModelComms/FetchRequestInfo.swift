@@ -13,15 +13,12 @@ struct FetchRequestInfo<T: NSManagedObject> {
     let predicate: NSPredicate
     var entityName: String { String(describing: T.self) }
     var fetchRequest: NSFetchRequest<T> {
-        get {
-            let request = NSFetchRequest<T>(entityName: entityName)
-            request.sortDescriptors = self.sortDescriptors
-            request.predicate = self.predicate
-            return request
-        }
+        let request = NSFetchRequest<T>(entityName: entityName)
+        request.sortDescriptors = self.sortDescriptors
+        request.predicate = self.predicate
+        return request
     }
 }
-
 
 struct TaskFetchRequestDefaults {
 
@@ -30,14 +27,12 @@ struct TaskFetchRequestDefaults {
     static let toDoTable: FetchRequestInfo<Task> = mkWorkflowFetchRequest(for: .toDo)
     static let finishedTable: FetchRequestInfo<Task> = mkWorkflowFetchRequest(for: .toDo)
     static var archivedTable: FetchRequestInfo<Task> {
-        get {
-            let predicateKey = "workflowStatus"
-            let descriptorKey = "dateUpdated"
-            let sortDescriptors = [NSSortDescriptor(key: descriptorKey, ascending: true)]
-            let predicate = NSPredicate(format: "\(predicateKey) > 3 ")
-            let info = FetchRequestInfo<Task>(sortDescriptors: sortDescriptors, predicate: predicate)
-            return info
-        }
+        let predicateKey = "workflowStatus"
+        let descriptorKey = "dateUpdated"
+        let sortDescriptors = [NSSortDescriptor(key: descriptorKey, ascending: true)]
+        let predicate = NSPredicate(format: "\(predicateKey) > 3 ")
+        let info = FetchRequestInfo<Task>(sortDescriptors: sortDescriptors, predicate: predicate)
+        return info
     }
 
     static func mkWorkflowFetchRequest(for section: WorkflowPosition) -> FetchRequestInfo<Task> {
@@ -48,6 +43,4 @@ struct TaskFetchRequestDefaults {
         let info = FetchRequestInfo<Task>(sortDescriptors: sortDescriptors, predicate: predicate)
         return info
     }
-
 }
-

@@ -36,14 +36,13 @@ enum TaskFolder: Int, MORawRepresentable, CaseIterable, Hashable {
         }
     }
 
-    static var workflowPages: [TaskFolder] { Self.allCases.filter( { $0.status != nil }) }
+    static var workflowPages: [TaskFolder] { Self.allCases.filter({ $0.status != nil }) }
 
     static var pageDic: [MainMenuPages: TaskFolder] {
         Self.allCases.reduce(into: [MainMenuPages: TaskFolder]()) { $0[$1.page!] = $1 }
     }
 
     static var statusDic: [WorkflowPosition: TaskFolder] {
-        Self.workflowPages.reduce(into: [WorkflowPosition : TaskFolder]() ) { $0[$1.status!] = $1 }
+        Self.workflowPages.reduce(into: [WorkflowPosition: TaskFolder]() ) { $0[$1.status!] = $1 }
     }
-    
 }

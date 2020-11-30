@@ -73,9 +73,6 @@
 		71C6C893256113AD0056CCCF /* TasksPageContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71C6C892256113AD0056CCCF /* TasksPageContent.swift */; };
 		71D182C8255C8D9700E86C50 /* ContentRequestHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71D182C7255C8D9700E86C50 /* ContentRequestHandler.swift */; };
 		71D182DF255CAC4400E86C50 /* FetchRequestInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71D182DE255CAC4400E86C50 /* FetchRequestInfo.swift */; };
-		71D182F3255CB58600E86C50 /* LocalizationNotes.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 71D182F2255CB58600E86C50 /* LocalizationNotes.rtf */; };
-		71D182F9255CB5A400E86C50 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 71D182F8255CB5A400E86C50 /* InfoPlist.strings */; };
-		71D182FF255CB5BC00E86C50 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 71D182FE255CB5BC00E86C50 /* Localizable.strings */; };
 		71D18334255D12A000E86C50 /* MainMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71D18333255D12A000E86C50 /* MainMenuController.swift */; };
 		71D1834A255D462E00E86C50 /* UIScrollViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71D18349255D462E00E86C50 /* UIScrollViewExtension.swift */; };
 		71D378392541B53D00F66FCC /* WorkflowPositions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71D378382541B53D00F66FCC /* WorkflowPositions.swift */; };
@@ -370,9 +367,6 @@
 		71C6C892256113AD0056CCCF /* TasksPageContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksPageContent.swift; sourceTree = "<group>"; };
 		71D182C7255C8D9700E86C50 /* ContentRequestHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentRequestHandler.swift; sourceTree = "<group>"; };
 		71D182DE255CAC4400E86C50 /* FetchRequestInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchRequestInfo.swift; sourceTree = "<group>"; };
-		71D182F2255CB58600E86C50 /* LocalizationNotes.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = LocalizationNotes.rtf; sourceTree = "<group>"; };
-		71D182F8255CB5A400E86C50 /* InfoPlist.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = InfoPlist.strings; sourceTree = "<group>"; };
-		71D182FE255CB5BC00E86C50 /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		71D18333255D12A000E86C50 /* MainMenuController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuController.swift; sourceTree = "<group>"; };
 		71D18349255D462E00E86C50 /* UIScrollViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIScrollViewExtension.swift; sourceTree = "<group>"; };
 		71D378382541B53D00F66FCC /* WorkflowPositions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkflowPositions.swift; sourceTree = "<group>"; };
@@ -865,16 +859,6 @@
 			path = ViewComms;
 			sourceTree = "<group>";
 		};
-		71D18304255CB6DF00E86C50 /* Localization */ = {
-			isa = PBXGroup;
-			children = (
-				71D182F2255CB58600E86C50 /* LocalizationNotes.rtf */,
-				71D182F8255CB5A400E86C50 /* InfoPlist.strings */,
-				71D182FE255CB5BC00E86C50 /* Localizable.strings */,
-			);
-			path = Localization;
-			sourceTree = "<group>";
-		};
 		71DC7FB225474D8B00D0B40C /* InputValidatorTests */ = {
 			isa = PBXGroup;
 			children = (
@@ -887,7 +871,6 @@
 		71DC7FD9255AEA6800D0B40C /* resources */ = {
 			isa = PBXGroup;
 			children = (
-				71D18304255CB6DF00E86C50 /* Localization */,
 				713D0D58255B342C0031C303 /* LogoFiles */,
 				713D0D57255B34250031C303 /* Fonts */,
 			);
@@ -1236,7 +1219,6 @@
 				71DC8046255AEA8800D0B40C /* icon-messages-app-27x20@3x.png in Resources */,
 				71DC8031255AEA8800D0B40C /* Icon-App-60x60@2x.png in Resources */,
 				71DC8059255AEA8800D0B40C /* favicon-16x16.png in Resources */,
-				71D182FF255CB5BC00E86C50 /* Localizable.strings in Resources */,
 				715B72BB253BEDE800219F07 /* Assets.xcassets in Resources */,
 				71DC804B255AEA8800D0B40C /* icon-messages-app-iPhone-60x45@2x.png in Resources */,
 				71DC803C255AEA8800D0B40C /* ic_launcher.png in Resources */,
@@ -1245,7 +1227,6 @@
 				713D0D5E255B34E30031C303 /* Favicon Notes.rtf in Resources */,
 				71DC8041255AEA8800D0B40C /* icon-messages-transcript-32x24@3x.png in Resources */,
 				71DC8037255AEA8800D0B40C /* iTunesArtwork@3x.png in Resources */,
-				71D182F3255CB58600E86C50 /* LocalizationNotes.rtf in Resources */,
 				71DC804E255AEA8800D0B40C /* Icon-50@2x.png in Resources */,
 				71DC8036255AEA8800D0B40C /* iTunesArtwork@2x.png in Resources */,
 				71DC804C255AEA8800D0B40C /* icon-messages-settings-29x29@3x.png in Resources */,
@@ -1255,7 +1236,6 @@
 				71DC802C255AEA8800D0B40C /* Contents.json in Resources */,
 				71DC804D255AEA8800D0B40C /* Icon-40@2x.png in Resources */,
 				71DC8048255AEA8800D0B40C /* icon-messages-app-store-1024x1024.png in Resources */,
-				71D182F9255CB5A400E86C50 /* InfoPlist.strings in Resources */,
 				71DC805E255AEA8800D0B40C /* site.webmanifest in Resources */,
 				71DC8051255AEA8800D0B40C /* Icon-44@2x.png in Resources */,
 				71DC8033255AEA8800D0B40C /* Icon-App-40x40@3x.png in Resources */,

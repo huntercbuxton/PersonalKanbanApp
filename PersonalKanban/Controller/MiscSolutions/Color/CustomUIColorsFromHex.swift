@@ -7,7 +7,6 @@
 
 import UIKit
 
-
 struct SavedCustomColors {
     static let logoBackground = CustomColor.logoBackground.convertToUIColor()
     static let logoText = CustomColor.logoText.convertToUIColor()

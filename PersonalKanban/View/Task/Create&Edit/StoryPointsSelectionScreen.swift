@@ -11,7 +11,6 @@ public protocol StoryPointSelectorDelegate: AnyObject {
     func select(storyPoints: StoryPoints)
 }
 
-
 class StoryPointsSelectionScreen: UITableViewController {
 
     private let cellReuseID = "StoryPointsSelectionScreen.cellReuseID"
@@ -61,5 +60,4 @@ class StoryPointsSelectionScreen: UITableViewController {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
 }

@@ -36,10 +36,9 @@ final class PersistenceManager {
     }
 
     func performFetch<T: NSManagedObject>(with info: FetchRequestInfo<T>) -> [T] {
-        let entityName = info.entityName
         let fetchRequest = info.fetchRequest //NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
         do {
-            let fetchedObjects = try? context.fetch(fetchRequest) as? [T]
+            let fetchedObjects = try? context.fetch(fetchRequest) as [T]
             return fetchedObjects ?? [T]()
         } catch {
             print(error)
@@ -74,7 +73,7 @@ final class PersistenceManager {
     }
 
     func getArchivedTasks() -> [Task] {
-        var allTasks = self.getAllTasks()
+        let allTasks = self.getAllTasks()
         return allTasks.filter({$0.isArchived})
     }
 
@@ -102,7 +101,7 @@ final class PersistenceManager {
     }
 
     func getUnassignedTasks() -> [Task] {
-        var tasks = self.getAllTasks()
+        let tasks = self.getAllTasks()
         return tasks.filter({$0.epic == nil})
     }
 

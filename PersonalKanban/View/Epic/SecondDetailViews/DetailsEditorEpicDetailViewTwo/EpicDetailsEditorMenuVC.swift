@@ -140,8 +140,7 @@ class EpicDetailsEditorMenuVC: UITableViewController, UnassignedTasksSelectionDe
     override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         return section == 1 ? UILabel() : nil
     }
-    
-//
+
 //    private func mkSectionHeaderView() -> UILabel {
 //        let label = UILabel()
 ////        label.styleForSectionHeader()

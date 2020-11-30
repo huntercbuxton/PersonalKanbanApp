@@ -18,10 +18,9 @@ public protocol TaskEditorOptionsTable2Delegate: AnyObject {
     func unArchiveTask()
 }
 
-protocol EpicTaskListDisplayDelegate {
+protocol EpicTaskListDisplayDelegate: AnyObject {
     func displayAddedTask(task: Task)
 }
-
 
 class AddEditTaskVC: UIViewController, TaskEditorOptionsTable2Delegate, ManagedInputsStateDelegate {
 
@@ -55,7 +54,7 @@ class AddEditTaskVC: UIViewController, TaskEditorOptionsTable2Delegate, ManagedI
         }
     }
 
-    func update(position: WorkflowPosition?, at: Inputs)  {
+    func update(position: WorkflowPosition?, at: Inputs) {
         workflowOptionsTable.workflowPosition = position
     }
 
@@ -66,7 +65,6 @@ class AddEditTaskVC: UIViewController, TaskEditorOptionsTable2Delegate, ManagedI
     func update(storyPoints: StoryPoints, at: Inputs) {
         workflowOptionsTable.storyPoints = storyPoints
     }
-
 
     // MARK: - properties storing UI Components
 
@@ -188,7 +186,7 @@ class AddEditTaskVC: UIViewController, TaskEditorOptionsTable2Delegate, ManagedI
         persistenceManager.save()
     }
 
-//     MARK: - initialization
+    // MARK: - initialization
 
     // used when creating  anew task for a given epic
     init(persistenceManager: PersistenceManager, updateDelegate: CoreDataDisplayDelegate, selectedEpic: Epic? = nil, displayAddedTaskDelegate: EpicTaskListDisplayDelegate) {

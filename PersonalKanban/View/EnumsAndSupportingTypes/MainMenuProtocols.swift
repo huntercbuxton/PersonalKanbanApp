@@ -7,9 +7,7 @@
 
 import Foundation
 
-protocol MenuOptionRepresentable: CaseIterable, Hashable {
-   
-}
+protocol MenuOptionRepresentable: CaseIterable, Hashable {}
 
 protocol MenuRepresentable {
     associatedtype OptionT

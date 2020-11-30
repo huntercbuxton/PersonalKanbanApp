@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 enum TaskPriority: Int, CaseIterable, MORawRepresentable {
     case unassigned = 0, low, medium, high, highest
 
@@ -17,4 +16,3 @@ enum TaskPriority: Int, CaseIterable, MORawRepresentable {
 
     static var caseDefault: Int64 { Self.unassigned.moValue }
 }
-

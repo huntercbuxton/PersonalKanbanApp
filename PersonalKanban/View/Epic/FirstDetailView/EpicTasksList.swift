@@ -117,7 +117,7 @@ class EpicTasksList: UITableViewController, EditorStateControllable {
 
     // MARK: - initialization
 
-    init(persistenceManager: PersistenceManager,epic: Epic) {
+    init(persistenceManager: PersistenceManager, epic: Epic) {
         self.persistenceManager = persistenceManager
         self.epic = epic
         super.init(nibName: nil, bundle: nil)

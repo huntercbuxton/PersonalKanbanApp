@@ -13,7 +13,7 @@ enum EditableState {
 
 class EpicDetailView: UIViewController, ManagedInputsStateDelegate {
 
-    // MARK : - InputStateManagerDelegate
+    // MARK: - InputStateManagerDelegate
 
     func updateState(_ state: InputState) {
         saveBtn.isEnabled = state == .valid
@@ -57,7 +57,6 @@ class EpicDetailView: UIViewController, ManagedInputsStateDelegate {
         contentView.constrainEdgeAnchors(to: scrollView, insets: margins)
         contentView.widthAnchor.constraint(equalTo: self.scrollView.widthAnchor, constant: -(margins.left + margins.right)).isActive = true
 
-
 //        titleAndStickyNote = TitleAndStickyNote(epic: epic, titleObserver: self.inputValidation)
 //        self.addChild(titleAndStickyNote)
 //        titleAndStickyNote.view.translatesAutoresizingMaskIntoConstraints = false
@@ -99,7 +98,6 @@ class EpicDetailView: UIViewController, ManagedInputsStateDelegate {
 
     // MARK: - misc instance methods
 
-
     @objc func saveBtnTapped() {
         if useState == .create {
 //            createEpic(title: self.titleAndStickyNote.titleInput.text!, notes: titleAndStickyNote.stickyNoteInput.text)
@@ -113,12 +111,10 @@ class EpicDetailView: UIViewController, ManagedInputsStateDelegate {
         navigateToPreviousScreen()
     }
 
-
     private func navigateToPreviousScreen() {
         self.navigationController?.popViewController(animated: true)
 //        updateDelegate.updateCoreData()
     }
-
 
     private func createEpic(title: String, notes: String) {
         let epic = Epic(context: persistenceManager.context)
@@ -140,7 +136,6 @@ class EpicDetailView: UIViewController, ManagedInputsStateDelegate {
         self.heightConstraint?.constant = newSize1.height
         self.taskListTableVC.view.layoutIfNeeded()
     }
-
 
     // MARK: - initialization
 

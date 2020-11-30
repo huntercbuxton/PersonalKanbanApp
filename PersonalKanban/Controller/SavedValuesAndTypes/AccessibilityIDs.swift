@@ -7,7 +7,6 @@
 
 import UIKit
 
-
 public struct AccessibilityIDs {
     // not used
     public static let featureNavigationBar = "featureNavigationBar"

@@ -18,11 +18,9 @@ class PersonalKanbanUITests: XCTestCase {
 
     override func setUpWithError() throws {
         super.setUp()
-
         app = XCUIApplication()
         app.launchArguments = ["enable-testing"]
         app.launch()
-
     }
 
     override func tearDownWithError() throws {
@@ -41,23 +39,21 @@ class PersonalKanbanUITests: XCTestCase {
 
         XCTAssertTrue(app.isDisplayingTaskEditor, "UI test failed in \(#function) app.isDisplayingTaskEditor returned false")
 
-
         let saveBtn = navigationBarButtons["saveBtn"]
-        XCTAssertFalse(saveBtn.isEnabled,  "UI test failed in \(#function) saveBtn.isEnabled was true when AddEditTaskScreen had not recieved any inputs")
+        XCTAssertFalse(saveBtn.isEnabled, "UI test failed in \(#function) saveBtn.isEnabled was true when AddEditTaskScreen had not recieved any inputs")
 
         let titleTextField = app.textFields["titleTextField"]
         titleTextField.tap()
         titleTextField.typeText("alphanumeric string example")
-        XCTAssertTrue(saveBtn.isEnabled,  "UI test failed in \(#function) saveBtn.isEnabled was false when AddEditTaskScreen had already recieved alphanumeric input")
+        XCTAssertTrue(saveBtn.isEnabled, "UI test failed in \(#function) saveBtn.isEnabled was false when AddEditTaskScreen had already recieved alphanumeric input")
 
         let cancelBtn = navigationBarButtons["cancelBtn"]
-        XCTAssertTrue(cancelBtn.isEnabled,  "UI test failed in \(#function) cancelBtn.isEnabled was true")
+        XCTAssertTrue(cancelBtn.isEnabled, "UI test failed in \(#function) cancelBtn.isEnabled was true")
 
         saveBtn.tap()
         XCTAssertFalse(app.isDisplayingTaskEditor, "UI test failed in \(#function), addEditTaskScreen was still presented after saveBtn was enabled and tapped")
 
     }
-
 
     func testLaunchPerformance() throws {
         if #available(macOS 10.15, iOS 13.0, tvOS 13.0, *) {
@@ -69,7 +65,6 @@ class PersonalKanbanUITests: XCTestCase {
     }
 }
 
-
 extension XCUIApplication {
     var isDisplayingMainScreen: Bool {
         return otherElements["mainParentVCID"].exists
@@ -78,4 +73,3 @@ extension XCUIApplication {
         return otherElements["taskEditorVCID"].exists
     }
 }
-

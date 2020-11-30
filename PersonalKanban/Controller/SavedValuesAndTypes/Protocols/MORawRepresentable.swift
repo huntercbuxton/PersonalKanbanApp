@@ -40,5 +40,3 @@ extension MORawRepresentable where MOValue == Int64, RawValue == Int {
         self.init(moValue: moValue ?? Self.caseDefault)!
     }
 }
-
-
