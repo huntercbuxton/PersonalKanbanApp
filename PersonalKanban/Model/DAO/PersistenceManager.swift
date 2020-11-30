@@ -29,7 +29,7 @@ final class PersistenceManager {
         request.predicate = NSPredicate(format: "\(predicateKey) == 0")
         do {
             let objects = try context.fetch(request) as [Task]
-            return objects ?? [Task]()
+            return objects //?? [Task]()
         } catch {
             fatalError("failed to perform the fetch request in the method \(#function)")
         }
@@ -58,7 +58,7 @@ final class PersistenceManager {
 
     func sortEpicTasks(for epic: Epic) -> [[Task]] {
         let unsorted = epic.tasksList
-        var returnData: [WorkflowPosition:[Task]] = [.backlog: [],
+        var returnData: [WorkflowPosition: [Task]] = [.backlog: [],
                                                       .toDo: [],
                                                       .inProgress: [],
                                                       .finished: []

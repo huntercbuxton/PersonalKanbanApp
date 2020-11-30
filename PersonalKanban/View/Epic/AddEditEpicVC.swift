@@ -49,7 +49,7 @@ class AddEditEpicVC: UIViewController, InputsInterfaceDelegate, EpicDetailsMenuD
 
     // MARK: - properties specifying UI style/layout
 
-    private var titleText: String { useState == .create ? "create epic" : "edit epic" }
+    private var titleText: String { useState == .create ? "create epic" : "" }
     private lazy var margins: UIEdgeInsets = contentView.layoutMargins
 
     // MARK: - other properties

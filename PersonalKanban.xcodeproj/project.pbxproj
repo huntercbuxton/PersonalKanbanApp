@@ -43,7 +43,6 @@
 		716C71E6255E30FE00373F16 /* CreateRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 716C71E5255E30FE00373F16 /* CreateRequest.swift */; };
 		716C71F9255E31C800373F16 /* DAOErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 716C71F8255E31C800373F16 /* DAOErrors.swift */; };
 		717DCB24253ED0BE00E2156F /* AddEditEpicVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 717DCB23253ED0BE00E2156F /* AddEditEpicVC.swift */; };
-		717DCB2E253EF59300E2156F /* EpicDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 717DCB2D253EF59300E2156F /* EpicDetailView.swift */; };
 		717DCB33253F0A7200E2156F /* ViewOnlyEpicDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 717DCB32253F0A7200E2156F /* ViewOnlyEpicDetailVC.swift */; };
 		717DCB3B253F25E600E2156F /* EditEpicDetailsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 717DCB3A253F25E600E2156F /* EditEpicDetailsVC.swift */; };
 		717DCB40253F2BE000E2156F /* EpicDetailsEditorMenuVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 717DCB3F253F2BE000E2156F /* EpicDetailsEditorMenuVC.swift */; };
@@ -78,7 +77,6 @@
 		71D378392541B53D00F66FCC /* WorkflowPositions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71D378382541B53D00F66FCC /* WorkflowPositions.swift */; };
 		71D75FA8255DDEB90027858D /* UILabelExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71D75FA7255DDEB90027858D /* UILabelExtension.swift */; };
 		71DC7FB425474D8B00D0B40C /* InputValidatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71DC7FB325474D8B00D0B40C /* InputValidatorTests.swift */; };
-		71DC7FC8255A612800D0B40C /* EpicDetailScreenOneTopTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71DC7FC7255A612800D0B40C /* EpicDetailScreenOneTopTableVC.swift */; };
 		71DC7FD4255AC86F00D0B40C /* EpicTasksList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71DC7FD3255AC86F00D0B40C /* EpicTasksList.swift */; };
 		71DC8024255AEA8800D0B40C /* iTunesArtwork@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = 71DC7FDC255AEA8800D0B40C /* iTunesArtwork@1x.png */; };
 		71DC8025255AEA8800D0B40C /* Icon-App-76x76@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 71DC7FDE255AEA8800D0B40C /* Icon-App-76x76@2x.png */; };
@@ -337,7 +335,6 @@
 		716C71E5255E30FE00373F16 /* CreateRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateRequest.swift; sourceTree = "<group>"; };
 		716C71F8255E31C800373F16 /* DAOErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DAOErrors.swift; sourceTree = "<group>"; };
 		717DCB23253ED0BE00E2156F /* AddEditEpicVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEditEpicVC.swift; sourceTree = "<group>"; };
-		717DCB2D253EF59300E2156F /* EpicDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpicDetailView.swift; sourceTree = "<group>"; };
 		717DCB32253F0A7200E2156F /* ViewOnlyEpicDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewOnlyEpicDetailVC.swift; sourceTree = "<group>"; };
 		717DCB3A253F25E600E2156F /* EditEpicDetailsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditEpicDetailsVC.swift; sourceTree = "<group>"; };
 		717DCB3F253F2BE000E2156F /* EpicDetailsEditorMenuVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpicDetailsEditorMenuVC.swift; sourceTree = "<group>"; };
@@ -374,7 +371,6 @@
 		71DC7FB125474D8B00D0B40C /* InputValidatorTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = InputValidatorTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		71DC7FB325474D8B00D0B40C /* InputValidatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputValidatorTests.swift; sourceTree = "<group>"; };
 		71DC7FB525474D8B00D0B40C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		71DC7FC7255A612800D0B40C /* EpicDetailScreenOneTopTableVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpicDetailScreenOneTopTableVC.swift; sourceTree = "<group>"; };
 		71DC7FD3255AC86F00D0B40C /* EpicTasksList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpicTasksList.swift; sourceTree = "<group>"; };
 		71DC7FDC255AEA8800D0B40C /* iTunesArtwork@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iTunesArtwork@1x.png"; sourceTree = "<group>"; };
 		71DC7FDE255AEA8800D0B40C /* Icon-App-76x76@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-App-76x76@2x.png"; sourceTree = "<group>"; };
@@ -483,8 +479,6 @@
 		71170C0E255AF1EE00D5F2F2 /* FirstDetailView */ = {
 			isa = PBXGroup;
 			children = (
-				717DCB2D253EF59300E2156F /* EpicDetailView.swift */,
-				71DC7FC7255A612800D0B40C /* EpicDetailScreenOneTopTableVC.swift */,
 				71DC7FD3255AC86F00D0B40C /* EpicTasksList.swift */,
 			);
 			path = FirstDetailView;
@@ -1318,7 +1312,6 @@
 				716C71F9255E31C800373F16 /* DAOErrors.swift in Sources */,
 				717DCB4E253F3DBA00E2156F /* Epic+CoreDataProperties.swift in Sources */,
 				71D182DF255CAC4400E86C50 /* FetchRequestInfo.swift in Sources */,
-				717DCB2E253EF59300E2156F /* EpicDetailView.swift in Sources */,
 				713F7A87253C569B00D23CC7 /* EpicInputValidationManager.swift in Sources */,
 				715B72B2253BEDDE00219F07 /* AppDelegate.swift in Sources */,
 				71BC1B5D253DD3A3005EC646 /* InputsEnum.swift in Sources */,
@@ -1326,7 +1319,6 @@
 				716C7196255E22BC00373F16 /* TaskDetailsTableVC.swift in Sources */,
 				719427A3256260DE007C3B31 /* TaskPriority.swift in Sources */,
 				713F7A95253CD0AC00D23CC7 /* LargeTextView.swift in Sources */,
-				71DC7FC8255A612800D0B40C /* EpicDetailScreenOneTopTableVC.swift in Sources */,
 				715B7301253C39BC00219F07 /* MainMenu.swift in Sources */,
 				717DCB3B253F25E600E2156F /* EditEpicDetailsVC.swift in Sources */,
 				719427E6256389DD007C3B31 /* EpicsPageContent.swift in Sources */,

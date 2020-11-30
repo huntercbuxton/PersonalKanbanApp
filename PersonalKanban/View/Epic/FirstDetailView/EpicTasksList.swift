@@ -11,24 +11,12 @@ protocol EpicTasksListSelectionDelegate: AnyObject {
     func select(task: Task)
 }
 
-protocol EditorStateControllable {
-    func updateEditorState(_ newState: EditableState)
-}
-
-class EpicTasksList: UITableViewController, EditorStateControllable {
-
-    // MARK: - EditorStateControllable conformance
-
-    func updateEditorState(_ newState: EditableState) {
-        let isEditing = newState == .editEnabled
-        self.setEditing(isEditing, animated: true)
-    }
+class EpicTasksList: UITableViewController {
 
     private let persistenceManager: PersistenceManager!
     private let cellReuseID = "EpicTasksList.cellReuseID"
     private let epic: Epic!
     private lazy var taskLists: [[Task]] = []
-    private var editorState: EditableState = .editDisabled
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,7 +30,6 @@ class EpicTasksList: UITableViewController, EditorStateControllable {
 
     private func loadData() {
         taskLists = persistenceManager.sortEpicTasks(for: epic)
-//        self.view.backgroundColor = UIConsts.defaultBackgroundColor
     }
 
     func reloadDisplay() {
