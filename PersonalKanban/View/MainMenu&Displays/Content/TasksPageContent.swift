@@ -11,7 +11,7 @@ import CoreData
 class TasksPageContent: UITableViewController, SlidingContentsVC, NSFetchedResultsControllerDelegate {
 
     let cellReuseID = "FRCTaskLists.cellReuseID"
-    var sliderDelegate: SlidingViewDelegate?
+    weak var sliderDelegate: SlidingViewDelegate?
     let persistence: PersistenceManager!
     let folder: TaskFolder!
     var fetchedResultsController: NSFetchedResultsController<Task>?

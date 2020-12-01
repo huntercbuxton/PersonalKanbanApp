@@ -21,6 +21,7 @@ class TitleAndStickyNote: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         layoutInputs()
+        titleInput.accessibilityIdentifier = "titleTextField"
     }
 
     private func layoutInputs() {

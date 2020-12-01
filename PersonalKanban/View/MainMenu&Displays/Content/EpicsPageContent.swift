@@ -11,7 +11,7 @@ import CoreData
 class EpicsPageContent: UITableViewController, NSFetchedResultsControllerDelegate, SlidingContentsVC {
 
     let cellReuseID = "EpicsPage.cellReuseID"
-    var sliderDelegate: SlidingViewDelegate?
+    weak var sliderDelegate: SlidingViewDelegate?
     let persistence: PersistenceManager!
     var fetchedResultsController: NSFetchedResultsController<Epic>?
 
