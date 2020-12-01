@@ -14,3 +14,12 @@ The primary menu and display is constructed with a UIViewController subclass 'Ma
 
 ## upcoming features
 
+divide large tasks into 'sub-tasks'
+
+designate 'related' or 'prerequisite' tasks
+
+localization for France and Quebec
+
+cloud data backup   
+
+an additional 'notes' section for each task, for more detailed information to be recorded during the process of completion
