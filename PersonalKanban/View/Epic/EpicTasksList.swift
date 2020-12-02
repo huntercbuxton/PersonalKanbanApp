@@ -70,15 +70,14 @@ class EpicTasksList: UITableViewController {
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         switch section {
         case 0:
-            return mkSectionHeaderViewWith(titleIfEmpty: "You have no backlog tasks for this epic", titleIfNotEmpty: "backlog tasks", for: section)
+            return mkSectionHeaderViewWith(titleIfEmpty: "You have no \(MainMenuPages.backlog.title) tasks for this epic", titleIfNotEmpty: MainMenuPages.backlog.title, for: section)
         case 1:
-            return mkSectionHeaderViewWith(titleIfEmpty: "You have no 'to-do' tasks for this epic", titleIfNotEmpty: "to-do tasks", for: section)
+            return mkSectionHeaderViewWith(titleIfEmpty: "You have no '\(MainMenuPages.toDo.title)' tasks for this epic", titleIfNotEmpty: MainMenuPages.toDo.title, for: section)
         case 2:
-            return mkSectionHeaderViewWith(titleIfEmpty: "you have no 'in-progress' tasks for this epic", titleIfNotEmpty: "tasks in-progress", for: section)
+            return mkSectionHeaderViewWith(titleIfEmpty: "you have no '\(MainMenuPages.inProgress.title)' tasks for this epic", titleIfNotEmpty: MainMenuPages.inProgress.title, for: section)
         case 3:
-            return mkSectionHeaderViewWith(titleIfEmpty: "you have no finished tasks for this epic", titleIfNotEmpty: "finished tasks", for: section)
-        default:
-            return mkSectionHeaderViewWith(titleIfEmpty: "   ", titleIfNotEmpty: "   ", for: section)
+            return mkSectionHeaderViewWith(titleIfEmpty: "you have no \(MainMenuPages.finished.title) tasks for this epic", titleIfNotEmpty: MainMenuPages.finished.title, for: section)
+        default: fatalError("should never reach case \(section) in function \(#function)")
         }
     }
 

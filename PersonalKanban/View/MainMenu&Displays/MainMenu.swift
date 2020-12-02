@@ -40,7 +40,7 @@ class MainMenu: UITableViewController {
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: .default, reuseIdentifier: self.cellReuseID)
-        cell.textLabel?.text = options[indexPath.row].toString
+        cell.textLabel?.text = options[indexPath.row].title
         cell.selectionStyle = .default
         return cell
     }

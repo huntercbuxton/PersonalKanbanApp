@@ -78,7 +78,7 @@ class MainVC: UIViewController, SlidingViewDelegate, MainMenuControllerDelegate 
         addBtn.accessibilityIdentifier =  AccessibilityIDs.mainVCaddBtn
         menuBtn.accessibilityIdentifier = AccessibilityIDs.mainVCmenuBtn
 
-        title = self.menuControl.initialSelection.toString
+        title = self.menuControl.initialSelection.title
         navigationItem.setLeftBarButton(menuBtn, animated: false)
         navigationItem.setRightBarButton(addBtn, animated: false)
 

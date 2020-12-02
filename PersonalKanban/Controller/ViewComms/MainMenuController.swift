@@ -23,11 +23,11 @@ public class MainMenuController: MenuInteractionsResponder {
     var initialSelection: MainMenuPages = .toDo
     lazy var selection: MainMenuPages = initialSelection {
         didSet {
-            self.title = selection.toString
+            self.title = selection.title
             controllerDelegate?.title = title
         }
     }
-    lazy var title: String = selection.toString
+    lazy var title: String = selection.title
 
     func detectedSelection(_ option: MainMenuPages) {
         controllerDelegate?.hideMenu()

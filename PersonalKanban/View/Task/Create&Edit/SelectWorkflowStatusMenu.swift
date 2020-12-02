@@ -37,7 +37,7 @@ class SelectWorkflowStatusMenu: UITableViewController {
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: .default, reuseIdentifier: cellReuseID)
-        cell.textLabel?.text = options[indexPath.row].toString
+        cell.textLabel?.text = options[indexPath.row].menuPage!.title 
         if let status = currentStatus {
             if status == options[indexPath.row] { cell.isSelected = true }
         }
