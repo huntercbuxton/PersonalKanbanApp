@@ -9,7 +9,6 @@ import UIKit
 
 class TaskDetailsTableVC: UITableViewController {
 
-    private let isReadOnly: Bool
     private let persistenceManager: PersistenceManager
     private let cellReuseID = "TaskDetailsTableVC.cellReuseID"
     var modelManager: InputsModelManager?
@@ -71,7 +70,7 @@ class TaskDetailsTableVC: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: .default, reuseIdentifier: cellReuseID)
         cell.textLabel?.text = titles[indexPath.row]
-        if !isReadOnly { cell.accessoryType = .disclosureIndicator }
+        cell.accessoryType = .disclosureIndicator
         return cell
     }
 
@@ -80,7 +79,6 @@ class TaskDetailsTableVC: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard !isReadOnly else { return }
         switch indexPath.row {
         case 0: self.navigationController?.pushViewController(ChooseEpicsScreen(persistenceManager: self.persistenceManager, selectionDelegate: modelManager!), animated: true)
         case 1: self.navigationController?.pushViewController(StoryPointsSelectionScreen(delegate: modelManager!, currentSelection: self.storyPoints), animated: true)
@@ -89,19 +87,17 @@ class TaskDetailsTableVC: UITableViewController {
         }
     }
 
-    init(coreDataDAO: PersistenceManager, isReadOnly: Bool) {
+    init(coreDataDAO: PersistenceManager) {
         self.persistenceManager = coreDataDAO
-        self.isReadOnly = isReadOnly
         super.init(nibName: nil, bundle: nil)
     }
 
-    init(coreDataDAO: PersistenceManager, task: Task?, isReadOnly: Bool) {
+    init(coreDataDAO: PersistenceManager, task: Task?) {
         self.persistenceManager = coreDataDAO
         self.task = task
         epic = self.task?.epic
         storyPoints = self.task?.storyPointsEnum ?? .unassigned
         workflowPosition = self.task?.workflowStatusEnum
-        self.isReadOnly = isReadOnly
         super.init(nibName: nil, bundle: nil)
     }
 
