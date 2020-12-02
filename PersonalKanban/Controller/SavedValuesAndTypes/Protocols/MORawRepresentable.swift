@@ -7,6 +7,7 @@
 
 import Foundation
 
+// specifyies requirements for Enumerated types which are stored as properties of NSManagedOpbjects 
 protocol MORawRepresentable: RawRepresentable {
     associatedtype MOValue: Equatable
 

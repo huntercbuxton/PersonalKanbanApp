@@ -7,6 +7,7 @@
 
 import UIKit
 
+// used as the input field for the 'title' properties of Tasks and Epics
 public class LargeTextView: UITextView, UITextViewDelegate {
 
     // MARK: - InputValidationDelegate

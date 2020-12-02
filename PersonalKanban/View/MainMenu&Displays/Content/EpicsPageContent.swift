@@ -8,12 +8,17 @@
 import UIKit
 import CoreData
 
+// the content for the main menu option 'epics'
 class EpicsPageContent: UITableViewController, NSFetchedResultsControllerDelegate, SlidingContentsVC {
 
+    // MARK: - properties
+    
     let cellReuseID = "EpicsPage.cellReuseID"
     weak var sliderDelegate: SlidingViewDelegate?
     let persistence: PersistenceManager!
     var fetchedResultsController: NSFetchedResultsController<Epic>?
+
+    // MARK: - methods
 
     func loadSavedData() {
         if fetchedResultsController == nil {

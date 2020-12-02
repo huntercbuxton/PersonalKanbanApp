@@ -7,6 +7,7 @@
 
 import UIKit
 
+// functions that perform common combinations of anchor constraints and related tasks
 public extension UIView {
 
     func layoutAsContentView(for scrollView: UIScrollView) {

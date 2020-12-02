@@ -28,7 +28,6 @@
 		715B72D4253BEDE800219F07 /* PersonalKanbanUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 715B72D3253BEDE800219F07 /* PersonalKanbanUITests.swift */; };
 		715B72EF253BF39000219F07 /* UIConsts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 715B72EE253BF39000219F07 /* UIConsts.swift */; };
 		715B7301253C39BC00219F07 /* MainMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 715B72FF253C39BC00219F07 /* MainMenu.swift */; };
-		715B7306253C3A3900219F07 /* SlidingViewsVCProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 715B7305253C3A3900219F07 /* SlidingViewsVCProtocols.swift */; };
 		715B731B253C524600219F07 /* PaddedTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 715B731A253C524600219F07 /* PaddedTextField.swift */; };
 		716C718B255E22A100373F16 /* ChooseEpicsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 716C7186255E22A100373F16 /* ChooseEpicsScreen.swift */; };
 		716C718D255E22A100373F16 /* SelectWorkflowStatusMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 716C7188255E22A100373F16 /* SelectWorkflowStatusMenu.swift */; };
@@ -38,9 +37,6 @@
 		716C7197255E22BC00373F16 /* TaskEditorOptionsTable2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 716C7195255E22BC00373F16 /* TaskEditorOptionsTable2.swift */; };
 		716C71AD255E264D00373F16 /* StoryPoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 716C71AC255E264D00373F16 /* StoryPoints.swift */; };
 		716C71BD255E2A6B00373F16 /* InputFieldTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 716C71BC255E2A6B00373F16 /* InputFieldTracker.swift */; };
-		716C71D6255E2FED00373F16 /* ReadRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 716C71D5255E2FED00373F16 /* ReadRequest.swift */; };
-		716C71DC255E304200373F16 /* ModifyRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 716C71DB255E304200373F16 /* ModifyRequest.swift */; };
-		716C71E6255E30FE00373F16 /* CreateRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 716C71E5255E30FE00373F16 /* CreateRequest.swift */; };
 		717DCB24253ED0BE00E2156F /* AddEditEpicVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 717DCB23253ED0BE00E2156F /* AddEditEpicVC.swift */; };
 		717DCB40253F2BE000E2156F /* EpicDetailsEditorMenuVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 717DCB3F253F2BE000E2156F /* EpicDetailsEditorMenuVC.swift */; };
 		717DCB4D253F3DBA00E2156F /* Epic+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 717DCB47253F3DBA00E2156F /* Epic+CoreDataClass.swift */; };
@@ -68,7 +64,6 @@
 		71C6C88D2560CEC90056CCCF /* InputValidationServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71C6C88C2560CEC80056CCCF /* InputValidationServices.swift */; };
 		71C6C893256113AD0056CCCF /* TasksPageContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71C6C892256113AD0056CCCF /* TasksPageContent.swift */; };
 		71D182C8255C8D9700E86C50 /* ContentRequestHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71D182C7255C8D9700E86C50 /* ContentRequestHandler.swift */; };
-		71D182DF255CAC4400E86C50 /* FetchRequestInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71D182DE255CAC4400E86C50 /* FetchRequestInfo.swift */; };
 		71D18334255D12A000E86C50 /* MainMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71D18333255D12A000E86C50 /* MainMenuController.swift */; };
 		71D1834A255D462E00E86C50 /* UIScrollViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71D18349255D462E00E86C50 /* UIScrollViewExtension.swift */; };
 		71D378392541B53D00F66FCC /* WorkflowPositions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71D378382541B53D00F66FCC /* WorkflowPositions.swift */; };
@@ -317,7 +312,6 @@
 		715B72D5253BEDE800219F07 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		715B72EE253BF39000219F07 /* UIConsts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIConsts.swift; sourceTree = "<group>"; };
 		715B72FF253C39BC00219F07 /* MainMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainMenu.swift; sourceTree = "<group>"; };
-		715B7305253C3A3900219F07 /* SlidingViewsVCProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlidingViewsVCProtocols.swift; sourceTree = "<group>"; };
 		715B731A253C524600219F07 /* PaddedTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaddedTextField.swift; sourceTree = "<group>"; };
 		716C7186255E22A100373F16 /* ChooseEpicsScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChooseEpicsScreen.swift; sourceTree = "<group>"; };
 		716C7188255E22A100373F16 /* SelectWorkflowStatusMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectWorkflowStatusMenu.swift; sourceTree = "<group>"; };
@@ -327,9 +321,6 @@
 		716C7195255E22BC00373F16 /* TaskEditorOptionsTable2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskEditorOptionsTable2.swift; sourceTree = "<group>"; };
 		716C71AC255E264D00373F16 /* StoryPoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryPoints.swift; sourceTree = "<group>"; };
 		716C71BC255E2A6B00373F16 /* InputFieldTracker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputFieldTracker.swift; sourceTree = "<group>"; };
-		716C71D5255E2FED00373F16 /* ReadRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadRequest.swift; sourceTree = "<group>"; };
-		716C71DB255E304200373F16 /* ModifyRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModifyRequest.swift; sourceTree = "<group>"; };
-		716C71E5255E30FE00373F16 /* CreateRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateRequest.swift; sourceTree = "<group>"; };
 		717DCB23253ED0BE00E2156F /* AddEditEpicVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEditEpicVC.swift; sourceTree = "<group>"; };
 		717DCB3F253F2BE000E2156F /* EpicDetailsEditorMenuVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpicDetailsEditorMenuVC.swift; sourceTree = "<group>"; };
 		717DCB47253F3DBA00E2156F /* Epic+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Epic+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -357,7 +348,6 @@
 		71C6C88C2560CEC80056CCCF /* InputValidationServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputValidationServices.swift; sourceTree = "<group>"; };
 		71C6C892256113AD0056CCCF /* TasksPageContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksPageContent.swift; sourceTree = "<group>"; };
 		71D182C7255C8D9700E86C50 /* ContentRequestHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentRequestHandler.swift; sourceTree = "<group>"; };
-		71D182DE255CAC4400E86C50 /* FetchRequestInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchRequestInfo.swift; sourceTree = "<group>"; };
 		71D18333255D12A000E86C50 /* MainMenuController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuController.swift; sourceTree = "<group>"; };
 		71D18349255D462E00E86C50 /* UIScrollViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIScrollViewExtension.swift; sourceTree = "<group>"; };
 		71D378382541B53D00F66FCC /* WorkflowPositions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkflowPositions.swift; sourceTree = "<group>"; };
@@ -471,15 +461,6 @@
 			path = Epic;
 			sourceTree = "<group>";
 		};
-		71170C13255AF2F200D5F2F2 /* FrameworkTypeIdeas */ = {
-			isa = PBXGroup;
-			children = (
-				715B731A253C524600219F07 /* PaddedTextField.swift */,
-				713F7A94253CD0AC00D23CC7 /* LargeTextView.swift */,
-			);
-			path = FrameworkTypeIdeas;
-			sourceTree = "<group>";
-		};
 		71170C14255AF36F00D5F2F2 /* MainMenu&Displays */ = {
 			isa = PBXGroup;
 			children = (
@@ -527,7 +508,6 @@
 		713F7A85253C567D00D23CC7 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				716C71CF255E2CAA00373F16 /* ModelComms */,
 				716C71B5255E293100373F16 /* MiscSolutions */,
 				716C71B4255E281800373F16 /* SavedValuesAndTypes */,
 				716C71B2255E277F00373F16 /* RequestHandlers */,
@@ -602,7 +582,6 @@
 				716C719C255E22CB00373F16 /* Task */,
 				71170C09255AF1A000D5F2F2 /* Epic */,
 				71170C14255AF36F00D5F2F2 /* MainMenu&Displays */,
-				71170C13255AF2F200D5F2F2 /* FrameworkTypeIdeas */,
 				71BC1B68253DD48A005EC646 /* UIViewSubclassExtensions */,
 			);
 			path = View;
@@ -633,7 +612,6 @@
 		716C71A2255E23E000373F16 /* EnumsAndSupportingTypes */ = {
 			isa = PBXGroup;
 			children = (
-				715B7305253C3A3900219F07 /* SlidingViewsVCProtocols.swift */,
 				7146AC38253E19B000DA7D03 /* MainMenuProtocols.swift */,
 			);
 			path = EnumsAndSupportingTypes;
@@ -642,6 +620,8 @@
 		716C71A7255E24CA00373F16 /* MiscFiles */ = {
 			isa = PBXGroup;
 			children = (
+				713F7A94253CD0AC00D23CC7 /* LargeTextView.swift */,
+				715B731A253C524600219F07 /* PaddedTextField.swift */,
 				715B72EE253BF39000219F07 /* UIConsts.swift */,
 				71239FCA255E1DB400B3A1F1 /* Unused */,
 			);
@@ -699,25 +679,6 @@
 				717DCB5C253F3FF900E2156F /* DateConversion.swift */,
 			);
 			path = Dates;
-			sourceTree = "<group>";
-		};
-		716C71CF255E2CAA00373F16 /* ModelComms */ = {
-			isa = PBXGroup;
-			children = (
-				716C71D4255E2ED800373F16 /* Requests */,
-				71D182DE255CAC4400E86C50 /* FetchRequestInfo.swift */,
-			);
-			path = ModelComms;
-			sourceTree = "<group>";
-		};
-		716C71D4255E2ED800373F16 /* Requests */ = {
-			isa = PBXGroup;
-			children = (
-				716C71D5255E2FED00373F16 /* ReadRequest.swift */,
-				716C71DB255E304200373F16 /* ModifyRequest.swift */,
-				716C71E5255E30FE00373F16 /* CreateRequest.swift */,
-			);
-			path = Requests;
 			sourceTree = "<group>";
 		};
 		719427BA2562660C007C3B31 /* Enums */ = {
@@ -1251,9 +1212,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				71C6C88D2560CEC90056CCCF /* InputValidationServices.swift in Sources */,
-				716C71D6255E2FED00373F16 /* ReadRequest.swift in Sources */,
 				715B72B6253BEDDE00219F07 /* MainVC.swift in Sources */,
-				716C71E6255E30FE00373F16 /* CreateRequest.swift in Sources */,
 				7146AC52253E2DA100DA7D03 /* MainMenuPages.swift in Sources */,
 				71DC7FD4255AC86F00D0B40C /* EpicTasksList.swift in Sources */,
 				71D75FA8255DDEB90027858D /* UILabelExtension.swift in Sources */,
@@ -1269,7 +1228,6 @@
 				716C718D255E22A100373F16 /* SelectWorkflowStatusMenu.swift in Sources */,
 				71BC1B62253DD3D4005EC646 /* InputsProtocols.swift in Sources */,
 				717DCB4E253F3DBA00E2156F /* Epic+CoreDataProperties.swift in Sources */,
-				71D182DF255CAC4400E86C50 /* FetchRequestInfo.swift in Sources */,
 				713F7A87253C569B00D23CC7 /* EpicInputValidationManager.swift in Sources */,
 				715B72B2253BEDDE00219F07 /* AppDelegate.swift in Sources */,
 				71BC1B5D253DD3A3005EC646 /* InputsEnum.swift in Sources */,
@@ -1291,7 +1249,6 @@
 				717DCB5D253F3FF900E2156F /* DateConversion.swift in Sources */,
 				717DCB51253F3DBA00E2156F /* Task+CoreDataClass.swift in Sources */,
 				719427D82563402F007C3B31 /* InputsManagerServices.swift in Sources */,
-				716C71DC255E304200373F16 /* ModifyRequest.swift in Sources */,
 				716C718E255E22A100373F16 /* StoryPointsSelectionScreen.swift in Sources */,
 				71D378392541B53D00F66FCC /* WorkflowPositions.swift in Sources */,
 				716C718F255E22A100373F16 /* AddEditTaskVC.swift in Sources */,
@@ -1304,7 +1261,6 @@
 				7116FDCF255B7B8100C84084 /* AccessibilityIDs.swift in Sources */,
 				717DCB62253F4AAE00E2156F /* LogView.swift in Sources */,
 				719427BD25626686007C3B31 /* TaskDefaults.swift in Sources */,
-				715B7306253C3A3900219F07 /* SlidingViewsVCProtocols.swift in Sources */,
 				716C71AD255E264D00373F16 /* StoryPoints.swift in Sources */,
 				717DCB4D253F3DBA00E2156F /* Epic+CoreDataClass.swift in Sources */,
 				713D0D4C255B26330031C303 /* CustomFontImportStuff.swift in Sources */,

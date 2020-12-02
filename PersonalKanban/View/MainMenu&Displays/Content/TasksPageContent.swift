@@ -8,13 +8,18 @@
 import UIKit
 import CoreData
 
+// the content for the following main menu options: 'archive', 'backlog', 'to-do', 'in progress' and 'finished'
 class TasksPageContent: UITableViewController, SlidingContentsVC, NSFetchedResultsControllerDelegate {
+
+    // MARK: - properties
 
     let cellReuseID = "FRCTaskLists.cellReuseID"
     weak var sliderDelegate: SlidingViewDelegate?
     let persistence: PersistenceManager!
     let folder: TaskFolder!
     var fetchedResultsController: NSFetchedResultsController<Task>?
+
+    // MARK: - methods
 
     func loadSavedData() {
         if fetchedResultsController == nil {
@@ -23,7 +28,7 @@ class TasksPageContent: UITableViewController, SlidingContentsVC, NSFetchedResul
             let descriptorKey = "dateUpdated"
             let taskPredicate = folder.fetchPredicate
             let sortDescriptor = NSSortDescriptor(key: descriptorKey, ascending: true)
-            request.fetchBatchSize = 20
+            request.fetchBatchSize = 20 // default value is 0, which is treated as infinite
             request.sortDescriptors = [sortDescriptor]
             fetchedResultsController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: persistence.context, sectionNameKeyPath: nil, cacheName: nil)
             fetchedResultsController?.fetchRequest.predicate = taskPredicate
@@ -59,8 +64,7 @@ class TasksPageContent: UITableViewController, SlidingContentsVC, NSFetchedResul
         let task = fetchedResultsController?.object(at: indexPath)
         cell.textLabel?.text = task!.title
         cell.detailTextLabel?.text = task!.stickyNote
-//        print("task: \(task!.title) with status: \(String(describing: task?.workflowStatusEnum?.toString)), storypoints: \(task!.storyPointsEnum) and folder: \(task!.computedFolder) ")
-           return cell
+        return cell
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -73,7 +77,7 @@ class TasksPageContent: UITableViewController, SlidingContentsVC, NSFetchedResul
 
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         tableView.reloadData()
-        tableView.endUpdates()
+        tableView.endUpdates() // Use the performBatchUpdates(_:completion:) method instead of this one whenever possible https://developer.apple.com/documentation/uikit/uitableview/1614890-endupdates
     }
 
     // https://stackoverflow.com/questions/4637744/didchangesection-nsfetchedresultscontroller-delegate-method-not-being-called

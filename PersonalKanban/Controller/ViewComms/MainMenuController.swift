@@ -20,8 +20,14 @@ protocol MainMenuControllerDelegate: SlidingViewDelegate {
 public class MainMenuController: MenuInteractionsResponder {
 
     weak var controllerDelegate: MainMenuControllerDelegate?
-
     var initialSelection: MainMenuPages = .toDo
+    lazy var selection: MainMenuPages = initialSelection {
+        didSet {
+            self.title = selection.toString
+            controllerDelegate?.title = title
+        }
+    }
+    lazy var title: String = selection.toString
 
     func detectedSelection(_ option: MainMenuPages) {
         controllerDelegate?.hideMenu()
@@ -29,14 +35,4 @@ public class MainMenuController: MenuInteractionsResponder {
         self.selection = option
         self.controllerDelegate?.updateDisplay(for: option)
     }
-
-    lazy var selection: MainMenuPages = initialSelection {
-        didSet {
-            self.title = selection.toString
-            controllerDelegate?.title = title
-        }
-    }
-
-    lazy var title: String = selection.toString
-
 }

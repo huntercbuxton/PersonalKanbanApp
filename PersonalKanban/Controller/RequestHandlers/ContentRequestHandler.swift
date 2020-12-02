@@ -11,9 +11,13 @@ import  CoreData
 
 struct ContentRequestHandler {
 
+    // MARK: - properties
+
     private let persistenceManager: PersistenceManager
     weak var contentViewDelegateRef: MainVC?
     weak var presenterRef: MainVC?
+
+    // MARK: - methods
 
     func getDefaultMainVCDisplay() -> SlidingContentsVC {
         return mainMenuRequest(.inProgress)
@@ -23,7 +27,6 @@ struct ContentRequestHandler {
         switch option {
         case .epics:
             return EpicsPageContent(persistence: persistenceManager, sliderDelegate: contentViewDelegateRef)
-        //EpicsTable(sliderDelegate: contentViewDelegateRef, persistenceManager: persistenceManager)
         default:
             let folder = TaskFolder.pageDic[option]
             return TasksPageContent(persistenceManager: persistenceManager, sliderDelegate: contentViewDelegateRef, folder: folder!)

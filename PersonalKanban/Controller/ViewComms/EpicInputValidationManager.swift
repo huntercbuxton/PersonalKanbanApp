@@ -9,12 +9,13 @@ import UIKit
 
 class EpicInputValidationManager: InputValidationDelegate {
 
-    weak var delegate: InputsInterfaceDelegate?
+    // MARK: - properties
 
+    weak var delegate: InputsInterfaceDelegate?
     var inputTrackers = [ Inputs.title: InputTracker(textField: .title, "", nil),
                           Inputs.notes: InputTracker(textField: .notes, "", nil) ]
 
-    // MARK: - InputValidationDelegate
+    // MARK: - InputValidationDelegate conformance
 
     func inputUpdate(_ input: String?, from: Inputs) {
         inputTrackers[from]!.wrappedValue = input
@@ -24,6 +25,8 @@ class EpicInputValidationManager: InputValidationDelegate {
             delegate?.disableSave()
         }
     }
+
+    // MARK: - initialization
 
     init(delegate: InputsInterfaceDelegate) {
         self.delegate = delegate

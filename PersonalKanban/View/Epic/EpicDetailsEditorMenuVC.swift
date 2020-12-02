@@ -11,6 +11,7 @@ protocol EpicDetailsMenuDelegate: AnyObject {
     func updateTasks()
 }
 
+// a component used by AddEditTaskVC when in 'edit' mode, with options for deleting the epic or its task and similar features
 class EpicDetailsEditorMenuVC: UITableViewController, UnassignedTasksSelectionDelegate, EpicTaskListDisplayDelegate {
 
     // MARK: - EpicTaskListDisplayDelegate conformance
@@ -29,17 +30,19 @@ class EpicDetailsEditorMenuVC: UITableViewController, UnassignedTasksSelectionDe
         self.selectionDelegate.updateTasks()
     }
 
+    // MARK: - properties
+
     private let persistenceManager: PersistenceManager
     private let cellReuseID = "EpicDetailsEditorMenuVC.cellReuseID"
     private var epic: Epic!
     weak var selectionDelegate: EpicDetailsMenuDelegate!
     let options = [ ["add existing tasks",
-                     "add new task"
-                    ],
-                    [
-                        "unassign tasks",
-                        "delete all tasks",
+                     "add new task"],
+                    [ "unassign tasks",
+                    "delete all tasks",
                     "delete epic"]]
+
+    // MARK: - methods
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -88,9 +91,9 @@ class EpicDetailsEditorMenuVC: UITableViewController, UnassignedTasksSelectionDe
             case 0:
                 let alert = UIAlertController(title: "unassign all tasks from this epic", message: "do you want to continue? This action cannot be undone", preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: "Unassign Tasks", style: .destructive, handler: { _ in
-                    let tasks = self.epic.tasksList
-                    tasks.forEach({$0.epic = nil})
-                    self.persistenceManager.save()
+                        let tasks = self.epic.tasksList
+                        tasks.forEach({$0.epic = nil})
+                        self.persistenceManager.save()
                 }))
                 alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
                 present(alert, animated: true, completion: nil)
@@ -98,16 +101,16 @@ class EpicDetailsEditorMenuVC: UITableViewController, UnassignedTasksSelectionDe
                 let alert =  UIAlertController(title: "You are about to delete all tasks in this epic", message: "are you sure you want to continue?", preferredStyle: UIAlertController.Style.alert)
                 alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
                 alert.addAction(UIAlertAction(title: "Delete Tasks", style: .destructive, handler: { _ in
-                    let tasks = self.epic.tasksList
-                    tasks.forEach({self.persistenceManager.delete(task: $0)})
+                        let tasks = self.epic.tasksList
+                        tasks.forEach({self.persistenceManager.delete(task: $0)})
                 }))
                 present(alert, animated: true, completion: nil)
             case 2:
                 let alert =  UIAlertController(title: "Delete Epic", message: "this will also delete all the tasks in the epic. Do you want to continue", preferredStyle: UIAlertController.Style.alert)
                 alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
                 alert.addAction(UIAlertAction(title: "Delete Epic", style: .destructive, handler: { _ in
-                    self.persistenceManager.delete(epic: self.epic)
-                    self.navigationController?.popToRootViewController(animated: true)
+                        self.persistenceManager.delete(epic: self.epic)
+                        self.navigationController?.popToRootViewController(animated: true)
                 }))
                 present(alert, animated: true, completion: nil)
             default:
@@ -131,6 +134,8 @@ class EpicDetailsEditorMenuVC: UITableViewController, UnassignedTasksSelectionDe
     override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         return section == 1 ? UILabel() : nil
     }
+
+    // MARK: - initialization
 
     init(persistenceManager: PersistenceManager, epic: Epic, selectionDelegate: EpicDetailsMenuDelegate) {
         self.persistenceManager = persistenceManager

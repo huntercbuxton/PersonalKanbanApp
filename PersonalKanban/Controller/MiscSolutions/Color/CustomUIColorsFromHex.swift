@@ -12,7 +12,6 @@ struct SavedCustomColors {
     static let logoText = CustomColor.logoText.convertToUIColor()
     // font styles to mimic the default for a UITableView Header: https://ianmcdowell.net/blog/uitableview-default-fonts/
     static let defaultTableHeaderFontColor: UIColor = UIColor(red: 0.42, green: 0.42, blue: 0.44, alpha: 1.0)
-
 }
 
 enum CustomColor: String {

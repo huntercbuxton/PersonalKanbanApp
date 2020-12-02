@@ -7,13 +7,11 @@
 
 import UIKit
 
+/*
+ the root of the main navigation controller.  Only one instance created.
+ has two direct child views and two child view controllers, for the menu and the corresponding selected content, respectively
+ */
 class MainVC: UIViewController, SlidingViewDelegate, MainMenuControllerDelegate {
-
-    // MARK: - MenuSelectionDelegate conformance
-
-    private var menuControl: MainMenuController!
-    private lazy var displayRequestHandler: ContentRequestHandler = ContentRequestHandler(persistenceManager: self.persistenceManager, delegateRef: self)
-    var page: MainMenuPages?
 
     // MARK: - MainMenuControllerDelegate conformance
 
@@ -22,10 +20,6 @@ class MainVC: UIViewController, SlidingViewDelegate, MainMenuControllerDelegate 
         page = option
         displayVC = displayRequestHandler.mainMenuRequest(option)
         setupContentChildVC(child: displayVC as! UIViewController, superView: contentView)
-    }
-
-    func setTitle(_ newTitle: String?) {
-        self.title = newTitle
     }
 
     // MARK: - SlidingViewDelegate protocol conformance
@@ -61,6 +55,9 @@ class MainVC: UIViewController, SlidingViewDelegate, MainMenuControllerDelegate 
 
     // MARK: - other instance properties
 
+    private var menuControl: MainMenuController!
+    private lazy var displayRequestHandler: ContentRequestHandler = ContentRequestHandler(persistenceManager: self.persistenceManager, delegateRef: self)
+    var page: MainMenuPages?
     private var menuPercentageWidthOfParentView: CGFloat = 0.4
     private lazy var slideInMenuPadding: CGFloat = self.view.frame.width * (1 - menuPercentageWidthOfParentView)
     private var animationDuration: TimeInterval = 0.5
@@ -68,7 +65,6 @@ class MainVC: UIViewController, SlidingViewDelegate, MainMenuControllerDelegate 
     private var animationSpringDamping: CGFloat = 0.8
     private var animationInitialSpringVelocity: CGFloat = 0
     private var animationOptions: UIView.AnimationOptions = .curveEaseInOut
-
     private let persistenceManager: PersistenceManager
     private var menuIsVisible: Bool = false
 

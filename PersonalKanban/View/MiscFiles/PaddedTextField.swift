@@ -7,6 +7,7 @@
 
 import UIKit
 
+// used as the input field for the 'stickyNote' property of tasks
 open class PaddedTextField: UITextField, UITextFieldDelegate {
 
     // MARK: - InputValidatable
@@ -64,7 +65,6 @@ open class PaddedTextField: UITextField, UITextFieldDelegate {
         layer.cornerRadius = SavedStyles.textInputCornerRadius
 
         backgroundColor = .systemBackground
-
     }
 
     // MARK: - initializers

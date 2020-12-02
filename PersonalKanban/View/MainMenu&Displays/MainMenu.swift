@@ -9,14 +9,14 @@ import UIKit
 
 class MainMenu: UITableViewController {
 
-    // MARK: - other instance properties
+    // MARK: - properties
 
     private let cellReuseID = "MainMenuVC.cellReuseID"
     private let options: [MainMenuPages] = MainMenuPages.allCases
     private var savedSelection: MainMenuPages!
     var delegateResponder: MenuInteractionsResponder!
 
-    // MARK: - miscellaneous instance methods
+    // MARK: - methods
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,11 +26,9 @@ class MainMenu: UITableViewController {
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-//        let cell = tableView.cellForRow(at: IndexPath(row: savedSelection.rawValue, section: 0))
-//        cell!.setSelected(true, animated: true)
     }
 
-    // MARK: UITableViewDataSource
+    // MARK: - UITableViewDataSource
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -47,14 +45,11 @@ class MainMenu: UITableViewController {
         return cell
     }
 
-    // MARK: UITableViewDelegate
+    // MARK: - UITableViewDelegate
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let optionType = options[indexPath.row]
         self.delegateResponder.detectedSelection(optionType)
-//        if indexPath.row != delegateResponder.initialSelection.rawValue || indexPath.section != 0 {
-//            tableView.cellForRow(at: IndexPath(row: savedSelection.rawValue, section: 0))?.setSelected(false, animated: true)
-//        }
     }
 
     // MARK: - initialization

@@ -7,12 +7,17 @@
 
 import UIKit
 
+/*
+NOT YET IN PRODUCTION
+just playing around with the format for displaying additional notes for a task
+ */
 class LogView: UIViewController {
+
+    // MARK: - properties
 
     lazy var sectionLabel: UILabel = UILabel()
     lazy var dateCreatedLabel: UILabel = UILabel()
     lazy var dateUpdatedLabel: UILabel = UILabel()
-
     private var dateCreated: Date
     private var dateUpdated: Date
     private let horizontalMargin: CGFloat = 10
@@ -22,6 +27,8 @@ class LogView: UIViewController {
     private let sectionLabelText = "notes"
     private var createdLabelText: String { "task created on \(DateConversion.toString(date: dateCreated)) " }
     private var updatedLabelText: String { "task updated on \(DateConversion.toString(date: dateUpdated)) " }
+
+    // MARK: - methods
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,6 +52,8 @@ class LogView: UIViewController {
         dateUpdatedLabel.text = updatedLabelText
     }
 
+    // MARK: - initialization
+
     init(dateCreated: Date, dateUpdated: Date) {
         self.dateCreated = dateCreated
         self.dateUpdated = dateUpdated
@@ -55,12 +64,3 @@ class LogView: UIViewController {
     }
 }
 
-private extension UILabel {
-    func setup(in view: UIView, margin: CGFloat) {
-         translatesAutoresizingMaskIntoConstraints = false
-         view.addSubview(self)
-        self.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: margin).isActive = true
-        self.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -margin).isActive = true
-        self.heightAnchor.constraint(equalToConstant: 60).isActive = true
-    }
-}

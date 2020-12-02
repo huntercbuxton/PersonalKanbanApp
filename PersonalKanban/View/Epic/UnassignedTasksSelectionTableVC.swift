@@ -13,6 +13,8 @@ protocol UnassignedTasksSelectionDelegate: AnyObject {
 
 class UnassignedTasksSelectionTableVC: UITableViewController {
 
+    // MARK: - properties
+
     private let persistenceManager: PersistenceManager
     private let cellReuseID = "UnassignedTasksSelectionTableVC.cellReuseID"
     private let epic: Epic
@@ -20,6 +22,8 @@ class UnassignedTasksSelectionTableVC: UITableViewController {
     private var selectedList: [IndexPath] = []
     private lazy var addBtn: UIBarButtonItem = UIBarButtonItem(title: "Add", style: .plain, target: self, action: #selector(addBtnTapped))
     weak var selectionDelegate: UnassignedTasksSelectionDelegate!
+
+    // MARK: - methods
 
     override func viewDidLoad() {
         super.viewDidLoad()
