@@ -21,48 +21,39 @@ class AddEditEpicVC: UIViewController, InputsInterfaceDelegate, EpicDetailsMenuD
     // MARK: - InputsInterfaceDelegate conformance
 
     func enableSave() {
-        self.saveBarButton.isEnabled = true
+        self.saveBtn.isEnabled = true
     }
 
     func disableSave() {
-        self.saveBarButton.isEnabled = false
+        self.saveBtn.isEnabled = false
     }
 
     // MARK: - properties storing UI Components
 
-    lazy var saveBarButton = UIBarButtonItem(barButtonSystemItem: .save,
-                                                              target: self,
-                                                              action: #selector(saveBtnTapped))
-    lazy var cancelBarButton = UIBarButtonItem(barButtonSystemItem: .cancel,
-                                                                target: self,
-                                                                action: #selector(cancelBtnTapped))
+    lazy var saveBtn = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(saveBtnTapped))
+    lazy var cancelBtn = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(cancelBtnTapped))
     var scrollView: UIScrollView = UIScrollView()
     var contentView = UIView()
     lazy var titleTextField: PaddedTextField = PaddedTextField()
-
-    lazy var inputValidation: EpicInputValidationManager = EpicInputValidationManager(delegate: self)
     var editingTable: EpicDetailsEditorMenuVC?
     var taskTable: EpicTasksList?
-    var taskTableHeight: CGFloat?
-    var taskTableHeightConstraint: NSLayoutConstraint?
-
-    // MARK: - properties specifying UI style/layout
-
-    private var titleText: String { useState == .create ? "create epic" : "" }
-    private lazy var margins: UIEdgeInsets = contentView.layoutMargins
 
     // MARK: - other properties
 
     let persistenceManager: PersistenceManager
     let useState: CreateOrEdit
     var epic: Epic?
+    lazy var inputValidation: EpicInputValidationManager = EpicInputValidationManager(delegate: self)
+    private lazy var margins: UIEdgeInsets = contentView.layoutMargins
+    var taskTableHeight: CGFloat?
+    var taskTableHeightConstraint: NSLayoutConstraint?
+
 
     // MARK: - initial setup of UI components
 
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .systemGroupedBackground
-        setupNavBar()
         setupScrollViewAndContentView()
         setupTextField()
         if self.useState == .edit {
@@ -70,18 +61,13 @@ class AddEditEpicVC: UIViewController, InputsInterfaceDelegate, EpicDetailsMenuD
             self.taskTable = EpicTasksList(persistenceManager: self.persistenceManager, epic: self.epic!)
             setupTables()
         } else {
-            titleTextField.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
+            self.title = "create an epic"
+            self.navigationItem.setLeftBarButton(cancelBtn, animated: false)
+            self.navigationItem.setRightBarButton(saveBtn, animated: false)
+            saveBtn.isEnabled = false
+            titleTextField.bottomAnchor.constraint(lessThanOrEqualTo: contentView.bottomAnchor).isActive = true
         }
         setupDataStuff()
-    }
-
-    private func setupNavBar() {
-        self.title = self.titleText
-        self.navigationItem.setRightBarButton(saveBarButton, animated: false)
-        if self.useState == .create {
-            saveBarButton.isEnabled = false
-            self.navigationItem.setLeftBarButton(cancelBarButton, animated: false)
-        }
     }
 
     private func setupScrollViewAndContentView() {
@@ -134,18 +120,15 @@ class AddEditEpicVC: UIViewController, InputsInterfaceDelegate, EpicDetailsMenuD
         persistenceManager.save()
     }
 
-    private func saveChanges() {
-        guard let epic = epic else { fatalError("epic was nil when executing \(#function)") }
-        epic.title = titleTextField.text!
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        epic?.title = titleTextField.text!
         persistenceManager.save()
     }
 
     @objc func saveBtnTapped() {
-        if useState == .create {
-            createEpic(title: self.titleTextField.text!)
-        } else {
-            saveChanges()
-        }
+        createEpic(title: self.titleTextField.text!)
+        persistenceManager.save()
         self.goBack()
     }
 
