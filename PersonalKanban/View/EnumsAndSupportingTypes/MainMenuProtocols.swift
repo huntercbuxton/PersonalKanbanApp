@@ -15,10 +15,5 @@ protocol SlidingViewDelegate: AnyObject {
 }
 
 protocol SlidingContentsVC: AnyObject {
-    func refreshDisplay()
     var sliderDelegate: SlidingViewDelegate? { get set }
-}
-
-extension SlidingContentsVC {
-    func refreshDisplay() { }
 }
