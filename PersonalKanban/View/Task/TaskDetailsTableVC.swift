@@ -52,6 +52,7 @@ class TaskDetailsTableVC: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellReuseID)
+        tableView.isScrollEnabled = false
         self.workflowPosition = modelManager?.register(groupID: Inputs.position)
         if self.epic == nil { self.epic = modelManager?.register(groupID: .epic) }
         self.storyPoints = modelManager?.register(groupID: .storypoints) ?? StoryPoints()
