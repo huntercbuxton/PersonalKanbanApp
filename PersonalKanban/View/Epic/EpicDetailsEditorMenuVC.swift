@@ -38,9 +38,9 @@ class EpicDetailsEditorMenuVC: UITableViewController, UnassignedTasksSelectionDe
     weak var selectionDelegate: EpicDetailsMenuDelegate!
     let options = [ ["add existing tasks",
                      "add new task"],
-                    [ "unassign tasks",
+                    [ "remove all tasks",
                     "delete all tasks",
-                    "delete epic"]]
+                    "delete this epic"]]
 
     // MARK: - methods
 
