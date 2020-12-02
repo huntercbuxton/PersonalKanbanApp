@@ -28,7 +28,6 @@ class TasksPageContent: UITableViewController, SlidingContentsVC, NSFetchedResul
             let descriptorKey = "dateUpdated"
             let taskPredicate = folder.fetchPredicate
             let sortDescriptor = NSSortDescriptor(key: descriptorKey, ascending: true)
-            request.fetchBatchSize = 20 // default value is 0, which is treated as infinite
             request.sortDescriptors = [sortDescriptor]
             fetchedResultsController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: persistence.context, sectionNameKeyPath: nil, cacheName: nil)
             fetchedResultsController?.fetchRequest.predicate = taskPredicate
