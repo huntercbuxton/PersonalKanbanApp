@@ -25,7 +25,7 @@ class TasksPageContent: UITableViewController, SlidingContentsVC, NSFetchedResul
         if fetchedResultsController == nil {
             let entityName = String(describing: Task.self)
             let request = NSFetchRequest<Task>(entityName: entityName)
-            let descriptorKey = "dateUpdated"
+            let descriptorKey = "dateCreated"
             let taskPredicate = folder.fetchPredicate
             let sortDescriptor = NSSortDescriptor(key: descriptorKey, ascending: true)
             request.sortDescriptors = [sortDescriptor]
