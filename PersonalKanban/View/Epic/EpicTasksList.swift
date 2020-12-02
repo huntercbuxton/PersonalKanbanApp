@@ -7,16 +7,19 @@
 
 import UIKit
 
-protocol EpicTasksListSelectionDelegate: AnyObject {
-    func select(task: Task)
+protocol EpicTaskListResizeDelegate: AnyObject {
+    func resizeTable()
 }
 
+// displays all the tasks assigned to a certain epic
 class EpicTasksList: UITableViewController {
 
     private let persistenceManager: PersistenceManager!
     private let cellReuseID = "EpicTasksList.cellReuseID"
     private let epic: Epic!
+    weak var resizeDelegate: EpicTaskListResizeDelegate?
     private lazy var taskLists: [[Task]] = []
+    var editedTaskIndexPath: IndexPath?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,6 +31,14 @@ class EpicTasksList: UITableViewController {
         self.view.clipsToBounds = true
     }
 
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        if self.editedTaskIndexPath != nil {
+            reloadDisplay()
+        }
+        editedTaskIndexPath = nil
+    }
+
     private func loadData() {
         taskLists = persistenceManager.sortEpicTasks(for: epic)
     }
@@ -35,6 +46,7 @@ class EpicTasksList: UITableViewController {
     func reloadDisplay() {
         taskLists = persistenceManager.sortEpicTasks(for: epic)
         tableView.reloadData()
+        resizeDelegate?.resizeTable()
     }
 
     // MARK: - Table view data source
@@ -54,12 +66,19 @@ class EpicTasksList: UITableViewController {
         return cell
     }
 
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let detailView = AddEditTaskVC(persistenceManager: persistenceManager, useState: .edit, task: taskLists[indexPath.section][indexPath.row])
+        editedTaskIndexPath = indexPath
+        navigationController?.pushViewController(detailView, animated: true)
+    }
+
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             let toDelete = taskLists[indexPath.section][indexPath.row]
             persistenceManager.delete(task: toDelete)
             self.taskLists[indexPath.section].remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
+            resizeDelegate?.resizeTable()
         }
     }
 

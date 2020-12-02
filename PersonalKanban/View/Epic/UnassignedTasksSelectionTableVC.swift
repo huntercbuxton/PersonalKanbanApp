@@ -56,7 +56,6 @@ class UnassignedTasksSelectionTableVC: UITableViewController {
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.selectedList.append(indexPath)
-        selectedList.forEach({print(String(describing: $0))})
     }
 
     override func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {

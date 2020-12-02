@@ -13,9 +13,7 @@ class AddEditEpicVC: UIViewController, InputsInterfaceDelegate, EpicDetailsMenuD
 
     func updateTasks() {
         self.taskTable?.reloadDisplay()
-        taskTableHeight = taskTable!.view.sizeThatFits(CGSize(width: contentView.bounds.width, height: CGFloat.greatestFiniteMagnitude)).height
-        taskTableHeightConstraint!.constant = taskTableHeight!
-        taskTable!.view.layoutIfNeeded()
+        resizeTable()
     }
 
     // MARK: - InputsInterfaceDelegate conformance
@@ -89,6 +87,7 @@ class AddEditEpicVC: UIViewController, InputsInterfaceDelegate, EpicDetailsMenuD
     }
 
     private func setupTables() {
+        taskTable!.resizeDelegate = self
         self.addChild(taskTable!)
         self.taskTable!.view.translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview(taskTable!.view)
@@ -144,8 +143,6 @@ class AddEditEpicVC: UIViewController, InputsInterfaceDelegate, EpicDetailsMenuD
         titleTextField.epicUpdateDelegate = self.inputValidation
     }
 
-    // MARK: - EditTaskTableDelegate conformance
-
     func deleteTask() {
         let alert = UIAlertController(title: "Alert", message: "Are you sure you want to delete this task?", preferredStyle: UIAlertController.Style.alert)
         alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel, handler: { _ in print("called handler for Cancel action") }))
@@ -168,5 +165,13 @@ class AddEditEpicVC: UIViewController, InputsInterfaceDelegate, EpicDetailsMenuD
 
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+}
+
+extension AddEditEpicVC: EpicTaskListResizeDelegate {
+    func resizeTable() {
+        taskTableHeight = taskTable!.view.sizeThatFits(CGSize(width: contentView.bounds.width, height: CGFloat.greatestFiniteMagnitude)).height
+        taskTableHeightConstraint!.constant = taskTableHeight!
+        taskTable!.view.layoutIfNeeded()
     }
 }

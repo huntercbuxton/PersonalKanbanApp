@@ -94,6 +94,7 @@ class EpicDetailsEditorMenuVC: UITableViewController, UnassignedTasksSelectionDe
                         let tasks = self.epic.tasksList
                         tasks.forEach({$0.epic = nil})
                         self.persistenceManager.save()
+                        self.selectionDelegate.updateTasks()
                 }))
                 alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
                 present(alert, animated: true, completion: nil)
@@ -103,6 +104,8 @@ class EpicDetailsEditorMenuVC: UITableViewController, UnassignedTasksSelectionDe
                 alert.addAction(UIAlertAction(title: "Delete Tasks", style: .destructive, handler: { _ in
                         let tasks = self.epic.tasksList
                         tasks.forEach({self.persistenceManager.delete(task: $0)})
+                        self.persistenceManager.save()
+                        self.selectionDelegate.updateTasks()
                 }))
                 present(alert, animated: true, completion: nil)
             case 2:

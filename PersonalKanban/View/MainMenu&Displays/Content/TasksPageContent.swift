@@ -78,12 +78,12 @@ class TasksPageContent: UITableViewController, SlidingContentsVC, NSFetchedResul
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         tableView.reloadData()
 //        tableView.performBatchUpdates(<#T##updates: (() -> Void)?##(() -> Void)?##() -> Void#>, completion: <#T##((Bool) -> Void)?##((Bool) -> Void)?##(Bool) -> Void#>)
-//        tableView.endUpdates() // Use the performBatchUpdates(_:completion:) method instead of this one whenever possible https://developer.apple.com/documentation/uikit/uitableview/1614890-endupdates
+        tableView.endUpdates() // Use the performBatchUpdates(_:completion:) method instead of this one whenever possible https://developer.apple.com/documentation/uikit/uitableview/1614890-endupdates
     }
 
     // https://stackoverflow.com/questions/4637744/didchangesection-nsfetchedresultscontroller-delegate-method-not-being-called
     func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-//        tableView.beginUpdates()
+        tableView.beginUpdates()
     }
 
     func configureCell(_ cell: UITableViewCell, at indexPath: IndexPath) {
