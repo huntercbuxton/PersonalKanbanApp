@@ -73,12 +73,12 @@ class EpicsPageContent: UITableViewController, NSFetchedResultsControllerDelegat
 
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         tableView.reloadData()
-        tableView.endUpdates()
+//        tableView.endUpdates()
     }
 
     // https://stackoverflow.com/questions/4637744/didchangesection-nsfetchedresultscontroller-delegate-method-not-being-called
     func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        tableView.beginUpdates()
+//        tableView.beginUpdates()
     }
 
     func configureCell(_ cell: UITableViewCell, at indexPath: IndexPath) {
