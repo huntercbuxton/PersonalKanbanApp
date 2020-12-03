@@ -46,7 +46,6 @@ class AddEditEpicVC: UIViewController, InputsInterfaceDelegate, EpicDetailsMenuD
     var taskTableHeight: CGFloat?
     var taskTableHeightConstraint: NSLayoutConstraint?
 
-
     // MARK: - initial setup of UI components
 
     override func viewDidLoad() {

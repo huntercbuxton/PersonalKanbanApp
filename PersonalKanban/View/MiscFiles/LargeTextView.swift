@@ -10,14 +10,12 @@ import UIKit
 // used as the input field for the 'title' properties of Tasks and Epics
 public class LargeTextView: UITextView, UITextViewDelegate {
 
-    // MARK: - InputValidationDelegate
+    // MARK: - properties
 
     let inputField = Inputs.notes
-
     weak var inputValidationDelegate: InputValidationDelegate?
     weak var groupObserver: InputsModelManager?
     let groupID = Inputs.notes
-
     static let defaultInsets = UIEdgeInsets(top: 10.0, left: 10.0, bottom: 10.0, right: 10.0)
 
     // MARK: - UITextViewDelegate
@@ -26,18 +24,7 @@ public class LargeTextView: UITextView, UITextViewDelegate {
         self.inputValidationDelegate?.inputUpdate(textView.text, from: inputField)
     }
 
-    // MARK: - initialisors
-
-    convenience init(text: String? = "") {
-        self.init()
-//        layer.cornerRadius = SavedStyles.textInputCornerRadius
-//        layer.borderWidth = SavedStyles.textInputBorderWidth
-//        layer.borderColor = SavedStyles.textInputBorderColor
-//        font = SavedStyles.defaultTextViewFont
-//
-//        translatesAutoresizingMaskIntoConstraints = false
-//        heightAnchor.constraint(equalToConstant: SavedLayouts.defaultTextViewHeight).isActive = true
-    }
+    // MARK: - initializers
 
     public init(placeholder: String, group: InputsModelManager, text: String = "") {
         super.init(frame: .zero, textContainer: nil)
@@ -55,7 +42,6 @@ public class LargeTextView: UITextView, UITextViewDelegate {
         self.groupObserver = group
         self.text = text
         self.groupObserver?.register(groupID: groupID, savedValue: self.text)
-
     }
 
     public init() {

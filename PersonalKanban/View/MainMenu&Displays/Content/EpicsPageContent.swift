@@ -12,7 +12,7 @@ import CoreData
 class EpicsPageContent: UITableViewController, NSFetchedResultsControllerDelegate, SlidingContentsVC {
 
     // MARK: - properties
-    
+
     let cellReuseID = "EpicsPage.cellReuseID"
     weak var sliderDelegate: SlidingViewDelegate?
     let persistence: PersistenceManager!

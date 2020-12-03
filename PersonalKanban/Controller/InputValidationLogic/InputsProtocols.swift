@@ -7,11 +7,6 @@
 
 import Foundation
 
-protocol InputValidatable {
-    var inputField: Inputs { get }
-    var inputValidationDelegate: InputValidationDelegate? { get set }
-}
-
 protocol InputValidationDelegate: AnyObject {
     func inputUpdate(_ input: String?, from: Inputs)
 }

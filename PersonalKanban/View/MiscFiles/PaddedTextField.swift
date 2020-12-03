@@ -10,13 +10,12 @@ import UIKit
 // used as the input field for the 'stickyNote' property of tasks
 open class PaddedTextField: UITextField, UITextFieldDelegate {
 
-    // MARK: - InputValidatable
-
-    let inputField = Inputs.title
+    // MARK: - properties
 
     weak var groupObserver: InputsModelManager?
     weak var epicUpdateDelegate: EpicInputValidationManager?
     let groupID = Inputs.title
+    let inset: CGFloat = 10
 
     // MARK: - UITextFieldDelegate
 
@@ -30,10 +29,8 @@ open class PaddedTextField: UITextField, UITextFieldDelegate {
         return newString.length <= maxLength
     }
 
-    // MARK: - for the padding around the border
-
-    let inset: CGFloat = 10
-
+    // MARK: - styling and layout
+    
     open override func textRect(forBounds bounds: CGRect) -> CGRect {
         return bounds.insetBy(dx: inset, dy: inset)
     }
@@ -44,13 +41,6 @@ open class PaddedTextField: UITextField, UITextFieldDelegate {
 
     open override func placeholderRect(forBounds bounds: CGRect) -> CGRect {
         return bounds.insetBy(dx: inset, dy: inset)
-    }
-
-    // MARK: - styling and layout
-
-    @objc open func respondToChange() {
-        groupObserver?.update(value: self.text, from: .title)
-        epicUpdateDelegate?.inputUpdate(self.text, from: .title)
     }
 
     func firstSetup() {
@@ -65,6 +55,11 @@ open class PaddedTextField: UITextField, UITextFieldDelegate {
         layer.cornerRadius = SavedStyles.textInputCornerRadius
 
         backgroundColor = .systemBackground
+    }
+
+    @objc open func respondToChange() {
+        groupObserver?.update(value: self.text, from: .title)
+        epicUpdateDelegate?.inputUpdate(self.text, from: .title)
     }
 
     // MARK: - initializers
