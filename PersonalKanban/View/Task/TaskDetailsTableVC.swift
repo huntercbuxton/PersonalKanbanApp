@@ -80,7 +80,7 @@ class TaskDetailsTableVC: UITableViewController {
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch indexPath.row {
-        case 0: self.navigationController?.pushViewController(ChooseEpicsScreen(persistenceManager: self.persistenceManager, selectionDelegate: modelManager!), animated: true)
+        case 0: self.navigationController?.pushViewController(ChooseEpicsScreen(persistenceManager: self.persistenceManager, selectionDelegate: modelManager!, currentEpic: self.epic), animated: true)
         case 1: self.navigationController?.pushViewController(StoryPointsSelectionScreen(delegate: modelManager!, currentSelection: self.storyPoints), animated: true)
         case 2: navigationController?.pushViewController(SelectWorkflowStatusMenu(workflowStatusSelectionDelegate: modelManager!, currentStatus: workflowPosition), animated: true)
         default: assertionFailure("the call of function \(#function) had argument IndexPath = \(String(describing: indexPath)). there should be no cell at that path")

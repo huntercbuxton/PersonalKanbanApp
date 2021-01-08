@@ -25,6 +25,14 @@ class SelectWorkflowStatusMenu: UITableViewController {
         tableView.tableFooterView = UIView(background: .systemGroupedBackground)
     }
 
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        let preselectedIndexPath = IndexPath(row: options.firstIndex(of: currentStatus ?? WorkflowPosition(moValue: WorkflowPosition.caseDefault)!)!, section: 0)
+        tableView.selectRow(at: preselectedIndexPath, animated: true, scrollPosition: .top)
+        let cell = tableView.cellForRow(at: preselectedIndexPath)
+        cell?.setHighlighted(true, animated: true)
+    }
+    
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {

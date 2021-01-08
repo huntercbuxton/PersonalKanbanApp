@@ -14,7 +14,7 @@ public protocol StoryPointSelectorDelegate: AnyObject {
 class StoryPointsSelectionScreen: UITableViewController {
 
     private let cellReuseID = "StoryPointsSelectionScreen.cellReuseID"
-    private let options: [StoryPoints] = StoryPoints.allCases.filter({ $0 != .unassigned })
+    private let options: [StoryPoints] = StoryPoints.allCases//.filter({ $0 != .unassigned })
     private weak var delegate: StoryPointSelectorDelegate?
     private var currentSelection: StoryPoints
 
@@ -22,6 +22,14 @@ class StoryPointsSelectionScreen: UITableViewController {
         super.viewDidLoad()
         self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellReuseID)
         tableView.tableFooterView = UIView(background: .systemGroupedBackground)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        let preselectedIndexPath = IndexPath(row: options.firstIndex(of: currentSelection)!, section: 0)
+        tableView.selectRow(at: preselectedIndexPath, animated: true, scrollPosition: .top)
+        let cell = tableView.cellForRow(at: preselectedIndexPath)
+        cell?.setHighlighted(true, animated: true)
     }
 
     // MARK: - Table view data source

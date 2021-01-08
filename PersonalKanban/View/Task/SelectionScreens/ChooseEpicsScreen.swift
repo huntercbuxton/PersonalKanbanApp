@@ -17,6 +17,7 @@ class ChooseEpicsScreen: UITableViewController {
     private let cellReuseID = "ChooseEpicsScreen.cellReuseID"
     weak var delegate: EpicsSelectorDelegate?
     lazy var epics: [Epic] = []
+    var currentEpic: Epic?
 
     func loadData() {
         self.epics = persistenceManager.getAllEpics()
@@ -27,6 +28,18 @@ class ChooseEpicsScreen: UITableViewController {
         loadData()
         self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: self.cellReuseID)
         self.tableView.tableFooterView = UITableViewHeaderFooterView()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        if let selection = self.currentEpic, let selectedIndex = epics.firstIndex(of: selection) {
+                let indexPath = IndexPath(row: selectedIndex, section: 0)
+                tableView.selectRow(at: indexPath, animated: true, scrollPosition: .top)
+                let cell = tableView.cellForRow(at: indexPath)
+                cell?.setHighlighted(true, animated: true)
+            
+        }
     }
 
     // MARK: - Table view data source
@@ -52,9 +65,10 @@ class ChooseEpicsScreen: UITableViewController {
 
     // MARK: - initialization
 
-    init(persistenceManager: PersistenceManager, selectionDelegate: EpicsSelectorDelegate) {
+    init(persistenceManager: PersistenceManager, selectionDelegate: EpicsSelectorDelegate, currentEpic: Epic?) {
         self.persistenceManager = persistenceManager
         self.delegate = selectionDelegate
+        self.currentEpic = currentEpic
         super.init(nibName: nil, bundle: nil)
     }
 
