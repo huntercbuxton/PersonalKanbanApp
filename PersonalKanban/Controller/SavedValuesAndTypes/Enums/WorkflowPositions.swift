@@ -15,6 +15,7 @@ public enum WorkflowPosition: Int, CaseIterable, MORawRepresentable {
     var moPropertyKey: String { "workflowStatus" }
 
     static var caseDefault: MOValue { Self.toDo.moValue }
+    static var typeDefault: WorkflowPosition { .toDo }
 
     var toString: String { String(describing: self) }
 

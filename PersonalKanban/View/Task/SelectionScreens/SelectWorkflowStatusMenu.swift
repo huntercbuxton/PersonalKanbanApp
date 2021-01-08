@@ -15,22 +15,21 @@ class SelectWorkflowStatusMenu: UITableViewController {
 
     private let cellReuseID = "SelectWorkflowStatusMenu.cellReuseID"
     private weak var delegate: WorkflowStatusSelectorDelegate?
-    private var options: [WorkflowPosition] = WorkflowPosition.allCases as [WorkflowPosition]
-    private var currentStatus: WorkflowPosition?
+    private var options: [WorkflowPosition] { WorkflowPosition.allCases }
+    private var savedChoice: WorkflowPosition = .typeDefault
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "select status"
+        self.title = "workflow status"
         self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellReuseID)
         tableView.tableFooterView = UIView(background: .systemGroupedBackground)
     }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        let preselectedIndexPath = IndexPath(row: options.firstIndex(of: currentStatus ?? WorkflowPosition(moValue: WorkflowPosition.caseDefault)!)!, section: 0)
-        tableView.selectRow(at: preselectedIndexPath, animated: true, scrollPosition: .top)
-        let cell = tableView.cellForRow(at: preselectedIndexPath)
-        cell?.setHighlighted(true, animated: true)
+        let indexPath = IndexPath(row: options.firstIndex(of: savedChoice)!, section: 0)
+        tableView.selectRow(at: indexPath, animated: true, scrollPosition: .top)
+        tableView.cellForRow(at: indexPath)?.setHighlighted(true, animated: true)
     }
     
     // MARK: - Table view data source
@@ -46,9 +45,7 @@ class SelectWorkflowStatusMenu: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: .default, reuseIdentifier: cellReuseID)
         cell.textLabel?.text = options[indexPath.row].menuPage!.title
-        if let status = currentStatus {
-            if status == options[indexPath.row] { cell.isSelected = true }
-        }
+        if savedChoice == options[indexPath.row] { cell.isSelected = true }
         return cell
     }
 
@@ -57,8 +54,8 @@ class SelectWorkflowStatusMenu: UITableViewController {
         self.navigationController?.popViewController(animated: true)
     }
 
-    init(workflowStatusSelectionDelegate: WorkflowStatusSelectorDelegate, currentStatus: WorkflowPosition?) {
-        self.currentStatus = currentStatus
+    init(workflowStatusSelectionDelegate: WorkflowStatusSelectorDelegate, currentStatus: WorkflowPosition) {
+        self.savedChoice = currentStatus
         self.delegate = workflowStatusSelectionDelegate
         super.init(nibName: nil, bundle: nil)
     }

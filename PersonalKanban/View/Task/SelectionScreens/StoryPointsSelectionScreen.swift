@@ -14,22 +14,22 @@ public protocol StoryPointSelectorDelegate: AnyObject {
 class StoryPointsSelectionScreen: UITableViewController {
 
     private let cellReuseID = "StoryPointsSelectionScreen.cellReuseID"
-    private let options: [StoryPoints] = StoryPoints.allCases//.filter({ $0 != .unassigned })
+    var options: [StoryPoints] { StoryPoints.allCases }
     private weak var delegate: StoryPointSelectorDelegate?
-    private var currentSelection: StoryPoints
+    private var savedChoice: StoryPoints
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.title = "story points"
         self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellReuseID)
         tableView.tableFooterView = UIView(background: .systemGroupedBackground)
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        let preselectedIndexPath = IndexPath(row: options.firstIndex(of: currentSelection)!, section: 0)
-        tableView.selectRow(at: preselectedIndexPath, animated: true, scrollPosition: .top)
-        let cell = tableView.cellForRow(at: preselectedIndexPath)
-        cell?.setHighlighted(true, animated: true)
+        let indexPath = IndexPath(row: options.firstIndex(of: savedChoice)!, section: 0)
+        tableView.selectRow(at: indexPath, animated: true, scrollPosition: .top)
+        tableView.cellForRow(at: indexPath)?.setHighlighted(true, animated: true)
     }
 
     // MARK: - Table view data source
@@ -45,14 +45,10 @@ class StoryPointsSelectionScreen: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: .default, reuseIdentifier: cellReuseID)
         cell.textLabel?.text = options[indexPath.row].string
-        if options[indexPath.row] != .unassigned {
-            cell.isSelected = true
-        }
         return cell
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        delegate?.selectStoryPoints(options[indexPath.row])
         delegate?.select(storyPoints: options[indexPath.row])
         self.navigationController?.popViewController(animated: true)
     }
@@ -61,7 +57,7 @@ class StoryPointsSelectionScreen: UITableViewController {
 
     init(delegate: StoryPointSelectorDelegate, currentSelection: StoryPoints) {
         self.delegate = delegate
-        self.currentSelection = currentSelection
+        self.savedChoice = currentSelection
         super.init(nibName: nil, bundle: nil)
     }
 
