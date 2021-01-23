@@ -20,6 +20,7 @@ class MainVC: UIViewController, SlidingViewDelegate, MainMenuControllerDelegate 
         page = option
         displayVC = displayRequestHandler.mainMenuRequest(option)
         setupContentChildVC(child: displayVC as! UIViewController, superView: contentView)
+        showHideComposeBtn(for: option)
     }
 
     // MARK: - SlidingViewDelegate protocol conformance
@@ -42,6 +43,14 @@ class MainVC: UIViewController, SlidingViewDelegate, MainMenuControllerDelegate 
 
     func showMenu() {
         if !menuIsVisible { toggleMenuVisibility() }
+    }
+    
+    func showHideComposeBtn(for page: MainMenuPages) {
+        if page == .more {
+            self.navigationItem.setRightBarButton(nil, animated: true)
+        } else {
+            self.navigationItem.setRightBarButton(self.addBtn, animated: true)
+        }
     }
 
     // MARK: - properties referencing UI components

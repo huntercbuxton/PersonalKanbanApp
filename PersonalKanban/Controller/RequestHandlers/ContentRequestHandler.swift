@@ -27,6 +27,8 @@ struct ContentRequestHandler {
         switch option {
         case .epics:
             return EpicsPageContent(persistence: persistenceManager, sliderDelegate: contentViewDelegateRef)
+        case .more:
+            return MorePageContent(persistenceManager: persistenceManager, sliderDelegate: contentViewDelegateRef)
         default:
             let folder = TaskFolder.pageDic[option]
             return TasksPageContent(persistenceManager: persistenceManager, sliderDelegate: contentViewDelegateRef, folder: folder!)
@@ -41,6 +43,8 @@ struct ContentRequestHandler {
         case .backlog: return AddEditTaskVC(persistenceManager: persistenceManager, useState: .create, defaultFolder: .backlog)
         case .finished: return  AddEditTaskVC(persistenceManager: persistenceManager, useState: .create, defaultFolder: .finished)
         case .archived: return  AddEditTaskVC(persistenceManager: persistenceManager, useState: .create, defaultFolder: .archived)
+        case .more:
+            fatalError("called \(#function) from 'more' page");
         }
     }
 

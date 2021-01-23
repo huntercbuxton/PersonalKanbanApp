@@ -96,25 +96,36 @@ final class PersistenceManager {
     }
 
     func getArchivedTasks() -> [Task] {
-        let allTasks = self.getAllTasks()
-        return allTasks.filter({$0.isArchived})
+        return self.getAllTasks().filter({$0.computedFolder == .archived})
+    }
+    
+    func deleteArchivedTasks() {
+        self.getArchivedTasks().forEach({delete(task: $0)})
+    }
+    
+    func getFinishedTasks() -> [Task] {
+        return self.getAllTasks().filter({$0.computedFolder == .finished})
+    }
+    
+    func deleteFinishedTasks() {
+        self.getFinishedTasks().forEach({delete(task: $0)})
     }
 
-    func sort(match workflowPosition: WorkflowPosition) -> [Task] {
-        let entityName = String(describing: Task.self)
-        let request = NSFetchRequest<Task>(entityName: entityName)
-        let predicateKey = "workflowStatus"
-        let descriptorKey = "dateUpdated"
-        let sortDescriptor = NSSortDescriptor(key: descriptorKey, ascending: true)
-        request.sortDescriptors = [sortDescriptor]
-        request.predicate = NSPredicate(format: "\(predicateKey) == \(workflowPosition.rawValue)")
-        do {
-            let objects = try context.fetch(request) as [Task]
-            return objects ?? [Task]()
-        } catch {
-            fatalError("failed to perform the fetch request in the method \(#function)")
-        }
-    }
+//    func sort(match workflowPosition: WorkflowPosition) -> [Task] {
+//        let entityName = String(describing: Task.self)
+//        let request = NSFetchRequest<Task>(entityName: entityName)
+//        let predicateKey = "workflowStatus"
+//        let descriptorKey = "dateUpdated"
+//        let sortDescriptor = NSSortDescriptor(key: descriptorKey, ascending: true)
+//        request.sortDescriptors = [sortDescriptor]
+//        request.predicate = NSPredicate(format: "\(predicateKey) == \(workflowPosition.rawValue)")
+//        do {
+//            let objects = try context.fetch(request) as [Task]
+//            return objects ?? [Task]()
+//        } catch {
+//            fatalError("failed to perform the fetch request in the method \(#function)")
+//        }
+//    }
 
     func getAllTasks() -> [Task] {
         let tasks = self.fetch(Task.self)

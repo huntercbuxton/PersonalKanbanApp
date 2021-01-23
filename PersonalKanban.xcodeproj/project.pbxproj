@@ -29,6 +29,7 @@
 		715B72EF253BF39000219F07 /* UIConsts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 715B72EE253BF39000219F07 /* UIConsts.swift */; };
 		715B7301253C39BC00219F07 /* MainMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 715B72FF253C39BC00219F07 /* MainMenu.swift */; };
 		715B731B253C524600219F07 /* PaddedTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 715B731A253C524600219F07 /* PaddedTextField.swift */; };
+		715DE6F425BCC0C400C598E3 /* MorePageContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 715DE6F325BCC0C400C598E3 /* MorePageContent.swift */; };
 		716C718B255E22A100373F16 /* ChooseEpicsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 716C7186255E22A100373F16 /* ChooseEpicsScreen.swift */; };
 		716C718D255E22A100373F16 /* SelectWorkflowStatusMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 716C7188255E22A100373F16 /* SelectWorkflowStatusMenu.swift */; };
 		716C718E255E22A100373F16 /* StoryPointsSelectionScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 716C7189255E22A100373F16 /* StoryPointsSelectionScreen.swift */; };
@@ -313,6 +314,7 @@
 		715B72EE253BF39000219F07 /* UIConsts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIConsts.swift; sourceTree = "<group>"; };
 		715B72FF253C39BC00219F07 /* MainMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainMenu.swift; sourceTree = "<group>"; };
 		715B731A253C524600219F07 /* PaddedTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaddedTextField.swift; sourceTree = "<group>"; };
+		715DE6F325BCC0C400C598E3 /* MorePageContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MorePageContent.swift; sourceTree = "<group>"; };
 		716C7186255E22A100373F16 /* ChooseEpicsScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChooseEpicsScreen.swift; sourceTree = "<group>"; };
 		716C7188255E22A100373F16 /* SelectWorkflowStatusMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectWorkflowStatusMenu.swift; sourceTree = "<group>"; };
 		716C7189255E22A100373F16 /* StoryPointsSelectionScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoryPointsSelectionScreen.swift; sourceTree = "<group>"; };
@@ -476,6 +478,7 @@
 			children = (
 				71C6C892256113AD0056CCCF /* TasksPageContent.swift */,
 				719427E5256389DD007C3B31 /* EpicsPageContent.swift */,
+				715DE6F325BCC0C400C598E3 /* MorePageContent.swift */,
 			);
 			path = Content;
 			sourceTree = "<group>";
@@ -1238,6 +1241,7 @@
 				715B7301253C39BC00219F07 /* MainMenu.swift in Sources */,
 				719427E6256389DD007C3B31 /* EpicsPageContent.swift in Sources */,
 				71BC1B44253DCC6C005EC646 /* PersistenceManager.swift in Sources */,
+				715DE6F425BCC0C400C598E3 /* MorePageContent.swift in Sources */,
 				71C6C883255F959F0056CCCF /* InputsStateManager.swift in Sources */,
 				71D18334255D12A000E86C50 /* MainMenuController.swift in Sources */,
 				719427D225628981007C3B31 /* MORawRepresentable.swift in Sources */,
