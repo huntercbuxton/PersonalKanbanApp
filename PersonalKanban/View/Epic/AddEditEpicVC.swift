@@ -65,6 +65,7 @@ class AddEditEpicVC: UIViewController, InputsInterfaceDelegate, EpicDetailsMenuD
             titleTextField.bottomAnchor.constraint(lessThanOrEqualTo: contentView.bottomAnchor).isActive = true
         }
         setupDataStuff()
+        self.dismissKeyboard()
     }
 
     private func setupScrollViewAndContentView() {
@@ -172,5 +173,17 @@ extension AddEditEpicVC: EpicTaskListResizeDelegate {
         taskTableHeight = taskTable!.view.sizeThatFits(CGSize(width: contentView.bounds.width, height: CGFloat.greatestFiniteMagnitude)).height
         taskTableHeightConstraint!.constant = taskTableHeight!
         taskTable!.view.layoutIfNeeded()
+    }
+}
+
+extension AddEditEpicVC {
+    func dismissKeyboard() {
+       let tap: UITapGestureRecognizer = UITapGestureRecognizer( target: self, action: #selector(dismissKeyboardTouchOutside))
+       tap.cancelsTouchesInView = false
+       view.addGestureRecognizer(tap)
+    }
+
+    @objc private func dismissKeyboardTouchOutside() {
+       view.endEditing(true)
     }
 }

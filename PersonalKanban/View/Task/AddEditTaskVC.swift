@@ -143,6 +143,8 @@ class AddEditTaskVC: UIViewController, TaskEditorOptionsTable2Delegate, ManagedI
         } else {
             workflowOptionsTable.view.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -contentView.layoutMargins.bottom).isActive = true
         }
+
+        self.dismissKeyboard()
     }
 
     // MARK: - other methods
@@ -213,5 +215,17 @@ class AddEditTaskVC: UIViewController, TaskEditorOptionsTable2Delegate, ManagedI
 
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+}
+
+extension AddEditTaskVC {
+    func dismissKeyboard() {
+       let tap: UITapGestureRecognizer = UITapGestureRecognizer( target: self, action: #selector(dismissKeyboardTouchOutside))
+       tap.cancelsTouchesInView = false
+       view.addGestureRecognizer(tap)
+    }
+
+    @objc private func dismissKeyboardTouchOutside() {
+       view.endEditing(true)
     }
 }
