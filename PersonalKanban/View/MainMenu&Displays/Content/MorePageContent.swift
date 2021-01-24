@@ -35,6 +35,7 @@ class MorePageContent: UITableViewController, SlidingContentsVC {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: .default, reuseIdentifier: cellReuseID)
         cell.textLabel?.text = options[indexPath.row]
+        cell.selectionStyle = .none
         return cell
     }
     
