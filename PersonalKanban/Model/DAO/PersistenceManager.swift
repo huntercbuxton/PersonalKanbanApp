@@ -63,22 +63,6 @@ final class PersistenceManager {
 
     // MARK: - methods
 
-    func sort() -> [Task] {
-        let entityName = String(describing: Task.self)
-        let request = NSFetchRequest<Task>(entityName: entityName)
-        let predicateKey = "workflowStatus"
-        let descriptorKey = "dateUpdated"
-        let sortDescriptor = NSSortDescriptor(key: descriptorKey, ascending: true)
-        request.sortDescriptors = [sortDescriptor]
-        request.predicate = NSPredicate(format: "\(predicateKey) == 0")
-        do {
-            let objects = try context.fetch(request) as [Task]
-            return objects //?? [Task]()
-        } catch {
-            fatalError("failed to perform the fetch request in the method \(#function)")
-        }
-    }
-
     func sortEpicTasks(for epic: Epic) -> [[Task]] {
         let unsorted = epic.tasksList
         var returnData: [WorkflowPosition: [Task]] = [.backlog: [],
@@ -96,26 +80,23 @@ final class PersistenceManager {
     }
     
     func getAllTasks() -> [Task] {
-        let tasks = self.fetch(Task.self)
-        return tasks
+        return fetch(Task.self)
     }
 
     func getArchivedTasks() -> [Task] {
-        return self.getAllTasks().filter({$0.computedFolder == .archived})
+        return getAllTasks().filter({$0.computedFolder == .archived})
     }
     
     func getFinishedTasks() -> [Task] {
-        return self.getAllTasks().filter({$0.computedFolder == .finished})
+        return getAllTasks().filter({$0.computedFolder == .finished})
     }
 
     func getUnassignedTasks() -> [Task] {
-        let tasks = self.getAllTasks()
-        return tasks.filter({$0.epic == nil})
+        return getAllTasks().filter({$0.epic == nil})
     }
 
     func getAllEpics() -> [Epic] {
-        let epics = self.fetch(Epic.self)
-        return epics
+        return fetch(Epic.self)
     }
 
     func delete(task: Task) {
@@ -134,8 +115,7 @@ final class PersistenceManager {
     }
     
     func deleteAllTasks() {
-        let tasks = getAllTasks()
-        tasks.forEach({self.delete(task: $0)})
+        getAllTasks().forEach({delete(task: $0)})
     }
     
     func deleteAllEpics() {
@@ -143,11 +123,11 @@ final class PersistenceManager {
     }
     
     func deleteArchivedTasks() {
-        self.getArchivedTasks().forEach({delete(task: $0)})
+        getArchivedTasks().forEach({delete(task: $0)})
     }
     
     func deleteFinishedTasks() {
-        self.getFinishedTasks().forEach({delete(task: $0)})
+        getFinishedTasks().forEach({delete(task: $0)})
     }
 
     private func fetch<T: NSManagedObject>(_ objectType: T.Type) -> [T] {

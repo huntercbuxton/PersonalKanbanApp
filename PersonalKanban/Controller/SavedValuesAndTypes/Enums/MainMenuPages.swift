@@ -8,7 +8,8 @@
 import Foundation
 
 public enum MainMenuPages: Int, CaseIterable {
-    case toDo = 0, epics, inProgress, backlog, finished, archived, more
+    // you can reorder the items of the main menu by changing the order of these cases
+    case toDo = 0, inProgress, backlog, finished, archived, epics, more
 
     static let defaultVal: MainMenuPages = .toDo
     var int64: Int64 { Int64(self.rawValue) }
