@@ -136,7 +136,7 @@ class MainVC: UIViewController, SlidingViewDelegate, MainMenuControllerDelegate 
         hideMenu()
     }
 
-    // MARK: - initializers
+    // MARK: - initialization
 
     init(persistenceManager: PersistenceManager, displayController: MainMenuController) {
         self.persistenceManager = persistenceManager

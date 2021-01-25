@@ -106,7 +106,7 @@ class EpicsPageContent: UITableViewController, NSFetchedResultsControllerDelegat
         }
     }
 
-    // MARK: - initializers
+    // MARK: - initialization
 
     init(persistence: PersistenceManager, sliderDelegate: SlidingViewDelegate?) {
         self.persistence = persistence

@@ -7,12 +7,17 @@
 
 import UIKit
 
+// a table of additional options for editing and using task data
 class MorePageContent: UITableViewController, SlidingContentsVC {
 
+    // MARK: - properties
+    
     private let cellReuseID = "MorePageContent.cellReuseID"
     var sliderDelegate: SlidingViewDelegate?
     let persistence: PersistenceManager!
     let options = ["delete all tasks","delete archived tasks","delete finished tasks"]
+    
+    // MARK: - methods
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,12 +28,10 @@ class MorePageContent: UITableViewController, SlidingContentsVC {
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
         return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
         return options.count
     }
 
@@ -38,6 +41,8 @@ class MorePageContent: UITableViewController, SlidingContentsVC {
         cell.selectionStyle = .none
         return cell
     }
+    
+    // MARK: - UITableViewDelegate
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch indexPath.row {
