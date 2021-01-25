@@ -128,9 +128,18 @@ final class PersistenceManager {
         save()
     }
 
+    func deleteAllData() {
+        deleteAllTasks()
+        deleteAllEpics()
+    }
+    
     func deleteAllTasks() {
         let tasks = getAllTasks()
         tasks.forEach({self.delete(task: $0)})
+    }
+    
+    func deleteAllEpics() {
+        getAllEpics().forEach({delete(epic: $0)})
     }
     
     func deleteArchivedTasks() {
