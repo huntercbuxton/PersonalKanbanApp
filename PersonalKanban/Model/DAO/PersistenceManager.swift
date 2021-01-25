@@ -94,42 +94,18 @@ final class PersistenceManager {
         let taskArray = [ returnData[.backlog] ?? [], returnData[.toDo] ?? [], returnData[.inProgress] ?? [], returnData[.finished] ?? [] ]
         return taskArray
     }
+    
+    func getAllTasks() -> [Task] {
+        let tasks = self.fetch(Task.self)
+        return tasks
+    }
 
     func getArchivedTasks() -> [Task] {
         return self.getAllTasks().filter({$0.computedFolder == .archived})
     }
     
-    func deleteArchivedTasks() {
-        self.getArchivedTasks().forEach({delete(task: $0)})
-    }
-    
     func getFinishedTasks() -> [Task] {
         return self.getAllTasks().filter({$0.computedFolder == .finished})
-    }
-    
-    func deleteFinishedTasks() {
-        self.getFinishedTasks().forEach({delete(task: $0)})
-    }
-
-//    func sort(match workflowPosition: WorkflowPosition) -> [Task] {
-//        let entityName = String(describing: Task.self)
-//        let request = NSFetchRequest<Task>(entityName: entityName)
-//        let predicateKey = "workflowStatus"
-//        let descriptorKey = "dateUpdated"
-//        let sortDescriptor = NSSortDescriptor(key: descriptorKey, ascending: true)
-//        request.sortDescriptors = [sortDescriptor]
-//        request.predicate = NSPredicate(format: "\(predicateKey) == \(workflowPosition.rawValue)")
-//        do {
-//            let objects = try context.fetch(request) as [Task]
-//            return objects ?? [Task]()
-//        } catch {
-//            fatalError("failed to perform the fetch request in the method \(#function)")
-//        }
-//    }
-
-    func getAllTasks() -> [Task] {
-        let tasks = self.fetch(Task.self)
-        return tasks
     }
 
     func getUnassignedTasks() -> [Task] {
@@ -155,6 +131,14 @@ final class PersistenceManager {
     func deleteAllTasks() {
         let tasks = getAllTasks()
         tasks.forEach({self.delete(task: $0)})
+    }
+    
+    func deleteArchivedTasks() {
+        self.getArchivedTasks().forEach({delete(task: $0)})
+    }
+    
+    func deleteFinishedTasks() {
+        self.getFinishedTasks().forEach({delete(task: $0)})
     }
 
     private func fetch<T: NSManagedObject>(_ objectType: T.Type) -> [T] {
