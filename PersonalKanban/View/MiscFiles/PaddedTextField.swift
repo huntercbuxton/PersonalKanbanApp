@@ -43,6 +43,12 @@ open class PaddedTextField: UITextField, UITextFieldDelegate {
         return bounds.insetBy(dx: inset, dy: inset)
     }
 
+    // this causes the keyboard to be dismissed when the return key is pressed.
+    public func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        superview?.endEditing(true)
+        return false
+    }
+    
     func firstSetup() {
         self.addTarget(self, action: #selector(respondToChange), for: UIControl.Event.editingChanged)
         self.delegate = self
