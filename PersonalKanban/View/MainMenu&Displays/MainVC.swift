@@ -44,7 +44,7 @@ class MainVC: UIViewController, SlidingViewDelegate, MainMenuControllerDelegate 
     func showMenu() {
         if !menuIsVisible { toggleMenuVisibility() }
     }
-    
+
     func showHideComposeBtn(for page: MainMenuPages) {
         if page == .more {
             self.navigationItem.setRightBarButton(nil, animated: true)

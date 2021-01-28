@@ -11,18 +11,18 @@ import UIKit
 class MorePageContent: UITableViewController, SlidingContentsVC {
 
     // MARK: - properties
-    
+
     private let cellReuseID = "MorePageContent.cellReuseID"
-    var sliderDelegate: SlidingViewDelegate?
+    weak var sliderDelegate: SlidingViewDelegate?
     let persistence: PersistenceManager!
     let options = ["delete all data",
                    "delete all tasks",
                    "delete all epics",
                    "delete archived tasks",
                    "delete finished tasks"]
-    
+
     // MARK: - methods
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: self.cellReuseID)
@@ -45,9 +45,9 @@ class MorePageContent: UITableViewController, SlidingContentsVC {
         cell.selectionStyle = .none
         return cell
     }
-    
+
     // MARK: - UITableViewDelegate
-    
+
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch indexPath.row {
         case 0:

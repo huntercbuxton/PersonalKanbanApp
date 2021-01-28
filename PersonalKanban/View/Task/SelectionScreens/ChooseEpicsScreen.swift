@@ -25,7 +25,7 @@ class ChooseEpicsScreen: UITableViewController {
         self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: self.cellReuseID)
         self.tableView.tableFooterView = UITableViewHeaderFooterView()
     }
-    
+
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         if let selection = self.savedChoice, let selectedIndex = options.firstIndex(of: selection) {

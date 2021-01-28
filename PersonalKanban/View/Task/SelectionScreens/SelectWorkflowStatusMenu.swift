@@ -31,7 +31,7 @@ class SelectWorkflowStatusMenu: UITableViewController {
         tableView.selectRow(at: indexPath, animated: true, scrollPosition: .top)
         tableView.cellForRow(at: indexPath)?.setHighlighted(true, animated: true)
     }
-    
+
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {

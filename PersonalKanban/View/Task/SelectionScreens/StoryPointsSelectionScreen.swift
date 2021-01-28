@@ -24,7 +24,7 @@ class StoryPointsSelectionScreen: UITableViewController {
         self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellReuseID)
         tableView.tableFooterView = UIView(background: .systemGroupedBackground)
     }
-    
+
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         let indexPath = IndexPath(row: options.firstIndex(of: savedChoice)!, section: 0)

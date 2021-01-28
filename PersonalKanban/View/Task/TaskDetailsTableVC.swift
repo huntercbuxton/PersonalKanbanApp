@@ -43,7 +43,7 @@ class TaskDetailsTableVC: UITableViewController {
         }
     }
 
-    var epicCellTitle: String { "Epic: \(epic?.title! ?? "none" ) " }
+    var epicCellTitle: String { "Epic: \(epic?.title ?? "none" ) " }
     var storyPointsCellTitle: String { "story points: \(storyPoints.string)" }
     var workflowPositionCellTitle: String { "workflow position: \(workflowPosition?.menuPage?.title ?? "none")" }
     lazy var titles: [String] = [ epicCellTitle, storyPointsCellTitle, workflowPositionCellTitle ]

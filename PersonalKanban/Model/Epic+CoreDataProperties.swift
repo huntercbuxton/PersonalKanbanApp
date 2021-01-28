@@ -15,7 +15,7 @@ extension Epic {
         return NSFetchRequest<Epic>(entityName: "Epic")
     }
 
-    @NSManaged public var title: String?
+    @NSManaged public var title: String
     @NSManaged public var primaryKey: UUID?
     @NSManaged public var quickNote: String?
     @NSManaged public var dateCreated: Date?

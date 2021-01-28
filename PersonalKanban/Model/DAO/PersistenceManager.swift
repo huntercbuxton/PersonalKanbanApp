@@ -78,7 +78,7 @@ final class PersistenceManager {
         let taskArray = [ returnData[.backlog] ?? [], returnData[.toDo] ?? [], returnData[.inProgress] ?? [], returnData[.finished] ?? [] ]
         return taskArray
     }
-    
+
     func getAllTasks() -> [Task] {
         return fetch(Task.self)
     }
@@ -86,7 +86,7 @@ final class PersistenceManager {
     func getArchivedTasks() -> [Task] {
         return getAllTasks().filter({$0.computedFolder == .archived})
     }
-    
+
     func getFinishedTasks() -> [Task] {
         return getAllTasks().filter({$0.computedFolder == .finished})
     }
@@ -113,19 +113,19 @@ final class PersistenceManager {
         deleteAllTasks()
         deleteAllEpics()
     }
-    
+
     func deleteAllTasks() {
         getAllTasks().forEach({delete(task: $0)})
     }
-    
+
     func deleteAllEpics() {
         getAllEpics().forEach({delete(epic: $0)})
     }
-    
+
     func deleteArchivedTasks() {
         getArchivedTasks().forEach({delete(task: $0)})
     }
-    
+
     func deleteFinishedTasks() {
         getFinishedTasks().forEach({delete(task: $0)})
     }
