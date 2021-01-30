@@ -133,13 +133,8 @@ final class PersistenceManager {
     private func fetch<T: NSManagedObject>(_ objectType: T.Type) -> [T] {
         let entityName = String(describing: objectType)
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
-        do {
-            let fetchedObjects = try? context.fetch(fetchRequest) as? [T]
-            return fetchedObjects ?? [T]()
-        } catch {
-            print(error)
-            fatalError("PersistenceManager caught an error while performing a fetch request in \(#function)")
-        }
+        let fetchedObjects = try? context.fetch(fetchRequest) as? [T]
+        return fetchedObjects ?? [T]()
     }
 
     private init() {}
