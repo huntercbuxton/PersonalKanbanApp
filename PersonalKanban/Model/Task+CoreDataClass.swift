@@ -31,15 +31,9 @@ public class Task: NSManagedObject {
 
     var workflowStatusEnum: WorkflowPosition? { computedFolder.status }
 
-    var notesList: [Note] {
-        get { self.taskNotes?.array as! [Note] }
-        set { taskNotes = NSOrderedSet(array: newValue) }
-    }
-
     private func setDefaultInitialValues() {
         self.epic = TaskDefaults.epic
         self.folder = TaskDefaults.folder
-        self.primaryKey = TaskDefaults.primaryKey
         self.priority = TaskDefaults.priority
         self.stickyNote = TaskDefaults.stickyNote
         self.storypoints = TaskDefaults.storypoints.moValue

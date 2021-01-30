@@ -42,8 +42,6 @@
 		717DCB40253F2BE000E2156F /* EpicDetailsEditorMenuVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 717DCB3F253F2BE000E2156F /* EpicDetailsEditorMenuVC.swift */; };
 		717DCB4D253F3DBA00E2156F /* Epic+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 717DCB47253F3DBA00E2156F /* Epic+CoreDataClass.swift */; };
 		717DCB4E253F3DBA00E2156F /* Epic+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 717DCB48253F3DBA00E2156F /* Epic+CoreDataProperties.swift */; };
-		717DCB4F253F3DBA00E2156F /* Note+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 717DCB49253F3DBA00E2156F /* Note+CoreDataClass.swift */; };
-		717DCB50253F3DBA00E2156F /* Note+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 717DCB4A253F3DBA00E2156F /* Note+CoreDataProperties.swift */; };
 		717DCB51253F3DBA00E2156F /* Task+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 717DCB4B253F3DBA00E2156F /* Task+CoreDataClass.swift */; };
 		717DCB52253F3DBA00E2156F /* Task+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 717DCB4C253F3DBA00E2156F /* Task+CoreDataProperties.swift */; };
 		717DCB5D253F3FF900E2156F /* DateConversion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 717DCB5C253F3FF900E2156F /* DateConversion.swift */; };
@@ -327,8 +325,6 @@
 		717DCB3F253F2BE000E2156F /* EpicDetailsEditorMenuVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpicDetailsEditorMenuVC.swift; sourceTree = "<group>"; };
 		717DCB47253F3DBA00E2156F /* Epic+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Epic+CoreDataClass.swift"; sourceTree = "<group>"; };
 		717DCB48253F3DBA00E2156F /* Epic+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Epic+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		717DCB49253F3DBA00E2156F /* Note+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Note+CoreDataClass.swift"; sourceTree = "<group>"; };
-		717DCB4A253F3DBA00E2156F /* Note+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Note+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		717DCB4B253F3DBA00E2156F /* Task+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Task+CoreDataClass.swift"; sourceTree = "<group>"; };
 		717DCB4C253F3DBA00E2156F /* Task+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Task+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		717DCB5C253F3FF900E2156F /* DateConversion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateConversion.swift; sourceTree = "<group>"; };
@@ -757,8 +753,6 @@
 				719427BB25626669007C3B31 /* DefaultValues */,
 				717DCB48253F3DBA00E2156F /* Epic+CoreDataProperties.swift */,
 				717DCB47253F3DBA00E2156F /* Epic+CoreDataClass.swift */,
-				717DCB49253F3DBA00E2156F /* Note+CoreDataClass.swift */,
-				717DCB4A253F3DBA00E2156F /* Note+CoreDataProperties.swift */,
 				717DCB4B253F3DBA00E2156F /* Task+CoreDataClass.swift */,
 				717DCB4C253F3DBA00E2156F /* Task+CoreDataProperties.swift */,
 			);
@@ -1248,7 +1242,6 @@
 				71B72FEB25416BCD00D26CDC /* MiscellaneousUIKitExtensions.swift in Sources */,
 				71BC1B3C253DC948005EC646 /* PersonalKanban.xcdatamodeld in Sources */,
 				715B72B4253BEDDE00219F07 /* SceneDelegate.swift in Sources */,
-				717DCB4F253F3DBA00E2156F /* Note+CoreDataClass.swift in Sources */,
 				71C6C893256113AD0056CCCF /* TasksPageContent.swift in Sources */,
 				717DCB5D253F3FF900E2156F /* DateConversion.swift in Sources */,
 				717DCB51253F3DBA00E2156F /* Task+CoreDataClass.swift in Sources */,
@@ -1269,7 +1262,6 @@
 				717DCB4D253F3DBA00E2156F /* Epic+CoreDataClass.swift in Sources */,
 				713D0D4C255B26330031C303 /* CustomFontImportStuff.swift in Sources */,
 				717DCB24253ED0BE00E2156F /* AddEditEpicVC.swift in Sources */,
-				717DCB50253F3DBA00E2156F /* Note+CoreDataProperties.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

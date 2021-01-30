@@ -24,7 +24,7 @@ class EpicsPageContent: UITableViewController, NSFetchedResultsControllerDelegat
         if fetchedResultsController == nil {
             let entityName = String(describing: Epic.self)
             let request = NSFetchRequest<Epic>(entityName: entityName)
-            let descriptorKey = "dateCreated"
+            let descriptorKey = "title"
             let sortDescriptor = NSSortDescriptor(key: descriptorKey, ascending: true)
             request.fetchBatchSize = 20
             request.sortDescriptors = [sortDescriptor]

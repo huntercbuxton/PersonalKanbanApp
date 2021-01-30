@@ -16,12 +16,7 @@ extension Epic {
     }
 
     @NSManaged public var title: String
-    @NSManaged public var primaryKey: UUID?
-    @NSManaged public var quickNote: String?
-    @NSManaged public var dateCreated: Date?
-    @NSManaged public var dateLastUpdated: Date?
     @NSManaged public var tasks: NSOrderedSet?
-    @NSManaged public var epicNotes: NSOrderedSet?
 
 }
 
@@ -60,23 +55,4 @@ extension Epic {
 
 }
 
-// MARK: Generated accessors for epicNotes
-extension Epic {
-
-    @objc(addEpicNotesObject:)
-    @NSManaged public func addToEpicNotes(_ value: Note)
-
-    @objc(removeEpicNotesObject:)
-    @NSManaged public func removeFromEpicNotes(_ value: Note)
-
-    @objc(addEpicNotes:)
-    @NSManaged public func addToEpicNotes(_ values: NSSet)
-
-    @objc(removeEpicNotes:)
-    @NSManaged public func removeFromEpicNotes(_ values: NSSet)
-
-}
-
-extension Epic: Identifiable {
-
-}
+extension Epic: Identifiable {}

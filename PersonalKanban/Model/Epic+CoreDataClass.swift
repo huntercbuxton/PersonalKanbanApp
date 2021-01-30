@@ -17,8 +17,4 @@ public class Epic: NSManagedObject {
           set { tasks = NSOrderedSet(array: newValue) }
       }
 
-    var notesList: [Note] {
-        get { return self.epicNotes?.array as? [Note] ?? [] }
-        set { epicNotes = NSOrderedSet(array: newValue) }
-    }
 }
