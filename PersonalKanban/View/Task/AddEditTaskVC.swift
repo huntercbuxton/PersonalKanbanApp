@@ -217,4 +217,3 @@ class AddEditTaskVC: UIViewController, TaskEditorOptionsTable2Delegate, ManagedI
         fatalError("init(coder:) has not been implemented")
     }
 }
-

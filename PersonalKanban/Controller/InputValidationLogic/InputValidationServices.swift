@@ -28,7 +28,7 @@ struct InputValidationServices {
 
     // these closures will never need to be modified
     let emptyPredicate: (String) -> Bool  = { $0.isEmpty }
-    let onlyWhitespaceAndNewlinesPred:  (String) -> Bool = { $0.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty }
+    let onlyWhitespaceAndNewlinesPred: (String) -> Bool = {$0.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty}
     let titleTooLong: (String) -> Bool = { $0.count > 50 }
     // for testing purposes only atm
     var illegalString: (String) -> Bool = { $0 == "a title that already exists" }

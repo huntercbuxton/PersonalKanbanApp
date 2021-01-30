@@ -8,8 +8,6 @@
 import UIKit
 
 class TaskEditorOptionsTable2: UITableViewController {
-    
-    
 
     // MARK: - properties
 

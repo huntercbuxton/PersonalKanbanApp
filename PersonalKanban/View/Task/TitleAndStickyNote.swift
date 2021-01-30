@@ -41,8 +41,6 @@ class TitleAndStickyNote: UIViewController {
 
     // MARK: - initializers
 
-
-
     init(task: Task?, titleObserver: InputsModelManager) {
         self.task = task
         self.titleInput = PaddedTextField(placeholder: "title", group: titleObserver, text: task?.title ?? "")

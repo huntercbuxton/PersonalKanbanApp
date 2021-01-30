@@ -44,7 +44,7 @@ struct ContentRequestHandler {
         case .finished: return  AddEditTaskVC(persistenceManager: persistenceManager, useState: .create, defaultFolder: .finished)
         case .archived: return  AddEditTaskVC(persistenceManager: persistenceManager, useState: .create, defaultFolder: .archived)
         case .more:
-            fatalError("called \(#function) from 'more' page");
+            fatalError("called \(#function) from 'more' page")
         }
     }
 

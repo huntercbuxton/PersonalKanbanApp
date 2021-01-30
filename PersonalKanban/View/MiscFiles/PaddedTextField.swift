@@ -30,7 +30,7 @@ open class PaddedTextField: UITextField, UITextFieldDelegate {
     }
 
     // MARK: - styling and layout
-    
+
     open override func textRect(forBounds bounds: CGRect) -> CGRect {
         return bounds.insetBy(dx: inset, dy: inset)
     }
@@ -48,7 +48,7 @@ open class PaddedTextField: UITextField, UITextFieldDelegate {
         superview?.endEditing(true)
         return false
     }
-    
+
     func firstSetup() {
         self.addTarget(self, action: #selector(respondToChange), for: UIControl.Event.editingChanged)
         self.delegate = self
