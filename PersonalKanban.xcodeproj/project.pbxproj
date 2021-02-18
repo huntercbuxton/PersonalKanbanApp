@@ -46,6 +46,7 @@
 		717DCB52253F3DBA00E2156F /* Task+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 717DCB4C253F3DBA00E2156F /* Task+CoreDataProperties.swift */; };
 		717DCB5D253F3FF900E2156F /* DateConversion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 717DCB5C253F3FF900E2156F /* DateConversion.swift */; };
 		717DCB62253F4AAE00E2156F /* LogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 717DCB61253F4AAE00E2156F /* LogView.swift */; };
+		71806C9C25DF241700A2141F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 71806C9B25DF241700A2141F /* GoogleService-Info.plist */; };
 		719427A3256260DE007C3B31 /* TaskPriority.swift in Sources */ = {isa = PBXBuildFile; fileRef = 719427A2256260DE007C3B31 /* TaskPriority.swift */; };
 		719427BD25626686007C3B31 /* TaskDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 719427BC25626686007C3B31 /* TaskDefaults.swift */; };
 		719427CB25628894007C3B31 /* TaskFolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 719427CA25628894007C3B31 /* TaskFolder.swift */; };
@@ -122,6 +123,9 @@
 		71DC805D255AEA8800D0B40C /* android-chrome-512x512.png in Resources */ = {isa = PBXBuildFile; fileRef = 71DC8021255AEA8800D0B40C /* android-chrome-512x512.png */; };
 		71DC805E255AEA8800D0B40C /* site.webmanifest in Resources */ = {isa = PBXBuildFile; fileRef = 71DC8022255AEA8800D0B40C /* site.webmanifest */; };
 		71DC805F255AEA8800D0B40C /* favicon-32x32.png in Resources */ = {isa = PBXBuildFile; fileRef = 71DC8023255AEA8800D0B40C /* favicon-32x32.png */; };
+		95D5582E335D72E4C90947DA /* Pods_PersonalKanban_PersonalKanbanUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7FB31D7BAEC371AEC2F50039 /* Pods_PersonalKanban_PersonalKanbanUITests.framework */; };
+		F3608CD2462EB579E0779977 /* Pods_PersonalKanban.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0206010C2E51021AE487090B /* Pods_PersonalKanban.framework */; };
+		FF44C0D9AF9B49AECD9E0DC9 /* Pods_PersonalKanbanTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F27AC229D6BDEC682E43A6E8 /* Pods_PersonalKanbanTests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXBuildRule section */
@@ -284,6 +288,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		011DCEDDA925E9338C3FE56B /* Pods-PersonalKanbanTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PersonalKanbanTests.debug.xcconfig"; path = "Target Support Files/Pods-PersonalKanbanTests/Pods-PersonalKanbanTests.debug.xcconfig"; sourceTree = "<group>"; };
+		0206010C2E51021AE487090B /* Pods_PersonalKanban.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PersonalKanban.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		0D90732C18A97753C281BB73 /* Pods-PersonalKanban.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PersonalKanban.release.xcconfig"; path = "Target Support Files/Pods-PersonalKanban/Pods-PersonalKanban.release.xcconfig"; sourceTree = "<group>"; };
+		2B6BDDC98155F4048CAFAADE /* Pods-PersonalKanban-PersonalKanbanUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PersonalKanban-PersonalKanbanUITests.debug.xcconfig"; path = "Target Support Files/Pods-PersonalKanban-PersonalKanbanUITests/Pods-PersonalKanban-PersonalKanbanUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		3BF97E1E8E65457CB0951864 /* Pods-PersonalKanban.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PersonalKanban.debug.xcconfig"; path = "Target Support Files/Pods-PersonalKanban/Pods-PersonalKanban.debug.xcconfig"; sourceTree = "<group>"; };
 		7116FDC4255B522C00C84084 /* UnassignedTasksSelectionTableVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnassignedTasksSelectionTableVC.swift; sourceTree = "<group>"; };
 		7116FDCE255B7B8100C84084 /* AccessibilityIDs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessibilityIDs.swift; sourceTree = "<group>"; };
 		713D0D3F255B20C60031C303 /* UIColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
@@ -329,6 +338,7 @@
 		717DCB4C253F3DBA00E2156F /* Task+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Task+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		717DCB5C253F3FF900E2156F /* DateConversion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateConversion.swift; sourceTree = "<group>"; };
 		717DCB61253F4AAE00E2156F /* LogView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogView.swift; sourceTree = "<group>"; };
+		71806C9B25DF241700A2141F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		719427A2256260DE007C3B31 /* TaskPriority.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskPriority.swift; sourceTree = "<group>"; };
 		719427BC25626686007C3B31 /* TaskDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskDefaults.swift; sourceTree = "<group>"; };
 		719427CA25628894007C3B31 /* TaskFolder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskFolder.swift; sourceTree = "<group>"; };
@@ -414,6 +424,10 @@
 		71DC8021255AEA8800D0B40C /* android-chrome-512x512.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "android-chrome-512x512.png"; sourceTree = "<group>"; };
 		71DC8022255AEA8800D0B40C /* site.webmanifest */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = site.webmanifest; sourceTree = "<group>"; };
 		71DC8023255AEA8800D0B40C /* favicon-32x32.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "favicon-32x32.png"; sourceTree = "<group>"; };
+		7FB31D7BAEC371AEC2F50039 /* Pods_PersonalKanban_PersonalKanbanUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PersonalKanban_PersonalKanbanUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E0C293016B1152B7C86C38C4 /* Pods-PersonalKanbanTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PersonalKanbanTests.release.xcconfig"; path = "Target Support Files/Pods-PersonalKanbanTests/Pods-PersonalKanbanTests.release.xcconfig"; sourceTree = "<group>"; };
+		F2304FCED614A6A852A983B5 /* Pods-PersonalKanban-PersonalKanbanUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PersonalKanban-PersonalKanbanUITests.release.xcconfig"; path = "Target Support Files/Pods-PersonalKanban-PersonalKanbanUITests/Pods-PersonalKanban-PersonalKanbanUITests.release.xcconfig"; sourceTree = "<group>"; };
+		F27AC229D6BDEC682E43A6E8 /* Pods_PersonalKanbanTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PersonalKanbanTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -421,6 +435,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F3608CD2462EB579E0779977 /* Pods_PersonalKanban.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -428,6 +443,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FF44C0D9AF9B49AECD9E0DC9 /* Pods_PersonalKanbanTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -435,6 +451,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				95D5582E335D72E4C90947DA /* Pods_PersonalKanban_PersonalKanbanUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -448,6 +465,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3C901EC62CB289DBA310A219 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				3BF97E1E8E65457CB0951864 /* Pods-PersonalKanban.debug.xcconfig */,
+				0D90732C18A97753C281BB73 /* Pods-PersonalKanban.release.xcconfig */,
+				2B6BDDC98155F4048CAFAADE /* Pods-PersonalKanban-PersonalKanbanUITests.debug.xcconfig */,
+				F2304FCED614A6A852A983B5 /* Pods-PersonalKanban-PersonalKanbanUITests.release.xcconfig */,
+				011DCEDDA925E9338C3FE56B /* Pods-PersonalKanbanTests.debug.xcconfig */,
+				E0C293016B1152B7C86C38C4 /* Pods-PersonalKanbanTests.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		71170C09255AF1A000D5F2F2 /* Epic */ = {
 			isa = PBXGroup;
 			children = (
@@ -524,6 +555,8 @@
 				715B72D2253BEDE800219F07 /* PersonalKanbanUITests */,
 				71DC7FB225474D8B00D0B40C /* InputValidatorTests */,
 				715B72AF253BEDDE00219F07 /* Products */,
+				3C901EC62CB289DBA310A219 /* Pods */,
+				C39D46A2266380279DDBA7B2 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -551,6 +584,7 @@
 				715B72BA253BEDE800219F07 /* Assets.xcassets */,
 				715B72BC253BEDE800219F07 /* LaunchScreen.storyboard */,
 				715B72BF253BEDE800219F07 /* Info.plist */,
+				71806C9B25DF241700A2141F /* GoogleService-Info.plist */,
 			);
 			path = PersonalKanban;
 			sourceTree = "<group>";
@@ -960,6 +994,16 @@
 			path = favicon_io;
 			sourceTree = "<group>";
 		};
+		C39D46A2266380279DDBA7B2 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				0206010C2E51021AE487090B /* Pods_PersonalKanban.framework */,
+				7FB31D7BAEC371AEC2F50039 /* Pods_PersonalKanban_PersonalKanbanUITests.framework */,
+				F27AC229D6BDEC682E43A6E8 /* Pods_PersonalKanbanTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -967,10 +1011,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 715B72D8253BEDE800219F07 /* Build configuration list for PBXNativeTarget "PersonalKanban" */;
 			buildPhases = (
+				C12A3592C7DBA7850531AEF8 /* [CP] Check Pods Manifest.lock */,
 				715B72AA253BEDDE00219F07 /* Sources */,
 				715B72AB253BEDDE00219F07 /* Frameworks */,
 				715B72AC253BEDDE00219F07 /* Resources */,
 				713F7ABD253CF7CA00D23CC7 /* ShellScript */,
+				988B6E2E644FDA60BA4A6ADC /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 				713F7ABC253CF72C00D23CC7 /* PBXBuildRule */,
@@ -997,6 +1043,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 715B72DB253BEDE800219F07 /* Build configuration list for PBXNativeTarget "PersonalKanbanTests" */;
 			buildPhases = (
+				C2610582B4B72EBFC44DB3AC /* [CP] Check Pods Manifest.lock */,
 				715B72C0253BEDE800219F07 /* Sources */,
 				715B72C1253BEDE800219F07 /* Frameworks */,
 				715B72C2253BEDE800219F07 /* Resources */,
@@ -1015,9 +1062,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 715B72DE253BEDE800219F07 /* Build configuration list for PBXNativeTarget "PersonalKanbanUITests" */;
 			buildPhases = (
+				C0607531F68E2017DE6FF7B7 /* [CP] Check Pods Manifest.lock */,
 				715B72CB253BEDE800219F07 /* Sources */,
 				715B72CC253BEDE800219F07 /* Frameworks */,
 				715B72CD253BEDE800219F07 /* Resources */,
+				82317AB1ED16C4008EB487F2 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -1124,6 +1173,7 @@
 				71DC8043255AEA8800D0B40C /* icon-messages-transcript-32x24@2x.png in Resources */,
 				71DC8042255AEA8800D0B40C /* icon-messages-app-27x20@1x.png in Resources */,
 				71DC805A255AEA8800D0B40C /* favicon.ico in Resources */,
+				71806C9C25DF241700A2141F /* GoogleService-Info.plist in Resources */,
 				71DC804A255AEA8800D0B40C /* icon-messages-app-iPhone-60x45@3x.png in Resources */,
 				71DC8047255AEA8800D0B40C /* icon-messages-app-iPadAir-74x55@2x.png in Resources */,
 				71DC8040255AEA8800D0B40C /* icon-messages-app-iPadAir-67x50@2x.png in Resources */,
@@ -1200,6 +1250,106 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nif which swiftlint >/dev/null; then\n    swiftlint\nelse\n    echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+		};
+		82317AB1ED16C4008EB487F2 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-PersonalKanban-PersonalKanbanUITests/Pods-PersonalKanban-PersonalKanbanUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-PersonalKanban-PersonalKanbanUITests/Pods-PersonalKanban-PersonalKanbanUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-PersonalKanban-PersonalKanbanUITests/Pods-PersonalKanban-PersonalKanbanUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		988B6E2E644FDA60BA4A6ADC /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-PersonalKanban/Pods-PersonalKanban-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-PersonalKanban/Pods-PersonalKanban-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-PersonalKanban/Pods-PersonalKanban-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C0607531F68E2017DE6FF7B7 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-PersonalKanban-PersonalKanbanUITests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C12A3592C7DBA7850531AEF8 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-PersonalKanban-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C2610582B4B72EBFC44DB3AC /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-PersonalKanbanTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -1439,6 +1589,7 @@
 		};
 		715B72D9253BEDE800219F07 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3BF97E1E8E65457CB0951864 /* Pods-PersonalKanban.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -1459,6 +1610,7 @@
 		};
 		715B72DA253BEDE800219F07 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0D90732C18A97753C281BB73 /* Pods-PersonalKanban.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -1479,6 +1631,7 @@
 		};
 		715B72DC253BEDE800219F07 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 011DCEDDA925E9338C3FE56B /* Pods-PersonalKanbanTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -1501,6 +1654,7 @@
 		};
 		715B72DD253BEDE800219F07 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E0C293016B1152B7C86C38C4 /* Pods-PersonalKanbanTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -1523,6 +1677,7 @@
 		};
 		715B72DF253BEDE800219F07 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2B6BDDC98155F4048CAFAADE /* Pods-PersonalKanban-PersonalKanbanUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -1543,6 +1698,7 @@
 		};
 		715B72E0253BEDE800219F07 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F2304FCED614A6A852A983B5 /* Pods-PersonalKanban-PersonalKanbanUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;

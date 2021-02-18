@@ -1,0 +1,6 @@
+framework module Pods_PersonalKanbanTests {
+  umbrella header "Pods-PersonalKanbanTests-umbrella.h"
+
+  export *
+  module * { export * }
+}
