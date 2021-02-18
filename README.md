@@ -23,3 +23,5 @@ localization for France and Quebec
 cloud data backup   
 
 an additional 'notes' section for each task, for more detailed information to be recorded during the process of completion
+
+## more info is available on the support site: personalkanban.huntercbuxton.com
