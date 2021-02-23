@@ -109,25 +109,30 @@ final class PersistenceManager {
         save()
     }
 
-    func deleteAllData() {
+    func deleteAllData() -> Bool {
         deleteAllTasks()
         deleteAllEpics()
+        return getAllTasks().count == 0 && getAllEpics().count == 0
     }
 
-    func deleteAllTasks() {
+    func deleteAllTasks() -> Bool {
         getAllTasks().forEach({delete(task: $0)})
+        return getAllTasks().count == 0
     }
 
-    func deleteAllEpics() {
+    func deleteAllEpics() -> Bool {
         getAllEpics().forEach({delete(epic: $0)})
+        return getAllEpics().count == 0
     }
 
-    func deleteArchivedTasks() {
+    func deleteArchivedTasks() -> Bool {
         getArchivedTasks().forEach({delete(task: $0)})
+        return getArchivedTasks().count == 0
     }
 
-    func deleteFinishedTasks() {
+    func deleteFinishedTasks() -> Bool {
         getFinishedTasks().forEach({delete(task: $0)})
+        return getFinishedTasks().count == 0
     }
 
     private func fetch<T: NSManagedObject>(_ objectType: T.Type) -> [T] {

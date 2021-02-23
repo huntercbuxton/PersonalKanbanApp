@@ -53,39 +53,57 @@ class MorePageContent: UITableViewController, SlidingContentsVC {
         case 0:
             let alert = UIAlertController(title: options[indexPath.row], message: "this action cannot be undone", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "Continue", style: .destructive, handler: { _ in
-                self.persistence.deleteAllData()
+                self.showDeleteResultAlert(result: self.persistence.deleteAllData())
             }))
             alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
             present(alert, animated: true, completion: nil)
         case 1:
             let alert = UIAlertController(title: options[indexPath.row], message: "this action cannot be undone", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "Continue", style: .destructive, handler: { _ in
-                self.persistence.deleteAllTasks()
+                self.showDeleteResultAlert(result: self.persistence.deleteAllTasks())
             }))
             alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
             present(alert, animated: true, completion: nil)
         case 2:
             let alert = UIAlertController(title: options[indexPath.row], message: "this will also delete their tasks", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "Continue", style: .destructive, handler: { _ in
-                self.persistence.deleteAllEpics()
+                self.showDeleteResultAlert(result: self.persistence.deleteAllEpics())
             }))
             alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
             present(alert, animated: true, completion: nil)
         case 3:
             let alert = UIAlertController(title: options[indexPath.row], message: "this action cannot be undone", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "Continue", style: .destructive, handler: { _ in
-                self.persistence.deleteArchivedTasks()
+                self.showDeleteResultAlert(result: self.persistence.deleteArchivedTasks())
             }))
             alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
             present(alert, animated: true, completion: nil)
         case 4:
             let alert = UIAlertController(title: options[indexPath.row], message: "this action cannot be undone", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "Continue", style: .destructive, handler: { _ in
-                self.persistence.deleteFinishedTasks()
+                self.showDeleteResultAlert(result: self.persistence.deleteFinishedTasks())
             }))
             alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
             present(alert, animated: true, completion: nil)
         default: fatalError("the indexPath passed to \(#function) in MorePageContent was invalid ")
+        }
+    }
+    
+    func showDeleteResultAlert(result: Bool) {
+        if result {
+            let alert = UIAlertController(title: "successfully deleted data", message: "", preferredStyle: .alert)
+            self.present(alert, animated: true, completion: nil)
+            let when = DispatchTime.now() + 1.5
+            DispatchQueue.main.asyncAfter(deadline: when) {
+              alert.dismiss(animated: true, completion: nil)
+            }
+        } else {
+            let alert = UIAlertController(title: "could not delete data", message: "", preferredStyle: .alert)
+            self.present(alert, animated: true, completion: nil)
+            let when = DispatchTime.now() + 1.5
+                DispatchQueue.main.asyncAfter(deadline: when) {
+                alert.dismiss(animated: true, completion: nil)
+            }
         }
     }
 
