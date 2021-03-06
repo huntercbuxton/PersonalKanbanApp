@@ -49,16 +49,17 @@ class MorePageContent: UITableViewController, SlidingContentsVC {
     // MARK: - UITableViewDelegate
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let defaultWarning = "this action cannot be undone"
         switch indexPath.row {
         case 0:
-            let alert = UIAlertController(title: options[indexPath.row], message: "this action cannot be undone", preferredStyle: .alert)
+            let alert = UIAlertController(title: options[indexPath.row], message: defaultWarning, preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "Continue", style: .destructive, handler: { _ in
                 self.showDeleteResultAlert(result: self.persistence.deleteAllData())
             }))
             alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
             present(alert, animated: true, completion: nil)
         case 1:
-            let alert = UIAlertController(title: options[indexPath.row], message: "this action cannot be undone", preferredStyle: .alert)
+            let alert = UIAlertController(title: options[indexPath.row], message: defaultWarning, preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "Continue", style: .destructive, handler: { _ in
                 self.showDeleteResultAlert(result: self.persistence.deleteAllTasks())
             }))
@@ -72,14 +73,14 @@ class MorePageContent: UITableViewController, SlidingContentsVC {
             alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
             present(alert, animated: true, completion: nil)
         case 3:
-            let alert = UIAlertController(title: options[indexPath.row], message: "this action cannot be undone", preferredStyle: .alert)
+            let alert = UIAlertController(title: options[indexPath.row], message: defaultWarning, preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "Continue", style: .destructive, handler: { _ in
                 self.showDeleteResultAlert(result: self.persistence.deleteArchivedTasks())
             }))
             alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
             present(alert, animated: true, completion: nil)
         case 4:
-            let alert = UIAlertController(title: options[indexPath.row], message: "this action cannot be undone", preferredStyle: .alert)
+            let alert = UIAlertController(title: options[indexPath.row], message: defaultWarning, preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "Continue", style: .destructive, handler: { _ in
                 self.showDeleteResultAlert(result: self.persistence.deleteFinishedTasks())
             }))
@@ -90,17 +91,18 @@ class MorePageContent: UITableViewController, SlidingContentsVC {
     }
     
     func showDeleteResultAlert(result: Bool) {
+        let delay = 1.5
         if result {
             let alert = UIAlertController(title: "successfully deleted data", message: "", preferredStyle: .alert)
             self.present(alert, animated: true, completion: nil)
-            let when = DispatchTime.now() + 1.5
+            let when = DispatchTime.now() + delay
             DispatchQueue.main.asyncAfter(deadline: when) {
               alert.dismiss(animated: true, completion: nil)
             }
         } else {
             let alert = UIAlertController(title: "could not delete data", message: "", preferredStyle: .alert)
             self.present(alert, animated: true, completion: nil)
-            let when = DispatchTime.now() + 1.5
+            let when = DispatchTime.now() + delay
                 DispatchQueue.main.asyncAfter(deadline: when) {
                 alert.dismiss(animated: true, completion: nil)
             }
